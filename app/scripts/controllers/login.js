@@ -28,6 +28,14 @@ app.controller('loginCtrl', function ($scope, $rootScope, UI, User) {
 
 
 	$scope.login = function(){
-		User.login();
+
+		User.login($scope.user).then(
+			function (data){//success
+
+			},
+			function (msg){ //error
+				console.log(msg);
+			}
+		);
 	}
 });

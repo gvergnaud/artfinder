@@ -19,8 +19,7 @@ app.factory('UI', function UI() {
 			height: window.innerHeight + 'px'
 		});
 		//on redefini lelement vu car il change a chaque chagement de page
-		var view = angular.element(document.querySelector('.view'));
-		view.css({
+		viewcontainer.css({
 			width: window.innerWidth - 150 + 'px'
 		});
 	}

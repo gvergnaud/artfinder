@@ -15,7 +15,7 @@
     </select>
   </div>
   <div class="post" ng-repeat="post in posts | filter:Technic:strict | filter:Search:strict">
-    <a href="#/singlepost/{{post.id}}" ng-change-page>
+    <a href="#/singlepost/{{post.id}}">
       <img ng-src="{{post.urls[0]}}" />
       <div class="over">
         <h1>{{post.artist}}</h1>
