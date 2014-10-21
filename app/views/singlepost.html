@@ -1,0 +1,41 @@
+<div ng-singlepost>
+	<section id="player" class="player">
+		<nav class="arrows" id="prev">Prev</nav>
+		<nav class="arrows" id="next">Next</nav>
+		<img ng-src="{{post.urls[0]}}" />
+		<div class="control"></div>
+	</section>
+	<section id="post_infos">
+		<span class="left">
+			<span id="where">{{post.adress}}</span>
+			<span id="artist">{{post.artist}}</span>
+		</span>
+		<span class="right">	
+			<span id="like" ng-click="likePost()">{{post.likes}} Like !</span>
+			<span id="nb_comments">{{post.comments.length}} Commentaires</span>
+		</span>
+		<p id="desc">{{post.description}}</p>
+
+	</section>
+
+	<section>
+		<div id="commentaires">
+			<h2>Commentaires</h2>
+			<div ng-repeat="comment in post.comments">
+
+				<p><strong>{{comment.username}}</strong></p>
+				<blockquote>
+					<p>{{comment.content}}</p>
+				</blockquote>
+				<p class="date">{{comment.date}}</p>
+
+			</div>
+			<h4>écrire un commentaire</h4>
+			<form role="form" ng-submit="addComment()">
+				<input type="text" ng-model="newComment.username" placeholder="pseudo"/><br>
+				<textarea type="text" ng-model="newComment.content" placeholder="message"></textarea>
+				<input type="submit" value="Envoyer" />
+			</form>
+		</div>
+	</section>
+</div>

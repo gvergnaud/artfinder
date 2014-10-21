@@ -1,0 +1,114 @@
+[
+    {
+        "id": 0,
+        "artist": "Banksy",
+        "technic": "pochoir",
+        "urls": [
+            "images\/banksy.jpg"
+        ],
+        "description": "Encore un truc styl\u00e9",
+        "coords": {
+            "latitude": 48.861186,
+            "longitude": 2.353499
+        },
+        "adress": "37 Rue Rambuteau, 75004 Paris, France",
+        "stillExist": true,
+        "userId": 0,
+        "comments": [],
+        "likes": 1
+    },
+    {
+        "id": 1,
+        "artist": "C 215",
+        "technic": "pochoir",
+        "urls": [
+            "images\/c215.jpg"
+        ],
+        "description": "Encore un truc styl\u00e9",
+        "coords": {
+            "latitude": 48.833142,
+            "longitude": 2.378433
+        },
+        "adress": "17 Quai Fran\u00e7ois Mauriac, 75013 Paris, France",
+        "stillExist": true,
+        "userId": 0,
+        "comments": [
+            {
+                "username": "cool",
+                "content": "vraiment styl\u00e9",
+                "timestamp": 1413544089964,
+                "date": "17\/10\/2014"
+            }
+        ],
+        "likes": 9
+    },
+    {
+        "id": 2,
+        "artist": "Vhils",
+        "technic": "sculpture",
+        "urls": [
+            "images\/vhils.jpg"
+        ],
+        "description": "Encore un truc styl\u00e9",
+        "coords": {
+            "latitude": 48.84653,
+            "longitude": 2.343221
+        },
+        "adress": "172-174 Rue Saint-Jacques, 75005 Paris, France",
+        "stillExist": true,
+        "userId": 0,
+        "comments": [
+            {
+                "username": "John",
+                "content": "incroyable",
+                "timestamp": 1413831804750,
+                "date": "20\/10\/2014"
+            }
+        ],
+        "likes": 5
+    },
+    {
+        "id": 3,
+        "artist": "Konny Steding",
+        "technic": "collage",
+        "urls": [
+            "images\/konnysteding.jpg",
+            "images\/konnysteding2.jpg"
+        ],
+        "description": "Encore un truc styl\u00e9",
+        "coords": {
+            "latitude": 48.8479861186,
+            "longitude": 2.3253499
+        },
+        "adress": "37 Rue Rambuteau, 75004 Paris, France",
+        "stillExist": true,
+        "userId": 0,
+        "comments": [
+            {
+                "username": "oui",
+                "content": "je suis submerg\u00e9 de joie",
+                "timestamp": 1413544485227,
+                "date": "17\/10\/2014"
+            },
+            {
+                "username": "Gab",
+                "content": "C'est chouette.",
+                "timestamp": 1413709594727,
+                "date": "19\/10\/2014"
+            },
+            {
+                "username": "Gab",
+                "content": "Fort bien",
+                "timestamp": 1413827842231,
+                "date": "20\/10\/2014"
+            },
+            {
+                "username": "camille",
+                "content": "salut",
+                "timestamp": 1413892390041,
+                "date": "21\/10\/2014"
+            }
+        ],
+        "likes": 6
+    }
+]

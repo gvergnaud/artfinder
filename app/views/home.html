@@ -1,0 +1,27 @@
+<section id="map">
+  
+</section>
+<section class="section" id="mosaic">
+  <div id="filtres">
+    <label>Cacher les markers</label><input type="checkbox" ng-hideAllMarkers />
+    <input type="text" id="search" placeholder="Artiste" ng-model="Search.artist" />
+    <label>Technique utilisée : </label><select ng-model="Technic.technic">
+      <option value="">Toutes</option>
+      <option value="pochoir">Pochoir</option>
+      <option value="sculpture">Sculpture</option>
+      <option value="grafitti">Grafitti</option>
+      <option value="collage">Collage</option>
+      <option value="autre">Autre</option>
+    </select>
+  </div>
+  <div class="post" ng-repeat="post in posts | filter:Technic:strict | filter:Search:strict">
+    <a href="#/singlepost/{{post.id}}" ng-change-page>
+      <img ng-src="{{post.urls[0]}}" />
+      <div class="over">
+        <h1>{{post.artist}}</h1>
+        <p>{{post.adress}}</p>
+        <a href="" ng-showPostLocation>Voir sur la Carte</a>
+      </div>
+    </a>
+  </div>
+</section>
