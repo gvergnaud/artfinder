@@ -7,18 +7,21 @@
  * # AddpostCtrl
  * Controller of the artFinderApp
  */
-app.controller('loginCtrl', function ($scope, $rootScope, UI, User) {
-	$scope.user = {};
+app.controller('signCtrl', function ($scope, $rootScope, UI, AUTH_EVENTS, Auth, Session) {
+	$scope.userInfos = {};
 
 	var showlogin = angular.element(document.querySelector('a#showlogin')),
 		loginContainer = angular.element(document.querySelector('#login')),
 		loginForm = angular.element(document.querySelector('#loginForm'));
 
-	showlogin.on('click', function(){
+	showlogin.on('click', function(e){
+		console.log(e);
+		e.stopPropagation();
 		UI.showHideLoginOverlay();
 	});
 
-	loginContainer.on('click', function(){
+	loginContainer.on('click', function(e){
+		e.stopPropagation();
 		UI.showHideLoginOverlay();
 	});
 
@@ -26,16 +29,16 @@ app.controller('loginCtrl', function ($scope, $rootScope, UI, User) {
 		e.stopPropagation();
 	});
 
-
 	$scope.login = function(){
 
-		User.login($scope.user).then(
-			function (data){//success
+		Auth.login($scope.userInfos).then(
+			function (user) {
+				$rootScope.$broadcast(AUTH_EVENTS.loginSuccess);
+				$scope.setCurrentUser(user);
 
-			},
-			function (msg){ //error
-				console.log(msg);
+			}, function () {
+				$rootScope.$broadcast(AUTH_EVENTS.loginFailed);
 			}
 		);
-	}
+	};
 });

@@ -8,6 +8,9 @@
 	{
 	        die('Erreur : ' . $e->getMessage());
 	}
+?>
+{
+<?php
 
 	if(!empty($_POST['mail']) && !empty($_POST['pwd'])){
 
@@ -20,16 +23,30 @@
 			$response = $query->fetch();
 
 			if($_POST['pwd'] == $response['password']){
-
-				echo "success";
+			//l'utilisateur s'est connecté avec success
+?>
+	"statut": "success",
+	"id": "<?= $response['id']; ?>",
+	"username": "<?= $response['username']; ?>",
+	"role": "<?= $response['role']; ?>"
+<?php
+			}else{
+?>
+	"statut": "error",
+	"desc": "pwd error"
+<?php
 			}
 			
 
 		}else{  //
-
-			echo "cet utilisateur n'existe pas";
+?>
+	"statut": "error",
+	"desc": "user unknown"
+<?php
 		}
 	}else{
-
-		echo "aucune donnée reçus";
-	}
+?>
+	"statut": "error",
+	"desc": "no data"
+<?php } ?>
+}

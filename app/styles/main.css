@@ -30,21 +30,39 @@ body{
   height:100%;
   width: 100%;
   display: block;
+}
+
+.animated{
   transition: .5s ease;
   -webkit-transition: .5s ease;
 }
 
-.view.ng-enter{
+.scale.ng-enter{
+  -webkit-transform: scale(0);
+  transform: scale(0);
+}
+
+.scale.ng-enter-active{
+  -webkit-transform: scale(1);
+  transform: scale(1);
+}
+
+.scale.ng-leave-active{
+  -webkit-transform: scale(0);
+  transform: scale(0);
+}
+
+.slide.ng-enter{
   -webkit-transform: translateX(150%);
   transform: translateX(150%);
 }
 
-.view.ng-enter-active{
+.slide.ng-enter-active{
   -webkit-transform: translateX(0%);
   transform: translateX(0%);
 }
 
-.view.ng-leave-active{
+.slide.ng-leave-active{
   -webkit-transform: translateX(-150%);
   transform: translateX(-150%);
 }
@@ -177,7 +195,7 @@ nav.arrows{
 }
 
 nav#prev{
-  left: 170px;
+  left: 20px;
 }
 
 nav#next{
