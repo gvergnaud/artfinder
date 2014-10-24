@@ -268,13 +268,45 @@ p.date{
   top: 0;
   background: rgba(0,0,0,.7);
   z-index: 1000;
+  color: #fff;
 }
 #login.show{
   display:block;
 }
 
-form#loginForm{
+div#signForms{
   width:250px;
-  height:300px;
   margin: 100px auto;
+}
+
+/* NOTIFICATIONS */
+
+aside#notifications{
+  position: fixed;
+  right: 10px; 
+  top: 10px;
+  height:80px;
+  min-width: 250px;
+  z-index:1000;
+  overflow:auto;
+}
+
+p.notification{
+  text-align: center;
+  padding:5px;
+  margin:2px auto;
+  border-radius: 5px;
+  width: 90%;
+  color: #fff;
+  font-size: 1em;
+  background: #666;
+  user-select: none;
+}
+
+p.notification.success{
+  background: #87E851;
+}
+
+p.notification.error{
+  background: #FF5A43;
 }

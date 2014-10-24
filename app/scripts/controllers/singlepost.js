@@ -7,7 +7,7 @@
  * # SinglepostCtrl
  * Controller of the artFinderApp
  */
-app.controller('SinglepostCtrl',['$scope', '$rootScope', '$routeParams', 'Post', 'UI', function ($scope, $rootScope, $routeParams, Post, UI) {
+app.controller('SinglepostCtrl',['$scope', '$rootScope', '$routeParams', 'Post', 'UI', 'Auth', 'Session', function ($scope, $rootScope, $routeParams, Post, UI, Auth, Session) {
 	
 	//Récuperation des posts
 	Post.find($routeParams.id).then(
@@ -50,32 +50,51 @@ app.controller('SinglepostCtrl',['$scope', '$rootScope', '$routeParams', 'Post',
 
  	$scope.addComment = function(){
 
- 		if(typeof $scope.newComment.username !== 'undefined' && typeof $scope.newComment.content !== 'undefined'){
- 			
- 			$scope.newComment.timestamp = new Date().getTime();
+		if(Auth.isAuthenticated()){ //si l'utilisateur est identifé
 
- 			var d = new Date($scope.newComment.timestamp);
- 			$scope.newComment.date = ('0'+d.getDate()).slice(-2)+'/'+('0'+(d.getMonth()+1)).slice(-2)+'/'+d.getFullYear();
+	 		if(typeof $scope.newComment.content !== 'undefined'){
+	 			
+	 			$scope.newComment.timestamp = new Date().getTime();
+	 			$scope.newComment.username = Session.username;
 
- 			Post.saveComment($scope.post.id, $scope.newComment).then(
- 				function(data){ //success
- 					$scope.post.comments.push($scope.newComment);
-					$scope.newComment = {};
- 				},
- 				function(msg){} //error
- 			);	
- 		}
+	 			var d = new Date($scope.newComment.timestamp);
+	 			$scope.newComment.date = ('0'+d.getDate()).slice(-2)+'/'+('0'+(d.getMonth()+1)).slice(-2)+'/'+d.getFullYear();
+
+	 			Post.saveComment($scope.post.id, $scope.newComment).then(
+	 				function(data){ //success
+	 					$scope.post.comments.push($scope.newComment);
+						$scope.newComment = {};
+	 				},
+	 				function(msg){} //error
+	 			);	
+	 		}
+ 		}else{
+			UI.notification('', 'vous devez etre identifier !');
+		}
  	};
 
  	$scope.likePost = function(){
 
+		if(Auth.isAuthenticated()){ //si l'utilisateur est identifé
 
- 		Post.addLike($scope.post).then(
- 			function(data){ //success
- 				$scope.post.likes += 1;
- 			},
- 			function(msg){} //error
- 		);
+	 		Post.addLike($scope.post).then(
+	 			function(data){ //success
+	 				Post.find($routeParams.id).then(
+						function (post){ // les posts sont récupérés !
+							$scope.post =  post;
+							UI.singlepost.playerArrowsShowHide($scope);
+						},
+						function (msg){ // erreur lors de la récupération des posts
+							console.log(msg);
+							$scope.post = false;
+						}
+					);
+	 			},
+	 			function(msg){} //error
+	 		);
+		}else{
+			UI.notification('', 'vous devez etre identifier !');
+		}
  	};
 	
 }]);

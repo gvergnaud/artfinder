@@ -23,27 +23,93 @@ app.factory('Geoloc', function () {
           var optionsGmaps = {
             center: that.defaultLatLng,
             mapTypeId: google.maps.MapTypeId.ROADMAP, // types possibles: ROADMAP, SATELLITE, HYBRID ou TERRAIN
-            zoom: 12
+            zoom: 12,
+            maxZoom: 19,
+            minZoom: 3,
+            disableDefaultUI: true
           };
 
           var styles = [
             {
-              stylers: [
-                { hue: '#00ffe6' },
-                { saturation: -20 }
+              "featureType": "landscape",
+              "stylers": [
+                { "saturation": -100 },
+                { "lightness": -65 }
               ]
             },{
-              featureType: 'road',
-              elementType: 'geometry',
-              stylers: [
-                { lightness: 100 },
-                { visibility: 'simplified' }
+              "featureType": "water",
+              "stylers": [
+                { "saturation": -100 },
+                { "lightness": 74 },
+                { "gamma": 8.95 },
+                { "visibility": "on" }
               ]
             },{
-              featureType: 'road',
-              elementType: 'labels',
-              stylers: [
-                { visibility: 'off' }
+              "featureType": "transit",
+              "stylers": [
+                { "visibility": "off" }
+              ]
+            },{
+              "featureType": "poi",
+              "stylers": [
+                { "visibility": "off" }
+              ]
+            },{
+              "featureType": "road.highway",
+              "stylers": [
+                { "visibility": "off" }
+              ]
+            },{
+              "featureType": "road.arterial",
+              "stylers": [
+                { "visibility": "simplified" }
+              ]
+            },{
+              "featureType": "road.local",
+              "stylers": [
+                { "visibility": "simplified" }
+              ]
+            },{
+              "elementType": "labels",
+              "stylers": [
+                { "visibility": "simplified" },
+                { "hue": "#ffa200" },
+                { "color": "#ffffff" }
+              ]
+            },{
+            },{
+              "featureType": "water",
+              "stylers": [
+                { "color": "#dddddd" }
+              ]
+            },{
+              "featureType": "road",
+              "stylers": [
+                { "color": "#808080" }
+              ]
+            },{
+              "featureType": "administrative",
+              "elementType": "labels",
+              "stylers": [
+                { "color": "#B59E5C" }
+              ]
+            },{
+              "featureType": "road.local",
+              "elementType": "geometry",
+              "stylers": [
+                { "visibility": "simplified" }
+              ]
+            },{
+              "featureType": "poi",
+              "elementType": "labels.icon",
+              "stylers": [
+                { "visibility": "off" }
+              ]
+            },{
+              "featureType": "all",
+              "elementType": "labels.icon",
+              "stylers": [
+                { "visibility": "off" }
               ]
             }
           ];
@@ -117,6 +183,14 @@ app.factory('Geoloc', function () {
             //animation: google.maps.Animation.DROP
             //icon: "fleche.png"
           });
+
+            google.maps.event.addListener(marker, 'click', (function(marker, post) {
+              return function() {
+
+               location.hash = '#/singlepost/' + post.id;
+
+              };
+            })(marker, post));
 
           that.markers.push(marker);
 

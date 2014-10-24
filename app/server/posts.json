@@ -14,8 +14,15 @@
         "adress": "37 Rue Rambuteau, 75004 Paris, France",
         "stillExist": true,
         "userId": 0,
-        "comments": [],
-        "likes": 1
+        "comments": [
+            {
+                "content": "Le fameux",
+                "timestamp": 1414102081594,
+                "username": "gab",
+                "date": "24\/10\/2014"
+            }
+        ],
+        "likes": []
     },
     {
         "id": 1,
@@ -40,7 +47,7 @@
                 "date": "17\/10\/2014"
             }
         ],
-        "likes": 9
+        "likes": []
     },
     {
         "id": 2,
@@ -63,9 +70,17 @@
                 "content": "incroyable",
                 "timestamp": 1413831804750,
                 "date": "20\/10\/2014"
+            },
+            {
+                "content": "lol",
+                "timestamp": 1414147644332,
+                "username": "gab",
+                "date": "24\/10\/2014"
             }
         ],
-        "likes": 5
+        "likes": [
+            "gab"
+        ]
     },
     {
         "id": 3,
@@ -107,8 +122,31 @@
                 "content": "salut",
                 "timestamp": 1413892390041,
                 "date": "21\/10\/2014"
+            },
+            {
+                "content": "cool",
+                "timestamp": 1414100291341,
+                "username": "gab",
+                "date": "23\/10\/2014"
+            },
+            {
+                "content": "tr\u00e8s cool",
+                "timestamp": 1414101645524,
+                "username": "gab",
+                "date": "24\/10\/2014"
+            },
+            {
+                "content": "oui",
+                "timestamp": 1414148365415,
+                "username": "leman",
+                "date": "24\/10\/2014"
             }
         ],
-        "likes": 6
+        "likes": [
+            "lol",
+            "ee",
+            "zejzfe",
+            "gab"
+        ]
     }
 ]

@@ -21,25 +21,42 @@
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
 
+
     <!-- Add your site or application content here -->
-    <div id="container">
-      <div id="login" ng-controller="signCtrl">
-        <form id="loginForm" role="form" ng-submit="login()">
-          <h3>Login</h3>
-          <input type="email" ng-model="userInfos.mail" placeholder="yourmail@any.any"/>
-          <input type="password" ng-model="userInfos.pwd" placeholder="mot de passe"/>
-          <input type="submit" value="Envoyer" />
-        </form>
+    <div id="container" ng-hide="loading">
+      <div id="login" ng-click="toggleLoginOverlay()" ng-controller="signCtrl">
+        <div id="signForms">
+        
+          <form role="form" ng-submit="login()">
+            <h3>Login</h3>
+            <input type="email" ng-model="loginInfos.mail" placeholder="yourmail@any.any"/>
+            <input type="password" ng-model="loginInfos.pwd" placeholder="mot de passe"/>
+            <input type="submit" value="Envoyer" />
+          </form>
+
+          <form role="form" ng-submit="signUp()">
+            <h3>Sign Up !</h3>
+            <input type="text" ng-model="signUpInfos.username" placeholder="nom d'utilisateur"/>
+            <input type="email" ng-model="signUpInfos.mail" placeholder="yourmail@any.any"/>
+            <input type="password" ng-model="signUpInfos.pwd" placeholder="mot de passe"/>
+            <input type="password" ng-model="signUpInfos.repeatpwd" placeholder="retappez votre mot de passe"/>
+            <input type="submit" value="Envoyer" />
+          </form>
+
+        </div>
       </div>
       <header class="header">
         <h3>artFinder</h3>
-        <p id="username">{{currentUser.username}}</p>
+        <h4 id="username" ng-show="isAuthenticated()">{{currentUser.username}}</h4>
         <ul>
           <li><a href="#/">Home</a></li>
           <li><a href="#/addpost">Upload</a></li>
-          <li><a href="" id="showlogin">Login</a></li>
+          <li ng-hide="isAuthenticated()"><a href="" ng-click="toggleLoginOverlay()">Se Connecter</a></li>
+          <li ng-show="isAuthenticated()"><a href="" ng-click="userDisconnect()">Se Déconnecter</a></li>
         </ul>
       </header>
+
+      <aside id="notifications"></aside>
 
       <div id="viewcontainer">
         <div class="view {{animate}}" ng-view=""></div>

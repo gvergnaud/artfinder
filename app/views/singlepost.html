@@ -11,7 +11,7 @@
 			<span id="artist">{{post.artist}}</span>
 		</span>
 		<span class="right">	
-			<span id="like" ng-click="likePost()">{{post.likes}} Like !</span>
+			<span id="like" ng-click="likePost()">{{post.likes.length}} Like !</span>
 			<span id="nb_comments">{{post.comments.length}} Commentaires</span>
 		</span>
 		<p id="desc">{{post.description}}</p>
@@ -30,12 +30,13 @@
 				<p class="date">{{comment.date}}</p>
 
 			</div>
-			<h4>écrire un commentaire</h4>
-			<form role="form" ng-submit="addComment()">
-				<input type="text" ng-model="newComment.username" placeholder="pseudo"/><br>
-				<textarea type="text" ng-model="newComment.content" placeholder="message"></textarea>
-				<input type="submit" value="Envoyer" />
-			</form>
+			<div ng-show="isAuthenticated()">
+				<h4>écrire un commentaire</h4>
+				<form role="form" ng-submit="addComment()">
+					<textarea type="text" ng-model="newComment.content" placeholder="message"></textarea>
+					<input type="submit" value="Envoyer" />
+				</form>
+			</div>
 		</div>
 	</section>
 </div>

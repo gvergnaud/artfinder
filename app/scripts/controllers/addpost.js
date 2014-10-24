@@ -7,9 +7,13 @@
  * # AddpostCtrl
  * Controller of the artFinderApp
  */
-app.controller('AddpostCtrl', function ($scope, $rootScope, UI) {
+app.controller('AddpostCtrl', function ($scope, $rootScope, UI, Auth) {
 	
 	UI.addpost.init();
+
+	if(!Auth.isAuthenticated()){
+		UI.toggleLoginOverlay();
+	}
 	
 	var postImageUrl = window.location.origin + window.location.pathname + 'upload.php';
         

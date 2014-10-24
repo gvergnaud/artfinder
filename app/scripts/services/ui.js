@@ -39,8 +39,26 @@ app.factory('UI', function UI() {
 			viewcontainer.addClass('hidden');
     	},
 
-    	showHideLoginOverlay: function(){
+    	toggleLoginOverlay: function(){
     		loginContainer.toggleClass('show');
+    	},
+
+    	notification: function(type, msg){
+    		var notifContainer = angular.element(document.querySelector('aside#notifications'));
+    		var newNotif = document.createElement('p');
+    		newNotif.innerHTML = msg;
+    		newNotif.classList.add('notification');
+    		if(type){
+    			newNotif.classList.add(type);
+    		}
+    		notifContainer[0].innerHTML = '';
+    		notifContainer.prepend(newNotif);
+    		newNotif.addEventListener('click', function(){
+    			this.style.display = 'none';
+    		});
+    		setTimeout(function(){
+    			angular.element(newNotif).remove();
+    		}, 5000);
     	},
     	
     	home: {

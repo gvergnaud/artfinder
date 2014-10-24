@@ -7,7 +7,7 @@
  * # post
  * Service in the artFinderApp.
  */
-app.factory('Post', function Post($http, $q) {
+app.factory('Post', function Post($http, $q, Session) {
     
     var factory = {
 
@@ -127,8 +127,15 @@ app.factory('Post', function Post($http, $q) {
             factory.get(true).then(
                 function (posts){
 
-                    //
-                    posts[post.id].likes += 1;
+                    //si le username n'est pas deja dans le tab des likes
+                    if(posts[post.id].likes.indexOf(Session.username) === -1){
+                        posts[post.id].likes.push(Session.username);
+                    
+                    }
+                    //sinon on le supprime
+                    else{
+                        posts[post.id].likes.splice(posts[post.id].likes.indexOf(Session.username), 1);
+                    }
                     
                     //on sauvegarde notre nouvel objet posts
                     

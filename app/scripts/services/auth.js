@@ -9,16 +9,16 @@
  */
 app.factory('Auth', function Auth($http, $q, Session) {
 
-	var factory = {
+	var auth = {
 
-		login: function(userInfos){
+		login: function(loginInfos){
 
 			var deferred = $q.defer();
 
 			$http({
-                    url: 'user.php',
+                    url: 'login.php',
                     method: 'post',
-                    data: userInfos
+                    data: loginInfos
                 })
         		.success(function (user, status){
         			if(user.statut === 'success'){
@@ -41,9 +41,42 @@ app.factory('Auth', function Auth($http, $q, Session) {
 			
 		},
 
+        signUp: function(signUpInfos){
+            var deferred = $q.defer();
+
+            $http({
+                    url: 'signup.php',
+                    method: 'post',
+                    data: signUpInfos
+                })
+                .success(function (user, status){
+                    console.log(user);
+                    if(user.statut === 'success'){
+
+                        console.log('inscription reussit');
+                        Session.create(user.id, user.username, user.role);
+                        deferred.resolve(user);
+
+                    }else if(user.statut === 'error'){
+
+                        console.log(user.desc);
+                        deferred.reject(user.desc)
+                    }
+                })
+                .error(function (data, status){
+                    deferred.reject('Impossible dinscrire lutilisateur. ' + status);
+                });
+
+            return deferred.promise;
+        },
+
         //renvoi false si session.userId == 'undefined', sinon true
         isAuthenticated:  function () {
             return !!Session.userId;
+        },
+
+        isNotAuthenticated: function(){
+            return !(!!Session.userId);
         },
 
         //renvoi un boulean : si true, l'utisateur est autorisé.
@@ -57,13 +90,13 @@ app.factory('Auth', function Auth($http, $q, Session) {
 
 	}
 
-	return factory;
+	return auth;
 })
 
 .service('Session', function () {
-  this.create = function (userId, userName, userRole) {
+  this.create = function (userId, username, userRole) {
     this.userId = userId;
-    this.userName = userName;
+    this.username = username;
     this.userRole = userRole;
   };
   this.destroy = function () {
