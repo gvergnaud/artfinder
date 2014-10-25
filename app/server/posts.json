@@ -1,7 +1,9 @@
 [
     {
         "id": 0,
-        "artist": "Banksy",
+        "artists": [
+            "Banksy"
+        ],
         "technic": "pochoir",
         "urls": [
             "images\/banksy.jpg"
@@ -11,8 +13,9 @@
             "latitude": 48.861186,
             "longitude": 2.353499
         },
-        "adress": "37 Rue Rambuteau, 75004 Paris, France",
+        "address": "37 Rue Rambuteau, 75004 Paris, France",
         "stillExist": true,
+        "date": 1414100058888,
         "userId": 0,
         "comments": [
             {
@@ -26,7 +29,9 @@
     },
     {
         "id": 1,
-        "artist": "C 215",
+        "artists": [
+            "C215"
+        ],
         "technic": "pochoir",
         "urls": [
             "images\/c215.jpg"
@@ -36,8 +41,9 @@
             "latitude": 48.833142,
             "longitude": 2.378433
         },
-        "adress": "17 Quai Fran\u00e7ois Mauriac, 75013 Paris, France",
+        "address": "17 Quai Fran\u00e7ois Mauriac, 75013 Paris, France",
         "stillExist": true,
+        "date": 1414100058888,
         "userId": 0,
         "comments": [
             {
@@ -51,7 +57,9 @@
     },
     {
         "id": 2,
-        "artist": "Vhils",
+        "artists": [
+            "Vhils"
+        ],
         "technic": "sculpture",
         "urls": [
             "images\/vhils.jpg"
@@ -61,8 +69,9 @@
             "latitude": 48.84653,
             "longitude": 2.343221
         },
-        "adress": "172-174 Rue Saint-Jacques, 75005 Paris, France",
+        "address": "172-174 Rue Saint-Jacques, 75005 Paris, France",
         "stillExist": true,
+        "date": 1414100058888,
         "userId": 0,
         "comments": [
             {
@@ -79,12 +88,15 @@
             }
         ],
         "likes": [
-            "gab"
+            "gab",
+            "test"
         ]
     },
     {
         "id": 3,
-        "artist": "Konny Steding",
+        "artists": [
+            "Konny Steding"
+        ],
         "technic": "collage",
         "urls": [
             "images\/konnysteding.jpg",
@@ -95,8 +107,9 @@
             "latitude": 48.8479861186,
             "longitude": 2.3253499
         },
-        "adress": "37 Rue Rambuteau, 75004 Paris, France",
+        "address": "37 Rue Rambuteau, 75004 Paris, France",
         "stillExist": true,
+        "date": 1414100058888,
         "userId": 0,
         "comments": [
             {
@@ -148,5 +161,26 @@
             "zejzfe",
             "gab"
         ]
+    },
+    {
+        "stillExist": true,
+        "artist": [],
+        "coords": {
+            "latitude": 48.849919323974,
+            "longitude": 2.3599147796631
+        },
+        "address": "3 Boulevard Henri IV, 75004 Paris, France",
+        "urls": [
+            "http:\/\/localhost\/hetic\/pumir\/artfinder\/app\/images\/uploads\/streetart-design-vol11-2.jpg"
+        ],
+        "technic": "peinture",
+        "description": "L\u00e8che le sol.",
+        "userId": "13",
+        "comments": [],
+        "likes": [
+            "gab"
+        ],
+        "date": 1414233579773,
+        "id": 4
     }
 ]

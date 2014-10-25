@@ -38,4 +38,8 @@ app.controller('appCtrl', function ($scope, $rootScope, Session, Auth, UI, USER_
 		$scope.currentUser = null;
 		UI.notification(false, 'Vous etes maintenant déconnecté.');
 	};
+
+	$scope.redirectTo = function(page, param){
+		location.hash = '#/' + page + '/'+ param;
+	}
 });

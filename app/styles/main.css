@@ -310,3 +310,10 @@ p.notification.success{
 p.notification.error{
   background: #FF5A43;
 }
+
+/* ADDPOST */
+
+div#formMap{
+  height:300px;
+  width: 100%;
+}

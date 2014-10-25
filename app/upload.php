@@ -5,15 +5,20 @@ $storeFolder = 'images' . $ds . 'uploads';   //2
  
 if (!empty($_FILES)) {
 
-	var_dump($_FILES['file']);
-     
-    $tempFile = $_FILES['file']['tmp_name'];          //3             
-      
-    $targetPath = dirname( __FILE__ ) . $ds. $storeFolder . $ds;  //4
-     
-    $targetFile =  $targetPath. $_FILES['file']['name'];  //5
- 
-    move_uploaded_file($tempFile,$targetFile); //6
+	$infosfichier = pathinfo($_FILES['file']['name']);
+	$extension_upload = $infosfichier['extension'];
+	$extensions_autorisees = array('jpg', 'jpeg', 'png');
+
+	if (in_array($extension_upload, $extensions_autorisees)){
+
+	    $tempFile = $_FILES['file']['tmp_name'];          //3             
+	      
+	    $targetPath = dirname( __FILE__ ) . $ds. $storeFolder . $ds;  //4
+	     
+	    $targetFile =  $targetPath. $_FILES['file']['name'];  //5
+	 
+	    move_uploaded_file($tempFile,$targetFile); //6
+	}
      
 } else {
   echo "nofiles";

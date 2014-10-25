@@ -7,7 +7,7 @@
  * # Geoloc
  * Factory in the artFinderApp.
  */
-app.factory('Geoloc', function () {
+app.factory('Geoloc', function (UI, $q) {
     
       return function (idMapElement){
 
@@ -17,6 +17,7 @@ app.factory('Geoloc', function () {
         that.map = {};
         that.defaultLatLng = new google.maps.LatLng(48.857487002645485, 2.3515677452087402); // Paris hotel de ville
         that.markers = [];
+        that.geocoder = new google.maps.Geocoder();
         
         that.createMap = function(){
 
@@ -125,6 +126,63 @@ app.factory('Geoloc', function () {
           });
         };
 
+        that.getLatLng = function(address) {
+
+          var deferred = $q.defer();
+
+          that.clearMarkers();
+          
+          that.geocoder.geocode( { 'address': address}, function(results, status) {
+            if(status == google.maps.GeocoderStatus.OK) {
+
+              that.map.setOptions({
+                center: results[0].geometry.location,
+                zoom: 15
+              });
+
+              var marker = new google.maps.Marker({
+                  map: that.map,
+                  position: results[0].geometry.location
+              });
+
+              that.markers.push(marker);
+              //envoi le latLng
+              deferred.resolve(results[0].geometry.location);
+            }else{
+              deferred.reject("Geocode was not successful for the following reason: " + status);
+            }
+          });
+          return deferred.promise;
+        };
+
+        that.getAddress = function(lat, lng) {
+
+          var deferred = $q.defer();
+          
+          var latlng = new google.maps.LatLng(lat, lng);
+          var address;
+
+          that.clearMarkers();
+
+          that.geocoder.geocode({'latLng': latlng}, function(results, status) {
+              if (status == google.maps.GeocoderStatus.OK) {
+                if (results[0]) {
+                  var marker = new google.maps.Marker({
+                      position: latlng,
+                      map: that.map
+                  });
+
+                  that.markers.push(marker);
+
+                  deferred.resolve(results[0].formatted_address);
+                }
+              }else{
+                deferred.reject("Geocoder failed due to: " + status);
+              }
+          });
+          return deferred.promise;
+        };
+
         that.smoothZoom = function (map, level, cnt, mode) {
             //fonction qui zoom doucement la carte gmap
             var z;
@@ -173,6 +231,8 @@ app.factory('Geoloc', function () {
         };
 
         that.addMarker = function(post){
+
+          if(!post.coords.latitude){ return; }
           
           var LatLng = new google.maps.LatLng(post.coords.latitude, post.coords.longitude);
 
@@ -261,6 +321,12 @@ app.factory('Geoloc', function () {
 
           }
           
+        };
+
+        that.clearMarkers = function(){
+          for (var i = 0; i < that.markers.length; i++){
+            that.markers[i].setMap();
+          }
         };
 
       };

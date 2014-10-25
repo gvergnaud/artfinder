@@ -34,6 +34,6 @@
 
 		$scope.geoloc.createMap();
 
-		$scope.geoloc.addMyLocationMarker();
+		//$scope.geoloc.addMyLocationMarker();
 
 	}]);

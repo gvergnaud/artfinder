@@ -67,6 +67,40 @@ app.factory('Post', function Post($http, $q, Session) {
     		return deferred.promise;
     	},
 
+        add: function(newPost){
+            var deferred = $q.defer();
+
+            //on récupere tous les posts au cas ou il y aurait eu une modification du fichier sur le server
+            factory.get(true).then(
+                function (posts){
+
+                    //on ajoute l'id a notre post
+                    newPost.id = posts[posts.length-1].id + 1;
+
+                    //on ajoute notre newPost a la liste de commentaire de notre post
+                    posts.push(newPost);
+                    
+                    //on sauvegarde notre nouvel objet posts
+                    factory.posts = posts;
+                    factory.save(posts).then(
+                        function(data){
+                            deferred.resolve(newPost.id);
+                        },
+                        function(msg){
+                            deferred.reject(msg);
+                            console.log(msg);
+                        }
+                    );
+
+                },
+                function (msg){
+                    deferred.reject(msg);
+                }
+            );
+
+            return deferred.promise;
+        },
+
     	save: function(posts){ //Envoi le json posts au fichier save.php, qui remplace l'ancien avec le nouveau sur le server.
 
             var deferred = $q.defer();
