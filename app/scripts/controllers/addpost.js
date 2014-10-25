@@ -86,7 +86,7 @@ app.controller('AddpostCtrl', function ($scope, $rootScope, UI, Auth, Geoloc, Se
 	$scope.newPost = {};
 	$scope.newPost.stillExist = new Boolean();
 	$scope.newPost.stillExist = false;
-	$scope.newPost.artist = [];
+	$scope.newPost.artists = {};
 	$scope.newPost.coords = {};
 
 	var geoloc = new Geoloc('formMap');
@@ -110,12 +110,10 @@ app.controller('AddpostCtrl', function ($scope, $rootScope, UI, Auth, Geoloc, Se
 	});
 
 	$scope.addressChange = function(){
-		console.log('trigger');
 		geoloc.getLatLng($scope.newPost.address).then(
 			function(latLng){
 				$scope.newPost.coords.latitude = latLng.k;
 				$scope.newPost.coords.longitude = latLng.B;
-				console.log($scope.newPost.coords);
 			},
 			function(msg){
 				UI.notification('error', msg);

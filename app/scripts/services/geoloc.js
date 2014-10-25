@@ -231,15 +231,13 @@ app.factory('Geoloc', function (UI, $q) {
         };
 
         that.addMarker = function(post){
-
-          if(!post.coords.latitude){ return; }
           
           var LatLng = new google.maps.LatLng(post.coords.latitude, post.coords.longitude);
 
           var marker = new google.maps.Marker({
             position: LatLng,
-            map: that.map,
-            title: post.artist
+            map: that.map
+            //title: post.artists
             //animation: google.maps.Animation.DROP
             //icon: "fleche.png"
           });

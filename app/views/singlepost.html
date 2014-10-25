@@ -8,7 +8,7 @@
 	<section id="post_infos">
 		<span class="left">
 			<span id="where">{{post.address}}</span>
-			<span id="artist"><span ng-repeat="artist in post.artists">, {{artist}}</span></span>
+			<span id="artist"><span ng-repeat="artist in post.artists">, {{artist.name}}</span></span>
 		</span>
 		<span class="right">	
 			<span id="like" ng-click="likePost()">{{post.likes.length}} Like !</span>

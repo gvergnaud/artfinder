@@ -2,7 +2,9 @@
     {
         "id": 0,
         "artists": [
-            "Banksy"
+            {
+                "name": "Banksy"
+            }
         ],
         "technic": "pochoir",
         "urls": [
@@ -30,7 +32,9 @@
     {
         "id": 1,
         "artists": [
-            "C215"
+            {
+                "name": "C-215"
+            }
         ],
         "technic": "pochoir",
         "urls": [
@@ -58,7 +62,9 @@
     {
         "id": 2,
         "artists": [
-            "Vhils"
+            {
+                "name": "Vhils"
+            }
         ],
         "technic": "sculpture",
         "urls": [
@@ -95,7 +101,9 @@
     {
         "id": 3,
         "artists": [
-            "Konny Steding"
+            {
+                "name": "Konny Steding"
+            }
         ],
         "technic": "collage",
         "urls": [
@@ -164,23 +172,40 @@
     },
     {
         "stillExist": true,
-        "artist": [],
+        "artists": [],
         "coords": {
             "latitude": 48.849919323974,
-            "longitude": 2.3599147796631
+            "longitude": 2.36008644104
         },
-        "address": "3 Boulevard Henri IV, 75004 Paris, France",
         "urls": [
             "http:\/\/localhost\/hetic\/pumir\/artfinder\/app\/images\/uploads\/streetart-design-vol11-2.jpg"
         ],
+        "address": "5 Boulevard Henri IV, 75004 Paris, France",
         "technic": "peinture",
         "description": "L\u00e8che le sol.",
         "userId": "13",
         "comments": [],
-        "likes": [
-            "gab"
-        ],
-        "date": 1414233579773,
+        "likes": [],
+        "date": 1414234728739,
         "id": 4
+    },
+    {
+        "stillExist": true,
+        "artists": [],
+        "coords": {
+            "latitude": 48.859258747207,
+            "longitude": 2.3509562015533
+        },
+        "urls": [
+            "http:\/\/localhost\/hetic\/pumir\/artfinder\/app\/images\/uploads\/paris-urban-art.jpg"
+        ],
+        "address": "22 Rue du Clo\u00eetre Saint-Merri, 75004 Paris, France",
+        "technic": "pochoir",
+        "description": "Portrait monumental.",
+        "userId": "13",
+        "comments": [],
+        "likes": [],
+        "date": 1414234761592,
+        "id": 5
     }
 ]
