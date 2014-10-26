@@ -1,14 +1,12 @@
 [
     {
         "id": 0,
-        "artists": [
-            {
-                "name": "Banksy"
-            }
-        ],
         "technic": "pochoir",
-        "urls": [
-            "images\/banksy.jpg"
+        "photos": [
+            {
+                "url": "images\/banksy.jpg",
+                "artists": []
+            }
         ],
         "description": "Encore un truc styl\u00e9",
         "coords": {
@@ -19,26 +17,17 @@
         "stillExist": true,
         "date": 1414100058888,
         "userId": 0,
-        "comments": [
-            {
-                "content": "Le fameux",
-                "timestamp": 1414102081594,
-                "username": "gab",
-                "date": "24\/10\/2014"
-            }
-        ],
+        "comments": [],
         "likes": []
     },
     {
         "id": 1,
-        "artists": [
-            {
-                "name": "C-215"
-            }
-        ],
         "technic": "pochoir",
-        "urls": [
-            "images\/c215.jpg"
+        "photos": [
+            {
+                "url": "images\/c215.jpg",
+                "artists": []
+            }
         ],
         "description": "Encore un truc styl\u00e9",
         "coords": {
@@ -49,26 +38,17 @@
         "stillExist": true,
         "date": 1414100058888,
         "userId": 0,
-        "comments": [
-            {
-                "username": "cool",
-                "content": "vraiment styl\u00e9",
-                "timestamp": 1413544089964,
-                "date": "17\/10\/2014"
-            }
-        ],
+        "comments": [],
         "likes": []
     },
     {
         "id": 2,
-        "artists": [
-            {
-                "name": "Vhils"
-            }
-        ],
         "technic": "sculpture",
-        "urls": [
-            "images\/vhils.jpg"
+        "photos": [
+            {
+                "url": "images\/vhils.jpg",
+                "artists": []
+            }
         ],
         "description": "Encore un truc styl\u00e9",
         "coords": {
@@ -81,16 +61,11 @@
         "userId": 0,
         "comments": [
             {
-                "username": "John",
-                "content": "incroyable",
-                "timestamp": 1413831804750,
-                "date": "20\/10\/2014"
-            },
-            {
-                "content": "lol",
-                "timestamp": 1414147644332,
+                "content": "Incroyable",
+                "timestamp": 1414325772724,
                 "username": "gab",
-                "date": "24\/10\/2014"
+                "activePhoto": 1,
+                "date": "26\/10\/2014"
             }
         ],
         "likes": [
@@ -100,15 +75,16 @@
     },
     {
         "id": 3,
-        "artists": [
-            {
-                "name": "Konny Steding"
-            }
-        ],
         "technic": "collage",
-        "urls": [
-            "images\/konnysteding.jpg",
-            "images\/konnysteding2.jpg"
+        "photos": [
+            {
+                "url": "images\/konnysteding.jpg",
+                "artists": []
+            },
+            {
+                "url": "images\/konnysteding2.jpg",
+                "artists": []
+            }
         ],
         "description": "Encore un truc styl\u00e9",
         "coords": {
@@ -121,46 +97,18 @@
         "userId": 0,
         "comments": [
             {
-                "username": "oui",
-                "content": "je suis submerg\u00e9 de joie",
-                "timestamp": 1413544485227,
-                "date": "17\/10\/2014"
-            },
-            {
-                "username": "Gab",
-                "content": "C'est chouette.",
-                "timestamp": 1413709594727,
-                "date": "19\/10\/2014"
-            },
-            {
-                "username": "Gab",
-                "content": "Fort bien",
-                "timestamp": 1413827842231,
-                "date": "20\/10\/2014"
-            },
-            {
-                "username": "camille",
-                "content": "salut",
-                "timestamp": 1413892390041,
-                "date": "21\/10\/2014"
-            },
-            {
-                "content": "cool",
-                "timestamp": 1414100291341,
+                "content": "Ouf",
+                "timestamp": 1414325792503,
                 "username": "gab",
-                "date": "23\/10\/2014"
+                "activePhoto": 2,
+                "date": "26\/10\/2014"
             },
             {
-                "content": "tr\u00e8s cool",
-                "timestamp": 1414101645524,
+                "content": "ouf aussi",
+                "timestamp": 1414325802960,
                 "username": "gab",
-                "date": "24\/10\/2014"
-            },
-            {
-                "content": "oui",
-                "timestamp": 1414148365415,
-                "username": "leman",
-                "date": "24\/10\/2014"
+                "activePhoto": 1,
+                "date": "26\/10\/2014"
             }
         ],
         "likes": [
@@ -172,32 +120,44 @@
     },
     {
         "stillExist": true,
-        "artists": [],
         "coords": {
             "latitude": 48.849919323974,
             "longitude": 2.36008644104
         },
-        "urls": [
-            "http:\/\/localhost\/hetic\/pumir\/artfinder\/app\/images\/uploads\/streetart-design-vol11-2.jpg"
+        "photos": [
+            {
+                "url": "http:\/\/localhost\/hetic\/pumir\/artfinder\/app\/images\/uploads\/streetart-design-vol11-2.jpg",
+                "artists": []
+            }
         ],
         "address": "5 Boulevard Henri IV, 75004 Paris, France",
         "technic": "peinture",
         "description": "L\u00e8che le sol.",
         "userId": "13",
-        "comments": [],
+        "comments": [
+            {
+                "content": "lol",
+                "timestamp": 1414325846304,
+                "username": "gab",
+                "activePhoto": 1,
+                "date": "26\/10\/2014"
+            }
+        ],
         "likes": [],
         "date": 1414234728739,
         "id": 4
     },
     {
         "stillExist": true,
-        "artists": [],
         "coords": {
             "latitude": 48.859258747207,
             "longitude": 2.3509562015533
         },
-        "urls": [
-            "http:\/\/localhost\/hetic\/pumir\/artfinder\/app\/images\/uploads\/paris-urban-art.jpg"
+        "photos": [
+            {
+                "url": "http:\/\/localhost\/hetic\/pumir\/artfinder\/app\/images\/uploads\/paris-urban-art.jpg",
+                "artists": []
+            }
         ],
         "address": "22 Rue du Clo\u00eetre Saint-Merri, 75004 Paris, France",
         "technic": "pochoir",

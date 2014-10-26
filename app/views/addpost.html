@@ -44,8 +44,25 @@
 
 <div id="formMap"></div>
 <label>Adresse : </label><input type="text" ng-model="newPost.address" ng-change="addressChange()"/>
-<form role="form" ng-submit="addPost()">
 
+<section id="closePostsContainer" ng-show="closePosts.length">
+	<h3>Des murs ont été partagés à cet endroit.</h3>
+	<p>Selectionner l'un de ces murs pour y ajouter votre photo</p>
+	<div class="post" ng-repeat="post in closePosts">
+		<div  class="{{post.id}}">
+		    <img ng-src="{{post.photos[0].url}}" />
+		    <div class="over"  ng-click="selectClosePost({{post}})">
+		        <p>{{post.likes.length}} Likes</p>
+		    </div>
+		</div>
+	</div>
+</section>
+
+<form id="addPhotoForm">
+	<input type="submit" id="addPhotoBtn" value="Ajouter ma photo à ce post !" />
+</form>
+
+<form id="addPostForm" role="form" ng-submit="addPost()">
     <div>
 	    <label>Technique utilisée : </label>
 	    <select ng-model="newPost.technic">

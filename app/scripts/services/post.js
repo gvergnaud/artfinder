@@ -110,8 +110,12 @@ app.factory('Post', function Post($http, $q, Session) {
                     method: 'post',
                     data: {posts: angular.toJson(posts)}
                 })
-                .success(function (data, status){
-                    deferred.resolve(data);
+                .success(function (response, status){
+                    if(response === 'no data'){
+                        deferred.reject('pas de donnée reçu lors de l\'enregistrement.');
+                    }else{
+                        deferred.resolve(response); 
+                    }
                 })
                 .error(function (data, status){
                     deferred.reject('Impossible de sauvegarder les posts' + status);
@@ -121,7 +125,7 @@ app.factory('Post', function Post($http, $q, Session) {
             return deferred.promise;
     	},
 
-        saveComment: function(postId, newComment){
+        addComment: function(postId, newComment){
 
             var deferred = $q.defer();
 
@@ -179,6 +183,41 @@ app.factory('Post', function Post($http, $q, Session) {
                             deferred.resolve(data);
                         },
                         function(msg){
+                            deferred.reject(msg);
+                            console.log(msg);
+                        }
+                    );
+
+                },
+                function (msg){
+                    deferred.reject(msg);
+                }
+            );
+
+            return deferred.promise;
+        },
+
+        addPhoto: function(postId, photo){
+            var deferred = $q.defer();
+
+            //on récupere tous les posts au cas ou il y aurait eu une modification du fichier sur le server
+            factory.get(true).then(
+                function (posts){
+
+                    //on ajoute notre newComment a la liste de commentaire de notre post
+
+                    angular.forEach(posts, function (post, key){
+                        if(post.id === parseInt(postId)){   
+                            post.photos.push(photo);
+                        }
+                    });
+                    
+                    //on sauvegarde notre nouvel objet posts
+                    factory.save(posts).then(
+                        function (data){
+                            deferred.resolve(data);
+                        },
+                        function (msg){
                             deferred.reject(msg);
                             console.log(msg);
                         }

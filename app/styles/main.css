@@ -160,7 +160,7 @@ body{
   opacity: 1;
 }
 
-/* UPLOAD PAGE */
+/* UPLOAD ADDPOST */
 
 #drop{
   height:300px;
@@ -176,6 +176,10 @@ body{
 #drop.hover{
   color:#8dd0ff;
   border-color:#8dd0ff;
+}
+
+form#addPhotoForm{
+  display: none;
 }
 
 /* SINGLE POST */
@@ -254,6 +258,11 @@ blockquote{
 }
 
 p.date{
+  font-size: 0.8em;
+  color: #aaa;
+}
+
+span.activephoto{
   font-size: 0.8em;
   color: #aaa;
 }

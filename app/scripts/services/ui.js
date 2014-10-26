@@ -120,17 +120,17 @@ app.factory('UI', function UI() {
 
 	    	playerArrowsShowHide: function(scope){
 
-				if(typeof scope.post.urls[scope.currentUrlId - 1] === 'undefined'){
+				if(typeof scope.post.photos[scope.currentPhotoId - 1] === 'undefined'){
 					scope.arrows[0].css({display: 'none'});
 				}else{
 					scope.arrows[0].css({display: 'block'});
 				}
-				if(typeof scope.post.urls[scope.currentUrlId + 1] === 'undefined'){
+				if(typeof scope.post.photos[scope.currentPhotoId + 1] === 'undefined'){
 					scope.arrows[1].css({display: 'none'});
 				}else{
 					scope.arrows[1].css({display: 'block'});
 				}
-			},
+			}
 	    },
 
 
@@ -161,6 +161,19 @@ app.factory('UI', function UI() {
 				};
 
 				ui.showViewcontainer();
+	    	},
+
+	    	selectedPost: function(post){
+				var addPhotoForm = angular.element(document.querySelector('form#addPhotoForm'));
+				var addPostForm = angular.element(document.querySelector('form#addPostForm'));
+				
+				addPhotoForm.css({
+					display: 'block'
+				});
+				
+				addPostForm.css({
+					display: 'none'
+				});
 	    	}
 	    }
     };

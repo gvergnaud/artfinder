@@ -15,5 +15,5 @@
 
         fclose($posts_json);
 	}else{
-		echo "pas de données reçus en post";
+		echo "no data";
 	}

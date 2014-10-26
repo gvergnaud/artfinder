@@ -58,12 +58,21 @@ app.controller('AddpostCtrl', function ($scope, $rootScope, UI, Auth, Geoloc, Se
 		document.querySelector("#total-progress").style.opacity = "0";
 	});
 */
-	myDropzone.on("success", function(file){
-		var imagePath = window.location.origin + window.location.pathname + 'images/uploads/' + file.name;
-		document.getElementById('photorender').setAttribute('src', imagePath);
-		if(file.type === 'image/jpeg' || file.type === 'image/png'){
-			$scope.newPost.urls = [];
-			$scope.newPost.urls.push(imagePath);
+	myDropzone.on("success", function(file, response){
+		if(response !== 'nofiles'){
+			var imagePath = window.location.origin + window.location.pathname + 'images/uploads/' + response;
+			document.getElementById('photorender').setAttribute('src', imagePath);
+			if(file.type === 'image/jpeg' || file.type === 'image/png'){
+				
+				var photo = {
+					url: imagePath,
+					artists: []
+				};
+
+				$scope.newPost.photos.push(photo);
+			}
+		}else{
+			UI.notification('error', 'le serveur n\'a reçu aucune image.');
 		}
 	});
 
@@ -82,51 +91,118 @@ app.controller('AddpostCtrl', function ($scope, $rootScope, UI, Auth, Geoloc, Se
 
 	*/
 
-	var addPostForm = angular.element(document.querySelector('#addPost'));
 	$scope.newPost = {};
 	$scope.newPost.stillExist = new Boolean();
 	$scope.newPost.stillExist = false;
-	$scope.newPost.artists = {};
+	$scope.newPost.photos = [];
 	$scope.newPost.coords = {};
 
 	var geoloc = new Geoloc('formMap');
 
 	geoloc.createMap();
 
+	//click sur la carte pour récuperer les coordonnées
 	google.maps.event.addListener(geoloc.map, 'click', function( event ){
 
 		geoloc.getAddress(event.latLng.lat(), event.latLng.lng()).then(
-			function(address){
+			function (address){
 				$scope.newPost.address = address;
 			},
-			function(msg){
+			function (msg){
 				UI.notification('error', msg);
 			}
 		);
 
 		$scope.newPost.coords.latitude = event.latLng.lat();
 		$scope.newPost.coords.longitude = event.latLng.lng();
+		$scope.proposePosts();
 
 	});
 
+	//entrer l'adresse pour recupérer les coordonnées
 	$scope.addressChange = function(){
 		geoloc.getLatLng($scope.newPost.address).then(
-			function(latLng){
+			function (latLng){
 				$scope.newPost.coords.latitude = latLng.k;
 				$scope.newPost.coords.longitude = latLng.B;
+				$scope.proposePosts();
 			},
-			function(msg){
+			function (msg){
 				UI.notification('error', msg);
 			}
 		);
-	}
+	};
+
+	$scope.closePosts = [];
+
+	$scope.proposePosts = function(){
+
+		Post.get().then(
+			function (posts){
+				for(var i in posts){
+					var post = posts[i];
+					//si le nouveau post est près d'un ancien post
+					if($scope.areNear(post.coords, $scope.newPost.coords, 3)){
+						//si le post n'est pas déja dans le tableau closeposts
+						if($scope.closePosts.indexOf(post) === -1){
+							$scope.closePosts.push(post);
+							geoloc.addMarker(post);
+						}
+					//sinon, si le post etait dans le tableau, on l'enleve
+					}else if($scope.closePosts.indexOf(post) !== -1){
+						
+						$scope.closePosts.splice($scope.closePosts.indexOf(post), 1);
+						
+					}
+				}
+			},
+			function (msg){
+				UI.notification('error', msg);
+			}
+		);
+	};
+
+	$scope.selectClosePost = function(post){
+
+		UI.addpost.selectedPost(post); //dois effacer les autres champs ainsi que les autres closePosts proposés et faire apparaitre un bouton submit spécial qui déclenche la function Post.addPhoto.
+		var addPhotoForm = angular.element(document.querySelector('form#addPhotoForm'));
+		
+		//ajoute la photo au post existant
+		addPhotoForm.on('submit', function(e){
+			
+			e.preventDefault();
+			
+			if(Auth.isAuthenticated()){ //si l'utilisateur est bien authentifié
+
+				if(!!$scope.newPost.photos[0]){ //si l'utilisateur a bien envoyé son image
+					
+					//on ajoute le username de l'hoster a l'image
+					$scope.newPost.photos[0].hosterUsername = Session.username;
+
+					Post.addPhoto(post.id, $scope.newPost.photos[0]).then(
+						function(data){ //success
+							$scope.redirectTo('singlepost', post.id);
+						},
+						function(msg){ //error
+							UI.notification('error', msg);
+						}
+					);
+				}else{
+					UI.notification('error', 'Envoyer votre image avant d\'envoyer le formulaire !');
+				}
+			}else{
+				UI.notification('error', 'Identifiez vous pour ajouter un mur.');
+			}
+		});
+
+	};
 
 	$scope.addPost = function(){
 		
 		if(Auth.isAuthenticated()){
-			if(!!$scope.newPost.urls){
+			if(!!$scope.newPost.photos[0].url){ //si l'image a bien été upload
 
-				if(!!$scope.newPost.coords.latitude || !!$scope.newPost.coords.longitude){
+				if(!!$scope.newPost.coords.latitude || !!$scope.newPost.coords.longitude){ //si le post est bien géolocalisé
 					//on formate l'adresse à la bien (dans le cas ou l'utilisateur l'a entré manuellement)
 					geoloc.getAddress($scope.newPost.coords.latitude, $scope.newPost.coords.longitude).then(
 						function(address){
@@ -134,17 +210,19 @@ app.controller('AddpostCtrl', function ($scope, $rootScope, UI, Auth, Geoloc, Se
 
 							if(!!$scope.newPost.technic && !!$scope.newPost.description){
 
-								$scope.newPost.userId = Session.userId;
+								$scope.newPost.photos[0].hosterUsername = Session.username;
+								$scope.newPost.username = Session.username;
+								$scope.newPost.userId = parseInt(Session.userId);
 								$scope.newPost.comments = [];
 								$scope.newPost.likes = [];
 								$scope.newPost.date = new Date().getTime();
 
 								Post.add($scope.newPost).then(
-									function(newPostId){
+									function (newPostId){
 										UI.notification('success', 'Votre mur à bien été ajouté !');
 										$scope.redirectTo('singlepost', newPostId);
 									},
-									function(msg){
+									function (msg){
 										UI.notification('error', msg);
 									}
 								);
@@ -152,7 +230,7 @@ app.controller('AddpostCtrl', function ($scope, $rootScope, UI, Auth, Geoloc, Se
 							UI.notification('error', 'Tous les champs ne sont pas remplis.');
 							}
 						},
-						function(msg){
+						function (msg){
 							UI.notification('error', msg);
 						}
 					);
@@ -166,5 +244,5 @@ app.controller('AddpostCtrl', function ($scope, $rootScope, UI, Auth, Geoloc, Se
 		}else{
 			UI.notification('error', 'Identifiez vous pour ajouter un mur.');
 		}
-	}
+	};
 });

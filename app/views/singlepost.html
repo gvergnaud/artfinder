@@ -2,13 +2,13 @@
 	<section id="player" class="player">
 		<nav class="arrows" id="prev">Prev</nav>
 		<nav class="arrows" id="next">Next</nav>
-		<img ng-src="{{post.urls[0]}}" />
+		<img ng-src="{{post.photos[currentPhotoId].url}}" />
 		<div class="control"></div>
 	</section>
 	<section id="post_infos">
 		<span class="left">
 			<span id="where">{{post.address}}</span>
-			<span id="artist"><span ng-repeat="artist in post.artists">, {{artist.name}}</span></span>
+			<span id="artist"><span ng-repeat="artist in post.photos[currentPhotoId].artists">, {{artist.name}}</span></span>
 		</span>
 		<span class="right">	
 			<span id="like" ng-click="likePost()">{{post.likes.length}} Like !</span>
@@ -23,7 +23,7 @@
 			<h2>Commentaires</h2>
 			<div ng-repeat="comment in post.comments">
 
-				<p><strong>{{comment.username}}</strong></p>
+				<p><strong>{{comment.username}}</strong>  <span class="activephoto"> Photo n°{{comment.activePhoto}}</span></p>
 				<blockquote>
 					<p>{{comment.content}}</p>
 				</blockquote>

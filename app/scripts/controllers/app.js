@@ -41,5 +41,17 @@ app.controller('appCtrl', function ($scope, $rootScope, Session, Auth, UI, USER_
 
 	$scope.redirectTo = function(page, param){
 		location.hash = '#/' + page + '/'+ param;
-	}
+	};
+
+	$scope.areNear = function(coords1, coords2, distance){
+		if(!coords1 || !coords2 || !distance){return;}
+		function coordRound(val){
+			return Math.ceil(val * 10000);
+		}
+		if(Math.abs(coordRound(coords1.latitude) - coordRound(coords2.latitude)) <= distance && Math.abs(coordRound(coords1.longitude) - coordRound(coords2.longitude)) <= distance){
+			return true;
+		}else{
+			return false;
+		}
+	};
 });
