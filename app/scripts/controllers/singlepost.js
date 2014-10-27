@@ -7,13 +7,16 @@
  * # SinglepostCtrl
  * Controller of the artFinderApp
  */
-app.controller('SinglepostCtrl',['$scope', '$rootScope', '$routeParams', 'Post', 'UI', 'Auth', 'Session', function ($scope, $rootScope, $routeParams, Post, UI, Auth, Session) {
+app.controller('SinglepostCtrl',['$scope', '$rootScope', '$routeParams', 'Post', 'UI', 'Auth', 'Session', 'Geoloc', function ($scope, $rootScope, $routeParams, Post, UI, Auth, Session, Geoloc) {
 	
 	//Récuperation des posts
 	Post.find($routeParams.id).then(
 		function (post){ // les posts sont récupérés !
 			$scope.post =  post;
-			UI.singlepost.playerArrowsShowHide($scope);
+			UI.singlepost.togglePlayerArrows($scope);
+			setTimeout(function(){
+				UI.singlepost.tagStyles();
+			}, 300);
 		},
 		function (msg){ // erreur lors de la récupération des posts
 			console.log(msg);
@@ -32,19 +35,32 @@ app.controller('SinglepostCtrl',['$scope', '$rootScope', '$routeParams', 'Post',
 	//Changer l'image avec prev
 	document.getElementById('prev').addEventListener('click', function(){
 		
-		$scope.currentPhotoId -= 1;
-		$scope.img.attr('src', $scope.post.photos[$scope.currentPhotoId].url);
-		UI.singlepost.playerArrowsShowHide($scope);
+		$scope.$apply(function(){	
+			$scope.currentPhotoId -= 1;
+		});
+
+		UI.singlepost.togglePlayerArrows($scope);
 	});
 
  	//Changer l'image avec next
  	document.getElementById('next').addEventListener('click', function(){
  		
- 		$scope.currentPhotoId += 1;
- 		$scope.img.attr('src', $scope.post.photos[$scope.currentPhotoId].url);
- 		UI.singlepost.playerArrowsShowHide($scope);
+ 		$scope.$apply(function(){
+ 			$scope.currentPhotoId += 1;
+ 		});
+
+ 		UI.singlepost.togglePlayerArrows($scope);
  	});
 
+ 	$scope.toggleMap = function(){
+ 		var geoloc = new Geoloc('section.map');
+		geoloc.createMap();
+		geoloc.addMarker($scope.post);
+		geoloc.showPostLocation($scope.post);
+		geoloc.setMapOptions({scrollwheel: false});
+
+ 		UI.singlepost.toggleMap();
+ 	};
 
  	$scope.newComment = {}
 
@@ -70,7 +86,7 @@ app.controller('SinglepostCtrl',['$scope', '$rootScope', '$routeParams', 'Post',
 	 			);	
 	 		}
  		}else{
-			UI.notification('', 'vous devez etre identifier !');
+			UI.notification('', 'vous devez etre connecté !');
 		}
  	};
 
@@ -83,7 +99,7 @@ app.controller('SinglepostCtrl',['$scope', '$rootScope', '$routeParams', 'Post',
 	 				Post.find($routeParams.id).then(
 						function (post){ // les posts sont récupérés !
 							$scope.post =  post;
-							UI.singlepost.playerArrowsShowHide($scope);
+							UI.singlepost.togglePlayerArrows($scope);
 						},
 						function (msg){ // erreur lors de la récupération des posts
 							console.log(msg);
@@ -94,7 +110,95 @@ app.controller('SinglepostCtrl',['$scope', '$rootScope', '$routeParams', 'Post',
 	 			function(msg){} //error
 	 		);
 		}else{
-			UI.notification('', 'vous devez etre identifier !');
+			UI.notification('', 'vous devez etre connecté !');
+		}
+ 	};
+
+ 	$scope.identifying = false;
+ 	$scope.selecting = false;
+
+ 	$scope.startIdentification = function(){
+
+		$scope.identifying = true; //modifie des elements dans le dom
+ 		
+ 		var tagWrapper = angular.element(document.querySelector('div.tagWrapper'));
+ 		
+ 		$scope.newArtist = {}; 
+
+ 		UI.singlepost.startIdentification(); //cursor et background style
+
+ 		tagWrapper.on('mousedown', function(e){
+ 			e.preventDefault();
+
+ 			$scope.selecting = true; //demarre le suivit de la position du cursor
+
+ 			$scope.newArtist.left = (e.offsetX * 100) /  this.clientWidth; //recupe left en %
+ 			$scope.newArtist.top = (e.offsetY * 100) /  this.clientHeight; //recupe top en %
+
+ 			UI.singlepost.startSelection($scope.newArtist.left, $scope.newArtist.top); //cree le div newTag
+ 		});
+
+ 		tagWrapper.on('mousemove', function(e){
+
+ 			if($scope.selecting){ 
+	 			var x = e.offsetX=='undefined'?e.layerX:e.offsetX;
+				var y = e.offsetY=='undefined'?e.layerY:e.offsetY;
+
+	 			if(e.toElement ===  tagWrapper[0]){
+		 			$scope.newArtist.width = (x * 100) /  this.clientWidth - $scope.newArtist.left;
+		 			$scope.newArtist.height = (y * 100) /  this.clientHeight - $scope.newArtist.top;
+
+		 			UI.singlepost.doSelection($scope.newArtist.width, $scope.newArtist.height); //augment la taille du newtag en fonction du cursor
+	 			}	
+ 			}
+ 		});
+
+ 		tagWrapper.on('mouseup', function(e){
+ 			$scope.selecting = false;
+ 			e.preventDefault();
+ 			
+ 			UI.singlepost.stopSelection(function(artistNameInput){
+	 			$scope.newArtist.name = artistNameInput.value;
+	 			artistNameInput.blur();
+	 			UI.notification('', 'Clickez sur "Ajouter l\'identification !');
+	 		});
+ 		});
+ 	};
+
+ 	$scope.cancelIdentification = function(){
+ 		UI.singlepost.stopIdentification();
+ 		$scope.identifying = false;
+
+ 		if($scope.selecting){
+ 			UI.singlepost.stopSelection();
+ 			$scope.selecting = false;
+ 		}
+ 		
+ 		$scope.newArtist = {}; 
+ 	};
+
+ 	$scope.addArtist = function(){
+		
+		console.log($scope.newArtist);
+		if(!!$scope.newArtist.height && !!$scope.newArtist.width && !!$scope.newArtist.left && !!$scope.newArtist.top){
+			if(!!$scope.newArtist.name){
+				$scope.identifying = false;
+				Post.addArtist($scope.newArtist, $scope.post.id, $scope.currentPhotoId).then(
+					function(posts){ //success
+
+						$scope.post.photos[$scope.currentPhotoId].artists.push($scope.newArtist);
+				 		UI.singlepost.stopIdentification();				
+						UI.notification('success', 'Identification ajoutée!');
+					},
+					function(msg){
+						UI.notification('error', msg);
+					}
+				);
+			}else{
+				UI.notification('error', 'ajoutez le nom de l\'artiste !');
+			}
+		}else{
+			UI.notification('error', 'Selectionnez une partie de l\'image et ajoutez le nom de l\'artiste !');
 		}
  	};
 	

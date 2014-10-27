@@ -204,11 +204,46 @@ app.factory('Post', function Post($http, $q, Session) {
             factory.get(true).then(
                 function (posts){
 
-                    //on ajoute notre newComment a la liste de commentaire de notre post
+                    //on ajoute notre photo
 
                     angular.forEach(posts, function (post, key){
                         if(post.id === parseInt(postId)){   
                             post.photos.push(photo);
+                        }
+                    });
+                    
+                    //on sauvegarde notre nouvel objet posts
+                    factory.save(posts).then(
+                        function (data){
+                            deferred.resolve(data);
+                        },
+                        function (msg){
+                            deferred.reject(msg);
+                            console.log(msg);
+                        }
+                    );
+
+                },
+                function (msg){
+                    deferred.reject(msg);
+                }
+            );
+
+            return deferred.promise;
+        },
+
+        addArtist: function(newArtist, postId, currentPhotoId){
+            var deferred = $q.defer();
+
+            //on récupere tous les posts au cas ou il y aurait eu une modification du fichier sur le server
+            factory.get(true).then(
+                function (posts){
+
+                    //on ajoute notre artist a la liste
+
+                    angular.forEach(posts, function (post, key){
+                        if(post.id === parseInt(postId)){   
+                            post.photos[currentPhotoId].artists.push(newArtist);
                         }
                     });
                     

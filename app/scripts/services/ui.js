@@ -89,10 +89,13 @@ app.factory('UI', function UI() {
 
     	singlepost: {
 
+    		selection: false,
+
     		init:function(){
 
 				ui.singlepost.style();
 				window.addEventListener('resize', ui.singlepost.style, false);
+				window.addEventListener('resize', ui.singlepost.tagStyles, false);
 
 				ui.showViewcontainer();
 	    	},
@@ -118,7 +121,108 @@ app.factory('UI', function UI() {
 				});
 	    	},
 
-	    	playerArrowsShowHide: function(scope){
+	    	tagStyles: function(){
+	    		var tagWrapper = angular.element(document.querySelector('.tagWrapper')),
+	    			img = angular.element(document.querySelector('section#player>img'));
+		    	
+		    	tagWrapper.css({
+		    		height: img[0].clientHeight + 'px',
+		    		width: img[0].clientWidth + 'px'
+		    	});	
+	    	},
+
+	    	startIdentification: function(){
+	    		var tagWrapper = angular.element(document.querySelector('.tagWrapper'));
+
+	    		tagWrapper.css({
+	    			background: 'url(images/tag_wrapper_bg.png)',
+	    			cursor: 'crosshair'
+	    		});
+	    	},
+	    	
+	    	stopIdentification: function(){
+	    		ui.singlepost.tagWrapper = angular.element(document.querySelector('.tagWrapper'));
+
+	    		ui.singlepost.tagWrapper.css({
+	    			background: '',
+	    			cursor: ''
+	    		});
+
+	    		if(!!document.getElementById('newArtistId')){
+	    			angular.element(document.getElementById('newArtistId')).remove();
+	    		}   		
+	    	},
+
+	    	startSelection: function(left, top){
+	    		ui.singlepost.newTag = angular.element('<div />'),
+	    		ui.singlepost.tagWrapper = angular.element(document.querySelector('.tagWrapper'));
+
+	    		if(!!document.getElementById('newArtistId')){
+	    			angular.element(document.getElementById('newArtistId')).remove();
+	    		}
+
+	    		ui.singlepost.newTag.addClass('tagBox');
+	    		ui.singlepost.newTag.addClass('selection');
+	    		ui.singlepost.newTag.attr('id', 'newArtistId');
+	    		ui.singlepost.newTag.css({
+	    			top: top + '%',
+	    			left: left + '%'
+	    		});
+
+	    		ui.singlepost.tagWrapper.append(ui.singlepost.newTag);
+
+	    		console.log('startselection');
+
+	    		ui.singlepost.selection = true;
+	    	},
+
+	    	doSelection: function(width, height){
+	    		if(ui.singlepost.selection){
+		    		ui.singlepost.newTag.css({
+		    			width: width -1 + '%',
+		    			height: height -1 + '%'
+		    		});	
+	    		}
+	    	},
+
+	    	stopSelection: function(callback){
+	    		ui.singlepost.selection = false;
+
+	    		var artistNameInput = angular.element('<input />');
+	    		artistNameInput
+	    			.attr('type', 'text')
+	    			.attr('autofocus', '')
+	    			.attr('placeholder', 'nom de l\'artiste')
+	    			.addClass('tagName')
+	    			.css({
+	    				background: '#fff',
+	    				color: '#000',
+	    				textAlign: 'center'
+	    			})
+	    			.on('mousedown', function(e){
+	    				e.stopPropagation();
+	    			})
+	    			.on('mouseup', function(e){
+	    				e.stopPropagation();
+	    			})
+	    			.on('click', function(e){
+	    				e.stopPropagation();
+	    			})
+	    			.on('change', function(){
+	    				callback.call(this, this);
+	    			});
+
+				ui.singlepost.newTag.append(artistNameInput);
+
+	    		console.log('stopselection');
+	    	},
+
+	    	toggleMap: function(){
+	    		var map = angular.element(document.querySelector('section.map'));
+	    		map.toggleClass('show');
+	    	},
+
+	    	togglePlayerArrows: function(scope){
 
 				if(typeof scope.post.photos[scope.currentPhotoId - 1] === 'undefined'){
 					scope.arrows[0].css({display: 'none'});

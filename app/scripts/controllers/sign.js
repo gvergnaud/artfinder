@@ -17,6 +17,15 @@ app.controller('signCtrl', function ($scope, $rootScope, UI, AUTH_EVENTS, Auth, 
 		e.stopPropagation();
 	});
 
+	//si le localStorage existe, on recupère le user
+	if(!!localStorage.getItem('ArtFinderUser')){
+		var user = JSON.parse(localStorage.getItem('ArtFinderUser'));
+		Session.create(user.id, user.username, user.role);
+		$rootScope.$broadcast(AUTH_EVENTS.loginSuccess);
+		$scope.setCurrentUser(user);
+		UI.notification('success', 'Connection réussit !');
+	}
+
 	$scope.login = function(){
 		
 		if(!Auth.isAuthenticated()){ //si l'utilisateur n'est pas identifé
@@ -29,6 +38,11 @@ app.controller('signCtrl', function ($scope, $rootScope, UI, AUTH_EVENTS, Auth, 
 						$scope.setCurrentUser(user);
 						$scope.toggleLoginOverlay();
 						UI.notification('success', 'Connection réussit !');
+
+						//si l'utilisateur le veut on met ses données en localStorage
+						if($scope.loginInfos.remember){
+							localStorage.setItem('ArtFinderUser', angular.toJson(user));
+						}
 
 					}, function (msg) {
 						$rootScope.$broadcast(AUTH_EVENTS.loginFailed);

@@ -5,7 +5,15 @@
         "photos": [
             {
                 "url": "images\/banksy.jpg",
-                "artists": []
+                "artists": [
+                    {
+                        "left": 5.422446406053,
+                        "top": 4.0336134453782,
+                        "width": 82.093316519546,
+                        "height": 74.117647058824,
+                        "name": "Banksy"
+                    }
+                ]
             }
         ],
         "description": "Encore un truc styl\u00e9",
@@ -18,7 +26,9 @@
         "date": 1414100058888,
         "userId": 0,
         "comments": [],
-        "likes": []
+        "likes": [
+            "gab"
+        ]
     },
     {
         "id": 1,
@@ -26,7 +36,15 @@
         "photos": [
             {
                 "url": "images\/c215.jpg",
-                "artists": []
+                "artists": [
+                    {
+                        "left": 3.5390199637024,
+                        "top": 2.787456445993,
+                        "width": 90.38112522686,
+                        "height": 87.456445993031,
+                        "name": "C-215"
+                    }
+                ]
             }
         ],
         "description": "Encore un truc styl\u00e9",
@@ -47,7 +65,15 @@
         "photos": [
             {
                 "url": "images\/vhils.jpg",
-                "artists": []
+                "artists": [
+                    {
+                        "left": 23.577235772358,
+                        "top": 3.2520325203252,
+                        "width": 67.015098722416,
+                        "height": 82.81068524971,
+                        "name": "Vhils"
+                    }
+                ]
             }
         ],
         "description": "Encore un truc styl\u00e9",
@@ -79,11 +105,41 @@
         "photos": [
             {
                 "url": "images\/konnysteding.jpg",
-                "artists": []
+                "artists": [
+                    {
+                        "left": 50.855365474339,
+                        "top": 7.7816492450639,
+                        "width": 18.040435458787,
+                        "height": 14.285714285714,
+                        "name": "Shepard Farey"
+                    },
+                    {
+                        "left": 48.367029548989,
+                        "top": 24.854819976771,
+                        "width": 22.550544323484,
+                        "height": 18.815331010453,
+                        "name": "Mr. BrainWash"
+                    },
+                    {
+                        "left": 39.346811819596,
+                        "top": 48.08362369338,
+                        "width": 39.813374805599,
+                        "height": 36.353077816492,
+                        "name": "Konny Steding"
+                    }
+                ]
             },
             {
                 "url": "images\/konnysteding2.jpg",
-                "artists": []
+                "artists": [
+                    {
+                        "left": 14.152410575428,
+                        "top": 11.730545876887,
+                        "width": 67.340590979782,
+                        "height": 64.576074332172,
+                        "name": "Konny Steding"
+                    }
+                ]
             }
         ],
         "description": "Encore un truc styl\u00e9",
@@ -156,7 +212,15 @@
         "photos": [
             {
                 "url": "http:\/\/localhost\/hetic\/pumir\/artfinder\/app\/images\/uploads\/paris-urban-art.jpg",
-                "artists": []
+                "artists": [
+                    {
+                        "left": 15.889029003783,
+                        "top": 1.0084033613445,
+                        "width": 44.262295081967,
+                        "height": 86.386554621849,
+                        "name": "Jef Aeresol"
+                    }
+                ]
             }
         ],
         "address": "22 Rue du Clo\u00eetre Saint-Merri, 75004 Paris, France",
@@ -164,8 +228,43 @@
         "description": "Portrait monumental.",
         "userId": "13",
         "comments": [],
-        "likes": [],
+        "likes": [
+            "gab"
+        ],
         "date": 1414234761592,
         "id": 5
+    },
+    {
+        "stillExist": true,
+        "photos": [
+            {
+                "url": "http:\/\/localhost\/hetic\/pumir\/artfinder\/app\/images\/uploads\/1414406764Street-Art-Paris2.jpg",
+                "artists": [],
+                "hosterUsername": "gab"
+            }
+        ],
+        "coords": {
+            "latitude": 48.853082075094,
+            "longitude": 2.3725318908691
+        },
+        "address": "18 Passage du Cheval Blanc, 75011 Paris, France",
+        "technic": "pochoir",
+        "description": "Cool bonhomme",
+        "username": "gab",
+        "userId": 13,
+        "comments": [
+            {
+                "content": "Yes",
+                "timestamp": 1414419639618,
+                "username": "gab",
+                "activePhoto": 1,
+                "date": "27\/10\/2014"
+            }
+        ],
+        "likes": [
+            "gab"
+        ],
+        "date": 1414406808031,
+        "id": 6
     }
 ]

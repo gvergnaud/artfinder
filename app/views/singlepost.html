@@ -3,18 +3,31 @@
 		<nav class="arrows" id="prev">Prev</nav>
 		<nav class="arrows" id="next">Next</nav>
 		<img ng-src="{{post.photos[currentPhotoId].url}}" />
+		<div class="tagWrapper">
+			<div ng-repeat="artist in post.photos[currentPhotoId].artists">
+				<div  class="tagBox" ng-mouseenter="showTag=true" ng-mouseleave="showTag=false" style="left:{{artist.left}}%;top:{{artist.top}}%;width:{{artist.width}}%;height:{{artist.height}}%;" data-artist="{{artist.name}}">
+					<div class="tagName" ng-show="showTag">{{artist.name}}</div>
+				</div>
+			</div>
+		</div>
 		<div class="control"></div>
 	</section>
+	<section class="map"></section>
 	<section id="post_infos">
 		<span class="left">
-			<span id="where">{{post.address}}</span>
-			<span id="artist"><span ng-repeat="artist in post.photos[currentPhotoId].artists">, {{artist.name}}</span></span>
+			<span id="where" ng-click="toggleMap()">{{post.address}}</span>
+			<span id="artist">
+				<span ng-repeat="artist in post.photos[currentPhotoId].artists">, {{artist.name}}</span>
+				<a id="identification" ng-show="isAuthenticated() && !identifying" href="" ng-click="startIdentification()"> Identifier un artiste</a>
+				<a id="identification" ng-show="isAuthenticated() && identifying" href="" ng-click="addArtist()"> Ajouter l'identification</a>
+				<a id="identification" ng-show="isAuthenticated() && identifying" href="" ng-click="cancelIdentification()"> Annuler</a>
+			</span>
 		</span>
 		<span class="right">	
 			<span id="like" ng-click="likePost()">{{post.likes.length}} Like !</span>
 			<span id="nb_comments">{{post.comments.length}} Commentaires</span>
 		</span>
-		<p id="desc">{{post.description}}</p>
+		<p id="desc">{{post.description}}<span ng-if="!!post.photos[currentPhotoId].hosterUsername"> / Ajouté par {{post.photos[currentPhotoId].hosterUsername}}</span></p>
 
 	</section>
 
@@ -23,7 +36,7 @@
 			<h2>Commentaires</h2>
 			<div ng-repeat="comment in post.comments">
 
-				<p><strong>{{comment.username}}</strong>  <span class="activephoto"> Photo n°{{comment.activePhoto}}</span></p>
+				<p><strong>{{comment.username}}</strong>  <span class="activephoto"> Watching picture n°{{comment.activePhoto}}</span></p>
 				<blockquote>
 					<p>{{comment.content}}</p>
 				</blockquote>

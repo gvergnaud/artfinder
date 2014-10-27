@@ -30,7 +30,7 @@
 		
 	//Création de la carte
 
-		$scope.geoloc = new Geoloc('map');
+		$scope.geoloc = new Geoloc('#map');
 
 		$scope.geoloc.createMap();
 

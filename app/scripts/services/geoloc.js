@@ -9,11 +9,11 @@
  */
 app.factory('Geoloc', function (UI, $q) {
     
-      return function (idMapElement){
+      return function (selector){
 
         var that = this;
 
-        that.mapElement = document.getElementById(idMapElement);
+        that.mapElement = document.querySelector(selector);
         that.map = {};
         that.defaultLatLng = new google.maps.LatLng(48.857487002645485, 2.3515677452087402); // Paris hotel de ville
         that.markers = [];
@@ -124,6 +124,10 @@ app.factory('Geoloc', function (UI, $q) {
              google.maps.event.trigger(that.map, 'resize');
              that.map.setCenter(that.defaultLatLng);
           });
+        };
+
+        that.setMapOptions = function(options){
+          that.map.setOptions(options);
         };
 
         that.getLatLng = function(address) {

@@ -13,7 +13,7 @@ app.controller('AddpostCtrl', function ($scope, $rootScope, UI, Auth, Geoloc, Se
 
 	if(!Auth.isAuthenticated()){
 		UI.toggleLoginOverlay();
-		UI.notification('', 'Identiez vous pour ajouter un mur !');
+		UI.notification('', 'Connectez vous pour ajouter un mur !');
 	}
 	
 	var postImageUrl = window.location.origin + window.location.pathname + 'upload.php';
@@ -97,7 +97,7 @@ app.controller('AddpostCtrl', function ($scope, $rootScope, UI, Auth, Geoloc, Se
 	$scope.newPost.photos = [];
 	$scope.newPost.coords = {};
 
-	var geoloc = new Geoloc('formMap');
+	var geoloc = new Geoloc('#formMap');
 
 	geoloc.createMap();
 
@@ -121,16 +121,18 @@ app.controller('AddpostCtrl', function ($scope, $rootScope, UI, Auth, Geoloc, Se
 
 	//entrer l'adresse pour recupérer les coordonnées
 	$scope.addressChange = function(){
-		geoloc.getLatLng($scope.newPost.address).then(
-			function (latLng){
-				$scope.newPost.coords.latitude = latLng.k;
-				$scope.newPost.coords.longitude = latLng.B;
-				$scope.proposePosts();
-			},
-			function (msg){
-				UI.notification('error', msg);
-			}
-		);
+		if(!!$scope.newPost.address){
+			geoloc.getLatLng($scope.newPost.address).then(
+				function (latLng){
+					$scope.newPost.coords.latitude = latLng.k;
+					$scope.newPost.coords.longitude = latLng.B;
+					$scope.proposePosts();
+				},
+				function (msg){
+					UI.notification('error', msg);
+				}
+			);
+		}
 	};
 
 	$scope.closePosts = [];
@@ -191,7 +193,7 @@ app.controller('AddpostCtrl', function ($scope, $rootScope, UI, Auth, Geoloc, Se
 					UI.notification('error', 'Envoyer votre image avant d\'envoyer le formulaire !');
 				}
 			}else{
-				UI.notification('error', 'Identifiez vous pour ajouter un mur.');
+				UI.notification('error', 'Connectez vous pour ajouter un mur.');
 			}
 		});
 
@@ -242,7 +244,7 @@ app.controller('AddpostCtrl', function ($scope, $rootScope, UI, Auth, Geoloc, Se
 				UI.notification('error', 'Envoyer votre image avant d\'envoyer le formulaire !');
 			}
 		}else{
-			UI.notification('error', 'Identifiez vous pour ajouter un mur.');
+			UI.notification('error', 'Connectez vous pour ajouter un mur.');
 		}
 	};
 });
