@@ -48,14 +48,15 @@
 
         </div>
       </div>
-      <header class="header">
-        <h3>artFinder</h3>
-        <h4 id="username" ng-show="isAuthenticated()">{{currentUser.username}}</h4>
+      <header class="menu">
+        <div id="logo"></div>
+        <h1 id="username" ng-show="isAuthenticated()">{{currentUser.username}}</h1>
         <ul>
-          <li><a href="#/">Home</a></li>
-          <li><a href="#/addpost">Upload</a></li>
-          <li ng-hide="isAuthenticated()"><a href="" ng-click="toggleLoginOverlay()">Se Connecter</a></li>
-          <li ng-show="isAuthenticated()"><a href="" ng-click="userDisconnect()">Se Déconnecter</a></li>
+          <li><a href="#/" class="icon-globe">Explorer</a></li>
+          <li><a href="#/addpost" class="icon-camera">Ajouter un mur</a></li>
+          <li ng-hide="isAuthenticated()"><a href="" ng-click="toggleLoginOverlay()" class="icon-user">Sign In / Up</a></li>
+          <li ng-show="isAuthenticated()"><a href="" ng-click="userDisconnect()" class="icon-user">LogOut</a></li>
+          <li><a href="#/" class="icon-paper-plane">About</a></li>
         </ul>
       </header>
 

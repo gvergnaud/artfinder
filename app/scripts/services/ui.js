@@ -19,7 +19,7 @@ app.factory('UI', function UI() {
 		});
 		//on redefini lelement vu car il change a chaque chagement de page
 		viewcontainer.css({
-			width: window.innerWidth - 150 + 'px'
+			width: window.innerWidth - 200 + 'px'
 		});
 	}
 
@@ -90,11 +90,11 @@ app.factory('UI', function UI() {
 
 	    		map.css({
 					height: window.innerHeight/2 + 'px',
-					width: window.innerWidth - 150 + 'px'
+					width: window.innerWidth - 200 + 'px'
 				});
 				mosaic.css({
 					height: window.innerHeight/2 + 'px',
-					width: window.innerWidth - 150 + 'px'
+					width: window.innerWidth - 200 + 'px'
 				});
 	    	}
 

@@ -19,6 +19,70 @@
     src: url('../fonts/OpenSans-Regular.ttf')format('truetype');
 }
 
+@font-face {
+  font-family: 'icons';
+  src: url('../fonts/icons.eot?62427218');
+  src: url('../fonts/icons.eot?62427218#iefix') format('embedded-opentype'),
+       url('../fonts/icons.woff?62427218') format('woff'),
+       url('../fonts/icons.ttf?62427218') format('truetype'),
+       url('../fonts/icons.svg?62427218#icons') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+/* Chrome hack: SVG is rendered more smooth in Windozze. 100% magic, uncomment if you need it. */
+/* Note, that will break hinting! In other OS-es font will be not as sharp as it could be */
+/*
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+  @font-face {
+    font-family: 'icons';
+    src: url('../font/icons.svg?62427218#icons') format('svg');
+  }
+}
+*/
+[class^="icon-"]:before, [class*=" icon-"]:before {
+  font-family: "icons";
+  font-style: normal;
+  font-weight: normal;
+  speak: none;
+ 
+  display: inline-block;
+  text-decoration: inherit;
+  width: 1em;
+  margin-right: .2em;
+  text-align: center;
+  /* opacity: .8; */
+ 
+  /* For safety - reset parent styles, that can break glyph codes*/
+  font-variant: normal;
+  text-transform: none;
+     
+  /* fix buttons height, for twitter bootstrap */
+  line-height: 1em;
+ 
+  /* Animation center compensation - margins should be symmetric */
+  /* remove if not needed */
+  margin-left: .2em;
+ 
+  /* you can be more comfortable with increased icons size */
+  /* font-size: 120%; */
+ 
+  /* Uncomment for 3D effect */
+  /* text-shadow: 1px 1px 1px rgba(127, 127, 127, 0.3); */
+}
+ 
+.icon-marquee:before { content: '\e800'; } /* '' */
+.icon-user:before { content: '\e801'; } /* '' */
+.icon-comment:before { content: '\e802'; } /* '' */
+.icon-heart:before { content: '\e803'; } /* '' */
+.icon-camera:before { content: '\e804'; } /* '' */
+.icon-heart-empty:before { content: '\e805'; } /* '' */
+.icon-search:before { content: '\e806'; } /* '' */
+.icon-mail-alt:before { content: '\e807'; } /* '' */
+.icon-menu:before { content: '\e808'; } /* '' */
+.icon-resize-full:before { content: '\e809'; } /* '' */
+.icon-globe:before { content: '\e80a'; } /* '' */
+.icon-paper-plane:before { content: '\e80b'; } /* '' */
+
 h1{
   font-family: 'Uni Sans Heavy';
   font-size: 18px;
@@ -31,12 +95,12 @@ h2{
 
 h3{
   font-family: 'Montserrat Bold';
-  font-size: 14px;
+  font-size: 18px;
 }
 
 p{
   font-family: 'Open Sans Regular';
-  font-size: 12px;
+  font-size: 16px;
 }
 
 body{
@@ -46,11 +110,44 @@ body{
   overflow-x:hidden;
 }
 
-.header{
+.menu{
   position: fixed;
-  width:150px;
+  width:200px;
   height:100%;
-  z-index: 10;
+  z-index: 1000;
+  background: #000;
+  color: #fff;
+}
+
+.menu li{
+  list-style-type: none;
+  margin: 10px 0;
+}
+
+.menu a{
+  color: #B59E5C;
+  text-decoration: none;
+}
+
+.menu a:visited{
+  color: #B59E5C;
+}
+
+.menu div#logo{
+
+}
+
+#viewcontainer{
+  position: absolute;
+  left:200px;
+  height:100%;
+  opacity: 1;
+  transition: .3s ease;
+  -webkit-transition: .3s ease;
+}
+
+#viewcontainer.hidden{
+  opacity: 0;
 }
 
 .view{
@@ -97,21 +194,6 @@ body{
   transform: translateX(-150%);
 }
 
-#viewcontainer{
-  position: absolute;
-  left:150px;
-  height:100%;
-  opacity: 1;
-  transition: .3s ease;
-  -webkit-transition: .3s ease;
-}
-
-#viewcontainer.hidden{
-  opacity: 0;
-}
-
-
-
 /* LOGIN */
 
 #login{
@@ -120,7 +202,7 @@ body{
   left: 0;
   top: 0;
   background: rgba(0,0,0,.7);
-  z-index: 1000;
+  z-index: 50;
   color: #fff;
 }
 #login.show{
@@ -139,7 +221,7 @@ aside#notifications{
   right:0; 
   top: 0;
   width:100%;
-  z-index:1000;
+  z-index:100;
   overflow:hidden;
   display:none;
 }

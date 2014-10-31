@@ -19,9 +19,9 @@
 				<span id="where" ng-click="toggleMap()">{{post.address}}</span>
 				<span id="artist">
 					<span ng-repeat="artist in post.photos[currentPhotoId].artists">, {{artist.name}}</span>
-					<a id="identification" ng-show="isAuthenticated() && !identifying" href="" ng-click="startIdentification()"> Identifier un artiste</a>
-					<a id="identification" ng-show="isAuthenticated() && identifying" href="" ng-click="addArtist()"> Ajouter l'identification</a>
-					<a id="identification" ng-show="isAuthenticated() && identifying" href="" ng-click="cancelIdentification()"> Annuler</a>
+					<a class="identification" ng-show="isAuthenticated() && !identifying" href="" ng-click="startIdentification()"> Identifier un artiste</a>
+					<a class="identification" ng-show="isAuthenticated() && identifying" href="" ng-click="addArtist()"> Ajouter l'identification</a>
+					<a class="identification" ng-show="isAuthenticated() && identifying" href="" ng-click="cancelIdentification()"> Annuler</a>
 				</span>
 			</span>
 			<span class="right">
@@ -34,7 +34,7 @@
 
 		<section>
 			<div ng-if="post.comments.length" id="commentaires">
-				<h2>Commentaires</h2>
+				<h3>Commentaires</h3>
 				<div ng-repeat="comment in post.comments">
 
 					<p><strong>{{comment.username}}</strong>  <span class="activephoto"> Watching picture n°{{comment.activePhoto}}</span></p>

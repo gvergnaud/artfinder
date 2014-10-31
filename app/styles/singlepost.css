@@ -68,7 +68,12 @@ span#where{
 }
 
 span#artist{
+  font-size: 18px;
   font-family: 'Uni Sans Thin';
+}
+a.identification{
+  	font-size: 16px;
+	font-family: 'Montserrat Bold';
 }
 
 span.right{
@@ -103,7 +108,6 @@ blockquote{
   border-left: 4px solid #aaa;
   margin:0;
   padding-left: 15px;
-  font-style: italic;
 }
 
 p.date{
