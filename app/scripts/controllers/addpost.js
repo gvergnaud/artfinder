@@ -38,9 +38,9 @@ app.controller('AddpostCtrl', function ($scope, $rootScope, UI, Auth, Geoloc, Se
 
 
 
-	myDropzone.on("addedfile", function(file) {
+	myDropzone.on('addedfile', function(file) {
 	  	// Hookup the start button
-	  	file.previewElement.querySelector(".start").onclick = function(){
+	  	file.previewElement.querySelector('.start').onclick = function(){
 	  		myDropzone.enqueueFile(file);
 	  	};
 	});
@@ -58,7 +58,7 @@ app.controller('AddpostCtrl', function ($scope, $rootScope, UI, Auth, Geoloc, Se
 		document.querySelector("#total-progress").style.opacity = "0";
 	});
 */
-	myDropzone.on("success", function(file, response){
+	myDropzone.on('success', function(file, response){
 		if(response !== 'nofiles'){
 			var imagePath = window.location.origin + window.location.pathname + 'images/uploads/' + response;
 			document.getElementById('photorender').setAttribute('src', imagePath);
@@ -76,7 +76,7 @@ app.controller('AddpostCtrl', function ($scope, $rootScope, UI, Auth, Geoloc, Se
 		}
 	});
 
-	myDropzone.on("error", function(file){
+	myDropzone.on('error', function(file){
 	});
 /*
 	// Setup the buttons for all transfers
@@ -144,7 +144,7 @@ app.controller('AddpostCtrl', function ($scope, $rootScope, UI, Auth, Geoloc, Se
 				for(var i in posts){
 					var post = posts[i];
 					//si le nouveau post est près d'un ancien post
-					if($scope.areNear(post.coords, $scope.newPost.coords, 3)){
+					if(Post.areNear(post, $scope.newPost, 3)){
 						//si le post n'est pas déja dans le tableau closeposts
 						if($scope.closePosts.indexOf(post) === -1){
 							$scope.closePosts.push(post);
@@ -202,7 +202,7 @@ app.controller('AddpostCtrl', function ($scope, $rootScope, UI, Auth, Geoloc, Se
 	$scope.addPost = function(){
 		
 		if(Auth.isAuthenticated()){
-			if(!!$scope.newPost.photos[0].url){ //si l'image a bien été upload
+			if(!!$scope.newPost.photos[0]){ //si l'image a bien été upload
 
 				if(!!$scope.newPost.coords.latitude || !!$scope.newPost.coords.longitude){ //si le post est bien géolocalisé
 					//on formate l'adresse à la bien (dans le cas ou l'utilisateur l'a entré manuellement)

@@ -244,6 +244,8 @@ app.factory('Geoloc', function (UI, $q) {
             //title: post.artists
             //animation: google.maps.Animation.DROP
             //icon: "fleche.png"
+            //id: post.id,
+            //slug: ... ,
           });
 
             google.maps.event.addListener(marker, 'click', (function(marker, post) {

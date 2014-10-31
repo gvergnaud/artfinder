@@ -8,9 +8,9 @@
  * Controller of the artFinderApp
  */
 app.controller('appCtrl', function ($scope, $rootScope, Session, Auth, UI, USER_ROLES) {
-	$scope.loading = true;
+	$scope.loaded = false;
 	window.onload = function(){
-		$scope.loading = false;
+		$scope.loaded = true;
 	};
 
 	$scope.currentUser = null;
@@ -40,18 +40,14 @@ app.controller('appCtrl', function ($scope, $rootScope, Session, Auth, UI, USER_
 	};
 
 	$scope.redirectTo = function(page, param){
-		location.hash = '#/' + page + '/'+ param;
-	};
-
-	$scope.areNear = function(coords1, coords2, distance){
-		if(!coords1 || !coords2 || !distance){return;}
-		function coordRound(val){
-			return Math.ceil(val * 10000);
-		}
-		if(Math.abs(coordRound(coords1.latitude) - coordRound(coords2.latitude)) <= distance && Math.abs(coordRound(coords1.longitude) - coordRound(coords2.longitude)) <= distance){
-			return true;
+		if(!page){
+			window.location.hash = '';
+		}else if(param !== 'undefined'){
+			window.location.hash = '#/' + page + '/'+ param;
 		}else{
-			return false;
+			window.location.hash = '#/' + page;
 		}
+
+		window.scrollTo(0,0);
 	};
 });

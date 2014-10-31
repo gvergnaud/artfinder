@@ -9,11 +9,13 @@
 
     <!-- build:css(.) styles/vendor.css -->
     <!-- bower:css -->
-    <link rel="stylesheet" href="../bower_components/dropzone/downloads/css/dropzone.css" />
     <!-- endbower -->
     <!-- endbuild -->
     <!-- build:css(.tmp) styles/main.css -->
     <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/home.css">
+    <link rel="stylesheet" href="styles/singlepost.css">
+    <link rel="stylesheet" href="styles/addpost.css">
     <!-- endbuild -->
   </head>
   <body ng-app="artFinderApp" ng-controller="appCtrl">
@@ -23,7 +25,7 @@
 
 
     <!-- Add your site or application content here -->
-    <div id="container" ng-hide="loading">
+    <div id="container" ng-show="loaded">
       <div id="login" ng-click="toggleLoginOverlay()" ng-controller="signCtrl">
         <div id="signForms">
         
@@ -57,9 +59,8 @@
         </ul>
       </header>
 
-      <aside id="notifications"></aside>
-
       <div id="viewcontainer">
+        <aside id="notifications"></aside>
         <div class="view {{animate}}" ng-view=""></div>
       </div>
 
@@ -87,6 +88,7 @@
     <!-- endbuild -->
 
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBX9nAl6EjY0r2fBPVTK7QU4iJBeD-t5oc"></script>
+    
     <!-- <script src="http://localhost:1337/socket.io/socket.io.js"></script>
     <script>
         var socket = io.connect('http://localhost:1337');

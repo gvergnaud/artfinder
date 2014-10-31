@@ -10,8 +10,7 @@
 app.factory('UI', function UI() {
 	//tout ce qui est pareil pour toutes les pages
 	var loginContainer = angular.element(document.querySelector('#login')),
-		viewcontainer = angular.element(document.querySelector('#viewcontainer'));
-	      	
+		viewcontainer = angular.element(document.querySelector('#viewcontainer'));	      	
 
 	function mainStyle(){
 		loginContainer.css({
@@ -46,19 +45,33 @@ app.factory('UI', function UI() {
     	notification: function(type, msg){
     		var notifContainer = angular.element(document.querySelector('aside#notifications'));
     		var newNotif = document.createElement('p');
+    		
     		newNotif.innerHTML = msg;
+    		
     		newNotif.classList.add('notification');
     		if(type){
     			newNotif.classList.add(type);
     		}
+    		
     		notifContainer[0].innerHTML = '';
+    		notifContainer[0].style.display = 'block';
     		notifContainer.prepend(newNotif);
+    		
+    		setTimeout(function(){	
+    			newNotif.classList.add('show');
+    		}, 100);
+    		
+    		setTimeout(function(){	
+    			newNotif.classList.remove('show');
+    			setTimeout(function(){
+    				notifContainer[0].style.display = 'none';
+    				angular.element(newNotif).remove();
+    			}, 650);
+    		}, 5000);
+    		
     		newNotif.addEventListener('click', function(){
     			this.style.display = 'none';
     		});
-    		setTimeout(function(){
-    			angular.element(newNotif).remove();
-    		}, 5000);
     	},
     	
     	home: {
@@ -102,10 +115,10 @@ app.factory('UI', function UI() {
 
 	    	style: function(){
 
-	    		var player = angular.element(document.querySelector('#player')),
-		 			img = angular.element(document.querySelector('section#player>img')),
-		 			arrows = [angular.element(document.querySelector('nav#prev')), angular.element(document.querySelector('nav#next'))];
-
+	    		var player = angular.element(document.querySelectorAll('#player')),
+		 			img = angular.element(document.querySelectorAll('section#player img')),
+		 			arrows = [angular.element(document.querySelectorAll('nav#prev')), angular.element(document.querySelectorAll('nav#next'))];
+		 			
 		    	player.css({
 		 			height: window.innerHeight - 100 + 'px'
 		 		});
@@ -122,39 +135,53 @@ app.factory('UI', function UI() {
 	    	},
 
 	    	tagStyles: function(){
-	    		var tagWrapper = angular.element(document.querySelector('.tagWrapper')),
-	    			img = angular.element(document.querySelector('section#player>img'));
+	    		var tagWrapper = angular.element(document.querySelectorAll('.tagWrapper')),
+	    			img = document.querySelectorAll('section#player img');
 		    	
-		    	tagWrapper.css({
-		    		height: img[0].clientHeight + 'px',
-		    		width: img[0].clientWidth + 'px'
-		    	});	
+		    	if(!!img){
+			    	tagWrapper.css({
+			    		height: img[img.length-1].clientHeight + 'px',
+			    		width:  img[img.length-1].clientWidth + 'px'
+			    	});	
+		    	}
 	    	},
 
 	    	startIdentification: function(){
 	    		var tagWrapper = angular.element(document.querySelector('.tagWrapper'));
+	    		var tagBoxs = document.querySelectorAll('.tagBox');
 
 	    		tagWrapper.css({
 	    			background: 'url(images/tag_wrapper_bg.png)',
+  					backgroundSize: '100% 100%',
 	    			cursor: 'crosshair'
 	    		});
+	    		for(var i = 0 ; i < tagBoxs.length ; i++){
+	    			tagBoxs[i].classList.add('selection');
+	    		}
 	    	},
 	    	
 	    	stopIdentification: function(){
 	    		ui.singlepost.tagWrapper = angular.element(document.querySelector('.tagWrapper'));
+	    		var tagBoxs = document.querySelectorAll('.tagBox');
 
 	    		ui.singlepost.tagWrapper.css({
 	    			background: '',
 	    			cursor: ''
 	    		});
+	    		
+	    		for(var i = 0 ; i < tagBoxs.length ; i++){
+	    			tagBoxs[i].classList.remove('selection');
+	    		}  		
 
 	    		if(!!document.getElementById('newArtistId')){
 	    			angular.element(document.getElementById('newArtistId')).remove();
-	    		}   		
+	    		} 
+
+
 	    	},
 
 	    	startSelection: function(left, top){
-	    		ui.singlepost.newTag = angular.element('<div />'),
+	    		ui.singlepost.newTag = angular.element('<div />');
 	    		ui.singlepost.tagWrapper = angular.element(document.querySelector('.tagWrapper'));
 
 	    		if(!!document.getElementById('newArtistId')){
@@ -217,9 +244,16 @@ app.factory('UI', function UI() {
 	    		console.log('stopselection');
 	    	},
 
-	    	toggleMap: function(){
+	    	toggleMap: function(callback){
 	    		var map = angular.element(document.querySelector('section.map'));
+	    		var player = angular.element(document.querySelector('section#player'));
+	    		var below = angular.element(document.querySelector('#below'));
 	    		map.toggleClass('show');
+	    		player.toggleClass('up');
+	    		below.toggleClass('up');
+	    		setTimeout(function(){
+	    			callback.call(this);
+	    		}, 650);
 	    	},
 
 	    	togglePlayerArrows: function(scope){

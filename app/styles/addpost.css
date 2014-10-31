@@ -1,0 +1,26 @@
+/* UPLOAD ADDPOST */
+
+#drop{
+  height:300px;
+  width:300px;
+  border: 5px dashed #CCC;
+  text-align:   center;
+  font-family: sans-serif;
+  color: #CCC;
+  font-size: 25px;
+  line-height: 280px;
+}
+
+#drop.hover{
+  color:#8dd0ff;
+  border-color:#8dd0ff;
+}
+
+form#addPhotoForm{
+  display: none;
+}
+
+div#formMap{
+  height:300px;
+  width: 100%;
+}

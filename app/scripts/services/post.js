@@ -67,6 +67,62 @@ app.factory('Post', function Post($http, $q, Session) {
     		return deferred.promise;
     	},
 
+        getClosePosts: function(post, nb){ //recupère les nb posts situes les plus a proximité de post
+
+            var deferred = $q.defer();
+
+            factory.get().then(
+                function (posts){
+
+                    var closePosts = [];
+
+                    angular.forEach(posts, function (value, key){
+                        var latDistance = Math.abs(post.coords.latitude - value.coords.latitude);
+                        var lngDistance = Math.abs(post.coords.longitude - value.coords.longitude);
+                        var distance = (latDistance + lngDistance)/2;
+                        
+                        var closePost = {};
+                        closePost.distance = distance;
+                        closePost.post = value;
+
+                        closePosts.push(closePost);
+                    });
+
+                    closePosts.sort(function(a, b) { //on trie le tableau par distance croissante
+                        return a.distance - b.distance;
+                    });
+
+                    closePosts.shift(); //on supprime le 1er element du tableau car c'est le post luimeme
+
+                    closePosts.splice(nb); //on suprime les elements dont la distance est plus grande que les nb premiers
+
+                    angular.forEach(closePosts, function (value, key){
+                        closePosts[key] = value.post;
+                    });
+
+                    deferred.resolve(closePosts);
+                },
+                function (msg){
+                    deferred.reject(msg);
+                }
+            );
+
+            return deferred.promise;
+
+        },
+
+        areNear: function(post1, post2, distance){
+            if(!post1 || !post2 || !distance){return;}
+            function coordRound(val){
+                return Math.ceil(val * 10000);
+            }
+            if(Math.abs(coordRound(post1.coords.latitude) - coordRound(post2.coords.latitude)) <= distance && Math.abs(coordRound(post1.coords.longitude) - coordRound(post2.coords.longitude)) <= distance){
+                return true;
+            }else{
+                return false;
+            }
+        },
+
         add: function(newPost){
             var deferred = $q.defer();
 
@@ -113,8 +169,16 @@ app.factory('Post', function Post($http, $q, Session) {
                 .success(function (response, status){
                     if(response === 'no data'){
                         deferred.reject('pas de donnée reçu lors de l\'enregistrement.');
+                    
+                    }else if(response === 'file isnt writable'){
+                        deferred.reject('le fichier n\'est pas disponible en ecriture');
+                    
+                    }else if(response === 'Could not open file for writting.'){
+                        deferred.reject('le fichier n\'a pas pu etre ouvert');
+                    
                     }else{
-                        deferred.resolve(response); 
+                        deferred.resolve(response);
+                        console.log(response);
                     }
                 })
                 .error(function (data, status){

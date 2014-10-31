@@ -3,17 +3,27 @@
 	if(isset($_POST['posts'])){
 		
 		$posts = json_decode($_POST['posts']);
-
 		
 		$posts = json_encode($posts, JSON_PRETTY_PRINT);
 
-		echo $posts;
-	
-		$posts_json = fopen('server/posts.json', 'w+');
+		if (is_writable('server/posts.json')){
+			
+			$handle = fopen('server/posts.json', 'w');
 
-        fwrite($posts_json, $posts); // On ecrit le nouveau contenu
+			if (!is_resource($handle)) { // Test if PHP could open the file
+			    echo "Could not open file for writting."
+			    exit;
+			}
+			
+			echo $posts;
+        	
+        	fwrite($handle, $posts); // On ecrit le nouveau contenu
+        	fclose($handle);
 
-        fclose($posts_json);
+		}else{
+			echo "file isnt writable";
+		}
+
 	}else{
 		echo "no data";
 	}

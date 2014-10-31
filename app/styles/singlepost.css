@@ -1,0 +1,154 @@
+/* SINGLE POST */
+
+/* Player */
+section#player{
+  overflow: hidden;
+  background-color: #212124;
+  padding: 20px 0;
+  -webkit-transition: .65s cubic-bezier(.2,.1,.1,1);
+  transition: .65s cubic-bezier(.2,.1,.1,1); 
+}
+
+section#player.up{
+  -webkit-transform: translateY(-400px);
+  transform: translateY(-400px);
+}
+
+nav.arrows{
+  position: absolute;
+  height:50px;
+  width:50px;
+  text-align: center;
+  color: #fff;
+}
+
+nav#prev{
+  left: 20px;
+}
+
+nav#next{
+  right: 20px;
+}
+
+section#player>img{
+  display:block;
+  margin:0 auto;
+}
+
+/* Map */
+
+section.map{
+  height:0;
+  -webkit-transition: .65s cubic-bezier(.2,.1,.1,1);
+  transition: .65s cubic-bezier(.2,.1,.1,1);
+}
+section.map.show{
+  height:400px;
+}
+
+/* BELOW */
+#below{
+  -webkit-transition: .65s cubic-bezier(.2,.1,.1,1);
+  transition: .65s cubic-bezier(.2,.1,.1,1);
+}
+#below.up{
+  transform: translateY(-400px) !important;
+  -webkit-transform: translateY(-400px) !important;
+}
+
+/* POST INFOS */
+section#post_infos{
+  height: 100px;
+}
+
+span#where{
+  font-size:1.5em;
+  cursor: pointer;
+}
+
+span#artist{
+  font-style: italic;
+}
+
+span.right{
+  display:inline-block;
+  float: right;
+  margin-top:10px;
+  margin-right: 50px;
+}
+
+span.left{
+  display: inline-block;
+}
+
+#desc{
+  color: #555;
+  margin-top:5px;
+}
+
+/* COMMENTAIRES*/
+div#commentaires{
+  width:550px;
+  margin:10px 0 50px 50px;
+  padding:15px;
+  border-right: 1px solid #ddd;
+  border-left: 1px solid #ddd;
+}
+div#commentaires>h2{
+  margin-top: -2em;
+}
+
+blockquote{
+  border-left: 4px solid #aaa;
+  margin:0;
+  padding-left: 15px;
+  font-style: italic;
+}
+
+p.date{
+  font-size: 0.8em;
+  color: #aaa;
+}
+
+span.activephoto{
+  font-size: 0.8em;
+  color: #aaa;
+}
+
+
+/* TAGZ */
+
+.tagWrapper{
+  position: absolute;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  -webkit-transform: translateX(-50%);
+}
+
+.tagBox{
+  position: absolute;
+  line-height: normal;
+}
+
+.tagName{
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  -webkit-transform: translateX(-50%);
+  bottom: -3em;
+  white-space: nowrap;
+  font-size: .9em;
+  background: #000;
+  color: #fff;
+  padding: 7px;
+}
+
+.selection{
+  border: 2px dashed #fff;
+  -moz-box-shadow: 2px 2px 5px 0px #656565;
+  -webkit-box-shadow: 2px 2px 5px 0px #656565;
+  -o-box-shadow: 2px 2px 5px 0px #656565;
+  box-shadow: 2px 2px 5px 0px #656565;
+  filter:progid:DXImageTransform.Microsoft.Shadow(color=#656565, Direction=116, Strength=5);
+}

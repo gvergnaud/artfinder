@@ -23,7 +23,9 @@ app.controller('signCtrl', function ($scope, $rootScope, UI, AUTH_EVENTS, Auth, 
 		Session.create(user.id, user.username, user.role);
 		$rootScope.$broadcast(AUTH_EVENTS.loginSuccess);
 		$scope.setCurrentUser(user);
-		UI.notification('success', 'Connection réussit !');
+		setTimeout(function(){
+			UI.notification('success', 'Heureux de vous revoir ' + Session.username);
+		},500);
 	}
 
 	$scope.login = function(){
@@ -37,7 +39,7 @@ app.controller('signCtrl', function ($scope, $rootScope, UI, AUTH_EVENTS, Auth, 
 						$rootScope.$broadcast(AUTH_EVENTS.loginSuccess);
 						$scope.setCurrentUser(user);
 						$scope.toggleLoginOverlay();
-						UI.notification('success', 'Connection réussit !');
+						UI.notification('success', 'Heureux de vous revoir ' + Session.username);
 
 						//si l'utilisateur le veut on met ses données en localStorage
 						if($scope.loginInfos.remember){
@@ -47,7 +49,7 @@ app.controller('signCtrl', function ($scope, $rootScope, UI, AUTH_EVENTS, Auth, 
 					}, function (msg) {
 						$rootScope.$broadcast(AUTH_EVENTS.loginFailed);
 						if(msg === 'user unknown'){
-							UI.notification('error', 'utilisateur inconnu.');
+							UI.notification('error', 'adresse email inconnue.');
 						}
 						else if(msg === 'pwd error'){
 							UI.notification('error', 'mot de passe éronné.');
@@ -71,13 +73,14 @@ app.controller('signCtrl', function ($scope, $rootScope, UI, AUTH_EVENTS, Auth, 
 
 			if(!!$scope.signUpInfos.username && !!$scope.signUpInfos.mail && !!$scope.signUpInfos.pwd && !!$scope.signUpInfos.repeatpwd){
 				console.log($scope.signUpInfos.pwd.length);
-				if($scope.signUpInfos.pwd == $scope.signUpInfos.repeatpwd && $scope.signUpInfos.pwd.length >= 6){
+				if($scope.signUpInfos.pwd === $scope.signUpInfos.repeatpwd && $scope.signUpInfos.pwd.length >= 6){
 					
 					Auth.signUp($scope.signUpInfos).then(
 						function (user) {
 							$rootScope.$broadcast(AUTH_EVENTS.loginSuccess);
 							$scope.setCurrentUser(user);
 							$scope.toggleLoginOverlay();
+							UI.notification('success', 'Bienvenue sur ArtFinder ' + Session.username);
 
 						}, function (msg) {
 							$rootScope.$broadcast(AUTH_EVENTS.loginFailed);
@@ -93,7 +96,7 @@ app.controller('signCtrl', function ($scope, $rootScope, UI, AUTH_EVENTS, Auth, 
 						}
 					);
 				}else{
-					UI.notification('error', 'votre mot de passe doit faire au moins 6 caractères.')
+					UI.notification('error', 'votre mot de passe doit faire au moins 6 caractères.');
 				}
 			}else{
 				UI.notification('error','tous les champs ne sont pas remplis');
@@ -102,4 +105,21 @@ app.controller('signCtrl', function ($scope, $rootScope, UI, AUTH_EVENTS, Auth, 
 		
 	};
 
+	//FACEBOOK
+	/*window.fbAsyncInit = function() {
+	    FB.init({
+	    	appId      : '306208576247087',
+	    	xfbml      : true,
+	    	version    : 'v2.1'
+	    });
+	};
+
+	(function(d, s, id){
+	    var js, fjs = d.getElementsByTagName(s)[0];
+	    if (d.getElementById(id)) {return;}
+	    js = d.createElement(s); js.id = id;
+	    js.src = "//connect.facebook.net/en_US/sdk.js";
+	    fjs.parentNode.insertBefore(js, fjs);
+	}(document, 'script', 'facebook-jssdk'));
+*/
 });

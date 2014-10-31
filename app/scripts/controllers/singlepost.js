@@ -12,28 +12,35 @@ app.controller('SinglepostCtrl',['$scope', '$rootScope', '$routeParams', 'Post',
 	//Récuperation des posts
 	Post.find($routeParams.id).then(
 		function (post){ // les posts sont récupérés !
-			$scope.post =  post;
+			$scope.post =  post;		
+			
+			Post.getClosePosts(post, 3).then(
+				function(closePosts){
+					$scope.closePosts = closePosts;
+				}
+			);
+
 			UI.singlepost.togglePlayerArrows($scope);
 			setTimeout(function(){
 				UI.singlepost.tagStyles();
 			}, 300);
 		},
 		function (msg){ // erreur lors de la récupération des posts
-			console.log(msg);
+			UI.notification('error', msg);
 			$scope.post = false;
 		}
 	);
 
 	//Initialisationde l'ui
- 	UI.singlepost.init();
+	UI.singlepost.init();
 
- 	// PREV NEXT player 
+
 	$scope.currentPhotoId = 0;
- 	$scope.img = angular.element(document.querySelector('section#player>img'));
- 	$scope.arrows = [angular.element(document.querySelector('nav#prev')), angular.element(document.querySelector('nav#next'))];
+ 	$scope.img = angular.element(document.querySelectorAll('section#player img'));
+ 	$scope.arrows = [angular.element(document.querySelectorAll('nav#prev')), angular.element(document.querySelectorAll('nav#next'))];
 
 	//Changer l'image avec prev
-	document.getElementById('prev').addEventListener('click', function(){
+	$scope.arrows[0].on('click', function(){
 		
 		$scope.$apply(function(){	
 			$scope.currentPhotoId -= 1;
@@ -43,7 +50,7 @@ app.controller('SinglepostCtrl',['$scope', '$rootScope', '$routeParams', 'Post',
 	});
 
  	//Changer l'image avec next
- 	document.getElementById('next').addEventListener('click', function(){
+ 	$scope.arrows[1].on('click', function(){
  		
  		$scope.$apply(function(){
  			$scope.currentPhotoId += 1;
@@ -56,13 +63,14 @@ app.controller('SinglepostCtrl',['$scope', '$rootScope', '$routeParams', 'Post',
  		var geoloc = new Geoloc('section.map');
 		geoloc.createMap();
 		geoloc.addMarker($scope.post);
-		geoloc.showPostLocation($scope.post);
 		geoloc.setMapOptions({scrollwheel: false});
 
- 		UI.singlepost.toggleMap();
+ 		UI.singlepost.toggleMap(function(){
+			geoloc.showPostLocation($scope.post);
+ 		});
  	};
 
- 	$scope.newComment = {}
+ 	$scope.newComment = {};
 
  	$scope.addComment = function(){
 
@@ -141,8 +149,8 @@ app.controller('SinglepostCtrl',['$scope', '$rootScope', '$routeParams', 'Post',
  		tagWrapper.on('mousemove', function(e){
 
  			if($scope.selecting){ 
-	 			var x = e.offsetX=='undefined'?e.layerX:e.offsetX;
-				var y = e.offsetY=='undefined'?e.layerY:e.offsetY;
+	 			var x = e.offsetX === 'undefined'?e.layerX:e.offsetX;
+				var y = e.offsetY === 'undefined'?e.layerY:e.offsetY;
 
 	 			if(e.toElement ===  tagWrapper[0]){
 		 			$scope.newArtist.width = (x * 100) /  this.clientWidth - $scope.newArtist.left;
@@ -201,5 +209,5 @@ app.controller('SinglepostCtrl',['$scope', '$rootScope', '$routeParams', 'Post',
 			UI.notification('error', 'Selectionnez une partie de l\'image et ajoutez le nom de l\'artiste !');
 		}
  	};
-	
+
 }]);

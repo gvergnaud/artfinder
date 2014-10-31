@@ -48,8 +48,9 @@ var app = angular.module('artFinderApp', [
                   query += param(innerObj) + '&';
                 }
               }
-              else if(value !== undefined && value !== null)
+              else if(value !== undefined && value !== null){
                 query += encodeURIComponent(name) + '=' + encodeURIComponent(value) + '&';
+              }
           }
 
           return query.length ? query.substr(0, query.length - 1) : query;
