@@ -11,7 +11,7 @@
 			$handle = fopen('server/posts.json', 'w');
 
 			if (!is_resource($handle)) { // Test if PHP could open the file
-			    echo "Could not open file for writting."
+			    echo "Could not open file for writting.";
 			    exit;
 			}
 			

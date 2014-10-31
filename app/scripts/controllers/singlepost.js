@@ -110,12 +110,14 @@ app.controller('SinglepostCtrl',['$scope', '$rootScope', '$routeParams', 'Post',
 							UI.singlepost.togglePlayerArrows($scope);
 						},
 						function (msg){ // erreur lors de la récupération des posts
-							console.log(msg);
+							UI.notification('error', msg);
 							$scope.post = false;
 						}
 					);
 	 			},
-	 			function(msg){} //error
+	 			function(msg){
+					UI.notification('error', msg);
+	 			} //error
 	 		);
 		}else{
 			UI.notification('', 'vous devez etre connecté !');

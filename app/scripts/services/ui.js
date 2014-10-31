@@ -43,35 +43,40 @@ app.factory('UI', function UI() {
     	},
 
     	notification: function(type, msg){
-    		var notifContainer = angular.element(document.querySelector('aside#notifications'));
-    		var newNotif = document.createElement('p');
-    		
-    		newNotif.innerHTML = msg;
-    		
-    		newNotif.classList.add('notification');
-    		if(type){
-    			newNotif.classList.add(type);
+
+    		if(!ui.notifying){
+    			ui.notifying = true;
+	    		var notifContainer = angular.element(document.querySelector('aside#notifications'));
+	    		var newNotif = document.createElement('p');
+	    		
+	    		newNotif.innerHTML = msg;
+	    		
+	    		newNotif.classList.add('notification');
+	    		if(type){
+	    			newNotif.classList.add(type);
+	    		}
+	    		
+	    		notifContainer[0].innerHTML = '';
+	    		notifContainer[0].style.display = 'block';
+	    		notifContainer.prepend(newNotif);
+	    		
+	    		setTimeout(function(){	
+	    			newNotif.classList.add('show');
+	    		}, 100);
+	    		
+	    		setTimeout(function(){	
+	    			newNotif.classList.remove('show');
+	    			setTimeout(function(){
+	    				notifContainer[0].style.display = 'none';
+	    				angular.element(newNotif).remove();
+    					ui.notifying = false;
+	    			}, 650);
+	    		}, 4000);
+	    		
+	    		newNotif.addEventListener('click', function(){
+	    			this.style.display = 'none';
+	    		});
     		}
-    		
-    		notifContainer[0].innerHTML = '';
-    		notifContainer[0].style.display = 'block';
-    		notifContainer.prepend(newNotif);
-    		
-    		setTimeout(function(){	
-    			newNotif.classList.add('show');
-    		}, 100);
-    		
-    		setTimeout(function(){	
-    			newNotif.classList.remove('show');
-    			setTimeout(function(){
-    				notifContainer[0].style.display = 'none';
-    				angular.element(newNotif).remove();
-    			}, 650);
-    		}, 5000);
-    		
-    		newNotif.addEventListener('click', function(){
-    			this.style.display = 'none';
-    		});
     	},
     	
     	home: {

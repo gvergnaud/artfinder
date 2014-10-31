@@ -134,7 +134,10 @@ body{
 }
 
 .menu div#logo{
-
+  background: url(../images/logo-retract.svg) no-repeat;
+  height: 80px;
+  width: 40px;
+  margin: 20px auto;
 }
 
 #viewcontainer{

@@ -176,9 +176,11 @@ app.factory('Post', function Post($http, $q, Session) {
                     }else if(response === 'Could not open file for writting.'){
                         deferred.reject('le fichier n\'a pas pu etre ouvert');
                     
+                    }else if(typeof response !== 'object'){
+                        console.log(typeof response);
+                        deferred.reject('problème lors de l\'enregistrment');
                     }else{
                         deferred.resolve(response);
-                        console.log(response);
                     }
                 })
                 .error(function (data, status){
