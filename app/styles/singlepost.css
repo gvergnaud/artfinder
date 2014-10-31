@@ -62,12 +62,13 @@ section#post_infos{
 }
 
 span#where{
+  font-family: 'Uni Sans Heavy';
   font-size:1.5em;
   cursor: pointer;
 }
 
 span#artist{
-  font-style: italic;
+  font-family: 'Uni Sans Thin';
 }
 
 span.right{
