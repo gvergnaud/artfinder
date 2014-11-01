@@ -1,6 +1,9 @@
 #map{
   width:100%;
-  height: 100%;
+}
+
+#mosaic{
+  width:100%;
 }
 
 #filtres{
@@ -18,6 +21,7 @@
 }
 
 .post{
+  border:2px solid black;
   position: relative;
   display: inline-block;
   height:200px;
@@ -29,19 +33,22 @@
 }
 
 .post.ng-enter{
-  -webkit-transform: translateY(100px);
-  transform: translateY(100px);
+  width:0;
+  /*-webkit-transform: translateY(100px);
+  transform: translateY(100px);*/
   opacity: 0;
 }
 
 .post.ng-enter-active{
-  -webkit-transform: translateY(0px);
+  width:250px;
+  /*-webkit-transform: translateY(0px);
   transform: translateY(0px);
-  opacity: 1;
+ */ opacity: 1;
 }
 .post.ng-leave-active{
-  -webkit-transform: translateY(100px);
-  transform: translateY(100px);
+  width:0;
+  /*-webkit-transform: translateY(100px);
+  transform: translateY(100px);*/
   opacity: 0;
 }
 

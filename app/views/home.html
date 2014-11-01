@@ -14,7 +14,7 @@
       <option value="autre">Autre</option>
     </select>
   </div>
-  <div class="post" ng-repeat="post in posts | filter:Technic:strict | filter:Search:strict">
+  <div class="post" ng-repeat="post in posts | filter:Technic:strict | filter:Search:strict | reverse">
       <img ng-src="{{post.photos[0].url}}" />
       <div class="over"  ng-click="redirectTo('singlepost', {{post.id}})">
         <p>{{post.likes.length}} Likes</p>

@@ -3,15 +3,14 @@
 /* Player */
 section#player{
   overflow: hidden;
-  background-color: #212124;
+  background-color: #1b1b1b;
   padding: 20px 0;
   -webkit-transition: .65s cubic-bezier(.2,.1,.1,1);
   transition: .65s cubic-bezier(.2,.1,.1,1); 
 }
 
 section#player.up{
-  -webkit-transform: translateY(-400px);
-  transform: translateY(-400px);
+  margin-top: -400px;
 }
 
 nav.arrows{
@@ -35,6 +34,44 @@ section#player>img{
   margin:0 auto;
 }
 
+
+/* TAGZ */
+
+.tagWrapper{
+  position: absolute;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  -webkit-transform: translateX(-50%);
+}
+
+.tagBox{
+  position: absolute;
+  line-height: normal;
+}
+
+.tagName{
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  -webkit-transform: translateX(-50%);
+  bottom: -3em;
+  white-space: nowrap;
+  font-size: .9em;
+  background: #000;
+  color: #fff;
+  padding: 7px;
+}
+
+.selection{
+  border: 2px dashed #fff;
+  -moz-box-shadow: 2px 2px 5px 0px #656565;
+  -webkit-box-shadow: 2px 2px 5px 0px #656565;
+  -o-box-shadow: 2px 2px 5px 0px #656565;
+  box-shadow: 2px 2px 5px 0px #656565;
+  filter:progid:DXImageTransform.Microsoft.Shadow(color=#656565, Direction=116, Strength=5);
+}
+
 /* Map */
 
 section.map{
@@ -46,34 +83,65 @@ section.map.show{
   height:400px;
 }
 
-/* BELOW */
-#below{
-  -webkit-transition: .65s cubic-bezier(.2,.1,.1,1);
-  transition: .65s cubic-bezier(.2,.1,.1,1);
-}
-#below.up{
-  transform: translateY(-400px) !important;
-  -webkit-transform: translateY(-400px) !important;
-}
-
 /* POST INFOS */
 section#post_infos{
-  height: 100px;
+  background-color: #fff;
+  padding-top: 10px;
 }
 
 span#where{
   font-family: 'Uni Sans Heavy';
-  font-size:1.5em;
+  font-size:1.2em;
   cursor: pointer;
 }
 
-span#artist{
+span#artists{
   font-size: 14px;
   font-family: 'Uni Sans Heavy';
 }
+
+span.artist{
+  margin: 0 5px;
+}
+
+span.artist:before{
+  content:'//';
+  font-family: 'Uni Sans Heavy';
+  font-size: 1.2em;
+  font-style: normal;
+  font-weight: normal;
+  speak: none;
+ 
+  display: inline-block;
+  text-decoration: inherit;
+  margin-right: .2em;
+  text-align: center;
+  /* opacity: .8; */
+ 
+  /* For safety - reset parent styles, that can break glyph codes*/
+  font-variant: normal;
+  text-transform: none;
+  color:#B59E5C;
+     
+  /* fix buttons height, for twitter bootstrap */
+  line-height: 1em;
+ 
+  /* Animation center compensation - margins should be symmetric */
+  /* remove if not needed */
+  margin-left: .2em;
+  width:20px;
+}
+
 a.identification{
-  	font-size: 16px;
-	font-family: 'Montserrat Bold';
+  padding: 5px;
+  font-size: 16px;
+  font-family: 'Montserrat Bold';
+  color: #B59E5C;
+  text-decoration: none;
+}
+
+a.identification:before{
+  font-size: 20px;
 }
 
 span.right{
@@ -120,40 +188,9 @@ span.activephoto{
   color: #aaa;
 }
 
+/* CLOSE POSTS */
 
-/* TAGZ */
-
-.tagWrapper{
-  position: absolute;
-  top: 20px;
-  left: 50%;
-  transform: translateX(-50%);
-  -webkit-transform: translateX(-50%);
+div#closePostsContainer{
 }
 
-.tagBox{
-  position: absolute;
-  line-height: normal;
-}
 
-.tagName{
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
-  -webkit-transform: translateX(-50%);
-  bottom: -3em;
-  white-space: nowrap;
-  font-size: .9em;
-  background: #000;
-  color: #fff;
-  padding: 7px;
-}
-
-.selection{
-  border: 2px dashed #fff;
-  -moz-box-shadow: 2px 2px 5px 0px #656565;
-  -webkit-box-shadow: 2px 2px 5px 0px #656565;
-  -o-box-shadow: 2px 2px 5px 0px #656565;
-  box-shadow: 2px 2px 5px 0px #656565;
-  filter:progid:DXImageTransform.Microsoft.Shadow(color=#656565, Direction=116, Strength=5);
-}

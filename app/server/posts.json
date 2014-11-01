@@ -57,7 +57,9 @@
         "date": 1414100058888,
         "userId": 0,
         "comments": [],
-        "likes": []
+        "likes": [
+            "gab"
+        ]
     },
     {
         "id": 2,

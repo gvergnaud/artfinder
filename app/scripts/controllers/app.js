@@ -19,11 +19,17 @@ app.controller('appCtrl', function ($scope, $rootScope, Session, Auth, UI, USER_
 	$scope.isAuthenticated = Auth.isAuthenticated;
 	$scope.isNotAuthenticated = Auth.isNotAuthenticated;
 
-	$scope.animate = '';
+	$scope.animated = '';
+	$scope.animation = '';
 
 	setTimeout(function(){
-		$scope.animate = 'animated slide';
+		$scope.animated = 'animated';
+		$scope.animation = 'slide';
 	}, 1000);
+
+	angular.element(document.querySelector('header.menu')).on('mouseenter mouseleave', function(){
+		UI.toggleMenu();
+	});
  
 	$scope.setCurrentUser = function (user) {
 		$scope.currentUser = user;
@@ -40,14 +46,70 @@ app.controller('appCtrl', function ($scope, $rootScope, Session, Auth, UI, USER_
 	};
 
 	$scope.redirectTo = function(page, param){
-		if(!page){
-			window.location.hash = '';
-		}else if(param !== 'undefined'){
-			window.location.hash = '#/' + page + '/'+ param;
-		}else{
-			window.location.hash = '#/' + page;
-		}
+		
+		$scope.smoothScrollTop(function(){
 
-		window.scrollTo(0,0);
+			if(!page){
+				
+				if(window.location.hash === '#/'){return;}
+				
+				window.location.hash = '';
+				
+			}else if(typeof param !== 'undefined'){
+				
+				if(window.location.hash === '#/' + page + '/'+ param){return;}
+				
+				window.location.hash = '#/' + page + '/'+ param;
+
+			}else{
+				
+				if(window.location.hash === '#/' + page){return;}
+				
+				window.location.hash = '#/' + page;
+
+			}
+
+		});
+	};
+
+	$scope.smoothScrollTop = function(callback){
+		var speed = 200;
+		var movingFrequency = 15; // Affects performance !
+			
+		var element = document.querySelector('#container');
+		var getScrollTopElement =  function (elmt)
+		{
+		    var top = 0;
+
+		    while (elmt.offsetParent != undefined && elmt.offsetParent != null)
+		    {
+		        top += elmt.offsetTop + (elmt.clientTop != null ? elmt.clientTop : 0);
+		        elmt = elmt.offsetParent;
+		    }
+
+		    return top;
+		};
+
+		var getScrollTopDocument = function()
+		{
+		    return document.documentElement.scrollTop + document.body.scrollTop;
+		};
+
+		var hopCount = speed/movingFrequency;
+		var getScrollTopDocumentAtBegin = getScrollTopDocument();
+		var gap = (getScrollTopElement(element) - getScrollTopDocumentAtBegin) / hopCount;
+
+		for(var i = 1; i <= hopCount; i++)
+		{
+			(function()
+			{
+				var hopTopPosition = gap*i;
+				setTimeout(function(){  window.scrollTo(0, hopTopPosition + getScrollTopDocumentAtBegin); }, movingFrequency*i);
+	        })();
+	    }
+
+	    setTimeout(function(){
+	    	callback.call(this);
+	    }, speed);
 	};
 });

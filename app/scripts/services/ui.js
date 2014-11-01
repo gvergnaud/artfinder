@@ -19,7 +19,7 @@ app.factory('UI', function UI() {
 		});
 		//on redefini lelement vu car il change a chaque chagement de page
 		viewcontainer.css({
-			width: window.innerWidth - 200 + 'px'
+			width: window.innerWidth - 80 + 'px'
 		});
 	}
 
@@ -40,6 +40,53 @@ app.factory('UI', function UI() {
 
     	toggleLoginOverlay: function(){
     		loginContainer.toggleClass('show');
+    	},
+
+    	toggleMenu: function(){
+    		var viewcontainer = angular.element(document.querySelector('#viewcontainer')),
+				notifications = angular.element(document.querySelector('#notifications')),
+				menu = angular.element(document.querySelector('header.menu')),
+				menuLinks = angular.element(document.querySelectorAll('a.menu_link'));
+
+			if(!ui.menuOpen){
+
+				ui.menuOpen = true;
+
+				notifications.css({
+					width: window.innerWidth - 200 + 'px',
+					left: '200px'
+				});
+
+				viewcontainer.css({
+					left: '200px'
+				});
+
+				setTimeout(function(){
+					if(ui.menuOpen){
+						menuLinks.removeClass('hidden');
+					}
+				}, 300);
+
+				menu.addClass('opened');
+
+			}else{
+				
+				ui.menuOpen = false;
+
+				
+				notifications.css({
+					width: window.innerWidth - 80 + 'px',
+					left: '80px'
+				});
+
+				viewcontainer.css({
+					left: '80px'
+				});
+
+				menuLinks.addClass('hidden');
+				menu.removeClass('opened');
+
+			}
     	},
 
     	notification: function(type, msg){
@@ -94,12 +141,10 @@ app.factory('UI', function UI() {
     				map = angular.element(document.querySelector('#map'));
 
 	    		map.css({
-					height: window.innerHeight/2 + 'px',
-					width: window.innerWidth - 200 + 'px'
+					height: window.innerHeight/2 + 'px'
 				});
 				mosaic.css({
-					height: window.innerHeight/2 + 'px',
-					width: window.innerWidth - 200 + 'px'
+					height: window.innerHeight/2 + 'px'
 				});
 	    	}
 
@@ -252,10 +297,8 @@ app.factory('UI', function UI() {
 	    	toggleMap: function(callback){
 	    		var map = angular.element(document.querySelector('section.map'));
 	    		var player = angular.element(document.querySelector('section#player'));
-	    		var below = angular.element(document.querySelector('#below'));
 	    		map.toggleClass('show');
 	    		player.toggleClass('up');
-	    		below.toggleClass('up');
 	    		setTimeout(function(){
 	    			callback.call(this);
 	    		}, 650);

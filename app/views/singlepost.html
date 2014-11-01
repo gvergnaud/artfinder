@@ -12,25 +12,22 @@
 		</div>
 		<div class="control"></div>
 	</section>
-	<div id="below">
-		<section class="map"></section>
-		<section id="post_infos">
-			<span class="left">
-				<span id="where" ng-click="toggleMap()">{{post.address}}</span>
-				<span id="artist">
-					<span ng-repeat="artist in post.photos[currentPhotoId].artists">, {{artist.name}}</span>
-					<a class="identification icon-marquee" ng-show="isAuthenticated() && !identifying" href="" ng-click="startIdentification()"> Identifier un artiste</a>
-					<a class="identification" ng-show="isAuthenticated() && identifying" href="" ng-click="addArtist()"> Ajouter l'identification</a>
-					<a class="identification" ng-show="isAuthenticated() && identifying" href="" ng-click="cancelIdentification()"> Annuler</a>
-				</span>
+	<section class="map"></section>
+	<section id="post_infos">
+		<span class="left">
+			<span id="where" ng-click="toggleMap()">{{post.address}}</span>
+			<span id="artists">
+				<span class="artist" ng-repeat="artist in post.photos[currentPhotoId].artists">{{artist.name}}</span>
+				<a class="identification icon-marquee" ng-show="isAuthenticated() && !identifying" href="" ng-click="startIdentification()"> Identifier un artiste</a>
+				<a class="identification" ng-show="isAuthenticated() && identifying" href="" ng-click="addArtist()"> Ajouter l'identification</a>
+				<a class="identification" ng-show="isAuthenticated() && identifying" href="" ng-click="cancelIdentification()"> Annuler</a>
 			</span>
-			<span class="right">
-				<span id="like" ng-click="likePost()">{{post.likes.length}} Like !</span>
-				<span id="nb_comments">{{post.comments.length}} Commentaires</span>
-			</span>
-			<p id="desc">{{post.description}}<span ng-if="!!post.photos[currentPhotoId].hosterUsername"> / Ajouté par {{post.photos[currentPhotoId].hosterUsername}}</span></p>
-
-		</section>
+		</span>
+		<span class="right">
+			<span id="like" ng-click="likePost()">{{post.likes.length}}<span class="icon-heart-empty"></span></span>
+			<span id="nb_comments">{{post.comments.length}}<span class="icon-comment"></span></span>
+		</span>
+		<p id="desc">{{post.description}}<span ng-if="!!post.photos[currentPhotoId].hosterUsername"> / Ajouté par {{post.photos[currentPhotoId].hosterUsername}}</span></p>
 
 		<section>
 			<div ng-if="post.comments.length" id="commentaires">
@@ -53,18 +50,19 @@
 				</div>
 			</div>
 		</section>
+	</section>
 
-		<section class="closePosts">
-			<h1>Murs à proximité</h1>
-			<div id="closePostsContainer">
-				<div class="post" ng-repeat="post in closePosts">
-				    <img ng-src="{{post.photos[0].url}}" />
-				    <div class="over"  ng-click="redirectTo('singlepost', {{post.id}})">
-				      <p>{{post.likes.length}} Likes</p>
-				      <p>{{post.photos.length}} Photos</p>
-				    </div>
-				</div>
+
+	<section class="closePosts">
+		<h1>Murs à proximité</h1>
+		<div id="closePostsContainer">
+			<div class="post" ng-repeat="post in closePosts">
+			    <img ng-src="{{post.photos[0].url}}" />
+			    <div class="over"  ng-click="redirectTo('singlepost', {{post.id}})">
+			      <p>{{post.likes.length}} Likes</p>
+			      <p>{{post.photos.length}} Photos</p>
+			    </div>
 			</div>
-		</section>
-	</div>
+		</div>
+	</section>
 </div>

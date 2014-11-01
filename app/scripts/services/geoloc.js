@@ -89,6 +89,12 @@ app.factory('Geoloc', function (UI, $q) {
                 { "color": "#808080" }
               ]
             },{
+              "featureType": "road",
+              "elementType": "labels",
+              "stylers": [
+                { "color": "#FFFFFF" }
+              ]
+            },{
               "featureType": "administrative",
               "elementType": "labels",
               "stylers": [
