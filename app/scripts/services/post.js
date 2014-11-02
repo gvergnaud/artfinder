@@ -131,7 +131,11 @@ app.factory('Post', function Post($http, $q, Session) {
                 function (posts){
 
                     //on ajoute l'id a notre post
-                    newPost.id = posts[posts.length-1].id + 1;
+                    if(!!posts[posts.length-1]){
+                        newPost.id = posts[posts.length-1].id + 1;   
+                    }else{
+                        newPost.id = 0;
+                    }
 
                     //on ajoute notre newPost a la liste de commentaire de notre post
                     posts.push(newPost);
@@ -200,7 +204,11 @@ app.factory('Post', function Post($http, $q, Session) {
                 function (posts){
 
                     //on ajoute notre newComment a la liste de commentaire de notre post
-                    posts[postId].comments.push(newComment);
+                    angular.forEach(posts, function (value, key){
+                        if(value.id === postId){
+                            value.comments.push(newComment);
+                        }
+                    });
                     
                     //on sauvegarde notre nouvel objet posts
                     factory.posts = posts;
@@ -231,15 +239,20 @@ app.factory('Post', function Post($http, $q, Session) {
             factory.get(true).then(
                 function (posts){
 
+                    angular.forEach(posts, function (value, key){
+                        if(value.id === post.id){
+
+                            if(value.likes.indexOf(Session.username) === -1){
+                                value.likes.push(Session.username);
+                            
+                            }
+                            //sinon on le supprime
+                            else{
+                                value.likes.splice(value.likes.indexOf(Session.username), 1);
+                            }
+                        }
+                    });
                     //si le username n'est pas deja dans le tab des likes
-                    if(posts[post.id].likes.indexOf(Session.username) === -1){
-                        posts[post.id].likes.push(Session.username);
-                    
-                    }
-                    //sinon on le supprime
-                    else{
-                        posts[post.id].likes.splice(posts[post.id].likes.indexOf(Session.username), 1);
-                    }
                     
                     //on sauvegarde notre nouvel objet posts
                     

@@ -111,18 +111,24 @@ app.factory('UI', function UI() {
 	    			newNotif.classList.add('show');
 	    		}, 100);
 	    		
-	    		setTimeout(function(){	
-	    			newNotif.classList.remove('show');
-	    			setTimeout(function(){
-	    				notifContainer[0].style.display = 'none';
-	    				angular.element(newNotif).remove();
-    					ui.notifying = false;
-	    			}, 650);
+	    		setTimeout(function(){
+	    			if(ui.notifying){
+		    			newNotif.classList.remove('show');
+		    			setTimeout(function(){
+		    				notifContainer[0].style.display = 'none';
+		    				angular.element(newNotif).remove();
+	    					ui.notifying = false;
+		    			}, 650);
+		    		}
 	    		}, 4000);
 	    		
 	    		newNotif.addEventListener('click', function(){
 	    			this.style.display = 'none';
 	    		});
+    		}else{
+    			setTimeout(function(){
+    				ui.notification(type, msg);
+    			}, 1000);
     		}
     	},
     	
@@ -179,7 +185,7 @@ app.factory('UI', function UI() {
 
 		 		angular.forEach(arrows, function(value, key) {
 		 			value.css({
-						top: (window.innerHeight - 100)/2 + 'px',
+						top: (window.innerHeight - 200)/2 + 'px',
 					});
 				});
 	    	},

@@ -141,31 +141,39 @@ app.controller('SinglepostCtrl',['$scope', '$rootScope', '$routeParams', 'Post',
  			e.preventDefault();
 
  			$scope.selecting = true; //demarre le suivit de la position du cursor
+			
+			var x = typeof e.offsetX === 'undefined' ? e.layerX : e.offsetX;
+			var y = typeof e.offsetY === 'undefined' ? e.layerY : e.offsetY;
 
- 			$scope.newArtist.left = (e.offsetX * 100) /  this.clientWidth; //recupe left en %
- 			$scope.newArtist.top = (e.offsetY * 100) /  this.clientHeight; //recupe top en %
+ 			$scope.newArtist.left = (x * 100) /  this.clientWidth; //recupe left en %
+ 			$scope.newArtist.top = (y * 100) /  this.clientHeight; //recupe top en %
 
  			UI.singlepost.startSelection($scope.newArtist.left, $scope.newArtist.top); //cree le div newTag
  		});
 
  		tagWrapper.on('mousemove', function(e){
+ 			e.stopPropagation();
+ 			e.preventDefault();
 
  			if($scope.selecting){ 
-	 			var x = e.offsetX === 'undefined'?e.layerX:e.offsetX;
-				var y = e.offsetY === 'undefined'?e.layerY:e.offsetY;
+	 			var x = typeof e.offsetX === 'undefined' ? e.layerX : e.offsetX;
+				var y = typeof e.offsetY === 'undefined' ? e.layerY : e.offsetY;
+				var currentTarget = typeof e.currentTarget === 'undefined' ? e.toElement : e.currentTarget;
 
-	 			if(e.toElement ===  tagWrapper[0]){
-		 			$scope.newArtist.width = (x * 100) /  this.clientWidth - $scope.newArtist.left;
-		 			$scope.newArtist.height = (y * 100) /  this.clientHeight - $scope.newArtist.top;
+	 			if(currentTarget === tagWrapper[0]){
 
-		 			UI.singlepost.doSelection($scope.newArtist.width, $scope.newArtist.height); //augment la taille du newtag en fonction du cursor
+		 			$scope.newArtist.width = x * 100 / this.clientWidth - $scope.newArtist.left;
+		 			$scope.newArtist.height = y * 100 / this.clientHeight - $scope.newArtist.top;
+
+		 			UI.singlepost.doSelection($scope.newArtist.width, $scope.newArtist.height); //resize newtag en fonction du cursor
 	 			}	
  			}
  		});
 
  		tagWrapper.on('mouseup', function(e){
- 			$scope.selecting = false;
  			e.preventDefault();
+ 			
+ 			$scope.selecting = false;
  			
  			UI.singlepost.stopSelection(function(artistNameInput){
 	 			$scope.newArtist.name = artistNameInput.value;
@@ -189,10 +197,11 @@ app.controller('SinglepostCtrl',['$scope', '$rootScope', '$routeParams', 'Post',
 
  	$scope.addArtist = function(){
 		
-		console.log($scope.newArtist);
 		if(!!$scope.newArtist.height && !!$scope.newArtist.width && !!$scope.newArtist.left && !!$scope.newArtist.top){
 			if(!!$scope.newArtist.name){
+				
 				$scope.identifying = false;
+				
 				Post.addArtist($scope.newArtist, $scope.post.id, $scope.currentPhotoId).then(
 					function(posts){ //success
 

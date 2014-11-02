@@ -59,13 +59,9 @@
 </section>
 
 <form id="addPhotoForm">
-	<input type="submit" id="addPhotoBtn" value="Ajouter ma photo à ce post !" />
-</form>
-
-<form id="addPostForm" role="form" ng-submit="addPost()">
-    <div>
+	<div>
 	    <label>Technique utilisée : </label>
-	    <select ng-model="newPost.technic">
+	    <select ng-model="newPost.photos[0].technique">
 			<option value="pochoir">Pochoir</option>
 			<option value="sculpture">Sculpture</option>
 			<option value="peinture">Peinture</option>
@@ -76,11 +72,36 @@
     </div>
     <div>
     	<label>Description : </label>
-    	<textarea ng-model="newPost.description"></textarea>
+    	<textarea ng-model="newPost.photos[0].description"></textarea>
     </div>
     <div>
     	<label>L'oeuvre existe t'elle toujours ?</label>
-    	<input type="checkbox" ng-model="newPost.stillExist" />
+    	<input type="checkbox" ng-model="newPost.photos[0].stillExist" />
+    </div>
+    <div>
+		<input type="submit" id="addPhotoBtn" value="Ajouter ma photo à ce post !" />
+	</div>
+</form>
+
+<form id="addPostForm" role="form" ng-submit="addPost()">
+    <div>
+	    <label>Technique utilisée : </label>
+	    <select ng-model="newPost.photos[0].technique">
+			<option value="pochoir">Pochoir</option>
+			<option value="sculpture">Sculpture</option>
+			<option value="peinture">Peinture</option>
+			<option value="grafitti">Grafitti</option>
+			<option value="collage">Collage</option>
+			<option value="autre">Autre</option>
+	    </select>
+    </div>
+    <div>
+    	<label>Description : </label>
+    	<textarea ng-model="newPost.photos[0].description"></textarea>
+    </div>
+    <div>
+    	<label>L'oeuvre existe t'elle toujours ?</label>
+    	<input type="checkbox" ng-model="newPost.photos[0].stillExist" />
     </div>
     <div>
     	<input type="submit" value="Ajouter le mur !" />

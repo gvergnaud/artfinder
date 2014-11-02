@@ -63,13 +63,9 @@ app.controller('AddpostCtrl', function ($scope, $rootScope, UI, Auth, Geoloc, Se
 			var imagePath = window.location.origin + window.location.pathname + 'images/uploads/' + response;
 			document.getElementById('photorender').setAttribute('src', imagePath);
 			if(file.type === 'image/jpeg' || file.type === 'image/png'){
-				
-				var photo = {
-					url: imagePath,
-					artists: []
-				};
 
-				$scope.newPost.photos.push(photo);
+				$scope.newPost.photos[0].url = imagePath;
+				$scope.newPost.photos[0].artists = [];
 			}
 		}else{
 			UI.notification('error', 'le serveur n\'a reçu aucune image.');
@@ -92,9 +88,11 @@ app.controller('AddpostCtrl', function ($scope, $rootScope, UI, Auth, Geoloc, Se
 	*/
 
 	$scope.newPost = {};
-	$scope.newPost.stillExist = new Boolean();
-	$scope.newPost.stillExist = false;
 	$scope.newPost.photos = [];
+	$scope.newPost.photos[0] = {};
+	$scope.newPost.photos[0].stillExist = new Boolean();
+	$scope.newPost.photos[0].stillExist = false;
+	$scope.newPost.photos[0].description = '';
 	$scope.newPost.coords = {};
 
 	var geoloc = new Geoloc('#formMap');
@@ -176,19 +174,26 @@ app.controller('AddpostCtrl', function ($scope, $rootScope, UI, Auth, Geoloc, Se
 			
 			if(Auth.isAuthenticated()){ //si l'utilisateur est bien authentifié
 
-				if(!!$scope.newPost.photos[0]){ //si l'utilisateur a bien envoyé son image
-					
-					//on ajoute le username de l'hoster a l'image
-					$scope.newPost.photos[0].hosterUsername = Session.username;
+				if(!!$scope.newPost.photos[0].url){ //si l'utilisateur a bien envoyé son image
 
-					Post.addPhoto(post.id, $scope.newPost.photos[0]).then(
-						function(data){ //success
-							$scope.redirectTo('singlepost', post.id);
-						},
-						function(msg){ //error
-							UI.notification('error', msg);
-						}
-					);
+					if(!!$scope.newPost.photos[0].technique){
+
+						//on ajoute le username de l'hoster a l'image
+						$scope.newPost.photos[0].username = Session.username;
+						$scope.newPost.photos[0].userId = parseInt(Session.userId);
+						$scope.newPost.photos[0].date = new Date().getTime();
+
+						Post.addPhoto(post.id, $scope.newPost.photos[0]).then(
+							function(data){ //success
+								$scope.redirectTo('singlepost', post.id);
+							},
+							function(msg){ //error
+								UI.notification('error', msg);
+							}
+						);
+					}else{
+						UI.notification('error', 'Ajoutez la technique utilisée');
+					}
 				}else{
 					UI.notification('error', 'Envoyer votre image avant d\'envoyer le formulaire !');
 				}
@@ -202,7 +207,7 @@ app.controller('AddpostCtrl', function ($scope, $rootScope, UI, Auth, Geoloc, Se
 	$scope.addPost = function(){
 		
 		if(Auth.isAuthenticated()){
-			if(!!$scope.newPost.photos[0]){ //si l'image a bien été upload
+			if(!!$scope.newPost.photos[0].url){ //si l'image a bien été upload
 
 				if(!!$scope.newPost.coords.latitude || !!$scope.newPost.coords.longitude){ //si le post est bien géolocalisé
 					//on formate l'adresse à la bien (dans le cas ou l'utilisateur l'a entré manuellement)
@@ -210,15 +215,16 @@ app.controller('AddpostCtrl', function ($scope, $rootScope, UI, Auth, Geoloc, Se
 						function(address){
 							$scope.newPost.address = address;
 
-							if(!!$scope.newPost.technic && !!$scope.newPost.description){
+							if(!!$scope.newPost.photos[0].technique){
 
-								$scope.newPost.photos[0].hosterUsername = Session.username;
-								$scope.newPost.username = Session.username;
-								$scope.newPost.userId = parseInt(Session.userId);
 								$scope.newPost.comments = [];
 								$scope.newPost.likes = [];
-								$scope.newPost.date = new Date().getTime();
+								$scope.newPost.photos[0].username = Session.username;
+								$scope.newPost.photos[0].userId = parseInt(Session.userId);
+								$scope.newPost.photos[0].date = new Date().getTime();
 
+								console.log($scope.newPost);
+								
 								Post.add($scope.newPost).then(
 									function (newPostId){
 										UI.notification('success', 'Votre mur à bien été ajouté !');
@@ -229,7 +235,7 @@ app.controller('AddpostCtrl', function ($scope, $rootScope, UI, Auth, Geoloc, Se
 									}
 								);
 							}else{
-							UI.notification('error', 'Tous les champs ne sont pas remplis.');
+							UI.notification('error', 'Ajoutez la technique utilisée');
 							}
 						},
 						function (msg){

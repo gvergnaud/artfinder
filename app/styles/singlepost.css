@@ -15,17 +15,20 @@ section#player.up{
 
 nav.arrows{
   position: absolute;
-  height:50px;
-  width:50px;
+  height:100px;
+  width:100px;
   text-align: center;
   color: #fff;
+  cursor: pointer;
 }
 
 nav#prev{
+  background: url(../images/prev.svg) no-repeat;
   left: 20px;
 }
 
 nav#next{
+  background: url(../images/next.svg) no-repeat;
   right: 20px;
 }
 
@@ -84,15 +87,42 @@ section.map.show{
 }
 
 /* POST INFOS */
-section#post_infos{
+section#short_infos{
   background-color: #fff;
   padding-top: 10px;
+  padding-bottom: 15px;
 }
 
 span#where{
   font-family: 'Uni Sans Heavy';
   font-size:1.2em;
   cursor: pointer;
+}
+
+span#where:before{
+  content: '';
+  background: url(../images/pin.svg) no-repeat;
+  font-weight: normal;
+  speak: none;
+ 
+  display: inline-block;
+  text-decoration: inherit;
+  margin-right: .2em;
+  /* opacity: .8; */
+ 
+  /* For safety - reset parent styles, that can break glyph codes*/
+  font-variant: normal;
+  text-transform: none;
+  color:#B59E5C;
+     
+  /* fix buttons height, for twitter bootstrap */
+  line-height: 1em;
+ 
+  /* Animation center compensation - margins should be symmetric */
+  /* remove if not needed */
+  margin-left: .2em;
+  width:21px;
+  height:30px;
 }
 
 span#artists{
@@ -148,7 +178,7 @@ span.right{
   display:inline-block;
   float: right;
   margin-top:10px;
-  margin-right: 50px;
+  margin-right: 30px;
 }
 
 span.left{

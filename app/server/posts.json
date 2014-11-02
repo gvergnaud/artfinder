@@ -1,272 +1,192 @@
 [
     {
-        "id": 0,
-        "technic": "pochoir",
         "photos": [
             {
-                "url": "images\/banksy.jpg",
+                "stillExist": false,
+                "url": "http:\/\/localhost\/hetic\/pumir\/artfinder\/app\/images\/uploads\/1414921728konnysteding.jpg",
+                "artists": [],
+                "technique": "collage",
+                "username": "gab",
+                "date": 1414921768310,
+                "description": "Un mur bien remplis.",
+                "userId": 13
+            },
+            {
+                "stillExist": false,
+                "description": "",
+                "url": "http:\/\/localhost\/hetic\/pumir\/artfinder\/app\/images\/uploads\/1414923587konnysteding2.jpg",
+                "artists": [],
+                "technique": "collage",
+                "username": "gab",
+                "userId": 13,
+                "date": 1414923609300
+            }
+        ],
+        "coords": {
+            "latitude": 48.853851553519,
+            "longitude": 2.3673927783966
+        },
+        "address": "2 Rue de la Bastille, 75004 Paris, France",
+        "comments": [],
+        "likes": [
+            "gab"
+        ],
+        "id": 2
+    },
+    {
+        "photos": [
+            {
+                "stillExist": true,
+                "description": "Le c\u00e9l\u00e8bre pochoir de Banksy.",
+                "url": "http:\/\/localhost\/hetic\/pumir\/artfinder\/app\/images\/uploads\/1414922720banksy.jpg",
                 "artists": [
                     {
-                        "left": 5.422446406053,
-                        "top": 4.0336134453782,
-                        "width": 82.093316519546,
-                        "height": 74.117647058824,
+                        "left": 29.558011049724,
+                        "top": 5.8931860036832,
+                        "width": 42.403314917127,
+                        "height": 69.060773480663,
                         "name": "Banksy"
                     }
-                ]
+                ],
+                "technique": "pochoir",
+                "username": "gab",
+                "userId": 13,
+                "date": 1414922746876
             }
         ],
-        "description": "Encore un truc styl\u00e9",
         "coords": {
-            "latitude": 48.861186,
-            "longitude": 2.353499
+            "latitude": 48.853195026796,
+            "longitude": 2.3358821868896
         },
-        "address": "37 Rue Rambuteau, 75004 Paris, France",
-        "stillExist": true,
-        "date": 1414100058888,
-        "userId": 0,
+        "address": "29-31 Rue de Buci, 75006 Paris, France",
+        "comments": [
+            {
+                "content": "Trop Bath",
+                "timestamp": 1414923554687,
+                "username": "gab",
+                "activePhoto": 1,
+                "date": "02\/11\/2014"
+            }
+        ],
+        "likes": [
+            "gab"
+        ],
+        "id": 3
+    },
+    {
+        "photos": [
+            {
+                "stillExist": true,
+                "description": "",
+                "url": "http:\/\/localhost\/hetic\/pumir\/artfinder\/app\/images\/uploads\/1414923664c215.jpg",
+                "artists": [
+                    {
+                        "left": 15.063520871143,
+                        "top": 45.063879210221,
+                        "width": 33.938294010889,
+                        "height": 45.760743321719,
+                        "name": "C 215"
+                    }
+                ],
+                "technique": "pochoir",
+                "username": "gab",
+                "userId": 13,
+                "date": 1414923681717
+            }
+        ],
+        "coords": {
+            "latitude": 48.836701380838,
+            "longitude": 2.3735618591309
+        },
+        "address": "2-8 Rue Jean Arp, 75013 Paris, France",
         "comments": [],
         "likes": [
             "gab"
-        ]
-    },
-    {
-        "id": 1,
-        "technic": "pochoir",
-        "photos": [
-            {
-                "url": "images\/c215.jpg",
-                "artists": [
-                    {
-                        "left": 3.5390199637024,
-                        "top": 2.787456445993,
-                        "width": 90.38112522686,
-                        "height": 87.456445993031,
-                        "name": "C-215"
-                    }
-                ]
-            }
         ],
-        "description": "Encore un truc styl\u00e9",
-        "coords": {
-            "latitude": 48.833142,
-            "longitude": 2.378433
-        },
-        "address": "17 Quai Fran\u00e7ois Mauriac, 75013 Paris, France",
-        "stillExist": true,
-        "date": 1414100058888,
-        "userId": 0,
-        "comments": [],
-        "likes": [
-            "gab"
-        ]
-    },
-    {
-        "id": 2,
-        "technic": "sculpture",
-        "photos": [
-            {
-                "url": "images\/vhils.jpg",
-                "artists": [
-                    {
-                        "left": 23.577235772358,
-                        "top": 3.2520325203252,
-                        "width": 67.015098722416,
-                        "height": 82.81068524971,
-                        "name": "Vhils"
-                    }
-                ]
-            }
-        ],
-        "description": "Encore un truc styl\u00e9",
-        "coords": {
-            "latitude": 48.84653,
-            "longitude": 2.343221
-        },
-        "address": "172-174 Rue Saint-Jacques, 75005 Paris, France",
-        "stillExist": true,
-        "date": 1414100058888,
-        "userId": 0,
-        "comments": [
-            {
-                "content": "Incroyable",
-                "timestamp": 1414325772724,
-                "username": "gab",
-                "activePhoto": 1,
-                "date": "26\/10\/2014"
-            }
-        ],
-        "likes": [
-            "test",
-            "gab"
-        ]
-    },
-    {
-        "id": 3,
-        "technic": "collage",
-        "photos": [
-            {
-                "url": "images\/konnysteding.jpg",
-                "artists": [
-                    {
-                        "left": 50.855365474339,
-                        "top": 7.7816492450639,
-                        "width": 18.040435458787,
-                        "height": 14.285714285714,
-                        "name": "Shepard Farey"
-                    },
-                    {
-                        "left": 48.367029548989,
-                        "top": 24.854819976771,
-                        "width": 22.550544323484,
-                        "height": 18.815331010453,
-                        "name": "Mr. BrainWash"
-                    },
-                    {
-                        "left": 39.346811819596,
-                        "top": 48.08362369338,
-                        "width": 39.813374805599,
-                        "height": 36.353077816492,
-                        "name": "Konny Steding"
-                    }
-                ]
-            },
-            {
-                "url": "images\/konnysteding2.jpg",
-                "artists": [
-                    {
-                        "left": 14.152410575428,
-                        "top": 11.730545876887,
-                        "width": 67.340590979782,
-                        "height": 64.576074332172,
-                        "name": "Konny Steding"
-                    }
-                ]
-            }
-        ],
-        "description": "Encore un truc styl\u00e9",
-        "coords": {
-            "latitude": 48.8479861186,
-            "longitude": 2.3253499
-        },
-        "address": "37 Rue Rambuteau, 75004 Paris, France",
-        "stillExist": true,
-        "date": 1414100058888,
-        "userId": 0,
-        "comments": [
-            {
-                "content": "Ouf",
-                "timestamp": 1414325792503,
-                "username": "gab",
-                "activePhoto": 2,
-                "date": "26\/10\/2014"
-            },
-            {
-                "content": "ouf aussi",
-                "timestamp": 1414325802960,
-                "username": "gab",
-                "activePhoto": 1,
-                "date": "26\/10\/2014"
-            }
-        ],
-        "likes": [
-            "lol",
-            "ee",
-            "zejzfe",
-            "gab"
-        ]
-    },
-    {
-        "stillExist": true,
-        "coords": {
-            "latitude": 48.849919323974,
-            "longitude": 2.36008644104
-        },
-        "photos": [
-            {
-                "url": "http:\/\/localhost\/hetic\/pumir\/artfinder\/app\/images\/uploads\/streetart-design-vol11-2.jpg",
-                "artists": []
-            }
-        ],
-        "address": "5 Boulevard Henri IV, 75004 Paris, France",
-        "technic": "peinture",
-        "description": "L\u00e8che le sol.",
-        "userId": "13",
-        "comments": [
-            {
-                "content": "lol",
-                "timestamp": 1414325846304,
-                "username": "gab",
-                "activePhoto": 1,
-                "date": "26\/10\/2014"
-            }
-        ],
-        "likes": [],
-        "date": 1414234728739,
         "id": 4
     },
     {
-        "stillExist": true,
-        "coords": {
-            "latitude": 48.859258747207,
-            "longitude": 2.3509562015533
-        },
         "photos": [
             {
-                "url": "http:\/\/localhost\/hetic\/pumir\/artfinder\/app\/images\/uploads\/paris-urban-art.jpg",
+                "stillExist": true,
+                "description": "Grav\u00e9 au marteau piqueur.",
+                "url": "http:\/\/localhost\/hetic\/pumir\/artfinder\/app\/images\/uploads\/1414923693vhils.jpg",
                 "artists": [
                     {
-                        "left": 15.889029003783,
-                        "top": 1.0084033613445,
-                        "width": 44.262295081967,
-                        "height": 86.386554621849,
-                        "name": "Jef Aeresol"
+                        "left": 16.390423572744,
+                        "top": 15.469613259669,
+                        "width": 71.270718232044,
+                        "height": 63.16758747698,
+                        "name": "Vhils"
                     }
-                ]
+                ],
+                "technique": "sculpture",
+                "username": "gab",
+                "userId": 13,
+                "date": 1414923714032
             }
         ],
-        "address": "22 Rue du Clo\u00eetre Saint-Merri, 75004 Paris, France",
-        "technic": "pochoir",
-        "description": "Portrait monumental.",
-        "userId": "13",
+        "coords": {
+            "latitude": 48.87961871879,
+            "longitude": 2.3431777954102
+        },
+        "address": "37 Rue Rodier, 75009 Paris, France",
+        "comments": [],
+        "likes": [],
+        "id": 5
+    },
+    {
+        "photos": [
+            {
+                "stillExist": false,
+                "description": "",
+                "url": "http:\/\/localhost\/hetic\/pumir\/artfinder\/app\/images\/uploads\/14149237471414419330Street-Art-Paris2.jpg",
+                "artists": [],
+                "technique": "pochoir",
+                "username": "gab",
+                "userId": 13,
+                "date": 1414923756997
+            }
+        ],
+        "coords": {
+            "latitude": 48.850822987538,
+            "longitude": 2.3874664306641
+        },
+        "address": "39 Rue de Montreuil, 75011 Paris, France",
+        "comments": [],
+        "likes": [],
+        "id": 6
+    },
+    {
+        "photos": [
+            {
+                "stillExist": true,
+                "description": "Portrait monumental.",
+                "url": "http:\/\/localhost\/hetic\/pumir\/artfinder\/app\/images\/uploads\/1414923771paris-urban-art.jpg",
+                "artists": [
+                    {
+                        "left": 21.341463414634,
+                        "top": 5.34262485482,
+                        "width": 38.327526132404,
+                        "height": 76.771196283391,
+                        "name": "Jef Aerosol"
+                    }
+                ],
+                "technique": "pochoir",
+                "username": "gab",
+                "userId": 13,
+                "date": 1414923793926
+            }
+        ],
+        "coords": {
+            "latitude": 48.859272864442,
+            "longitude": 2.3509562015533
+        },
+        "address": "20 Rue du Clo\u00eetre Saint-Merri, 75004 Paris, France",
         "comments": [],
         "likes": [
             "gab"
         ],
-        "date": 1414234761592,
-        "id": 5
-    },
-    {
-        "stillExist": true,
-        "photos": [
-            {
-                "url": "http:\/\/localhost\/hetic\/pumir\/artfinder\/app\/images\/uploads\/1414406764Street-Art-Paris2.jpg",
-                "artists": [],
-                "hosterUsername": "gab"
-            }
-        ],
-        "coords": {
-            "latitude": 48.853082075094,
-            "longitude": 2.3725318908691
-        },
-        "address": "18 Passage du Cheval Blanc, 75011 Paris, France",
-        "technic": "pochoir",
-        "description": "Cool bonhomme",
-        "username": "gab",
-        "userId": 13,
-        "comments": [
-            {
-                "content": "Yes",
-                "timestamp": 1414419639618,
-                "username": "gab",
-                "activePhoto": 1,
-                "date": "27\/10\/2014"
-            }
-        ],
-        "likes": [
-            "gab"
-        ],
-        "date": 1414406808031,
-        "id": 6
+        "id": 7
     }
 ]

@@ -1,7 +1,7 @@
 <div ng-singlepost>
 	<section id="player" class="player">
-		<nav class="arrows" id="prev">Prev</nav>
-		<nav class="arrows" id="next">Next</nav>
+		<nav class="arrows" id="prev"></nav>
+		<nav class="arrows" id="next"></nav>
 		<img ng-src="{{post.photos[currentPhotoId].url}}" />
 		<div class="tagWrapper">
 			<div ng-repeat="artist in post.photos[currentPhotoId].artists">
@@ -12,8 +12,10 @@
 		</div>
 		<div class="control"></div>
 	</section>
+
 	<section class="map"></section>
-	<section id="post_infos">
+
+	<section id="short_infos">
 		<span class="left">
 			<span id="where" ng-click="toggleMap()">{{post.address}}</span>
 			<span id="artists">
@@ -27,7 +29,10 @@
 			<span id="like" ng-click="likePost()">{{post.likes.length}}<span class="icon-heart-empty"></span></span>
 			<span id="nb_comments">{{post.comments.length}}<span class="icon-comment"></span></span>
 		</span>
-		<p id="desc">{{post.description}}<span ng-if="!!post.photos[currentPhotoId].hosterUsername"> / Ajouté par {{post.photos[currentPhotoId].hosterUsername}}</span></p>
+	</section>
+
+	<section id="infos">
+		<p id="desc">{{post.photos[currentPhotoId].description}}<span ng-if="!!post.photos[currentPhotoId].username"> / Ajouté par {{post.photos[currentPhotoId].username}}</span></p>
 
 		<section>
 			<div ng-if="post.comments.length" id="commentaires">
@@ -41,13 +46,13 @@
 					<p class="date">{{comment.date}}</p>
 
 				</div>
-				<div ng-show="isAuthenticated()">
-					<h4>écrire un commentaire</h4>
-					<form role="form" ng-submit="addComment()">
-						<textarea type="text" ng-model="newComment.content" placeholder="message"></textarea>
-						<input type="submit" value="Envoyer" />
-					</form>
-				</div>
+			</div>
+			<div ng-show="isAuthenticated()">
+				<h4>Commenter</h4>
+				<form role="form" ng-submit="addComment()">
+					<textarea type="text" ng-model="newComment.content" placeholder="message"></textarea>
+					<input type="submit" value="Envoyer" />
+				</form>
 			</div>
 		</section>
 	</section>

@@ -19,12 +19,10 @@ app.controller('appCtrl', function ($scope, $rootScope, Session, Auth, UI, USER_
 	$scope.isAuthenticated = Auth.isAuthenticated;
 	$scope.isNotAuthenticated = Auth.isNotAuthenticated;
 
-	$scope.animated = '';
 	$scope.animation = '';
 
 	setTimeout(function(){
-		$scope.animated = 'animated';
-		$scope.animation = 'slide';
+		$scope.animation = "animated";
 	}, 1000);
 
 	angular.element(document.querySelector('header.menu')).on('mouseenter mouseleave', function(){
@@ -47,7 +45,7 @@ app.controller('appCtrl', function ($scope, $rootScope, Session, Auth, UI, USER_
 
 	$scope.redirectTo = function(page, param){
 		
-		$scope.smoothScrollTop(function(){
+		$scope.smoothScrollTo('#container', function(){
 
 			if(!page){
 				
@@ -72,11 +70,11 @@ app.controller('appCtrl', function ($scope, $rootScope, Session, Auth, UI, USER_
 		});
 	};
 
-	$scope.smoothScrollTop = function(callback){
+	$scope.smoothScrollTo = function(selector, callback){
 		var speed = 200;
 		var movingFrequency = 15; // Affects performance !
 			
-		var element = document.querySelector('#container');
+		var element = document.querySelector(selector);
 		var getScrollTopElement =  function (elmt)
 		{
 		    var top = 0;
