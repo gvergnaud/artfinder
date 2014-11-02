@@ -24,13 +24,13 @@ app.factory('Geoloc', function (UI, $q) {
           var optionsGmaps = {
             center: that.defaultLatLng,
             mapTypeId: google.maps.MapTypeId.ROADMAP, // types possibles: ROADMAP, SATELLITE, HYBRID ou TERRAIN
-            zoom: 12,
+            zoom: 4,
             maxZoom: 19,
             minZoom: 3,
             disableDefaultUI: true
           };
 
-          var styles = [{"featureType":"all","elementType":"labels.text","stylers":[{"visibility":"off"}]},{"featureType":"landscape","elementType":"all","stylers":[{"visibility":"simplified"},{"color":"#5c5c5c"},{"saturation":-100},{"lightness":-82}]},{"featureType":"transit","elementType":"all","stylers":[{"visibility":"off"},{"lightness":11}]},{"featureType":"poi","elementType":"all","stylers":[{"visibility":"off"}]},{"featureType":"road.highway","elementType":"all","stylers":[{"visibility":"off"}]},{"featureType":"road.local","elementType":"all","stylers":[{"visibility":"on"}]},{"featureType":"all","elementType":"labels","stylers":[{"visibility":"simplified"},{"color":"#ffffff"},{"hue":"#ffa200"}]},{"featureType":"road","elementType":"all","stylers":[{"color":"#808080"},{"saturation":-42},{"lightness":-53}]},{"featureType":"poi","elementType":"labels.icon","stylers":[{"visibility":"off"}]},{"featureType":"all","elementType":"labels.icon","stylers":[{"visibility":"off"}]},{"featureType":"water","elementType":"geometry","stylers":[{"visibility":"simplified"},{"color":"#c5d5fc"},{"saturation":-100},{"lightness":100}]},{"featureType":"water","elementType":"labels.text","stylers":[{"color":"#000000"},{"weight":8}]},{"featureType":"administrative","elementType":"labels.text","stylers":[{"visibility":"off"}]},{"featureType":"road.local","elementType":"geometry","stylers":[{"visibility":"simplified"},{"color":"#141414"},{"lightness":-78}]},{"featureType":"road.local","elementType":"labels.text","stylers":[{"color":"#c7b69b"}]},{"featureType":"administrative.locality","elementType":"labels.text","stylers":[{"visibility":"simplified"},{"color":"#f5eab6"},{"saturation":-23}]},{"featureType":"administrative.province","elementType":"all","stylers":[{"visibility":"off"}]},{"featureType":"administrative.country","elementType":"labels.text","stylers":[{"visibility":"simplified"},{"color":"#c7b69b"}]},{"featureType":"all","elementType":"all","stylers":[{"lightness":-81},{"gamma":3.71}]},{"featureType":"road.arterial","elementType":"geometry","stylers":[{"color":"#000000"},{"lightness":18}]},{"featureType":"road.arterial","elementType":"labels.text","stylers":[{"visibility":"simplified"},{"color":"#999896"}]},{"featureType":"road.highway","elementType":"geometry","stylers":[{"visibility":"on"},{"color":"#1a1a1a"}]}];
+          var styles = [{"featureType":"all","elementType":"all","stylers":[{"visibility":"simplified"},{"saturation":-100}]},{"featureType":"all","elementType":"labels.icon","stylers":[{"visibility":"off"}]},{"featureType":"landscape","elementType":"geometry","stylers":[{"color":"#706f70"},{"lightness":-22}]},{"featureType":"water","elementType":"geometry","stylers":[{"color":"#292929"}]},{"featureType":"water","elementType":"labels.text","stylers":[{"color":"#e8e8e8"}]},{"featureType":"poi","elementType":"all","stylers":[{"visibility":"off"}]},{"featureType":"administrative.locality","elementType":"labels.text","stylers":[{"visibility":"simplified"},{"color":"#1c1c1c"}]},{"featureType":"administrative.neighborhood","elementType":"labels.text","stylers":[{"visibility":"off"}]},{"featureType":"road.local","elementType":"geometry","stylers":[{"color":"#8a8a8a"},{"lightness":-26}]},{"featureType":"road.arterial","elementType":"geometry","stylers":[{"color":"#878587"},{"lightness":-17}]},{"featureType":"road.highway","elementType":"geometry","stylers":[{"color":"#949494"}]},{"featureType":"road","elementType":"labels.text","stylers":[{"visibility":"simplified"},{"color":"#000000"}]},{"featureType":"transit","elementType":"all","stylers":[{"visibility":"off"}]}];
 
           that.map = new google.maps.Map(that.mapElement, optionsGmaps);
 
@@ -248,6 +248,8 @@ app.factory('Geoloc', function (UI, $q) {
           for (var i = 0; i < that.markers.length; i++){
             that.markers[i].setMap();
           }
+
+          that.markers = [];
         };
 
       };

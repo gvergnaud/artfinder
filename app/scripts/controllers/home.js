@@ -7,7 +7,7 @@
  * # MainCtrl
  * Controller of the artFinderApp
  */
-	app.controller('HomeCtrl',['$scope', '$rootScope', 'Post', 'Geoloc', 'UI', function ($scope, $rootScope, Post, Geoloc, UI) {
+	app.controller('HomeCtrl',['$scope', '$rootScope', 'Post', 'Geoloc', 'UI', '$filter', function ($scope, $rootScope, Post, Geoloc, UI, $filter) {
 	
 
 	//Récuperation des posts
@@ -36,4 +36,18 @@
 
 		//$scope.geoloc.addMyLocationMarker();
 
+		//applique les filtres sur la map
+		$scope.filters = {};
+		
+		$scope.$watchCollection('filters', function (newValue, oldValue){
+	        $scope.geoloc.clearMarkers();
+
+	        var filteredPosts = $filter('filter')($scope.posts, newValue.search);
+	        filteredPosts = $filter('filter')(filteredPosts, newValue.technique);
+
+	        for( var post in filteredPosts ){
+				post = filteredPosts[post];
+				$scope.geoloc.addMarker(post);
+			}
+		});
 	}]);
