@@ -19,16 +19,26 @@ app.factory('Geoloc', function (UI, $q) {
         that.markers = [];
         that.geocoder = new google.maps.Geocoder();
         
-        that.createMap = function(){
-
+        that.createMap = function(options){          
+          
           var optionsGmaps = {
-            center: that.defaultLatLng,
-            mapTypeId: google.maps.MapTypeId.ROADMAP, // types possibles: ROADMAP, SATELLITE, HYBRID ou TERRAIN
-            zoom: 4,
-            maxZoom: 19,
-            minZoom: 3,
-            disableDefaultUI: true
+              center: that.defaultLatLng,
+              mapTypeId: google.maps.MapTypeId.ROADMAP, // types possibles: ROADMAP, SATELLITE, HYBRID ou TERRAIN
+              zoom: 4,
+              maxZoom: 19,
+              minZoom: 3,
+              disableDefaultUI: true
           };
+          
+          if(!!options){
+            if(!!options.center){ optionsGmaps.center = options.center }
+            if(!!options.mapTypeId){ optionsGmaps.mapTypeId = options.mapTypeId }
+            if(!!options.zoom){ optionsGmaps.zoom = options.zoom }
+            if(!!options.maxZoom){ optionsGmaps.maxZoom = options.maxZoom }
+            if(!!options.minZoom){ optionsGmaps.minZoom = options.minZoom }
+            if(!!options.disableDefaultUI){ optionsGmaps.disableDefaultUI = options.disableDefaultUI }
+          }
+
 
           var styles = [{"featureType":"all","elementType":"all","stylers":[{"visibility":"simplified"},{"saturation":-100}]},{"featureType":"all","elementType":"labels.icon","stylers":[{"visibility":"off"}]},{"featureType":"landscape","elementType":"geometry","stylers":[{"color":"#706f70"},{"lightness":-22}]},{"featureType":"water","elementType":"geometry","stylers":[{"color":"#292929"}]},{"featureType":"water","elementType":"labels.text","stylers":[{"color":"#e8e8e8"}]},{"featureType":"poi","elementType":"all","stylers":[{"visibility":"off"}]},{"featureType":"administrative.locality","elementType":"labels.text","stylers":[{"visibility":"simplified"},{"color":"#1c1c1c"}]},{"featureType":"administrative.neighborhood","elementType":"labels.text","stylers":[{"visibility":"off"}]},{"featureType":"road.local","elementType":"geometry","stylers":[{"color":"#8a8a8a"},{"lightness":-26}]},{"featureType":"road.arterial","elementType":"geometry","stylers":[{"color":"#878587"},{"lightness":-17}]},{"featureType":"road.highway","elementType":"geometry","stylers":[{"color":"#949494"}]},{"featureType":"road","elementType":"labels.text","stylers":[{"visibility":"simplified"},{"color":"#000000"}]},{"featureType":"transit","elementType":"all","stylers":[{"visibility":"off"}]}];
 
@@ -39,7 +49,7 @@ app.factory('Geoloc', function (UI, $q) {
           //Pour corriger le probleme de la carte au rechargement avec bootstrap
           google.maps.event.addListenerOnce(that.map, 'idle', function() {
              google.maps.event.trigger(that.map, 'resize');
-             that.map.setCenter(that.defaultLatLng);
+             that.map.setCenter(optionsGmaps.center);
           });
         };
 
@@ -47,7 +57,13 @@ app.factory('Geoloc', function (UI, $q) {
           that.map.setOptions(options);
         };
 
-        that.getLatLng = function(address) {
+        that.getLatLng = function(lat, lng){
+
+          var latlng = new google.maps.LatLng(lat, lng);
+          return latlng;
+        };
+
+        that.latLngFromAddress = function(address) {
 
           var deferred = $q.defer();
 
@@ -76,7 +92,7 @@ app.factory('Geoloc', function (UI, $q) {
           return deferred.promise;
         };
 
-        that.getAddress = function(lat, lng) {
+        that.addressFromLatLng = function(lat, lng) {
 
           var deferred = $q.defer();
           

@@ -175,6 +175,7 @@ a.identification:before{
 }
 
 span.right{
+  font-size: 1.2em;
   display:inline-block;
   float: right;
   margin-top:10px;
@@ -185,27 +186,57 @@ span.left{
   display: inline-block;
 }
 
-#desc{
-  color: #555;
-  margin-top:5px;
+#infos{
+  width: 800px;
+  margin: 30px auto;
 }
 
+#infos>div.left{
+  width:537px;
+}
 /* COMMENTAIRES*/
 div#commentaires{
-  width:550px;
-  margin:10px 0 50px 50px;
-  padding:15px;
-  border-right: 1px solid #ddd;
-  border-left: 1px solid #ddd;
-}
-div#commentaires>h2{
-  margin-top: -2em;
+  margin:10px auto;
 }
 
-blockquote{
-  border-left: 4px solid #aaa;
-  margin:0;
-  padding-left: 15px;
+div#commentaires>h3{
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+
+div.comment{
+  width:500px;
+  min-height: 50px;
+  background:#eeeeee;
+  padding: 10px;
+  border-bottom: 1px solid #aaa;
+}
+
+div.desc{
+  min-height: 50px;
+  background:#eeeeee;
+  width:500px;
+  padding: 10px;
+}
+
+img.avatar{
+  float: left;
+  width: 50px;
+}
+
+div.comment_info{
+  margin-left: 60px;
+}
+
+h3.username{
+  display: inline-block;
+  font-size: 16px;
+  margin-bottom: 5px;
+}
+
+p.content{
+  font-size: 16px;
+  margin-bottom: 10px;
 }
 
 p.date{
@@ -221,6 +252,9 @@ span.activephoto{
 /* CLOSE POSTS */
 
 div#closePostsContainer{
+  height: 210px;
+  background: #000;
+  overflow: hidden;
 }
 
 

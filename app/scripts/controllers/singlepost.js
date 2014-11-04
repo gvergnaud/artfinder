@@ -14,7 +14,7 @@ app.controller('SinglepostCtrl',['$scope', '$rootScope', '$routeParams', 'Post',
 		function (post){ // les posts sont récupérés !
 			$scope.post =  post;		
 			
-			Post.getClosePosts(post, 3).then(
+			Post.getClosePosts(post, 5).then(
 				function(closePosts){
 					$scope.closePosts = closePosts;
 				}
@@ -59,15 +59,30 @@ app.controller('SinglepostCtrl',['$scope', '$rootScope', '$routeParams', 'Post',
  		UI.singlepost.togglePlayerArrows($scope);
  	});
 
- 	$scope.toggleMap = function(){
- 		var geoloc = new Geoloc('section.map');
-		geoloc.createMap();
-		geoloc.addMarker($scope.post);
-		geoloc.setMapOptions({scrollwheel: false});
 
- 		UI.singlepost.toggleMap(function(){
-			geoloc.showPostLocation($scope.post);
- 		});
+ 	//Ouverture de la map
+ 	$scope.mapOpened = false;
+
+ 	$scope.toggleMap = function(){
+
+ 		if(!$scope.mapOpened){
+	 		var geoloc = new Geoloc('section.map');
+	 		var mapCenter = geoloc.getLatLng($scope.post.coords.latitude, $scope.post.coords.longitude);
+
+			geoloc.createMap({zoom: 10, center: mapCenter});
+			geoloc.addMarker($scope.post);
+			geoloc.setMapOptions({scrollwheel: false});
+
+	 		UI.singlepost.toggleMap(function(){
+				geoloc.showPostLocation($scope.post);
+	 		});
+
+	 		$scope.mapOpened = true;
+ 		}else{
+ 			UI.singlepost.toggleMap();
+ 			$scope.mapOpened = false;
+ 		}
+ 		
  	};
 
  	$scope.newComment = {};
@@ -98,6 +113,14 @@ app.controller('SinglepostCtrl',['$scope', '$rootScope', '$routeParams', 'Post',
 		}
  	};
 
+ 	$scope.isLiked = function(){
+ 		if(!!$scope.post){
+ 			return !$scope.post.likes.indexOf(Session.username);
+ 		}else{
+ 			return false;
+ 		}
+ 	};
+
  	$scope.likePost = function(){
 
 		if(Auth.isAuthenticated()){ //si l'utilisateur est identifé
@@ -107,7 +130,6 @@ app.controller('SinglepostCtrl',['$scope', '$rootScope', '$routeParams', 'Post',
 	 				Post.find($routeParams.id).then(
 						function (post){ // les posts sont récupérés !
 							$scope.post =  post;
-							UI.singlepost.togglePlayerArrows($scope);
 						},
 						function (msg){ // erreur lors de la récupération des posts
 							UI.notification('error', msg);

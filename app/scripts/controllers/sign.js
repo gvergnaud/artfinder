@@ -20,7 +20,7 @@ app.controller('signCtrl', function ($scope, $rootScope, UI, AUTH_EVENTS, Auth, 
 	//si le localStorage existe, on recupère le user
 	if(!!localStorage.getItem('ArtFinderUser')){
 		var user = JSON.parse(localStorage.getItem('ArtFinderUser'));
-		Session.create(user.id, user.username, user.role);
+		Session.create(user.id, user.username, user.role, user.avatar);
 		$rootScope.$broadcast(AUTH_EVENTS.loginSuccess);
 		$scope.setCurrentUser(user);
 		setTimeout(function(){

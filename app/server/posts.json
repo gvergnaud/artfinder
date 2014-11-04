@@ -4,7 +4,36 @@
             {
                 "stillExist": false,
                 "url": "http:\/\/localhost\/hetic\/pumir\/artfinder\/app\/images\/uploads\/1414921728konnysteding.jpg",
-                "artists": [],
+                "artists": [
+                    {
+                        "left": 42.457231726283,
+                        "top": 49.477351916376,
+                        "width": 36.858475894246,
+                        "height": 29.38443670151,
+                        "name": "Konny Steding"
+                    },
+                    {
+                        "left": 46.811819595645,
+                        "top": 23.809523809524,
+                        "width": 24.57231726283,
+                        "height": 22.648083623693,
+                        "name": "Mr. BrainWash"
+                    },
+                    {
+                        "left": 46.656298600311,
+                        "top": 7.0847851335656,
+                        "width": 23.48367029549,
+                        "height": 15.911730545877,
+                        "name": "Shepard Farey"
+                    },
+                    {
+                        "left": 21.150855365474,
+                        "top": 13.124274099884,
+                        "width": 14.463452566096,
+                        "height": 10.336817653891,
+                        "name": "Mario"
+                    }
+                ],
                 "technique": "collage",
                 "username": "gab",
                 "date": 1414921768310,
@@ -27,10 +56,16 @@
             "longitude": 2.3673927783966
         },
         "address": "2 Rue de la Bastille, 75004 Paris, France",
-        "comments": [],
-        "likes": [
-            "gab"
+        "comments": [
+            {
+                "content": "Oui",
+                "timestamp": 1415052283202,
+                "username": "gab",
+                "activePhoto": 1,
+                "date": "03\/11\/2014"
+            }
         ],
+        "likes": [],
         "id": 0
     },
     {
@@ -66,6 +101,27 @@
                 "username": "gab",
                 "activePhoto": 1,
                 "date": "02\/11\/2014"
+            },
+            {
+                "content": "Du tonnerre",
+                "timestamp": 1415052708523,
+                "username": "gab",
+                "activePhoto": 1,
+                "date": "03\/11\/2014"
+            },
+            {
+                "content": "fantastique.",
+                "timestamp": 1415052722107,
+                "username": "gab",
+                "activePhoto": 1,
+                "date": "03\/11\/2014"
+            },
+            {
+                "content": "Je suis trop facin\u00e9",
+                "timestamp": 1415052782095,
+                "username": "gab",
+                "activePhoto": 1,
+                "date": "03\/11\/2014"
             }
         ],
         "likes": [
@@ -132,7 +188,9 @@
         },
         "address": "37 Rue Rodier, 75009 Paris, France",
         "comments": [],
-        "likes": [],
+        "likes": [
+            "gab"
+        ],
         "id": 3
     },
     {
@@ -141,7 +199,15 @@
                 "stillExist": false,
                 "description": "",
                 "url": "http:\/\/localhost\/hetic\/pumir\/artfinder\/app\/images\/uploads\/14149237471414419330Street-Art-Paris2.jpg",
-                "artists": [],
+                "artists": [
+                    {
+                        "left": 41.298342541436,
+                        "top": 16.390423572744,
+                        "width": 29.972375690608,
+                        "height": 46.593001841621,
+                        "name": "efe"
+                    }
+                ],
                 "technique": "pochoir",
                 "username": "gab",
                 "userId": 13,
@@ -154,7 +220,9 @@
         },
         "address": "39 Rue de Montreuil, 75011 Paris, France",
         "comments": [],
-        "likes": [],
+        "likes": [
+            "gab"
+        ],
         "id": 4
     },
     {
@@ -188,5 +256,35 @@
             "gab"
         ],
         "id": 5
+    },
+    {
+        "photos": [
+            {
+                "stillExist": false,
+                "description": "zefzf",
+                "technique": "sculpture",
+                "url": "http:\/\/localhost\/hetic\/pumir\/artfinder\/app\/images\/uploads\/1415009336konnysteding2.jpg",
+                "artists": [
+                    {
+                        "left": 17.801857585139,
+                        "top": 19.976771196283,
+                        "width": 62.074303405573,
+                        "height": 58.652729384437,
+                        "name": "Konny stedding"
+                    }
+                ],
+                "username": "gab",
+                "userId": 13,
+                "date": 1415009339463
+            }
+        ],
+        "coords": {
+            "latitude": 47.279229002571,
+            "longitude": 6.943359375
+        },
+        "address": "Ilattes, 2354 Goumois, Suisse",
+        "comments": [],
+        "likes": [],
+        "id": 6
     }
 ]

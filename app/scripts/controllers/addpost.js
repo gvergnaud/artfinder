@@ -102,11 +102,11 @@ app.controller('AddpostCtrl', function ($scope, $rootScope, UI, Auth, Geoloc, Se
 	//click sur la carte pour récuperer les coordonnées
 	google.maps.event.addListener(geoloc.map, 'click', function( event ){
 
-		geoloc.getAddress(event.latLng.lat(), event.latLng.lng()).then(
-			function (address){
+		geoloc.addressFromLatLng(event.latLng.lat(), event.latLng.lng()).then(
+			function (address) {
 				$scope.newPost.address = address;
 			},
-			function (msg){
+			function (msg) {
 				UI.notification('error', msg);
 			}
 		);
@@ -120,7 +120,7 @@ app.controller('AddpostCtrl', function ($scope, $rootScope, UI, Auth, Geoloc, Se
 	//entrer l'adresse pour recupérer les coordonnées
 	$scope.addressChange = function(){
 		if(!!$scope.newPost.address){
-			geoloc.getLatLng($scope.newPost.address).then(
+			geoloc.latLngFromAddress($scope.newPost.address).then(
 				function (latLng){
 					$scope.newPost.coords.latitude = latLng.k;
 					$scope.newPost.coords.longitude = latLng.B;

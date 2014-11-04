@@ -55,7 +55,8 @@
 	"statut": "success",
 	"id": "<?= $response['id']; ?>",
 	"username": "<?= $response['username']; ?>",
-	"role": "<?= $response['role']; ?>"
+	"role": "<?= $response['role']; ?>",
+	"avatar": "<?= $response['avatar']; ?>"
 	
 <?php
 			}

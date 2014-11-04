@@ -24,7 +24,7 @@ app.factory('Auth', function Auth($http, $q, Session) {
         			if(user.statut === 'success'){
 
                         console.log('auth reussit');
-                        Session.create(user.id, user.username, user.role);
+                        Session.create(user.id, user.username, user.role, user.avatar);
                         deferred.resolve(user);
 
                     }else if(user.statut === 'error'){
@@ -54,7 +54,7 @@ app.factory('Auth', function Auth($http, $q, Session) {
                     if(user.statut === 'success'){
 
                         console.log('inscription reussit');
-                        Session.create(user.id, user.username, user.role);
+                        Session.create(user.id, user.username, user.role, user.avatar);
                         deferred.resolve(user);
 
                     }else if(user.statut === 'error'){
@@ -94,15 +94,17 @@ app.factory('Auth', function Auth($http, $q, Session) {
 })
 
 .service('Session', function () {
-  this.create = function (userId, username, userRole) {
+  this.create = function (userId, username, userRole, userAvatar) {
     this.userId = userId;
     this.username = username;
     this.userRole = userRole;
+    this.userAvatar = userAvatar;
   };
   this.destroy = function () {
     this.userId = null;
     this.userName = null;
     this.userRole = null;
+    this.userAvatar = null;
   };
   return this;
 })

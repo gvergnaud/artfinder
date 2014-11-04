@@ -13,7 +13,7 @@
       <option value="autre">Autre</option>
     </select>
   </div>
-  <div class="post" ng-repeat="post in posts | filter:filters.technique | filter:filters.search | reverse">
+  <div class="post span_1_of_5 col" ng-repeat="post in posts | filter:filters.technique | filter:filters.search | reverse">
       <img ng-src="{{post.photos[0].url}}" />
       <div class="over"  ng-click="redirectTo('singlepost', {{post.id}})">
         <p>{{post.likes.length}} Likes</p>

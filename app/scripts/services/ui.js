@@ -305,9 +305,11 @@ app.factory('UI', function UI() {
 	    		var player = angular.element(document.querySelector('section#player'));
 	    		map.toggleClass('show');
 	    		player.toggleClass('up');
-	    		setTimeout(function(){
-	    			callback.call(this);
-	    		}, 650);
+	    		if(!!callback){
+		    		setTimeout(function(){
+		    			callback.call(this);
+		    		}, 650);
+	    		}
 	    	},
 
 	    	togglePlayerArrows: function(scope){
