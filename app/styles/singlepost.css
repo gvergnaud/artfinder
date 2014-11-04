@@ -252,9 +252,21 @@ span.activephoto{
 /* CLOSE POSTS */
 
 div#closePostsContainer{
-  height: 210px;
+  height: 275px;
   background: #000;
   overflow: hidden;
 }
 
+section.closePosts h1{
+  padding: 10px 0;
+  text-align: center;
+  background: #1b1b1b;
+  color: #fff;
+}
 
+
+@media only screen and (max-width: 680px) {
+  div#closePostsContainer{
+    height:825px;
+  }
+}

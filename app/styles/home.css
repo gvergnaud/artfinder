@@ -4,9 +4,12 @@
 
 #mosaic{
   width:100%;
+  position: fixed;
+  overflow-y: scroll;
+  background: #050505;
 }
 
 #filtres{
   width:100%;
-  height:;
+  height:60px;
 }

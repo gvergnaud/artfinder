@@ -13,6 +13,9 @@ app.controller('appCtrl', function ($scope, $rootScope, Session, Auth, UI, USER_
 		$scope.loaded = true;
 	};
 
+	$rootScope.postsLimite = 8;
+
+
 	$scope.currentUser = null;
 	$scope.userRoles = USER_ROLES;
 	$scope.isAuthorized = Auth.isAuthorized;

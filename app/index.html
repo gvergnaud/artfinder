@@ -27,7 +27,7 @@
 
     <!-- Add your site or application content here -->
     <div id="landing" class="loading">
-      <button class="enter">Entrer</button>
+      <button class="enter"><span class="enterText">Entrer</span></button>
       <div class="logo">
         <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Calque_1" x="0px" y="0px" viewBox="0 0 250 100" enable-background="new 0 0 250 100" xml:space="preserve">
           <text transform="matrix(1 0 0 1 16 62.8193)">
@@ -80,7 +80,7 @@
         </div>
       </div>
       <header class="menu">
-        <div id="logo"></div>
+        <div ng-click="redirectTo()" id="logo"></div>
         <h1 id="username" ng-show="isAuthenticated()">{{currentUser.username}}</h1>
         <ul>
           <li ng-click="redirectTo()" class="icon-globe"><a class="menu_link hidden" href="">Explorer</a></li>
@@ -154,6 +154,7 @@
         <script src="scripts/services/ui.js"></script>
 
         <script src="scripts/directives/showpostlocation.js"></script>
+        <script src="scripts/directives/whenscrolled.js"></script>
         
         <script src="scripts/filters/reversefilter.js"></script>
 

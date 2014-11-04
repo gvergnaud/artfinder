@@ -13,11 +13,8 @@
 	//Récuperation des posts
 		Post.get().then(
 			function (posts){ // les posts sont récupérés !
-				$scope.posts =  posts;
-				for( var post in $scope.posts ){
-					post = $scope.posts[post];
-					$scope.geoloc.addMarker(post);
-				}
+				$scope.allPosts = posts;
+				$scope.loadPosts(true);
 			},
 			function (msg){ // erreur lors de la récupération des posts
 				console.log(msg);
@@ -36,7 +33,23 @@
 
 		//$scope.geoloc.addMyLocationMarker();
 
-		//applique les filtres sur la map
+	//Charge les posts
+		$scope.loadPosts = function(firstLoad){
+			
+			if($rootScope < $scope.allPosts.length || !!firstLoad){
+
+				$scope.posts = $filter('limitTo')($filter('reverse')($scope.allPosts), $rootScope.postsLimite);
+				for( var post in $scope.posts ){
+					post = $scope.posts[post];
+					$scope.geoloc.addMarker(post);
+				}
+
+				$rootScope.postsLimite += 4;
+			}
+				
+		};
+
+	//applique les filtres sur la map
 		$scope.filters = {};
 		
 		$scope.$watchCollection('filters', function (newValue, oldValue){

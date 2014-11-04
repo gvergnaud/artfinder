@@ -26,6 +26,10 @@ app.factory('UI', function UI() {
 	mainStyle();
 	window.addEventListener('resize', mainStyle, false);
 
+	document.querySelector('#landing button.enter').addEventListener('click', function(){
+		ui.notifying = false;
+	});
+
 
 	//Public fonctions
     var ui = {
@@ -89,6 +93,8 @@ app.factory('UI', function UI() {
 			}
     	},
 
+    	notifying: true,
+
     	notification: function(type, msg){
 
     		if(!ui.notifying){
@@ -147,10 +153,12 @@ app.factory('UI', function UI() {
     				map = angular.element(document.querySelector('#map'));
 
 	    		map.css({
-					height: window.innerHeight/2 + 'px'
+					width: window.innerWidth - 80 + 'px',
+					height: window.innerHeight/2 - 30 + 'px'
 				});
 				mosaic.css({
-					height: window.innerHeight/2 + 'px'
+					width: window.innerWidth - 80 + 'px',
+					height: window.innerHeight/2 - 30 + 'px'
 				});
 	    	}
 

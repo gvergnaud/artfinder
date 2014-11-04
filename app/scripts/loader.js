@@ -18,8 +18,20 @@ var loader = {
 		}
 		xhr.onloadend = function(pe) {
 		    console.log(pe.loaded);
-			loader.logo.classList.add('loaded');
-			loader.button.addEventListener('click', loader.showContent);
+		    setTimeout(function(){
+				loader.logo.classList.add('loaded');
+				setTimeout(function(){
+					loader.button.classList.add('width');
+					setTimeout(function(){
+						loader.button.classList.add('height');
+						loader.button.addEventListener('click', loader.showContent);
+						setTimeout(function(){
+							loader.button.querySelector('.enterText').classList.add('loaded');
+						}, 500);
+					}, 500);
+				}, 800);
+		    }, 500);
+
 		}
 
 		xhr.send();

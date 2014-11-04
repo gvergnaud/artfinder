@@ -211,7 +211,7 @@ app.controller('AddpostCtrl', function ($scope, $rootScope, UI, Auth, Geoloc, Se
 
 				if(!!$scope.newPost.coords.latitude || !!$scope.newPost.coords.longitude){ //si le post est bien géolocalisé
 					//on formate l'adresse à la bien (dans le cas ou l'utilisateur l'a entré manuellement)
-					geoloc.getAddress($scope.newPost.coords.latitude, $scope.newPost.coords.longitude).then(
+					geoloc.addressFromLatLng($scope.newPost.coords.latitude, $scope.newPost.coords.longitude).then(
 						function(address){
 							$scope.newPost.address = address;
 

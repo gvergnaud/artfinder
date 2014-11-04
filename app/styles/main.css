@@ -183,6 +183,7 @@ body{
 
 .menu div#logo{
   background: url(../images/logo-retract.svg) no-repeat;
+  cursor: pointer;
   height: 80px;
   width: 40px;
   margin: 20px auto;
@@ -202,6 +203,7 @@ body{
 }
 
 .view{
+  background:#fff;
   position: absolute;
   left:0;
   top: 0;
@@ -320,7 +322,7 @@ p.notification.show{
 .post{
   position: relative;
   display: inline-block;
-  height:200px;
+  height:275px;
   overflow: hidden;
   background: #000;
   transition: .5s ease;
@@ -416,22 +418,22 @@ p.notification.show{
   .col {
   display: block;
   float: left;
-  width: 19.5%;
+  width: 24.70%; 
   margin: .15% .15%.15% .15%;
 }
 
 
 /*  GO FULL WIDTH AT LESS THAN 480 PIXELS */
 
-@media only screen and (max-width: 1400px) {
+@media only screen and (max-width: 1280px) {
   .col{
-    width: 23.8%; 
+    width: 33%; 
   }
 }
 
-@media only screen and (max-width: 1280px) {
+@media only screen and (max-width: 850px) {
   .col{
-    width: 32.26%; 
+    width: 49.2%; 
   }
 }
 
@@ -492,20 +494,48 @@ p.notification.show{
   transform: translate3d(-50%, -50%,0);
   opacity: 1;
 }
- /*#container{
-  transition: .8s cubic-bezier(0.645,.045,.355,1);
-  -webkit-transition: .8s cubic-bezier(0.645,.045,.355,1);
 
-  webkit-transform: translate3d(0,50%,0);
-  -moz-transform: translate3d(0,50%,0);
-  -o-transform: translate3d(0,50%,0);
-  transform: translate3d(0,50%,0);
+button.enter{
+  position: absolute;
+  background: #fff;
+  border:none;
+  padding:5px 0;
+  height:3px;
+  width:0;
+  left: 50%;
+  top:50%;
+  cursor: pointer;
+  z-index:1;
+  transition: 2s ease;
+  -webkit-transition: 2s ease;
+
+  webkit-transform: translate3d(-182px, 50px, 0);
+  -moz-transform: translate3d(-182px, 50px, 0);
+  -o-transform: translate3d(-182px, 50px, 0);
+  transform: translate3d(-182px, 50px, 0);
 }
 
-#container.loaded{
+button.enter.width{
+  height:3px;
+  width:90%;
+  max-width: 350px;
+}
+
+button.enter.height{
+  transition: .5s ease;
+  -webkit-transition: .5s ease;
+  height:50px;
+}
+
+button.enter .enterText{
+  font-family: 'Uni Sans Heavy';
+  font-size:1.2em;
+  transition: .5s ease;
+  -webkit-transition: .5s ease;
+  opacity: 0;
+}
+
+button.enter .enterText.loaded{
   opacity: 1;
-  webkit-transform: translate3d(0, 0,0);
-  -moz-transform: translate3d(0, 0,0);
-  -o-transform: translate3d(0, 0,0);
-  transform: translate3d(0, 0,0);
-}*/
+}
+
