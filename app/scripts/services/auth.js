@@ -30,7 +30,7 @@ app.factory('Auth', function Auth($http, $q, Session) {
                     }else if(user.statut === 'error'){
 
                         console.log(user.desc);
-                        deferred.reject(user.desc)
+                        deferred.reject(user.desc);
                     }
         		})
         		.error(function (data, status){
@@ -60,7 +60,7 @@ app.factory('Auth', function Auth($http, $q, Session) {
                     }else if(user.statut === 'error'){
 
                         console.log(user.desc);
-                        deferred.reject(user.desc)
+                        deferred.reject(user.desc);
                     }
                 })
                 .error(function (data, status){
@@ -88,7 +88,7 @@ app.factory('Auth', function Auth($http, $q, Session) {
                 authorizedRoles.indexOf(Session.userRole) !== -1);
         }
 
-	}
+	};
 
 	return auth;
 })

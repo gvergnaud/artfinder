@@ -31,12 +31,12 @@ app.factory('Geoloc', function (UI, $q) {
           };
           
           if(!!options){
-            if(!!options.center){ optionsGmaps.center = options.center }
-            if(!!options.mapTypeId){ optionsGmaps.mapTypeId = options.mapTypeId }
-            if(!!options.zoom){ optionsGmaps.zoom = options.zoom }
-            if(!!options.maxZoom){ optionsGmaps.maxZoom = options.maxZoom }
-            if(!!options.minZoom){ optionsGmaps.minZoom = options.minZoom }
-            if(!!options.disableDefaultUI){ optionsGmaps.disableDefaultUI = options.disableDefaultUI }
+            if(!!options.center){ optionsGmaps.center = options.center; }
+            if(!!options.mapTypeId){ optionsGmaps.mapTypeId = options.mapTypeId; }
+            if(!!options.zoom){ optionsGmaps.zoom = options.zoom; }
+            if(!!options.maxZoom){ optionsGmaps.maxZoom = options.maxZoom; }
+            if(!!options.minZoom){ optionsGmaps.minZoom = options.minZoom; }
+            if(!!options.disableDefaultUI){ optionsGmaps.disableDefaultUI = options.disableDefaultUI; }
           }
 
 

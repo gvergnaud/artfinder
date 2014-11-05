@@ -1,3 +1,5 @@
+'use strict';
+
 var loader = {
 	init: function(){
 
@@ -15,7 +17,7 @@ var loader = {
 		    	console.log(pe.total);
 		    	console.log(pe.loaded);
 		    }
-		}
+		};
 		xhr.onloadend = function(pe) {
 		    console.log(pe.loaded);
 		    setTimeout(function(){
@@ -32,7 +34,7 @@ var loader = {
 				}, 800);
 		    }, 500);
 
-		}
+		};
 
 		xhr.send();
 
