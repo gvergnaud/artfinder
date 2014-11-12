@@ -1,4 +1,4 @@
-<div ng-singlepost>
+<div class="container">
 	<section id="player" class="player">
 		<nav class="arrows" id="prev"></nav>
 		<nav class="arrows" id="next"></nav>
@@ -17,9 +17,11 @@
 
 	<section id="short_infos">
 		<span class="left">
-			<span id="where" ng-click="toggleMap()">{{post.address}}</span>
+			<span id="where" ng-click="toggleMap()" ng-tooltip="Voir sur la carte">{{post.address}}</span>
 			<span id="artists">
-				<span class="artist" ng-repeat="artist in post.photos[currentPhotoId].artists">{{artist.name}}</span>
+				<span ng-repeat="artist in post.photos[currentPhotoId].artists">
+					<span class="artist" ng-click="redirectTo('search', '{{artist.name}}')" ng-tooltip="Oeuvres de l'artiste">{{artist.name}}</span>
+				</span>
 				<a class="identification icon-marquee" ng-show="isAuthenticated() && !identifying" href="" ng-click="startIdentification()"> Identifier un artiste</a>
 				<a class="identification" ng-show="isAuthenticated() && identifying" href="" ng-click="addArtist()"> Ajouter l'identification</a>
 				<a class="identification" ng-show="isAuthenticated() && identifying" href="" ng-click="cancelIdentification()"> Annuler</a>
@@ -27,10 +29,10 @@
 		</span>
 		<span class="right">
 			<span id="like" ng-click="likePost()">
-				{{post.likes.length}}<span ng-if="!isLiked()" class="icon-heart-empty"></span><span  ng-if="isLiked()" class="icon-heart"></span>
+				{{post.likes.length}}<span ng-if="!isLiked(post)" class="icon-heart-empty"></span><span  ng-if="isLiked(post)" class="icon-heart"></span>
 			</span>
-			<span id="nb_comments">
-				{{post.comments.length}}<span class="icon-comment"></span>
+			<span id="nb_comments" ng-click="smoothScrollTo('#infos')">
+				{{post.comments.length}}<span ng-if="post.comments.length" class="icon-comment"></span><span ng-if="!post.comments.length" class="icon-comment-empty"></span>
 			</span>
 		</span>
 	</section>

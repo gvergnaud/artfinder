@@ -22,7 +22,7 @@
 
 			$response = $query->fetch();
 
-			if($_POST['pwd'] == $response['password']){
+			if(md5($_POST['pwd']) == $response['password']){
 			//l'utilisateur s'est connecté avec success
 ?>
 	"statut": "success",

@@ -8,71 +8,63 @@
  * Controller of the artFinderApp
  */
 app.controller('appCtrl', function ($scope, $rootScope, Session, Auth, UI, USER_ROLES) {
+	
+	//LOADER 
+	//
 	$scope.loaded = false;
+	
 	window.onload = function(){
 		$scope.loaded = true;
 	};
 
-	$rootScope.postsLimite = 8;
-
-
+	// USER SETS
+	//
 	$scope.currentUser = null;
 	$scope.userRoles = USER_ROLES;
 	$scope.isAuthorized = Auth.isAuthorized;
 	$scope.isAuthenticated = Auth.isAuthenticated;
 	$scope.isNotAuthenticated = Auth.isNotAuthenticated;
 
-	$scope.animation = '';
-
-	setTimeout(function(){
-		$scope.animation = "animated";
-	}, 1000);
-
-	angular.element(document.querySelector('header.menu')).on('mouseenter mouseleave', function(){
-		UI.toggleMenu();
-	});
- 
 	$scope.setCurrentUser = function (user) {
 		$scope.currentUser = user;
 	};
-
-	$scope.toggleLoginOverlay = function(){
-		UI.toggleLoginOverlay();
-	};
-
+	
 	$scope.userDisconnect = function(){
 		Session.destroy();
 		$scope.currentUser = null;
 		UI.notification(false, 'Vous etes maintenant déconnecté.');
 	};
-
-	$scope.redirectTo = function(page, param){
-		
-		$scope.smoothScrollTo('#container', function(){
-
-			if(!page){
-				
-				if(window.location.hash === '#/'){return;}
-				
-				window.location.hash = '';
-				
-			}else if(typeof param !== 'undefined'){
-				
-				if(window.location.hash === '#/' + page + '/'+ param){return;}
-				
-				window.location.hash = '#/' + page + '/'+ param;
-
+	
+	$scope.isLiked = function(post){
+		if(!!post){
+			if(post.likes.indexOf(Session.username) !== -1){
+				return true;
 			}else{
-				
-				if(window.location.hash === '#/' + page){return;}
-				
-				window.location.hash = '#/' + page;
-
+				return false;
 			}
+		}else{
+			return false;
+		}
+	};
+	
+	// UI 
+	// animation de la VIEW
+	$scope.animation = '';
 
-		});
+	setTimeout(function(){
+		$scope.animation = "animated";
+	}, 1000);
+	
+	// ANIMATION MENU 
+	angular.element(document.querySelector('header.menu')).on('mouseenter mouseleave', function(){
+		UI.toggleMenu();
+	});
+ 
+	$scope.toggleLoginOverlay = function(){
+		UI.toggleLoginOverlay();
 	};
 
+	//Animation du Scroll
 	$scope.smoothScrollTo = function(selector, callback){
 		var speed = 200;
 		var movingFrequency = 15; // Affects performance !
@@ -109,8 +101,39 @@ app.controller('appCtrl', function ($scope, $rootScope, Session, Auth, UI, USER_
 	        })();
 	    }
 
-	    setTimeout(function(){
-	    	callback.call(this);
-	    }, speed);
+		if(!!callback){	
+			setTimeout(function(){
+				callback.call(this);
+			}, speed);
+		}
+	};
+	
+	//Redirection 
+	//
+	$scope.redirectTo = function(page, param){
+		
+		$scope.smoothScrollTo('#container', function(){
+
+			if(!page){
+				
+				if(window.location.hash === '#/'){return;}
+				
+				window.location.hash = '';
+				
+			}else if(typeof param !== 'undefined'){
+				
+				if(window.location.hash === '#/' + page + '/'+ param){return;}
+				
+				window.location.hash = '#/' + page + '/'+ param;
+
+			}else{
+				
+				if(window.location.hash === '#/' + page){return;}
+				
+				window.location.hash = '#/' + page;
+
+			}
+
+		});
 	};
 });

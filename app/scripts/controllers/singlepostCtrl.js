@@ -7,7 +7,7 @@
  * # SinglepostCtrl
  * Controller of the artFinderApp
  */
-app.controller('SinglepostCtrl',['$scope', '$rootScope', '$routeParams', 'Post', 'UI', 'Auth', 'Session', 'Geoloc', function ($scope, $rootScope, $routeParams, Post, UI, Auth, Session, Geoloc) {
+app.controller('SinglepostCtrl',['$scope', '$rootScope', '$routeParams', 'Post', 'UI', 'Auth', 'Session', 'Geoloc', '$filter', function ($scope, $rootScope, $routeParams, Post, UI, Auth, Session, Geoloc, $filter) {
 	
 	//Récuperation des posts
 	Post.find($routeParams.id).then(
@@ -113,14 +113,6 @@ app.controller('SinglepostCtrl',['$scope', '$rootScope', '$routeParams', 'Post',
 		}
  	};
 
- 	$scope.isLiked = function(){
- 		if(!!$scope.post){
- 			return !$scope.post.likes.indexOf(Session.username);
- 		}else{
- 			return false;
- 		}
- 	};
-
  	$scope.likePost = function(){
 
 		if(Auth.isAuthenticated()){ //si l'utilisateur est identifé
@@ -146,7 +138,7 @@ app.controller('SinglepostCtrl',['$scope', '$rootScope', '$routeParams', 'Post',
 		}
  	};
 
- 	$scope.identifying = false;
+	$scope.identifying = false;
  	$scope.selecting = false;
 
  	$scope.startIdentification = function(){
@@ -221,7 +213,9 @@ app.controller('SinglepostCtrl',['$scope', '$rootScope', '$routeParams', 'Post',
 		
 		if(!!$scope.newArtist.height && !!$scope.newArtist.width && !!$scope.newArtist.left && !!$scope.newArtist.top){
 			if(!!$scope.newArtist.name){
-				
+
+				$scope.newArtist.name = $filter('lowercase')($scope.newArtist.name);
+				console.log($scope.newArtist.name);
 				$scope.identifying = false;
 				
 				Post.addArtist($scope.newArtist, $scope.post.id, $scope.currentPhotoId).then(

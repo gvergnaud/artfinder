@@ -3,35 +3,35 @@
         "photos": [
             {
                 "stillExist": false,
-                "url": "http:\/\/localhost\/hetic\/pumir\/artfinder\/app\/images\/uploads\/1414921728konnysteding.jpg",
+                "url": "images\/uploads\/1414921728konnysteding.jpg",
                 "artists": [
                     {
                         "left": 42.457231726283,
                         "top": 49.477351916376,
                         "width": 36.858475894246,
                         "height": 29.38443670151,
-                        "name": "Konny Steding"
+                        "name": "konny steding"
                     },
                     {
                         "left": 46.811819595645,
                         "top": 23.809523809524,
                         "width": 24.57231726283,
                         "height": 22.648083623693,
-                        "name": "Mr. BrainWash"
+                        "name": "mr. brainWash"
                     },
                     {
                         "left": 46.656298600311,
                         "top": 7.0847851335656,
                         "width": 23.48367029549,
                         "height": 15.911730545877,
-                        "name": "Shepard Farey"
+                        "name": "shepard fairey"
                     },
                     {
                         "left": 21.150855365474,
                         "top": 13.124274099884,
                         "width": 14.463452566096,
                         "height": 10.336817653891,
-                        "name": "Mario"
+                        "name": "mario"
                     }
                 ],
                 "technique": "collage",
@@ -43,7 +43,7 @@
             {
                 "stillExist": false,
                 "description": "",
-                "url": "http:\/\/localhost\/hetic\/pumir\/artfinder\/app\/images\/uploads\/1414923587konnysteding2.jpg",
+                "url": "images\/uploads\/1414923587konnysteding2.jpg",
                 "artists": [],
                 "technique": "collage",
                 "username": "gab",
@@ -53,7 +53,7 @@
             {
                 "stillExist": true,
                 "description": "COOl truc",
-                "url": "http:\/\/localhost\/hetic\/pumir\/artfinder\/app\/images\/uploads\/1415134381P2017_Vergnaud-Gabriel_colorisation.jpg",
+                "url": "images\/uploads\/1415134381P2017_Vergnaud-Gabriel_colorisation.jpg",
                 "artists": [],
                 "technique": "peinture",
                 "username": "gab",
@@ -76,7 +76,8 @@
             }
         ],
         "likes": [
-            "gab"
+            "gab",
+            "Gabriel"
         ],
         "id": 0
     },
@@ -85,14 +86,14 @@
             {
                 "stillExist": true,
                 "description": "Le c\u00e9l\u00e8bre pochoir de Banksy.",
-                "url": "http:\/\/localhost\/hetic\/pumir\/artfinder\/app\/images\/uploads\/1414922720banksy.jpg",
+                "url": "images\/uploads\/1414922720banksy.jpg",
                 "artists": [
                     {
                         "left": 29.558011049724,
                         "top": 5.8931860036832,
                         "width": 42.403314917127,
                         "height": 69.060773480663,
-                        "name": "Banksy"
+                        "name": "banksy"
                     }
                 ],
                 "technique": "pochoir",
@@ -146,14 +147,14 @@
             {
                 "stillExist": true,
                 "description": "",
-                "url": "http:\/\/localhost\/hetic\/pumir\/artfinder\/app\/images\/uploads\/1414923664c215.jpg",
+                "url": "images\/uploads\/1414923664c215.jpg",
                 "artists": [
                     {
                         "left": 15.063520871143,
                         "top": 45.063879210221,
                         "width": 33.938294010889,
                         "height": 45.760743321719,
-                        "name": "C 215"
+                        "name": "c 215"
                     }
                 ],
                 "technique": "pochoir",
@@ -178,14 +179,14 @@
             {
                 "stillExist": true,
                 "description": "Grav\u00e9 au marteau piqueur.",
-                "url": "http:\/\/localhost\/hetic\/pumir\/artfinder\/app\/images\/uploads\/1414923693vhils.jpg",
+                "url": "images\/uploads\/1414923693vhils.jpg",
                 "artists": [
                     {
                         "left": 16.390423572744,
                         "top": 15.469613259669,
                         "width": 71.270718232044,
                         "height": 63.16758747698,
-                        "name": "Vhils"
+                        "name": "vhils"
                     }
                 ],
                 "technique": "sculpture",
@@ -210,16 +211,8 @@
             {
                 "stillExist": false,
                 "description": "",
-                "url": "http:\/\/localhost\/hetic\/pumir\/artfinder\/app\/images\/uploads\/14149237471414419330Street-Art-Paris2.jpg",
-                "artists": [
-                    {
-                        "left": 41.298342541436,
-                        "top": 16.390423572744,
-                        "width": 29.972375690608,
-                        "height": 46.593001841621,
-                        "name": "efe"
-                    }
-                ],
+                "url": "images\/uploads\/14149237471414419330Street-Art-Paris2.jpg",
+                "artists": [],
                 "technique": "pochoir",
                 "username": "gab",
                 "userId": 13,
@@ -231,9 +224,19 @@
             "longitude": 2.3874664306641
         },
         "address": "39 Rue de Montreuil, 75011 Paris, France",
-        "comments": [],
+        "comments": [
+            {
+                "content": "coule",
+                "timestamp": 1415633519571,
+                "username": "lol",
+                "activePhoto": 1,
+                "date": "10\/11\/2014"
+            }
+        ],
         "likes": [
-            "gab"
+            "gab",
+            "lol",
+            "Gabriel"
         ],
         "id": 4
     },
@@ -242,14 +245,14 @@
             {
                 "stillExist": true,
                 "description": "Portrait monumental.",
-                "url": "http:\/\/localhost\/hetic\/pumir\/artfinder\/app\/images\/uploads\/1414923771paris-urban-art.jpg",
+                "url": "images\/uploads\/1414923771paris-urban-art.jpg",
                 "artists": [
                     {
                         "left": 21.341463414634,
                         "top": 5.34262485482,
                         "width": 38.327526132404,
                         "height": 76.771196283391,
-                        "name": "Jef Aerosol"
+                        "name": "jef aerosol"
                     }
                 ],
                 "technique": "pochoir",
@@ -263,9 +266,18 @@
             "longitude": 2.3509562015533
         },
         "address": "20 Rue du Clo\u00eetre Saint-Merri, 75004 Paris, France",
-        "comments": [],
+        "comments": [
+            {
+                "content": "hehe",
+                "timestamp": 1415220305837,
+                "username": "gab",
+                "activePhoto": 1,
+                "date": "05\/11\/2014"
+            }
+        ],
         "likes": [
-            "gab"
+            "gab",
+            "Gabriel"
         ],
         "id": 5
     },
@@ -275,14 +287,14 @@
                 "stillExist": false,
                 "description": "zefzf",
                 "technique": "sculpture",
-                "url": "http:\/\/localhost\/hetic\/pumir\/artfinder\/app\/images\/uploads\/1415009336konnysteding2.jpg",
+                "url": "images\/uploads\/1415009336konnysteding2.jpg",
                 "artists": [
                     {
                         "left": 17.801857585139,
                         "top": 19.976771196283,
                         "width": 62.074303405573,
                         "height": 58.652729384437,
-                        "name": "Konny stedding"
+                        "name": "konny steding"
                     }
                 ],
                 "username": "gab",
@@ -298,5 +310,222 @@
         "comments": [],
         "likes": [],
         "id": 6
+    },
+    {
+        "photos": [
+            {
+                "stillExist": true,
+                "description": "Tian sur le canal de l'Ourcq.",
+                "url": "images\/uploads\/3755265685_bdfc6a3f3d_z.jpg",
+                "artists": [
+                    {
+                        "left": 46.950092421442,
+                        "top": 8.0346106304079,
+                        "width": 43.253234750462,
+                        "height": 61.186650185414,
+                        "name": "Tian"
+                    }
+                ],
+                "technique": "pochoir",
+                "username": "Gab",
+                "userId": 1,
+                "date": 1415176938570
+            }
+        ],
+        "coords": {
+            "latitude": 48.902981893269,
+            "longitude": 2.4616670608521
+        },
+        "address": "39 Rue de Paris, 93130 Noisy-le-Sec, France",
+        "comments": [
+            {
+                "content": "cool",
+                "timestamp": 1415187134484,
+                "username": "gab",
+                "activePhoto": 1,
+                "date": "05\/11\/2014"
+            }
+        ],
+        "likes": [
+            "Gabriel"
+        ],
+        "id": 7
+    },
+    {
+        "photos": [
+            {
+                "stillExist": false,
+                "description": "",
+                "technique": "pochoir",
+                "url": "images\/uploads\/3757893272_6118d6dd06_z.jpg",
+                "artists": [],
+                "username": "Gab",
+                "userId": 1,
+                "date": 1415177024702
+            }
+        ],
+        "coords": {
+            "latitude": 48.899314484475,
+            "longitude": 2.4426984786987
+        },
+        "address": "14 Avenue Jean Jaur\u00e8s, 93000 Bobigny, France",
+        "comments": [],
+        "likes": [],
+        "id": 8
+    },
+    {
+        "photos": [
+            {
+                "stillExist": false,
+                "description": "Portrait monumental",
+                "url": "images\/uploads\/obey-1.jpg",
+                "artists": [
+                    {
+                        "left": 47.02380952381,
+                        "top": 13.793103448276,
+                        "width": 49.107142857143,
+                        "height": 72.64367816092,
+                        "name": "shepard fairey"
+                    }
+                ],
+                "technique": "pochoir",
+                "username": "Gab",
+                "userId": 1,
+                "date": 1415177124296
+            }
+        ],
+        "coords": {
+            "latitude": 48.833509346068,
+            "longitude": 2.3645925521851
+        },
+        "address": "123 Boulevard Vincent Auriol, 75013 Paris, France",
+        "comments": [
+            {
+                "content": "Chouette !",
+                "timestamp": 1415650678640,
+                "username": "Gabriel",
+                "activePhoto": 1,
+                "date": "10\/11\/2014"
+            }
+        ],
+        "likes": [
+            "gab",
+            "lol"
+        ],
+        "id": 9
+    },
+    {
+        "photos": [
+            {
+                "stillExist": true,
+                "description": "",
+                "url": "images\/uploads\/seth-belleville-1.jpg",
+                "artists": [
+                    {
+                        "left": 5.3763440860215,
+                        "top": 6.6820276497696,
+                        "width": 90.168970814132,
+                        "height": 27.41935483871,
+                        "name": "seth"
+                    }
+                ],
+                "technique": "peinture",
+                "username": "Gab",
+                "userId": 1,
+                "date": 1415177239682
+            }
+        ],
+        "coords": {
+            "latitude": 48.8702515,
+            "longitude": 2.3845908000001
+        },
+        "address": "3A Passage Julien Lacroix, 75020 Paris, France",
+        "comments": [],
+        "likes": [],
+        "id": 10
+    },
+    {
+        "photos": [
+            {
+                "stillExist": false,
+                "description": "Encore un peu de magie.",
+                "url": "images\/uploads\/vhils-nuitblanche-1.jpg",
+                "artists": [
+                    {
+                        "left": 51.820294345469,
+                        "top": 26.7131242741,
+                        "width": 37.722695584818,
+                        "height": 59.349593495935,
+                        "name": "vhils"
+                    }
+                ],
+                "technique": "sculpture",
+                "username": "Gab",
+                "userId": 1,
+                "date": 1415177346648
+            }
+        ],
+        "coords": {
+            "latitude": 48.856809346712,
+            "longitude": 2.3205184936523
+        },
+        "address": "114 Rue de Grenelle, 75007 Paris, France",
+        "comments": [],
+        "likes": [],
+        "id": 11
+    },
+    {
+        "photos": [
+            {
+                "stillExist": false,
+                "description": "",
+                "url": "images\/uploads\/nemo-funambule-1.jpg",
+                "artists": [],
+                "technique": "pochoir",
+                "username": "Gab",
+                "userId": 1,
+                "date": 1415177509111
+            }
+        ],
+        "coords": {
+            "latitude": 48.8677053,
+            "longitude": 2.3865067
+        },
+        "address": "38 Rue de Menilmontant, 75020 Paris, France",
+        "comments": [],
+        "likes": [],
+        "id": 12
+    },
+    {
+        "photos": [
+            {
+                "stillExist": false,
+                "description": "",
+                "technique": "peinture",
+                "url": "images\/uploads\/inti-paris13-1.jpg",
+                "artists": [
+                    {
+                        "left": 29.52,
+                        "top": 25.834363411619,
+                        "width": 31.52,
+                        "height": 58.343634116193,
+                        "name": "inti"
+                    }
+                ],
+                "username": "Gab",
+                "userId": 1,
+                "date": 1415177600029
+            }
+        ],
+        "coords": {
+            "latitude": 48.8215646,
+            "longitude": 2.3596507
+        },
+        "address": "129 Avenue d'Italie, 75013 Paris, France",
+        "comments": [],
+        "likes": [
+            "gab"
+        ],
+        "id": 13
     }
 ]

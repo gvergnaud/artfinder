@@ -2,271 +2,278 @@
 
 /* Player */
 section#player{
-  overflow: hidden;
-  background-color: #1b1b1b;
-  padding: 20px 0;
-  -webkit-transition: .65s cubic-bezier(.2,.1,.1,1);
-  transition: .65s cubic-bezier(.2,.1,.1,1); 
+	overflow: hidden;
+	background-color: #1b1b1b;
+	padding: 20px 0;
+	-webkit-transition: .65s cubic-bezier(.2,.1,.1,1);
+	transition: .65s cubic-bezier(.2,.1,.1,1); 
 }
 
 section#player.up{
-  margin-top: -400px;
+	margin-top: -400px;
 }
 
 nav.arrows{
-  position: absolute;
-  height:100px;
-  width:100px;
-  text-align: center;
-  color: #fff;
-  cursor: pointer;
+	position: absolute;
+	height:100px;
+	width:100px;
+	text-align: center;
+	color: #fff;
+	cursor: pointer;
+	z-index: 200;
 }
 
 nav#prev{
-  background: url(../images/prev.svg) no-repeat;
-  left: 20px;
+	background: url(../images/prev.svg) no-repeat;
+	left: 20px;
 }
 
 nav#next{
-  background: url(../images/next.svg) no-repeat;
-  right: 20px;
+	background: url(../images/next.svg) no-repeat;
+	right: 20px;
 }
 
 section#player>img{
-  display:block;
-  margin:0 auto;
+	display:block;
+	margin:0 auto;
 }
 
 
 /* TAGZ */
 
 .tagWrapper{
-  position: absolute;
-  top: 20px;
-  left: 50%;
-  transform: translateX(-50%);
-  -webkit-transform: translateX(-50%);
+	position: absolute;
+	top: 20px;
+	left: 50%;
+	transform: translateX(-50%);
+	-webkit-transform: translateX(-50%);
 }
 
 .tagBox{
-  position: absolute;
-  line-height: normal;
+	position: absolute;
+	line-height: normal;
 }
 
 .tagName{
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
-  -webkit-transform: translateX(-50%);
-  bottom: -3em;
-  white-space: nowrap;
-  font-size: .9em;
-  background: #000;
-  color: #fff;
-  padding: 7px;
+	position: absolute;
+	left: 50%;
+	transform: translateX(-50%);
+	-webkit-transform: translateX(-50%);
+	bottom: -3em;
+	white-space: nowrap;
+	font-size: .9em;
+	background: #000;
+	color: #fff;
+	padding: 7px;
 }
 
 .selection{
-  border: 2px dashed #fff;
-  -moz-box-shadow: 2px 2px 5px 0px #656565;
-  -webkit-box-shadow: 2px 2px 5px 0px #656565;
-  -o-box-shadow: 2px 2px 5px 0px #656565;
-  box-shadow: 2px 2px 5px 0px #656565;
-  filter:progid:DXImageTransform.Microsoft.Shadow(color=#656565, Direction=116, Strength=5);
+	border: 2px dashed #fff;
+	-moz-box-shadow: 2px 2px 5px 0px #656565;
+	-webkit-box-shadow: 2px 2px 5px 0px #656565;
+	-o-box-shadow: 2px 2px 5px 0px #656565;
+	box-shadow: 2px 2px 5px 0px #656565;
+	filter:progid:DXImageTransform.Microsoft.Shadow(color=#656565, Direction=116, Strength=5);
 }
 
 /* Map */
 
 section.map{
-  height:0;
-  -webkit-transition: .65s cubic-bezier(.2,.1,.1,1);
-  transition: .65s cubic-bezier(.2,.1,.1,1);
+	height:0;
+	-webkit-transition: .65s cubic-bezier(.2,.1,.1,1);
+	transition: .65s cubic-bezier(.2,.1,.1,1);
 }
 section.map.show{
-  height:400px;
+	height:400px;
 }
 
 /* POST INFOS */
 section#short_infos{
-  background-color: #fff;
-  padding-top: 10px;
-  padding-bottom: 15px;
+	background-color: #fff;
+	padding-top: 10px;
+	padding-bottom: 15px;
 }
 
 span#where{
-  font-family: 'Uni Sans Heavy';
-  font-size:1.2em;
-  cursor: pointer;
+	font-family: 'Uni Sans Heavy';
+	font-size:1.2em;
+	cursor: pointer;
 }
 
 span#where:before{
-  content: '';
-  background: url(../images/pin.svg) no-repeat;
-  font-weight: normal;
-  speak: none;
- 
-  display: inline-block;
-  text-decoration: inherit;
-  margin-right: .2em;
-  /* opacity: .8; */
- 
-  /* For safety - reset parent styles, that can break glyph codes*/
-  font-variant: normal;
-  text-transform: none;
-  color:#B59E5C;
-     
-  /* fix buttons height, for twitter bootstrap */
-  line-height: 1em;
- 
-  /* Animation center compensation - margins should be symmetric */
-  /* remove if not needed */
-  margin-left: .2em;
-  width:21px;
-  height:30px;
+	content: '';
+	background: url(../images/pin.svg) no-repeat;
+	font-weight: normal;
+	speak: none;
+
+	display: inline-block;
+	text-decoration: inherit;
+	margin-right: .2em;
+	/* opacity: .8; */
+
+	/* For safety - reset parent styles, that can break glyph codes*/
+	font-variant: normal;
+	text-transform: none;
+	color:#B59E5C;
+
+	/* fix buttons height, for twitter bootstrap */
+	line-height: 1em;
+
+	/* Animation center compensation - margins should be symmetric */
+	/* remove if not needed */
+	margin-left: .2em;
+	width:21px;
+	height:30px;
 }
 
 span#artists{
-  font-size: 14px;
-  font-family: 'Uni Sans Heavy';
+	font-size: 14px;
+	font-family: 'Uni Sans Heavy';
 }
 
 span.artist{
-  margin: 0 5px;
+	margin: 0 5px;
+	cursor: pointer;
 }
 
 span.artist:before{
-  content:'//';
-  font-family: 'Uni Sans Heavy';
-  font-size: 1.2em;
-  font-style: normal;
-  font-weight: normal;
-  speak: none;
- 
-  display: inline-block;
-  text-decoration: inherit;
-  margin-right: .2em;
-  text-align: center;
-  /* opacity: .8; */
- 
-  /* For safety - reset parent styles, that can break glyph codes*/
-  font-variant: normal;
-  text-transform: none;
-  color:#B59E5C;
-     
-  /* fix buttons height, for twitter bootstrap */
-  line-height: 1em;
- 
-  /* Animation center compensation - margins should be symmetric */
-  /* remove if not needed */
-  margin-left: .2em;
-  width:20px;
+	content:'//';
+	font-family: 'Uni Sans Heavy';
+	font-size: 1.2em;
+	font-style: normal;
+	font-weight: normal;
+	speak: none;
+
+	display: inline-block;
+	text-decoration: inherit;
+	margin-right: .2em;
+	text-align: center;
+	/* opacity: .8; */
+
+	/* For safety - reset parent styles, that can break glyph codes*/
+	font-variant: normal;
+	text-transform: none;
+	color:#B59E5C;
+
+	/* fix buttons height, for twitter bootstrap */
+	line-height: 1em;
+
+	/* Animation center compensation - margins should be symmetric */
+	/* remove if not needed */
+	margin-left: .2em;
+	width:20px;
 }
 
 a.identification{
-  padding: 5px;
-  font-size: 16px;
-  font-family: 'Montserrat Bold';
-  color: #B59E5C;
-  text-decoration: none;
+	padding: 5px;
+	font-size: 16px;
+	font-family: 'Montserrat Bold';
+	color: #B59E5C;
+	text-decoration: none;
 }
 
 a.identification:before{
-  font-size: 20px;
+	font-size: 20px;
 }
 
 span.right{
-  font-size: 1.2em;
-  display:inline-block;
-  float: right;
-  margin-top:10px;
-  margin-right: 30px;
+	font-size: 1.2em;
+	display:inline-block;
+	float: right;
+	margin-top:10px;
+	margin-right: 30px;
 }
 
 span.left{
-  display: inline-block;
+	display: inline-block;
 }
 
 #infos{
-  width: 800px;
-  margin: 30px auto;
+	width: 800px;
+	margin: 30px auto;
 }
 
 #infos>div.left{
-  width:537px;
+	width:537px;
 }
 /* COMMENTAIRES*/
 div#commentaires{
-  margin:10px auto;
+	margin:10px auto;
 }
 
 div#commentaires>h3{
-  margin-top: 20px;
-  margin-bottom: 10px;
+	margin-top: 20px;
+	margin-bottom: 10px;
 }
 
 div.comment{
-  width:500px;
-  min-height: 50px;
-  background:#eeeeee;
-  padding: 10px;
-  border-bottom: 1px solid #aaa;
+	width:500px;
+	min-height: 50px;
+	background:#eeeeee;
+	padding: 10px;
+	border-bottom: 1px solid #aaa;
 }
 
 div.desc{
-  min-height: 50px;
-  background:#eeeeee;
-  width:500px;
-  padding: 10px;
+	min-height: 50px;
+	background:#eeeeee;
+	width:500px;
+	padding: 10px;
 }
 
 img.avatar{
-  float: left;
-  width: 50px;
+	float: left;
+	width: 50px;
 }
 
 div.comment_info{
-  margin-left: 60px;
+	margin-left: 60px;
 }
 
 h3.username{
-  display: inline-block;
-  font-size: 16px;
-  margin-bottom: 5px;
+	display: inline-block;
+	font-size: 16px;
+	margin-bottom: 5px;
 }
 
 p.content{
-  font-size: 16px;
-  margin-bottom: 10px;
+	font-size: 16px;
+	margin-bottom: 10px;
 }
 
 p.date{
-  font-size: 0.8em;
-  color: #aaa;
+	font-size: 0.8em;
+	color: #aaa;
 }
 
 span.activephoto{
-  font-size: 0.8em;
-  color: #aaa;
+	font-size: 0.8em;
+	color: #aaa;
 }
 
 /* CLOSE POSTS */
 
 div#closePostsContainer{
-  height: 275px;
-  background: #000;
-  overflow: hidden;
+	height: 275px;
+	background: #000;
+	overflow: hidden;
+}
+
+section.closePosts{
+	background: #1b1b1b;
+	padding-bottom: 15px;
 }
 
 section.closePosts h1{
-  padding: 10px 0;
-  text-align: center;
-  background: #1b1b1b;
-  color: #fff;
+	padding: 10px 0;
+	text-align: center;
+	color: #fff;
 }
 
 
+
 @media only screen and (max-width: 680px) {
-  div#closePostsContainer{
-    height:825px;
-  }
+	div#closePostsContainer{
+		height:825px;
+	}
 }

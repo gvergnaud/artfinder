@@ -67,6 +67,10 @@ var app = angular.module('artFinderApp', [
         templateUrl: 'views/home.html',
         controller: 'HomeCtrl'
       })
+      .when('/search/:search', {
+        templateUrl: 'views/home.html',
+        controller: 'HomeCtrl'
+      })
       .when('/addpost', {
         templateUrl: 'views/addpost.html',
         controller: 'AddpostCtrl'

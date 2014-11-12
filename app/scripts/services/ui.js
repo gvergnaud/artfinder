@@ -10,13 +10,15 @@
 app.factory('UI', function UI() {
 	//tout ce qui est pareil pour toutes les pages
 	var loginContainer = angular.element(document.querySelector('#login')),
-		viewcontainer = angular.element(document.querySelector('#viewcontainer'));	      	
+		viewcontainer = angular.element(document.querySelector('#viewcontainer'));
 
 	function mainStyle(){
+
 		loginContainer.css({
 			width: window.innerWidth + 'px',
 			height: window.innerHeight + 'px'
 		});
+		
 		//on redefini lelement vu car il change a chaque chagement de page
 		viewcontainer.css({
 			width: window.innerWidth - 80 + 'px'
@@ -26,28 +28,25 @@ app.factory('UI', function UI() {
 	mainStyle();
 	window.addEventListener('resize', mainStyle, false);
 
-	document.querySelector('#landing button.enter').addEventListener('click', function(){
-		ui.notifying = false;
-	});
 
 
 	//Public fonctions
-    var ui = {
+	var ui = {
 
-    	showViewcontainer: function(){
+		showViewcontainer: function(){
 			viewcontainer.removeClass('hidden');
-    	},
+		},
 
-    	hideViewcontainer: function(){
+		hideViewcontainer: function(){
 			viewcontainer.addClass('hidden');
-    	},
+		},
 
-    	toggleLoginOverlay: function(){
-    		loginContainer.toggleClass('show');
-    	},
+		toggleLoginOverlay: function(){
+			loginContainer.toggleClass('show');
+		},
 
-    	toggleMenu: function(){
-    		var viewcontainer = angular.element(document.querySelector('#viewcontainer')),
+		toggleMenu: function(){
+			var viewcontainer = angular.element(document.querySelector('#viewcontainer')),
 				notifications = angular.element(document.querySelector('#notifications')),
 				menu = angular.element(document.querySelector('header.menu')),
 				menuLinks = angular.element(document.querySelectorAll('a.menu_link'));
@@ -63,7 +62,7 @@ app.factory('UI', function UI() {
 
 				viewcontainer.css({
 					left: '200px'
-				});
+				});				
 
 				setTimeout(function(){
 					if(ui.menuOpen){
@@ -74,10 +73,10 @@ app.factory('UI', function UI() {
 				menu.addClass('opened');
 
 			}else{
-				
+
 				ui.menuOpen = false;
 
-				
+
 				notifications.css({
 					width: window.innerWidth - 80 + 'px',
 					left: '80px'
@@ -86,241 +85,326 @@ app.factory('UI', function UI() {
 				viewcontainer.css({
 					left: '80px'
 				});
-
+				
 				menuLinks.addClass('hidden');
 				menu.removeClass('opened');
 
 			}
-    	},
+		},
 
-    	notifying: true,
+		currentNotifications: [], //tableau qui contient toutes les notifications en cours
 
-    	notification: function(type, msg){
+		notification: function(type, msg){
+			//Si le message n'est pas déjà dans la liste d'attente
+			if(ui.currentNotifications.indexOf(msg) === -1){
 
-    		if(!ui.notifying){
-    			ui.notifying = true;
-	    		var notifContainer = angular.element(document.querySelector('aside#notifications'));
-	    		var newNotif = document.createElement('p');
-	    		
-	    		newNotif.innerHTML = msg;
-	    		
-	    		newNotif.classList.add('notification');
-	    		if(type){
-	    			newNotif.classList.add(type);
-	    		}
-	    		
-	    		notifContainer[0].innerHTML = '';
-	    		notifContainer[0].style.display = 'block';
-	    		notifContainer.prepend(newNotif);
-	    		
-	    		setTimeout(function(){	
-	    			newNotif.classList.add('show');
-	    		}, 100);
-	    		
-	    		setTimeout(function(){
-	    			if(ui.notifying){
-		    			newNotif.classList.remove('show');
-		    			setTimeout(function(){
-		    				notifContainer[0].style.display = 'none';
-		    				angular.element(newNotif).remove();
-	    					ui.notifying = false;
-		    			}, 650);
-		    		}
-	    		}, 4000);
-	    		
-	    		newNotif.addEventListener('click', function(){
-	    			this.style.display = 'none';
-	    		});
-    		}else{
-    			setTimeout(function(){
-    				ui.notification(type, msg);
-    			}, 1000);
-    		}
-    	},
-    	
-    	home: {
+				//si il n'y a rien dans la liste d'attente, on affiche la notif
+				if(ui.currentNotifications.length === 0){
+					//on met le messsage en liste d'attente
+					ui.currentNotifications.push(msg);
 
-    		init: function(){
 
-				ui.home.style();
-				window.addEventListener('resize', ui.home.style, false);
+					var notifContainer = angular.element(document.querySelector('aside#notifications'));
+					var newNotif = document.createElement('p');
+
+					newNotif.innerHTML = msg;
+
+					newNotif.classList.add('notification');
+					if(type){
+						newNotif.classList.add(type);
+					}
+
+					notifContainer[0].innerHTML = '';
+					notifContainer[0].style.display = 'block';
+					notifContainer.prepend(newNotif);
+
+					setTimeout(function(){	
+						newNotif.classList.add('show');
+					}, 100);
+
+					setTimeout(function(){
+						//on cache la notif 
+						newNotif.classList.remove('show');
+
+						setTimeout(function(){
+
+							notifContainer[0].style.display = 'none';
+							angular.element(newNotif).remove();
+							//on retire le message de la liste d'attente
+							ui.currentNotifications.splice(ui.currentNotifications.indexOf(msg), 1);
+						}, 650);
+
+
+					}, 4000);
+
+					newNotif.addEventListener('click', function(){
+						notifContainer[0].style.display = 'none';
+						angular.element(newNotif).remove();
+						//on retire le message de la liste d'attente
+						ui.currentNotifications.splice(ui.currentNotifications.indexOf(msg), 1);
+					});
+					
+				}else{
+					setTimeout(function(){
+						ui.notification(type, msg);
+					}, 1000);
+				}
+			}
+		},
+
+		home: {
+
+			init: function(){
+
+				ui.home.setMapView();
+
+				window.addEventListener('resize', function(){
+					if(!ui.home.view){
+						ui.home.setMapView();
+					}else{
+						if(ui.home.view === 'map'){
+							ui.home.setMapView();
+						}else{
+							ui.home.setMozView();
+						}	
+					}
+				}, false);
+
 				ui.showViewcontainer();
-	    	},
+			},
 
-	    	style: function(){
+			switchMozMap: function(){
+				if(!ui.home.view){
+					ui.home.setMapView();
+				}else{
+					if(ui.home.view === 'moz'){
+						ui.home.setMapView();
+					}else{
+						ui.home.setMozView();
+					}	
+				}
+			},
 
-	    		var mosaic = angular.element(document.querySelector('#mosaic')),
-    				map = angular.element(document.querySelector('#map'));
+			setMozView: function(){
+				var switcher = angular.element(document.querySelectorAll('div#switcher')),
+					mosaic = angular.element(document.querySelectorAll('#mosaic')),
+					map = angular.element(document.querySelectorAll('section.map')),
+					thumbnail = angular.element(document.querySelectorAll('div.post'));
 
-	    		map.css({
+				switcher.css({
 					width: window.innerWidth - 80 + 'px',
-					height: window.innerHeight/2 - 30 + 'px'
+					height: 250 + 'px',
+					position: 'absolute',
+					top: 0,
+					bottom: '',
+					zIndex: 250
 				});
+
+				map.css({
+					width: window.innerWidth - 80 + 'px',
+					height: 250 + 'px'
+				});
+
 				mosaic.css({
 					width: window.innerWidth - 80 + 'px',
-					height: window.innerHeight/2 - 30 + 'px'
+					height: window.innerHeight - 250 + 'px'
 				});
-	    	}
 
-	    },
+				thumbnail.removeClass('reduced');
 
-    	singlepost: {
 
-    		selection: false,
+				ui.home.view = 'moz';
+			},
 
-    		init:function(){
+			setMapView: function(){
+				var switcher = angular.element(document.querySelectorAll('div#switcher')),
+					mosaic = angular.element(document.querySelectorAll('#mosaic')),
+					map = angular.element(document.querySelectorAll('section.map')),
+					thumbnail = angular.element(document.querySelectorAll('div.post'));
+
+				switcher.css({
+					width: window.innerWidth - 80 + 'px',
+					height: 250 + 'px',
+					position: 'absolute',
+					bottom: 0,
+					top: '',
+					zIndex: 100
+				});
+
+				map.css({
+					width: window.innerWidth - 80 + 'px',
+					height: window.innerHeight - 250 + 'px'
+				});
+
+				mosaic.css({
+					width: window.innerWidth - 80 + 'px',
+					height: 250 + 'px'
+				});
+
+				thumbnail.addClass('reduced');
+
+				ui.home.view = 'map';
+			}
+
+		},
+
+		singlepost: {
+
+			selection: false,
+
+			init:function(){
 
 				ui.singlepost.style();
 				window.addEventListener('resize', ui.singlepost.style, false);
 				window.addEventListener('resize', ui.singlepost.tagStyles, false);
 
 				ui.showViewcontainer();
-	    	},
+			},
 
-	    	style: function(){
+			style: function(){
 
-	    		var player = angular.element(document.querySelectorAll('#player')),
-		 			img = angular.element(document.querySelectorAll('section#player img')),
-		 			arrows = [angular.element(document.querySelectorAll('nav#prev')), angular.element(document.querySelectorAll('nav#next'))];
-		 			
-		    	player.css({
-		 			height: window.innerHeight - 100 + 'px'
-		 		});
+				var player = angular.element(document.querySelectorAll('#player')),
+					img = angular.element(document.querySelectorAll('section#player img')),
+					arrows = [angular.element(document.querySelectorAll('nav#prev')), angular.element(document.querySelectorAll('nav#next'))];
 
-		 		img.css({
-		 			height: window.innerHeight - 100 + 'px',
-		 		});
+				player.css({
+					height: window.innerHeight - 100 + 'px'
+				});
 
-		 		angular.forEach(arrows, function(value, key) {
-		 			value.css({
+				img.css({
+					height: window.innerHeight - 100 + 'px',
+				});
+
+				angular.forEach(arrows, function(value, key) {
+					value.css({
 						top: (window.innerHeight - 200)/2 + 'px',
 					});
 				});
-	    	},
+			},
 
-	    	tagStyles: function(){
-	    		var tagWrapper = angular.element(document.querySelectorAll('.tagWrapper')),
-	    			img = document.querySelectorAll('section#player img');
-		    	
-		    	if(!!img){
-			    	tagWrapper.css({
-			    		height: img[img.length-1].clientHeight + 'px',
-			    		width:  img[img.length-1].clientWidth + 'px'
-			    	});	
-		    	}
-	    	},
+			tagStyles: function(){
+				var tagWrapper = angular.element(document.querySelectorAll('.tagWrapper')),
+					img = document.querySelectorAll('section#player img');
 
-	    	startIdentification: function(){
-	    		var tagWrapper = angular.element(document.querySelector('.tagWrapper'));
-	    		var tagBoxs = document.querySelectorAll('.tagBox');
+				if(!!img){
+					tagWrapper.css({
+						height: img[img.length-1].clientHeight + 'px',
+						width:  img[img.length-1].clientWidth + 'px'
+					});	
+				}
+			},
 
-	    		tagWrapper.css({
-	    			background: 'url(images/tag_wrapper_bg.png)',
-  					backgroundSize: '100% 100%',
-	    			cursor: 'crosshair'
-	    		});
-	    		for(var i = 0 ; i < tagBoxs.length ; i++){
-	    			tagBoxs[i].classList.add('selection');
-	    		}
-	    	},
-	    	
-	    	stopIdentification: function(){
-	    		ui.singlepost.tagWrapper = angular.element(document.querySelector('.tagWrapper'));
-	    		var tagBoxs = document.querySelectorAll('.tagBox');
+			startIdentification: function(){
+				var tagWrapper = angular.element(document.querySelector('.tagWrapper'));
+				var tagBoxs = document.querySelectorAll('.tagBox');
 
-	    		ui.singlepost.tagWrapper.css({
-	    			background: '',
-	    			cursor: ''
-	    		});
-	    		
-	    		for(var i = 0 ; i < tagBoxs.length ; i++){
-	    			tagBoxs[i].classList.remove('selection');
-	    		}  		
+				tagWrapper.css({
+					background: 'url(images/tag_wrapper_bg.png)',
+					backgroundSize: '100% 100%',
+					cursor: 'crosshair'
+				});
+				for(var i = 0 ; i < tagBoxs.length ; i++){
+					tagBoxs[i].classList.add('selection');
+				}
+			},
 
-	    		if(!!document.getElementById('newArtistId')){
-	    			angular.element(document.getElementById('newArtistId')).remove();
-	    		} 
+			stopIdentification: function(){
+				ui.singlepost.tagWrapper = angular.element(document.querySelector('.tagWrapper'));
+				var tagBoxs = document.querySelectorAll('.tagBox');
+
+				ui.singlepost.tagWrapper.css({
+					background: '',
+					cursor: ''
+				});
+
+				for(var i = 0 ; i < tagBoxs.length ; i++){
+					tagBoxs[i].classList.remove('selection');
+				}  		
+
+				if(!!document.getElementById('newArtistId')){
+					angular.element(document.getElementById('newArtistId')).remove();
+				} 
 
 
-	    	},
+			},
 
-	    	startSelection: function(left, top){
-	    		ui.singlepost.newTag = angular.element('<div />');
-	    		ui.singlepost.tagWrapper = angular.element(document.querySelector('.tagWrapper'));
+			startSelection: function(left, top){
+				ui.singlepost.newTag = angular.element('<div />');
+				ui.singlepost.tagWrapper = angular.element(document.querySelector('.tagWrapper'));
 
-	    		if(!!document.getElementById('newArtistId')){
-	    			angular.element(document.getElementById('newArtistId')).remove();
-	    		}
+				if(!!document.getElementById('newArtistId')){
+					angular.element(document.getElementById('newArtistId')).remove();
+				}
 
-	    		ui.singlepost.newTag.addClass('tagBox');
-	    		ui.singlepost.newTag.addClass('selection');
-	    		ui.singlepost.newTag.attr('id', 'newArtistId');
-	    		ui.singlepost.newTag.css({
-	    			top: top + '%',
-	    			left: left + '%'
-	    		});
+				ui.singlepost.newTag.addClass('tagBox');
+				ui.singlepost.newTag.addClass('selection');
+				ui.singlepost.newTag.attr('id', 'newArtistId');
+				ui.singlepost.newTag.css({
+					top: top + '%',
+					left: left + '%'
+				});
 
-	    		ui.singlepost.tagWrapper.append(ui.singlepost.newTag);
+				ui.singlepost.tagWrapper.append(ui.singlepost.newTag);
 
-	    		console.log('startselection');
+				console.log('startselection');
 
-	    		ui.singlepost.selection = true;
-	    	},
+				ui.singlepost.selection = true;
+			},
 
-	    	doSelection: function(width, height){
-	    		if(ui.singlepost.selection){
-		    		ui.singlepost.newTag.css({
-		    			width: width -1 + '%',
-		    			height: height -1 + '%'
-		    		});	
-	    		}
-	    	},
+			doSelection: function(width, height){
+				if(ui.singlepost.selection){
+					ui.singlepost.newTag.css({
+						width: width -1 + '%',
+						height: height -1 + '%'
+					});	
+				}
+			},
 
-	    	stopSelection: function(callback){
-	    		ui.singlepost.selection = false;
+			stopSelection: function(callback){
+				ui.singlepost.selection = false;
 
-	    		var artistNameInput = angular.element('<input />');
-	    		artistNameInput
-	    			.attr('type', 'text')
-	    			.attr('autofocus', '')
-	    			.attr('placeholder', 'nom de l\'artiste')
-	    			.addClass('tagName')
-	    			.css({
-	    				background: '#fff',
-	    				color: '#000',
-	    				textAlign: 'center'
-	    			})
-	    			.on('mousedown', function(e){
-	    				e.stopPropagation();
-	    			})
-	    			.on('mouseup', function(e){
-	    				e.stopPropagation();
-	    			})
-	    			.on('click', function(e){
-	    				e.stopPropagation();
-	    			})
-	    			.on('change', function(){
-	    				callback.call(this, this);
-	    			});
+				var artistNameInput = angular.element('<input />');
+				artistNameInput
+				.attr('type', 'text')
+				.attr('autofocus', '')
+				.attr('placeholder', 'nom de l\'artiste')
+				.addClass('tagName')
+				.css({
+					background: '#fff',
+					color: '#000',
+					textAlign: 'center'
+				})
+				.on('mousedown', function(e){
+					e.stopPropagation();
+				})
+				.on('mouseup', function(e){
+					e.stopPropagation();
+				})
+				.on('click', function(e){
+					e.stopPropagation();
+				})
+				.on('change', function(){
+					callback.call(this, this);
+				});
 
 				ui.singlepost.newTag.append(artistNameInput);
 
-	    		console.log('stopselection');
-	    	},
+				console.log('stopselection');
+			},
 
-	    	toggleMap: function(callback){
-	    		var map = angular.element(document.querySelector('section.map'));
-	    		var player = angular.element(document.querySelector('section#player'));
-	    		map.toggleClass('show');
-	    		player.toggleClass('up');
-	    		if(!!callback){
-		    		setTimeout(function(){
-		    			callback.call(this);
-		    		}, 650);
-	    		}
-	    	},
+			toggleMap: function(callback){
+				var map = angular.element(document.querySelector('section.map'));
+				var player = angular.element(document.querySelector('section#player'));
+				map.toggleClass('show');
+				player.toggleClass('up');
+				if(!!callback){
+					setTimeout(function(){
+						callback.call(this);
+					}, 650);
+				}
+			},
 
-	    	togglePlayerArrows: function(scope){
+			togglePlayerArrows: function(scope){
 
 				if(typeof scope.post.photos[scope.currentPhotoId - 1] === 'undefined'){
 					scope.arrows[0].css({display: 'none'});
@@ -333,13 +417,13 @@ app.factory('UI', function UI() {
 					scope.arrows[1].css({display: 'block'});
 				}
 			}
-	    },
+		},
 
 
-    	addpost: {
-    		init: function(){
+		addpost: {
+			init: function(){
 
-	    		window.ondragover = window.ondrop = function(e){ e.preventDefault(); }; // evite le comportement par default du drag and drop
+				window.ondragover = window.ondrop = function(e){ e.preventDefault(); }; // evite le comportement par default du drag and drop
 
 				var el = document.querySelector('#drop');
 
@@ -356,28 +440,28 @@ app.factory('UI', function UI() {
 				};
 
 				el.ondrop = function(e) {
-				    e.preventDefault();
-				    
-				   	this.className = '';
+					e.preventDefault();
+
+					this.className = '';
 					this.innerHTML = 'Drag a file here';
 				};
 
 				ui.showViewcontainer();
-	    	},
+			},
 
-	    	selectedPost: function(post){
+			selectedPost: function(post){
 				var addPhotoForm = angular.element(document.querySelector('form#addPhotoForm'));
 				var addPostForm = angular.element(document.querySelector('form#addPostForm'));
-				
+
 				addPhotoForm.css({
 					display: 'block'
 				});
-				
+
 				addPostForm.css({
 					display: 'none'
 				});
-	    	}
-	    }
-    };
-    return ui;
- });
+			}
+		}
+	};
+	return ui;
+});

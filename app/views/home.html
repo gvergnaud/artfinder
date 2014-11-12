@@ -1,6 +1,6 @@
-<section id="map"></section>
+<section class="map"></section>
 
-<div id="filtres">
+<div id="filters">
     <input type="text" id="search" placeholder="Recherche" ng-model="filters.search"/>
     <label>Technique utilisée : </label><select ng-model="filters.technique">
       <option value="">Toutes</option>
@@ -13,13 +13,15 @@
     </select>
 </div>
 
-<section class="section" id="mosaic" when-scrolled="loadPosts()">
-  <div class="post span_1_of_5 col" ng-repeat="post in posts | filter:filters.technique | filter:filters.search">
+<section class="section" id="mosaic" ng-mousewheel="loadPosts()">
+  <div class="post col" ng-repeat="post in posts | filter:filters.technique | filter:filters.search">
       <img ng-src="{{post.photos[0].url}}" />
       <div class="over"  ng-click="redirectTo('singlepost', {{post.id}})">
         <p>{{post.likes.length}} Likes</p>
         <p>{{post.photos.length}} Photos</p>
-        <a href="" ng-showPostLocation>Voir sur la Carte</a>
+        <a href="" ng-click="showPostLocation($event, {{post}})">Voir sur la Carte</a>
       </div>
   </div>
 </section>
+
+<div id="switcher" ng-click="switchMozMap()"></div>

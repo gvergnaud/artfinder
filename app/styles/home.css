@@ -1,15 +1,42 @@
 #map{
-  width:100%;
+	width:100%;
+	-moz-transition: .65s cubic-besiez(.2,.1,.1,1);
+	-webkit-transition: .65s cubic-bezier(.2,.1,.1,1);
+	transition: .65s cubic-bezier(.2,.1,.1,1);
 }
 
 #mosaic{
-  width:100%;
-  position: fixed;
-  overflow-y: scroll;
-  background: #050505;
+	border-top: 5px solid #050505;
+	width:100%;
+	position: fixed;
+	overflow-y: scroll;
+	background: #050505;
+	-moz-transition: .65s cubic-besiez(.2,.1,.1,1);
+	-webkit-transition: .65s cubic-bezier(.2,.1,.1,1);
+	transition: .65s cubic-bezier(.2,.1,.1,1);
 }
 
-#filtres{
-  width:100%;
-  height:60px;
+#filters{
+	position: absolute;
+	width:200px;
+	height:100px;
+	left: 50px;	
+	top: 50px;
+	color: #fff;
+	z-index:1000
+}
+
+#search{
+	width: 250px;
+	background: rgba(255,255,255,.7);
+	border: none;
+	border-radius: 2px;
+	color: #050505;
+	-moz-transition: .65s ease;
+	-moz-transition: .65s ease;
+	-webkit-transition: .65s ease;
+	transition: .65s ease;
+}
+#search:focus{
+	background: rgba(255,255,255,1);
 }

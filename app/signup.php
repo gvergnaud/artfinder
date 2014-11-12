@@ -15,7 +15,7 @@
 	if(!empty($_POST['mail']) && !empty($_POST['pwd']) && !empty($_POST['username'])){
 
 		$mail = trim($_POST['mail']);
-		$pwd = trim($_POST['pwd']);
+		$pwd = md5(trim($_POST['pwd']));
 		$username = trim($_POST['username']);
 
 		$query = $bdd->query("SELECT * FROM users WHERE mail = '$mail'");
