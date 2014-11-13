@@ -1,5 +1,6 @@
 #map{
 	width:100%;
+    min-height: 100px !important;
 	-moz-transition: .65s cubic-besiez(.2,.1,.1,1);
 	-webkit-transition: .65s cubic-bezier(.2,.1,.1,1);
 	transition: .65s cubic-bezier(.2,.1,.1,1);
@@ -24,6 +25,10 @@
 	top: 50px;
 	color: #fff;
 	z-index:1000
+}
+
+#switcher{
+    min-height: 100px !important;
 }
 
 #search{

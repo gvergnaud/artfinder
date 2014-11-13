@@ -12,9 +12,12 @@ app.factory('Geoloc', function (UI, $q) {
 	return function (selector){
 
 		var that = this;
-
-		that.mapElement = document.querySelectorAll(selector);
-		that.mapElement = that.mapElement[that.mapElement.length - 1];
+        
+        if(selector){ // pour pouvoir se servir du service sans créer de map
+            that.mapElement = document.querySelectorAll(selector);
+            that.mapElement = that.mapElement[that.mapElement.length - 1];
+        }
+        
 		that.map = {};
 		that.defaultLatLng = new google.maps.LatLng(48.857487002645485, 2.3515677452087402); // Paris hotel de ville
 		that.markers = [];
@@ -67,7 +70,7 @@ app.factory('Geoloc', function (UI, $q) {
 		};
 		
 		
-		that.addMarker = function(post){
+		that.addPostMarker = function(post){
 
 			var LatLng = new google.maps.LatLng(post.coords.latitude, post.coords.longitude);
 
@@ -118,51 +121,16 @@ app.factory('Geoloc', function (UI, $q) {
 			that.markers.push(marker);
 
 		};
-
-		that.addMyLocationMarker = function(){
-
-			if(navigator.geolocation){
-				// passe à ses fonctions l'objet position: Geoposition{timestamp, coords{latitude, longitude}}
-				var survId = navigator.geolocation.getCurrentPosition(
-					function (position){
-
-						var LatLng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
-
-						var marker = new google.maps.Marker({
-							position: LatLng,
-							map: that.map,
-							title: 'Vous êtes ici !'
-							//icon: "fleche.png"
-						});
-
-					}, 
-
-					function (error){
-						var info = "Erreur lors de la géolocalisation : ";
-						switch(error.code) {
-							case error.TIMEOUT:
-								info += "Timeout !";
-								break;
-
-							case error.PERMISSION_DENIED:
-								info += "Vous n’avez pas donné la permission";
-								break;
-
-							case error.POSITION_UNAVAILABLE:
-								info += "La position n’a pu être déterminée";
-								break;
-
-							case error.UNKNOWN_ERROR:
-								info += "Erreur inconnue";
-								break;
-						}
-						console.log(info);
-					},
-
-					{enableHighAccuracy: true, timeout: 20000}
-				); 
-			}
-		};
+        
+        that.addMarker = function(latLng){
+            var marker = new google.maps.Marker({
+                position: latLng,
+                map: that.map,
+                icon: 'images/pin.png'
+            });
+            
+            that.markers.push(marker);
+        };
 		
 	//REMOVE
 		
@@ -252,12 +220,8 @@ app.factory('Geoloc', function (UI, $q) {
 			that.geocoder.geocode({'latLng': latlng}, function(results, status) {
 				if (status == google.maps.GeocoderStatus.OK) {
 					if (results[0]) {
-						var marker = new google.maps.Marker({
-							position: latlng,
-							map: that.map
-						});
-
-						that.markers.push(marker);
+                        
+                        that.addMarker(latlng);
 
 						deferred.resolve(results[0].formatted_address);
 					}
@@ -275,6 +239,53 @@ app.factory('Geoloc', function (UI, $q) {
 			var worldPoint = map.getProjection().fromLatLngToPoint(latLng);
 			return new google.maps.Point((worldPoint.x - bottomLeft.x) * scale, (worldPoint.y - topRight.y) * scale);
 		};
+        
+        that.getUserLocation = function(){
+
+            var deferred = $q.defer();
+
+            if(navigator.geolocation){
+                // passe à ses fonctions l'objet position: Geoposition{timestamp, coords{latitude, longitude}}
+                var survId = navigator.geolocation.getCurrentPosition(
+                    function (position){
+
+                        var latLng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+
+                        deferred.resolve(latLng);
+
+                    }, 
+
+                    function (error){
+                        var info = "Erreur lors de la géolocalisation : ";
+                        switch(error.code) {
+                            case error.TIMEOUT:
+                                info += "Timeout !";
+                                break;
+
+                            case error.PERMISSION_DENIED:
+                                info += "Vous n’avez pas donné la permission";
+                                break;
+
+                            case error.POSITION_UNAVAILABLE:
+                                info += "La position n’a pu être déterminée";
+                                break;
+
+                            case error.UNKNOWN_ERROR:
+                                info += "Erreur inconnue";
+                                break;
+                        }
+
+                        deferred.reject(info);
+                    },
+
+                    {enableHighAccuracy: true}
+                ); 
+            }else{
+                deferred.reject('no geolocation');
+            }
+
+            return deferred.promise;
+        };
 
 	//MOVE
 		

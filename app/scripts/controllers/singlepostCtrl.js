@@ -70,7 +70,7 @@ app.controller('SinglepostCtrl',['$scope', '$rootScope', '$routeParams', 'Post',
 	 		var mapCenter = geoloc.getLatLng($scope.post.coords.latitude, $scope.post.coords.longitude);
 
 			geoloc.createMap({zoom: 10, center: mapCenter});
-			geoloc.addMarker($scope.post);
+			geoloc.addPostMarker($scope.post);
 			geoloc.setMapOptions({scrollwheel: false});
 
 	 		UI.singlepost.toggleMap(function(){

@@ -46,7 +46,7 @@ app.controller('HomeCtrl',['$scope', '$rootScope', 'Post', 'Geoloc', 'UI', '$fil
 			
 			for( var post in $scope.posts ){
 				post = $scope.posts[post];
-				$scope.geoloc.addMarker(post);
+				$scope.geoloc.addPostMarker(post);
 			}
 
 			$scope.postsLimite += increm;
@@ -120,7 +120,7 @@ app.controller('HomeCtrl',['$scope', '$rootScope', 'Post', 'Geoloc', 'UI', '$fil
 
 		for( var post in filteredPosts ){
 			post = filteredPosts[post];
-			$scope.geoloc.addMarker(post);
+			$scope.geoloc.addPostMarker(post);
 		}
 	});
 	

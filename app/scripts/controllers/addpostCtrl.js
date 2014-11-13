@@ -10,6 +10,7 @@
 app.controller('AddpostCtrl', function ($scope, $rootScope, UI, Auth, Geoloc, Session, Post) {
 	
 	UI.addpost.init();
+    $rootScope.loaded = true;
 
 	if(!Auth.isAuthenticated()){
 		UI.toggleLoginOverlay();
@@ -146,7 +147,7 @@ app.controller('AddpostCtrl', function ($scope, $rootScope, UI, Auth, Geoloc, Se
 						//si le post n'est pas déja dans le tableau closeposts
 						if($scope.closePosts.indexOf(post) === -1){
 							$scope.closePosts.push(post);
-							geoloc.addMarker(post);
+							geoloc.addPostMarker(post);
 						}
 					//sinon, si le post etait dans le tableau, on l'enleve
 					}else if($scope.closePosts.indexOf(post) !== -1){
@@ -244,10 +245,10 @@ app.controller('AddpostCtrl', function ($scope, $rootScope, UI, Auth, Geoloc, Se
 					);
 
 				}else{
-					UI.notification('error', 'Géolocalisé votre image en cliquant sur la carte, ou en tapant son adresse.');
+					UI.notification('error', 'Géolocalisez votre image en cliquant sur la carte, ou en tapant son adresse.');
 				}
 			}else{
-				UI.notification('error', 'Envoyer votre image avant d\'envoyer le formulaire !');
+				UI.notification('error', 'Envoyez votre image avant d\'envoyer le formulaire !');
 			}
 		}else{
 			UI.notification('error', 'Connectez vous pour ajouter un mur.');

@@ -6,7 +6,7 @@
  * # whenScrolled
  */
 
-app.directive('ngLoader', function(Post) {
+app.directive('ngLoader', function(Post, $rootScope) {
 	return {
 
 		restrict: 'A',
@@ -49,7 +49,7 @@ app.directive('ngLoader', function(Post) {
 			//On observe les changement de Post.posts
 			$scope.$watch(function(){
 				//Si posts vaut quelque chose, on affiche la landing
-				if(Post.posts && loading){
+				if(Post.posts && loading || $rootScope.loaded){
 					loading = false; // l'utilisateur à chargé les posts
 					showLanding();
 				}

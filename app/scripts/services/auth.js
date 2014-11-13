@@ -9,63 +9,63 @@
  */
 app.factory('Auth', function Auth($http, $q, Session) {
 
-	var auth = {
+    var auth = {
 
-		login: function(loginInfos){
+        login: function(loginInfos){
 
-			var deferred = $q.defer();
+            var deferred = $q.defer();
 
-			$http({
-                    url: 'login.php',
-                    method: 'post',
-                    data: loginInfos
-                })
-        		.success(function (user, status){
-        			if(user.statut === 'success'){
+            $http({
+                url: 'login.php',
+                method: 'post',
+                data: loginInfos
+            })
+            .success(function (user, status){
+                if(user.statut === 'success'){
 
-                        console.log('auth reussit');
-                        Session.create(user.id, user.username, user.role, user.avatar);
-                        deferred.resolve(user);
+                    console.log('auth reussit');
+                    Session.create(user.id, user.username, user.role, user.avatar);
+                    deferred.resolve(user);
 
-                    }else if(user.statut === 'error'){
+                }else if(user.statut === 'error'){
 
-                        console.log(user.desc);
-                        deferred.reject(user.desc);
-                    }
-        		})
-        		.error(function (data, status){
-    				deferred.reject('Impossible de récupérer lutilisateur. ' + status);
-        		});
+                    console.log(user.desc);
+                    deferred.reject(user.desc);
+                }
+            })
+            .error(function (data, status){
+                deferred.reject('Impossible de récupérer lutilisateur. ' + status);
+            });
 
-        	return deferred.promise;
-			
-		},
+            return deferred.promise;
+
+        },
 
         signUp: function(signUpInfos){
             var deferred = $q.defer();
 
             $http({
-                    url: 'signup.php',
-                    method: 'post',
-                    data: signUpInfos
-                })
-                .success(function (user, status){
-                    console.log(user);
-                    if(user.statut === 'success'){
+                url: 'signup.php',
+                method: 'post',
+                data: signUpInfos
+            })
+            .success(function (user, status){
+                console.log(user);
+                if(user.statut === 'success'){
 
-                        console.log('inscription reussit');
-                        Session.create(user.id, user.username, user.role, user.avatar);
-                        deferred.resolve(user);
+                    console.log('inscription reussit');
+                    Session.create(user.id, user.username, user.role, user.avatar);
+                    deferred.resolve(user);
 
-                    }else if(user.statut === 'error'){
+                }else if(user.statut === 'error'){
 
-                        console.log(user.desc);
-                        deferred.reject(user.desc);
-                    }
-                })
-                .error(function (data, status){
-                    deferred.reject('Impossible dinscrire lutilisateur. ' + status);
-                });
+                    console.log(user.desc);
+                    deferred.reject(user.desc);
+                }
+            })
+            .error(function (data, status){
+                deferred.reject('Impossible dinscrire lutilisateur. ' + status);
+            });
 
             return deferred.promise;
         },
@@ -84,29 +84,35 @@ app.factory('Auth', function Auth($http, $q, Session) {
             if (!angular.isArray(authorizedRoles)) {
                 authorizedRoles = [authorizedRoles];
             }
-            return (authService.isAuthenticated() &&
-                authorizedRoles.indexOf(Session.userRole) !== -1);
+            return (authService.isAuthenticated() && authorizedRoles.indexOf(Session.userRole) !== -1);
         }
 
-	};
+    };
 
-	return auth;
+    return auth;
 })
 
 .service('Session', function () {
-  this.create = function (userId, username, userRole, userAvatar) {
-    this.userId = userId;
-    this.username = username;
-    this.userRole = userRole;
-    this.userAvatar = userAvatar;
-  };
-  this.destroy = function () {
-    this.userId = null;
-    this.userName = null;
-    this.userRole = null;
-    this.userAvatar = null;
-  };
-  return this;
+
+    this.create = function (userId, username, userRole, userAvatar) {
+        this.userId = userId;
+        this.username = username;
+        this.userRole = userRole;
+        this.userAvatar = userAvatar;
+    };
+    
+    this.addUserLocation = function(latLng){
+        this.userLocation = latLng;
+    }
+
+    this.destroy = function () {
+        this.userId = null;
+        this.userName = null;
+        this.userRole = null;
+        this.userAvatar = null;
+        this.userLocation = null;
+    };
+    return this;
 })
 
 .constant('AUTH_EVENTS', {
@@ -115,12 +121,13 @@ app.factory('Auth', function Auth($http, $q, Session) {
     logoutSuccess: 'auth-logout-success',
     sessionTimeout: 'auth-session-timeout',
     notAuthenticated: 'auth-not-authenticated',
-    notAuthorized: 'auth-not-authorized'
+    notAuthorized: 'auth-not-authorized',
+    userLocationChanged: 'user-location-changed'
 })
 
 .constant('USER_ROLES', {
-  all: '*',
-  admin: 'admin',
-  editor: 'editor',
-  guest: 'guest'
+    all: '*',
+    admin: 'admin',
+    editor: 'editor',
+    guest: 'guest'
 });

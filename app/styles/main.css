@@ -148,9 +148,10 @@ body{
 	z-index: 100;
 	background: #050505;
 	color: #fff;
-	transition: .3s ease;
-	-moz-transition: .3s ease;
-	-webkit-transition: .3s ease;
+    overflow: hidden;
+	transition: .5s ease;
+	-moz-transition: .5s ease;
+	-webkit-transition: .5s ease;
 }
 
 .menu.opened{
@@ -164,14 +165,22 @@ body{
 .menu li{
 	list-style-type: none;
 	margin-top: 10px;
+    height: 24px;
+    width: 200px;
+    overflow: hidden;
+    overflow: hidden;
 }
 
 .menu a.menu_link{
-	display: inline;
+    margin-left: 0;
+    display: inline;
 	color: #fff;
 	font-family: 'Uni Sans Heavy';
-	font-size: 1em;
+	font-size: 15px;
 	text-decoration: none;
+    transition: .4s ease;
+    -moz-transition: .4s ease;
+    -webkit-transition: .4s ease;
 }
 
 .menu a.menu_link:visited{
@@ -183,7 +192,7 @@ body{
 }
 
 .menu a.menu_link.hidden{
-	display: none;
+    margin-left: 100px;
 }
 
 .menu div#logo{
@@ -199,9 +208,9 @@ body{
 	left:80px;
 	height:100%;
 	opacity: 1;
-	transition: .3s ease;
-	-moz-transition: .3s ease;
-	-webkit-transition: .3s ease;
+	transition: .5s ease;
+	-moz-transition: .5s ease;
+	-webkit-transition: .5s ease;
 }
 
 #viewcontainer.hidden{

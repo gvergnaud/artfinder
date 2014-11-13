@@ -1,5 +1,19 @@
 /* UPLOAD ADDPOST */
 
+section.fsSection{
+    overflow: hidden;
+}
+
+/* NAVigation */
+div#formProgressBar{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 33%;
+    height: 25px;
+    background: #B59E5C;
+}
+
 #drop{
   height:300px;
   width:300px;
@@ -21,6 +35,6 @@ form#addPhotoForm{
 }
 
 div#formMap{
-  height:300px;
+  height:100%;
   width: 100%;
 }
