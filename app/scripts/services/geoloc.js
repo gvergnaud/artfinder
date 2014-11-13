@@ -193,12 +193,8 @@ app.factory('Geoloc', function (UI, $q) {
 						zoom: 15
 					});
 
-					var marker = new google.maps.Marker({
-						map: that.map,
-						position: results[0].geometry.location
-					});
-
-					that.markers.push(marker);
+                    that.addMarker(results[0].geometry.location);
+                    
 					//envoi le latLng
 					deferred.resolve(results[0].geometry.location);
 				}else{

@@ -119,7 +119,7 @@ app.controller('appCtrl', function ($scope, $rootScope, Session, Auth, UI, AUTH_
             }, speed);
         }
     };
-
+    
     //Redirection 
     //
     $scope.redirectTo = function(page, param){

@@ -458,7 +458,7 @@ app.factory('UI', function UI() {
                     e.preventDefault();
 
                     this.className = '';
-                    this.innerHTML = 'Drag a file here';
+                    this.innerHTML = '';
                 };
             },
 

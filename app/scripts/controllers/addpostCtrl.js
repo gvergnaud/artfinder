@@ -16,6 +16,8 @@ app.controller('AddpostCtrl', function ($scope, $rootScope, UI, Auth, Geoloc, Se
 		UI.toggleLoginOverlay();
 		UI.notification('', 'Connectez vous pour ajouter un mur !');
 	}
+    
+//    DROPZONE 
 	
 	var postImageUrl = window.location.origin + window.location.pathname + 'upload.php';
     
@@ -28,8 +30,8 @@ app.controller('AddpostCtrl', function ($scope, $rootScope, UI, Auth, Geoloc, Se
 	var myDropzone = new Dropzone('#drop', { // div#drop devient dropzone
 		url: postImageUrl, // Set the url
 		paramName: 'file', //param name
-		thumbnailWidth: 80,
-		thumbnailHeight: 80,
+		thumbnailWidth: 200,
+		thumbnailHeight: 200,
 		parallelUploads: 1,
 		previewTemplate: previewTemplate,
 		autoQueue: false, // Make sure the files aren't queued until manually added
@@ -87,7 +89,9 @@ app.controller('AddpostCtrl', function ($scope, $rootScope, UI, Auth, Geoloc, Se
 	}; 
 
 	*/
-
+    
+    
+//  FONCTIONNEL
 	$scope.newPost = {};
 	$scope.newPost.photos = [];
 	$scope.newPost.photos[0] = {};
@@ -108,7 +112,7 @@ app.controller('AddpostCtrl', function ($scope, $rootScope, UI, Auth, Geoloc, Se
 				$scope.newPost.address = address;
 			},
 			function (msg) {
-				UI.notification('error', msg);
+				UI.notification('error', 'Oups, je crois que nous sommes perdus.');
 			}
 		);
 
@@ -128,7 +132,7 @@ app.controller('AddpostCtrl', function ($scope, $rootScope, UI, Auth, Geoloc, Se
 					$scope.proposePosts();
 				},
 				function (msg){
-					UI.notification('error', msg);
+					UI.notification('error', 'Oups, je crois que nous sommes perdus.');
 				}
 			);
 		}
