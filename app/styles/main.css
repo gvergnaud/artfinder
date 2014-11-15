@@ -331,7 +331,7 @@ p.notification.show{
 /* TOOLTIP */
 
 .tooltip{
-	position: absolute;
+	position: fixed;
 	background: #070707;
 	padding: 10px;
 	color: #fff;
@@ -341,6 +341,23 @@ p.notification.show{
 	transform: translateX(-50%);
 	-moz-transform: translateX(-50%);
 	-webkit-transform: translateX(-50%);
+}
+
+.marker_tooltip{
+    width: 150px;
+    height: 150px;
+    overflow: hidden;
+    background: #050505;
+    position: absolute;
+    z-index: 200;
+    display: none;
+    border-radius: 5px;
+    border: 1px solid #B59E5C;
+}
+
+.tooltipImage{
+    height: 150px;
+    overflow: hidden;
 }
 
 /* POSTS */
@@ -435,22 +452,7 @@ p.notification.show{
 .post div.over:hover{
 	opacity: 1;
 }
-.marker_tooltip{
-	width: 150px;
-	height: 150px;
-	overflow: hidden;
-	background: #050505;
-	position: absolute;
-	z-index: 200;
-	display: none;
-	border-radius: 5px;
-	border: 1px solid #B59E5C;
-}
 
-.tooltipImage{
-	height: 150px;
-	overflow: hidden;
-}
 
 /*  GRID OF FIVE   ============================================================================= */
 

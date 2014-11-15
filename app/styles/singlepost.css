@@ -5,8 +5,10 @@ section#player{
 	overflow: hidden;
 	background-color: #1b1b1b;
 	padding: 20px 0;
-	-webkit-transition: .65s cubic-bezier(.2,.1,.1,1);
-	transition: .65s cubic-bezier(.2,.1,.1,1); 
+    -webkit-transition: .65s cubic-bezier(.2,.1,.1,1);
+    -moz-transition: .65s cubic-bezier(.2,.1,.1,1);
+    -o-transition: .65s cubic-bezier(.2,.1,.1,1);
+    transition: .65s cubic-bezier(.2,.1,.1,1);
 }
 
 section#player.up{
@@ -45,8 +47,10 @@ section#player>img{
 	position: absolute;
 	top: 20px;
 	left: 50%;
-	transform: translateX(-50%);
-	-webkit-transform: translateX(-50%);
+    -webkit-transform: translateX(-50%);
+    -moz-transform: translateX(-50%);
+    -o-transform: translateX(-50%);
+    transform: translateX(-50%);
 }
 
 .tagBox{
@@ -57,8 +61,10 @@ section#player>img{
 .tagName{
 	position: absolute;
 	left: 50%;
-	transform: translateX(-50%);
-	-webkit-transform: translateX(-50%);
+    -webkit-transform: translateX(-50%);
+    -moz-transform: translateX(-50%);
+    -o-transform: translateX(-50%);
+    transform: translateX(-50%);
 	bottom: -3em;
 	white-space: nowrap;
 	font-size: .9em;
@@ -80,8 +86,10 @@ section#player>img{
 
 section.map{
 	height:0;
-	-webkit-transition: .65s cubic-bezier(.2,.1,.1,1);
-	transition: .65s cubic-bezier(.2,.1,.1,1);
+    -webkit-transition: .65s cubic-bezier(.2,.1,.1,1);
+    -moz-transition: .65s cubic-bezier(.2,.1,.1,1);
+    -o-transition: .65s cubic-bezier(.2,.1,.1,1);
+    transition: .65s cubic-bezier(.2,.1,.1,1);
 }
 section.map.show{
 	height:400px;

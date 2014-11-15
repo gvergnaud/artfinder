@@ -167,45 +167,60 @@ app.controller('AddpostCtrl', function ($scope, $rootScope, UI, Auth, Geoloc, Se
 		);
 	};
 
+    
 	$scope.selectClosePost = function(post){
-
-		UI.addpost.selectedPost(post); //dois effacer les autres champs ainsi que les autres closePosts proposés et faire apparaitre un bouton submit spécial qui déclenche la function Post.addPhoto.
+        //dois effacer les autres champs ainsi que les autres closePosts proposés et faire apparaitre un bouton submit spécial qui déclenche la function Post.addPhoto.
+		UI.addpost.selectedPost(post);
+        
 		var addPhotoForm = angular.element(document.querySelector('form#addPhotoForm'));
 		
 		//ajoute la photo au post existant
-		addPhotoForm.on('submit', function(e){
-			
-			e.preventDefault();
-			
-			if(Auth.isAuthenticated()){ //si l'utilisateur est bien authentifié
+        
+        
+        function addPhotoSubmit(e){
+            
+            e.preventDefault();
 
-				if(!!$scope.newPost.photos[0].url){ //si l'utilisateur a bien envoyé son image
+            if(Auth.isAuthenticated()){ //si l'utilisateur est bien authentifié
 
-					if(!!$scope.newPost.photos[0].technique){
+                if(!!$scope.newPost.photos[0].url){ //si l'utilisateur a bien envoyé son image
 
-						//on ajoute le username de l'hoster a l'image
-						$scope.newPost.photos[0].username = Session.username;
-						$scope.newPost.photos[0].userId = parseInt(Session.userId);
-						$scope.newPost.photos[0].date = new Date().getTime();
+                    if(!!$scope.newPost.photos[0].technique){
 
-						Post.addPhoto(post.id, $scope.newPost.photos[0]).then(
-							function(data){ //success
-								$scope.redirectTo('singlepost', post.id);
-							},
-							function(msg){ //error
-								UI.notification('error', msg);
-							}
-						);
-					}else{
-						UI.notification('error', 'Ajoutez la technique utilisée');
-					}
-				}else{
-					UI.notification('error', 'Envoyer votre image avant d\'envoyer le formulaire !');
-				}
-			}else{
-				UI.notification('error', 'Connectez vous pour ajouter un mur.');
-			}
-		});
+                        //on ajoute le username de l'hoster a l'image
+                        $scope.newPost.photos[0].username = Session.username;
+                        $scope.newPost.photos[0].userId = parseInt(Session.userId);
+                        $scope.newPost.photos[0].date = new Date().getTime();
+
+                        Post.addPhoto(post.id, $scope.newPost.photos[0]).then(
+                            function(data){ //success
+                                $scope.redirectTo('singlepost', post.id);
+                            },
+                            function(msg){ //error
+                                UI.notification('error', msg);
+                            }
+                        );
+                    }else{
+                        UI.notification('error', 'Ajoutez la technique utilisée');
+                    }
+                }else{
+                    UI.notification('error', 'Envoyer votre image avant d\'envoyer le formulaire !');
+                }
+            }else{
+                UI.notification('error', 'Connectez vous pour ajouter un mur.');
+            }
+        }
+        
+        //ajoute de listener de l'envoi du formulaire pour ajouter la photo a un mur existant
+        addPhotoForm.on('submit', addPhotoSubmit);
+        
+        //si l'utilisateur clique sur la map, on lui redonne le formulaire normal
+        google.maps.event.addListener(geoloc.map, 'click', function( event ){
+            
+            addPhotoForm.off('submit', addPhotoSubmit);
+            UI.addpost.removeSelectedPost(post);
+            
+        });
 
 	};
 

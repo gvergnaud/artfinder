@@ -473,6 +473,19 @@ app.factory('UI', function UI() {
                 addPostForm.css({
                     display: 'none'
                 });
+            },
+            
+            removeSelectedPost: function(post){
+                var addPhotoForm = angular.element(document.querySelector('form#addPhotoForm'));
+                var addPostForm = angular.element(document.querySelector('form#addPostForm'));
+
+                addPhotoForm.css({
+                    display: 'none'
+                });
+
+                addPostForm.css({
+                    display: 'block'
+                });
             }
         }
     };

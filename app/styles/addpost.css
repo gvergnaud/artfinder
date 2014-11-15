@@ -6,27 +6,44 @@ nav#addpostnav{
     height: 50px;
 }
 
-div#formProgressBar{
+#formProgress{
+    height: 35px;
+    width: 100%;
+    background: #1B1B1B;
+}
+
+h1#formStep{
     position: absolute;
-    top: 0;
+    top: 5px;
+    right: 5px;
+    text-align: right;
+    z-index: 175;
+    color: #fff;
+}
+
+#formProgressBar{
+    position: absolute;
+    top: 5px;
     left: 0;
     width: 33%;
     height: 25px;
     background: #B59E5C;
-    transition: .5s ease;
-    -moz-transition: .5s ease;
-    -webkit-transition: .5s ease;
+    transition: .1s ease;
+    -moz-transition: .1s ease;
+    -webkit-transition: .1s ease;
 }
 
 
 
 section.formSection{
+    overflow:hidden;
 }
+
 
 /*  DROP */
 #drop{
     position:absolute;
-    top: 10px;
+    top: 45px;
     bottom: 10px;
     left: 10px;
     right: 25px;
@@ -45,7 +62,7 @@ section.formSection{
 
 div#previews{
     position:absolute;
-    z-index: 150;
+    z-index: 50;
     width: 200px;
     left: 50%;
     top: 50%;
@@ -53,6 +70,10 @@ div#previews{
     -moz-transform: translate3d(-50%, -50%, 0);
     -o-transform: translate3d(-50%, -50%, 0);
     transform: translate3d(-50%, -50%, 0);
+}
+
+div#previewImageContainer{
+    text-align: center;
 }
 
 img.previewImage{
@@ -90,22 +111,23 @@ div.progress{
 
 section#locate{
     background: #050505;
+    overflow:hidden;
 }
 
 div#formMap{
     height:100%;
     width: 100%;
-    opacity: .7;
+    opacity: .5;
 }
 
 span#addressInputContainer{
     position: absolute;
-    top: 175%;
+    top: 200%;
     left: 50%;
-    -webkit-transform: translate3d(-50%, -50%, 0);
-    -moz-transform: translate3d(-50%, -50%, 0);
-    -o-transform: translate3d(-50%, -50%, 0);
-    transform: translate3d(-50%, -50%, 0);
+    -webkit-transform: translate3d(-50%, -250px, 0);
+    -moz-transform: translate3d(-50%, -250px, 0);
+    -o-transform: translate3d(-50%, -250px, 0);
+    transform: translate3d(-50%, -250px, 0);
 }
 
 
@@ -150,6 +172,61 @@ input#addressInput{
 input#addressInput:focus{
     outline: none;
     border-bottom: 2px solid #B59E5C;
+}
+
+section#closePostsContainer{
+    height: 200px;
+    width:100%;
+    position: absolute;
+    top: 200%;
+    left: 0;
+    background: #1b1b1b;
+    padding-bottom: 15px;
+    overflow: hidden;
+    
+    -webkit-transform: translate3d(0, -100%, 0);
+    -moz-transform: translate3d(0, -100%, 0);
+    -o-transform: translate3d(0, -100%, 0);
+    transform: translate3d(0, -100%, 0);
+    
+    -webkit-transition: .65s cubic-bezier(.2,.1,.1,1);
+    -moz-transition: .65s cubic-bezier(.2,.1,.1,1);
+    -o-transition: .65s cubic-bezier(.2,.1,.1,1);
+    transition: .65s cubic-bezier(.2,.1,.1,1);
+}
+
+section#closePostsContainer h1{
+    padding: 10px 0;
+    text-align: center;
+    color: #fff;
+}
+
+section#closePostsContainer.ng-hide-remove{
+    -webkit-transform: translate3d(0, 0, 0);
+    -moz-transform: translate3d(0, 0, 0);
+    -o-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+}
+
+section#closePostsContainer.ng-hide-remove-active{
+    -webkit-transform: translate3d(0, -100%, 0);
+    -moz-transform: translate3d(0, -100%, 0);
+    -o-transform: translate3d(0, -100%, 0);
+    transform: translate3d(0, -100%, 0);
+}
+
+section#closePostsContainer.ng-hide-add{
+    -webkit-transform: translate3d(0, -100%, 0);
+    -moz-transform: translate3d(0, -100%, 0);
+    -o-transform: translate3d(0, -100%, 0);
+    transform: translate3d(0, -100%, 0);
+}
+
+section#closePostsContainer.ng-hide-add-active{
+    -webkit-transform: translate3d(0, 0, 0);
+    -moz-transform: translate3d(0, 0, 0);
+    -o-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
 }
 
 /*POStInfo*/

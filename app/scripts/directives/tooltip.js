@@ -18,18 +18,20 @@ app.directive('ngTooltip', function(Post) {
 
 
 			$element.on('mouseenter mouseleave', function(e){
+                
+                console.log($element);
 				if(hidden){
 					hidden = false;
 										
 					tooltip.css({
 						left: e.clientX + 'px', //left corrigé par un translate -50% en css
-						top: $element[0].offsetTop - 40 + 'px'
+                        top: e.clientY - 40 + 'px'
 					});
 					
 					$element.on('mousemove', function(e){
 						tooltip.css({
 							left: e.clientX + 'px', //left corrigé par un translate -50% en css
-							top: $element[0].offsetTop - 50 + 'px'
+                            top: e.clientY - 40 + 'px'
 						});
 					});
 

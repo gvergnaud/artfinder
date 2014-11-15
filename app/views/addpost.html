@@ -1,6 +1,9 @@
 <!--NAVIGATION-->
 <nav id="addpostnav">
-    <div id="formProgressBar"></div>
+    <div id="formProgress">
+        <formprogress id="formProgressBar" ></formprogress>
+        <h1 id="formStep">1/3</h1>
+    </div>
 </nav>
 
 <!--SECTION DRAG DROP-->
@@ -13,7 +16,7 @@
 
         <div id="template">
             <!-- This is used as the file preview template -->
-            <div>
+            <div id="previewImageContainer">
                 <img class="previewImage" data-dz-thumbnail />
             </div>
             <div>
@@ -42,9 +45,8 @@
     </span>
 
     <section id="closePostsContainer" ng-show="closePosts.length">
-        <h3>Des murs ont été partagés à cet endroit.</h3>
-        <p>Selectionner l'un de ces murs pour y ajouter votre photo</p>
-        <div class="post col" ng-repeat="post in closePosts">
+        <h1>Des murs ont été partagés à cet endroit.</h1>
+        <div class="post col" ng-repeat="post in closePosts" ng-tooltip="Ajouter à ce mur">
             <div  class="{{post.id}}">
                 <img ng-src="{{post.photos[0].url}}" />
                 <div class="over"  ng-click="selectClosePost({{post}})">
