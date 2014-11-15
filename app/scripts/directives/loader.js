@@ -13,7 +13,7 @@ app.directive('ngLoader', function(Post, $rootScope) {
 		link: function($scope, $element, $attrs) {
 
 			function showContent(){
-				window.removeEventListener( 'scroll', noscroll );
+				window.removeEventListener( 'scroll', $scope.noScroll );
 				document.getElementById('landing').classList.add('loaded');
 				document.getElementById('container').classList.add('loaded');
 			}
@@ -34,12 +34,7 @@ app.directive('ngLoader', function(Post, $rootScope) {
 				}, 500);
 			}
 
-			function noscroll(){
-				window.scrollTo(0,0);
-			}
-
-
-			window.addEventListener( 'scroll', noscroll);
+            window.addEventListener( 'scroll', $scope.noScroll);
 
 			var button = document.querySelector('#landing button.enter'),
 				logo = document.querySelector('#landing div.logo'),

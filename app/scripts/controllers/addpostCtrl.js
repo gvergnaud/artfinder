@@ -43,9 +43,14 @@ app.controller('AddpostCtrl', function ($scope, $rootScope, UI, Auth, Geoloc, Se
 
 	myDropzone.on('addedfile', function(file) {
 	  	// Hookup the start button
-	  	file.previewElement.querySelector('.start').onclick = function(){
-	  		myDropzone.enqueueFile(file);
-	  	};
+        
+        if(file.type === 'image/jpeg' || file.type === 'image/png'){
+            file.previewElement.querySelector('.start').onclick = function(){
+                myDropzone.enqueueFile(file);
+            };   
+        }else{
+            UI.notification('error', 'ce fichier n\'est pas une image');
+        }
 	});
 	/*
 	myDropzone.on("totaluploadprogress", function(progress) {
@@ -63,13 +68,20 @@ app.controller('AddpostCtrl', function ($scope, $rootScope, UI, Auth, Geoloc, Se
 */
 	myDropzone.on('success', function(file, response){
 		if(response !== 'nofiles'){
-			var imagePath = window.location.origin + window.location.pathname + 'images/uploads/' + response;
-			document.getElementById('photorender').setAttribute('src', imagePath);
-			if(file.type === 'image/jpeg' || file.type === 'image/png'){
+            if(response !== 'not an image'){
+                
+                var imagePath = window.location.origin + window.location.pathname + 'images/uploads/' + response;
+                document.getElementById('photorender').setAttribute('src', imagePath);
 
-				$scope.newPost.photos[0].url = imagePath;
-				$scope.newPost.photos[0].artists = [];
-			}
+                $scope.newPost.photos[0].url = imagePath;
+                $scope.newPost.photos[0].artists = [];
+                
+                $scope.smoothScrollTo('#locate');
+                
+            }else{
+                UI.notification('error', 'ce fichier n\'est pas une image');
+            }
+
 		}else{
 			UI.notification('error', 'le serveur n\'a reçu aucune image.');
 		}
@@ -113,6 +125,7 @@ app.controller('AddpostCtrl', function ($scope, $rootScope, UI, Auth, Geoloc, Se
 			},
 			function (msg) {
 				UI.notification('error', 'Oups, je crois que nous sommes perdus.');
+                $scope.newPost.coords = {};
 			}
 		);
 
@@ -133,9 +146,12 @@ app.controller('AddpostCtrl', function ($scope, $rootScope, UI, Auth, Geoloc, Se
 				},
 				function (msg){
 					UI.notification('error', 'Oups, je crois que nous sommes perdus.');
+                    $scope.newPost.coords = {};
 				}
 			);
-		}
+		}else{
+            $scope.newPost.coords = {};
+        }
 	};
 
 	$scope.closePosts = [];
@@ -171,6 +187,9 @@ app.controller('AddpostCtrl', function ($scope, $rootScope, UI, Auth, Geoloc, Se
 	$scope.selectClosePost = function(post){
         //dois effacer les autres champs ainsi que les autres closePosts proposés et faire apparaitre un bouton submit spécial qui déclenche la function Post.addPhoto.
 		UI.addpost.selectedPost(post);
+        
+        $scope.newPost.coords = post.coords;
+        $scope.newPost.address = post.address;
         
 		var addPhotoForm = angular.element(document.querySelector('form#addPhotoForm'));
 		

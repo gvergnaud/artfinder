@@ -75,6 +75,10 @@ app.controller('appCtrl', function ($scope, $rootScope, Session, Auth, UI, AUTH_
     $scope.toggleLoginOverlay = function(){
         UI.toggleLoginOverlay();
     };
+    
+    $scope.noScroll = function(){ 
+        window.scrollTo(0, 0);
+    };
 
     //Animation du Scroll
     $scope.smoothScrollTo = function(selector, callback){

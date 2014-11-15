@@ -22,7 +22,9 @@ if (!empty($_FILES)) {
 	 	echo $fileNewName;
 
 	    move_uploaded_file($tempFile,$targetFile); //6
-	}
+	}else{
+        echo "not an image";
+    }
      
 } else {
   echo "nofiles";

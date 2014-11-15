@@ -10,11 +10,11 @@ app.directive('formprogress', function() {
     return {
 
 
-        restrict: 'ES',
+        restrict: 'E',
         link: function($scope, $element, $attrs) {
             
             var formStep = angular.element(document.querySelector('#formStep'));
-
+            
             window.addEventListener( 'scroll', function(e){
                 var progress = (document.body.scrollTop + window.innerHeight) * 100 / document.body.scrollHeight;
                 
@@ -22,10 +22,10 @@ app.directive('formprogress', function() {
                     width: progress + '%'
                 });
                                 
-                if(progress <= 34){
+                if(progress <= 40){
                     formStep.html('1/3');
                     
-                }else if(progress <= 67){
+                }else if(progress <= 80){
                     formStep.html('2/3');
                     
                 }else if(progress <= 100){

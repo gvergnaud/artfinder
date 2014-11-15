@@ -32,6 +32,8 @@ app.factory('UI', function UI() {
 
     //Public fonctions
     var ui = {
+        
+        menuWidth: 80,
 
         showViewcontainer: function(){
             viewcontainer.removeClass('hidden');
@@ -78,7 +80,7 @@ app.factory('UI', function UI() {
 
 
                 notifications.css({
-                    width: window.innerWidth - 80 + 'px',
+                    width: window.innerWidth - ui.menuWidth + 'px',
                     left: '80px'
                 });
 
@@ -190,7 +192,7 @@ app.factory('UI', function UI() {
                     thumbnail = angular.element(document.querySelectorAll('div.post'));
 
                 switcher.css({
-                    width: window.innerWidth - 80 + 'px',
+                    width: window.innerWidth - ui.menuWidth + 'px',
                     height: '20%',
                     position: 'absolute',
                     top: 0,
@@ -199,12 +201,12 @@ app.factory('UI', function UI() {
                 });
 
                 map.css({
-                    width: window.innerWidth - 80 + 'px',
+                    width: window.innerWidth - ui.menuWidth + 'px',
                     height: '20%'
                 });
 
                 mosaic.css({
-                    width: window.innerWidth - 80 + 'px',
+                    width: window.innerWidth - ui.menuWidth + 'px',
                     height: '80%'
                 });
 
@@ -221,7 +223,7 @@ app.factory('UI', function UI() {
                     thumbnail = angular.element(document.querySelectorAll('div.post'));
 
                 switcher.css({
-                    width: window.innerWidth - 80 + 'px',
+                    width: window.innerWidth - ui.menuWidth + 'px',
                     height: '20%',
                     position: 'absolute',
                     bottom: 0,
@@ -230,12 +232,12 @@ app.factory('UI', function UI() {
                 });
 
                 map.css({
-                    width: window.innerWidth - 80 + 'px',
+                    width: window.innerWidth - ui.menuWidth + 'px',
                     height: '80%'
                 });
 
                 mosaic.css({
-                    width: window.innerWidth - 80 + 'px',
+                    width: window.innerWidth - ui.menuWidth + 'px',
                     height: '20%'
                 });
 
@@ -429,10 +431,15 @@ app.factory('UI', function UI() {
                 var dropSection = angular.element(document.querySelector('section#drop')),
                     locateSection = angular.element(document.querySelector('section#locate')),
                     infosSection = angular.element(document.querySelector('section#newPostInfos')),
-                    formSections = angular.element(document.querySelectorAll('section.formSection'));
+                    formSections = angular.element(document.querySelectorAll('section.formSection')),
+                    formProgress = angular.element(document.querySelector('#formProgress'));
 
                 formSections.css({
                     height: window.innerHeight + 'px'
+                });
+                
+                formProgress.css({
+                    width: window.innerWidth - ui.menuWidth - 15 + 'px'
                 });
             },
 

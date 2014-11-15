@@ -7,12 +7,13 @@ nav#addpostnav{
 }
 
 #formProgress{
-    height: 35px;
+    position: absolute;
+    height: 30px;
     width: 100%;
     background: #1B1B1B;
 }
 
-h1#formStep{
+h3#formStep{
     position: absolute;
     top: 5px;
     right: 5px;
@@ -23,10 +24,10 @@ h1#formStep{
 
 #formProgressBar{
     position: absolute;
-    top: 5px;
+    top: 0px;
     left: 0;
     width: 33%;
-    height: 25px;
+    height: 30px;
     background: #B59E5C;
     transition: .1s ease;
     -moz-transition: .1s ease;
@@ -37,13 +38,17 @@ h1#formStep{
 
 section.formSection{
     overflow:hidden;
+    -webkit-transition: .65s cubic-bezier(.2,.1,.1,1);
+    -moz-transition: .65s cubic-bezier(.2,.1,.1,1);
+    -o-transition: .65s cubic-bezier(.2,.1,.1,1);
+    transition: .65s cubic-bezier(.2,.1,.1,1);
 }
 
-
 /*  DROP */
+
 #drop{
     position:absolute;
-    top: 45px;
+    top: 40px;
     bottom: 10px;
     left: 10px;
     right: 25px;
@@ -117,7 +122,7 @@ section#locate{
 div#formMap{
     height:100%;
     width: 100%;
-    opacity: .5;
+    opacity: .7;
 }
 
 span#addressInputContainer{

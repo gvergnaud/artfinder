@@ -1,8 +1,8 @@
 <!--NAVIGATION-->
 <nav id="addpostnav">
     <div id="formProgress">
-        <formprogress id="formProgressBar" ></formprogress>
-        <h1 id="formStep">1/3</h1>
+        <formprogress id="formProgressBar"><h3 id="formStep">1/3</h3></formprogress>
+        
     </div>
 </nav>
 
@@ -42,6 +42,7 @@
     <div id="formMap"></div>
     <span id="addressInputContainer">
         <input id="addressInput" type="text" placeholder="Ou ce trouve ce mur ?" ng-model="newPost.address" ng-change="addressChange()"/>
+        <button ng-if="newPost.coords.latitude" ng-click="smoothScrollTo('#newPostInfos')">Valider</button>
     </span>
 
     <section id="closePostsContainer" ng-show="closePosts.length">
