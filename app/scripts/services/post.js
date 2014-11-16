@@ -7,7 +7,7 @@
  * # post
  * Service in the artFinderApp.
  */
-app.factory('Post', function Post($http, $q, Session) {
+app.factory('Post', function Post($http, $q, Session, Socket) {
     
     var factory = {
 
@@ -185,6 +185,7 @@ app.factory('Post', function Post($http, $q, Session) {
                         deferred.reject('problème lors de l\'enregistrment');
                     }else{
                         deferred.resolve(response);
+                        Socket.postsChanged();
                     }
                 })
                 .error(function (data, status){

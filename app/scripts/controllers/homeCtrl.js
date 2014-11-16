@@ -8,34 +8,49 @@
  * Controller of the artFinderApp
  */
 
-app.controller('HomeCtrl',['$scope', '$rootScope', 'Post', 'Geoloc', 'UI', '$filter', '$routeParams', function ($scope, $rootScope, Post, Geoloc, UI, $filter, $routeParams) {
+app.controller('HomeCtrl',['$scope', '$rootScope', 'Post', 'Geoloc', 'UI', '$filter', '$routeParams', 'Socket', function ($scope, $rootScope, Post, Geoloc, UI, $filter, $routeParams, Socket) {
 
 
 	//POSTS
-
+    function getPosts(){
+        Post.get(true).then(
+            function (posts){ // les posts sont récupérés !
+                
+                $scope.posts = [];
+                
+                //on inverse les posts
+                $scope.allPosts = $filter('reverse')(posts);
+                $scope.loadPosts(true, true);
+                if(!!$routeParams.search){
+                    $scope.posts = $scope.allPosts;
+                    $scope.filters.search = decodeURI($routeParams.search);
+                }
+            },
+            function (msg){ // erreur lors de la récupération des posts
+                console.log(msg);
+                $scope.posts = false;
+            }
+        );
+    }
+    
 	//Récuperation des posts
-	Post.get().then(
-		function (posts){ // les posts sont récupérés !
-			//on inverse les posts
-			$scope.allPosts = $filter('reverse')(posts);
-			$scope.loadPosts(true);
-			if(!!$routeParams.search){
-				$scope.posts = $scope.allPosts;
-				$scope.filters.search = decodeURI($routeParams.search);
-			}
-		},
-		function (msg){ // erreur lors de la récupération des posts
-			console.log(msg);
-			$scope.posts = false;
-		}
-	);
-
+    getPosts();
+    
+    $rootScope.$on('refreshPosts', getPosts);
+    
 	// Load les posts dans la view
 	$scope.postsLimite = 8;
 
-	$scope.loadPosts = function(force){
-
-		var increm = 4;
+	$scope.loadPosts = function(force, noIncrem){
+        
+        if(noIncrem){
+            var increm = 0;
+        }else{
+            var increm = 4;
+        }
+        
+        $scope.postsLimite += increm;
+        
 		//si il reste des posts à charger dans allPosts
 		if($scope.postsLimite <= $scope.allPosts.length + increm || force){
 
@@ -49,7 +64,6 @@ app.controller('HomeCtrl',['$scope', '$rootScope', 'Post', 'Geoloc', 'UI', '$fil
 				$scope.geoloc.addPostMarker(post);
 			}
 
-			$scope.postsLimite += increm;
 
 			$scope.$emit('postsLoaded');
 		}

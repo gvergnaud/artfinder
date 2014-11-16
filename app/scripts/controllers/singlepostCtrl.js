@@ -9,28 +9,36 @@
  */
 app.controller('SinglepostCtrl',['$scope', '$rootScope', '$routeParams', 'Post', 'UI', 'Auth', 'Session', 'Geoloc', '$filter', function ($scope, $rootScope, $routeParams, Post, UI, Auth, Session, Geoloc, $filter) {
 	
-	//Récuperation des posts
-	Post.find($routeParams.id).then(
-		function (post){ // les posts sont récupérés !
-			$scope.post =  post;		
-			
-			Post.getClosePosts(post, 5).then(
-				function(closePosts){
-					$scope.closePosts = closePosts;
-				}
-			);
+	//POSTS
+    function getPost(){
+        Post.find($routeParams.id, true).then(
+            function (post){ // les posts sont récupérés !
+                $scope.post =  post;		
 
-			UI.singlepost.togglePlayerArrows($scope);
-			setTimeout(function(){
-				UI.singlepost.tagStyles();
-			}, 300);
-		},
-		function (msg){ // erreur lors de la récupération des posts
-			UI.notification('error', msg);
-			$scope.post = false;
-		}
-	);
+                Post.getClosePosts(post, 5).then(
+                    function(closePosts){
+                        $scope.closePosts = closePosts;
+                    }
+                );
 
+                UI.singlepost.togglePlayerArrows($scope);
+                setTimeout(function(){
+                    UI.singlepost.tagStyles();
+                }, 300);
+            },
+            function (msg){ // erreur lors de la récupération des posts
+                UI.notification('error', msg);
+                $scope.post = false;
+            }
+        );
+    }
+
+    //Récuperation du post
+    getPost();
+
+    $rootScope.$on('refreshPosts', getPost);
+    
+    
 	//Initialisationde l'ui
 	UI.singlepost.init();
 
