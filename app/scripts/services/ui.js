@@ -253,31 +253,47 @@ app.factory('UI', function UI() {
             selection: false,
 
             init:function(){
+                ui.singlepost.player = angular.element(document.querySelectorAll('#player')),
+                ui.singlepost.img = angular.element(document.querySelectorAll('section#player img')),
+                ui.singlepost.arrows = [angular.element(document.querySelectorAll('nav#prev')), angular.element(document.querySelectorAll('nav#next'))];
 
                 ui.singlepost.style();
                 window.addEventListener('resize', ui.singlepost.style, false);
                 window.addEventListener('resize', ui.singlepost.tagStyles, false);
+                window.addEventListener('resize', ui.singlepost.imgStyle, false);
             },
 
             style: function(){
 
-                var player = angular.element(document.querySelectorAll('#player')),
-                    img = angular.element(document.querySelectorAll('section#player img')),
-                    arrows = [angular.element(document.querySelectorAll('nav#prev')), angular.element(document.querySelectorAll('nav#next'))];
-
-                player.css({
+                ui.singlepost.player.css({
                     height: window.innerHeight - 100 + 'px'
                 });
-
-                img.css({
-                    height: window.innerHeight - 100 + 'px',
-                });
-
-                angular.forEach(arrows, function(value, key) {
+                
+                angular.forEach(ui.singlepost.arrows, function(value, key) {
                     value.css({
                         top: (window.innerHeight - 200)/2 + 'px',
                     });
                 });
+            },
+
+            imgStyle: function(){
+                var playerRatio = (window.innerWidth-80) / (window.innerHeight-100);
+                var imgRatio = ui.singlepost.img[0].offsetWidth/ui.singlepost.img[0].offsetHeight;
+
+                if(playerRatio < imgRatio){
+                    ui.singlepost.img.css({
+                        width: window.innerWidth - ui.menuWidth + 'px',
+                        height: '',
+                        marginTop: Math.abs((window.innerHeight - 100 - ui.singlepost.img[0].offsetHeight)/2) + 'px'
+                    });
+
+                }else{
+                    ui.singlepost.img.css({
+                        height: window.innerHeight - 100 + 'px',
+                        width: '',
+                        marginTop: ''
+                    });   
+                }
             },
 
             tagStyles: function(){
@@ -287,7 +303,8 @@ app.factory('UI', function UI() {
                 if(!!img){
                     tagWrapper.css({
                         height: img[img.length-1].clientHeight + 'px',
-                        width:  img[img.length-1].clientWidth + 'px'
+                        width:  img[img.length-1].clientWidth + 'px',
+                        top: img[img.length-1].offsetTop + 'px'
                     });	
                 }
             },

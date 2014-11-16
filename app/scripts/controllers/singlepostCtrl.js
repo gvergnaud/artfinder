@@ -42,10 +42,13 @@ app.controller('SinglepostCtrl',['$scope', '$rootScope', '$routeParams', 'Post',
 	//Initialisationde l'ui
 	UI.singlepost.init();
 
-
 	$scope.currentPhotoId = 0;
  	$scope.img = angular.element(document.querySelectorAll('section#player img'));
  	$scope.arrows = [angular.element(document.querySelectorAll('nav#prev')), angular.element(document.querySelectorAll('nav#next'))];
+
+ 	$scope.img.on('load', function(){
+		UI.singlepost.imgStyle();
+ 	});
 
 	//Changer l'image avec prev
 	$scope.arrows[0].on('click', function(){
