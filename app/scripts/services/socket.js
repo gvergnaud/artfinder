@@ -14,7 +14,7 @@ app.factory('Socket', function Socket($rootScope) {
         init: function(){
             if(!io){ return; }
 
-            var socket = io.connect('https://artfindersocket.herokuapp.com/');
+            var socket = io.connect('localhost:3000');
             socket.on('refreshPosts', factory.refreshPosts);
         },
         
