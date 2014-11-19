@@ -144,6 +144,7 @@ app.factory('Post', function Post($http, $q, Session, Socket) {
                     factory.posts = posts;
                     factory.save(posts).then(
                         function(data){
+                            Socket.postsChanged(newPost.id);
                             deferred.resolve(newPost.id);
                         },
                         function(msg){
@@ -184,8 +185,9 @@ app.factory('Post', function Post($http, $q, Session, Socket) {
                         console.log(typeof response);
                         deferred.reject('problème lors de l\'enregistrment');
                     }else{
+
                         deferred.resolve(response);
-                        Socket.postsChanged();
+        
                     }
                 })
                 .error(function (data, status){
@@ -215,6 +217,7 @@ app.factory('Post', function Post($http, $q, Session, Socket) {
                     factory.posts = posts;
                     factory.save(posts).then(
                         function(data){
+                            Socket.postsChanged(postId);
                             deferred.resolve(data);
                         },
                         function(msg){
@@ -260,6 +263,7 @@ app.factory('Post', function Post($http, $q, Session, Socket) {
                     factory.posts = posts;
                     factory.save(posts).then(
                         function(data){
+                            Socket.postsChanged(post.id);
                             deferred.resolve(data);
                         },
                         function(msg){
@@ -295,6 +299,7 @@ app.factory('Post', function Post($http, $q, Session, Socket) {
                     //on sauvegarde notre nouvel objet posts
                     factory.save(posts).then(
                         function (data){
+                            Socket.postsChanged(postId);
                             deferred.resolve(data);
                         },
                         function (msg){
@@ -330,6 +335,7 @@ app.factory('Post', function Post($http, $q, Session, Socket) {
                     //on sauvegarde notre nouvel objet posts
                     factory.save(posts).then(
                         function (data){
+                            Socket.postsChanged(postId);
                             deferred.resolve(data);
                         },
                         function (msg){

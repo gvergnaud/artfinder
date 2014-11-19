@@ -225,27 +225,61 @@ body{
 	height:100%;
 	width: 100%;
 	display: block;
-}
 
-.animated.ng-enter{
 	transition: .5s cubic-bezier(0.645,.045,.355,1);
 	-moz-transition: .5s cubic-bezier(0.645,.045,.355,1);
 	-webkit-transition: .5s cubic-bezier(0.645,.045,.355,1);
+}
 
+.slide.ng-enter{
 	-webkit-transform: translate3d(150%,0,0);
 	-moz-transform: translate3d(150%,0,0);
 	-o-transform: translate3d(150%,0,0);
 	transform: translate3d(150%,0,0);
 }
 
-.animated.ng-enter-active{
+.slide.ng-enter-active{
 	-webkit-transform: translate3d(0,0,0);
 	-moz-transform: translate3d(0,0,0);
 	-o-transform: translate3d(0,0,0);
 	transform: translate3d(0,0,0);
 }
 
-.animated.ng-leave{
+.slide.ng-leave{
+	-webkit-transform: translate3d(0,0,0);
+	-moz-transform: translate3d(0,0,0);
+	-o-transform: translate3d(0,0,0);
+	transform: translate3d(0,0,0);
+}
+
+.slide.ng-leave-active{
+	-webkit-transform: translate3d(-50%,0,0);
+	-moz-transform: translate3d(-50%,0,0);
+	-o-transform: translate3d(-50%,0,0);
+	transform: translate3d(-50%,0,0);
+}
+
+/* BACK */
+
+.back.ng-enter{
+	transition: .5s cubic-bezier(0.645,.045,.355,1);
+	-moz-transition: .5s cubic-bezier(0.645,.045,.355,1);
+	-webkit-transition: .5s cubic-bezier(0.645,.045,.355,1);
+
+	-webkit-transform: translate3d(-150%,0,0);
+	-moz-transform: translate3d(-150%,0,0);
+	-o-transform: translate3d(-150%,0,0);
+	transform: translate3d(-150%,0,0);
+}
+
+.back.ng-enter-active{
+	-webkit-transform: translate3d(0,0,0);
+	-moz-transform: translate3d(0,0,0);
+	-o-transform: translate3d(0,0,0);
+	transform: translate3d(0,0,0);
+}
+
+.back.ng-leave{
 	transition: .5s cubic-bezier(0.645,.045,.355,1);
 	-moz-transition: .5s cubic-bezier(0.645,.045,.355,1);
 	-webkit-transition: .5s cubic-bezier(0.645,.045,.355,1);
@@ -256,11 +290,11 @@ body{
 	transform: translate3d(0,0,0);
 }
 
-.animated.ng-leave-active{
-	-webkit-transform: translate3d(-50%,0,0);
-	-moz-transform: translate3d(-50%,0,0);
-	-o-transform: translate3d(-50%,0,0);
-	transform: translate3d(-50%,0,0);
+.back.ng-leave-active{
+	-webkit-transform: translate3d(50%,0,0);
+	-moz-transform: translate3d(50%,0,0);
+	-o-transform: translate3d(50%,0,0);
+	transform: translate3d(50%,0,0);
 }
 
 /* LOGIN */

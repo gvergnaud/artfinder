@@ -2,7 +2,7 @@
 	try
 	{
 		//$bdd = new PDO('mysql:host=db405508102.db.1and1.com;dbname=db405508102', 'dbo405508102','Dbnight');
-		$bdd = new PDO('mysql:host=localhost;dbname=artfinder', 'root', '');
+		$bdd = new PDO('mysql:host=localhost;dbname=artfinder', 'root', 'root');
 	}
 	catch (Exception $e)
 	{

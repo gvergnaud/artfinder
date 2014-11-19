@@ -274,25 +274,22 @@ app.factory('UI', function UI() {
                         top: (window.innerHeight - 200)/2 + 'px',
                     });
                 });
+
+                ui.singlepost.img.css({
+                    height: window.innerHeight - 100 + 'px',
+                    width: '',
+                    marginTop: ''
+                }); 
             },
 
             imgStyle: function(){
-                var playerRatio = (window.innerWidth-80) / (window.innerHeight-100);
-                var imgRatio = ui.singlepost.img[0].offsetWidth/ui.singlepost.img[0].offsetHeight;
 
-                if(playerRatio < imgRatio){
+                if(ui.singlepost.img[0].offsetWidth > window.innerWidth-100){
                     ui.singlepost.img.css({
                         width: window.innerWidth - ui.menuWidth + 'px',
                         height: '',
                         marginTop: Math.abs((window.innerHeight - 100 - ui.singlepost.img[0].offsetHeight)/2) + 'px'
                     });
-
-                }else{
-                    ui.singlepost.img.css({
-                        height: window.innerHeight - 100 + 'px',
-                        width: '',
-                        marginTop: ''
-                    });   
                 }
             },
 

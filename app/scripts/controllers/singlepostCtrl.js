@@ -36,7 +36,12 @@ app.controller('SinglepostCtrl',['$scope', '$rootScope', '$routeParams', 'Post',
     //Récuperation du post
     getPost();
 
-    $rootScope.$on('refreshPosts', getPost);
+    $rootScope.$on('refreshPosts', function(e, info){
+    	console.log(info);
+    	if(info.postId == $scope.post.id){
+    		getPost();
+    	}
+    });
     
     
 	//Initialisationde l'ui
@@ -46,9 +51,9 @@ app.controller('SinglepostCtrl',['$scope', '$rootScope', '$routeParams', 'Post',
  	$scope.img = angular.element(document.querySelectorAll('section#player img'));
  	$scope.arrows = [angular.element(document.querySelectorAll('nav#prev')), angular.element(document.querySelectorAll('nav#next'))];
 
- 	$scope.img.on('load', function(){
-		UI.singlepost.imgStyle();
- 	});
+ 	// $scope.img.on('load', function(){
+		// UI.singlepost.imgStyle();
+ 	// });
 
 	//Changer l'image avec prev
 	$scope.arrows[0].on('click', function(){

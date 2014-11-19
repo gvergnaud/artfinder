@@ -8,7 +8,7 @@
  * Controller of the artFinderApp
  */
 
-app.controller('HomeCtrl',['$scope', '$rootScope', 'Post', 'Geoloc', 'UI', '$filter', '$routeParams', 'Socket', function ($scope, $rootScope, Post, Geoloc, UI, $filter, $routeParams, Socket) {
+app.controller('HomeCtrl',['$scope', '$rootScope', 'Post', 'Geoloc', 'UI', '$filter', '$routeParams', function ($scope, $rootScope, Post, Geoloc, UI, $filter, $routeParams) {
 
 
 	//POSTS
@@ -39,6 +39,8 @@ app.controller('HomeCtrl',['$scope', '$rootScope', 'Post', 'Geoloc', 'UI', '$fil
     $rootScope.$on('refreshPosts', getPosts);
     
 	// Load les posts dans la view
+
+
 	$scope.postsLimite = 8;
 
 	$scope.loadPosts = function(force, noIncrem){

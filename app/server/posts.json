@@ -135,6 +135,13 @@
                 "username": "gab",
                 "activePhoto": 1,
                 "date": "03\/11\/2014"
+            },
+            {
+                "content": "haha",
+                "timestamp": 1416390146049,
+                "username": "Gabriel",
+                "activePhoto": 1,
+                "date": "19\/11\/2014"
             }
         ],
         "likes": [

@@ -14,21 +14,21 @@ app.factory('Socket', function Socket($rootScope) {
         init: function(){
             if(!io){ return; }
 
-            var socket = io.connect('https://artfindersocket.herokuapp.com/');
-            socket.on('refreshPosts', factory.refreshPosts);
+            this.socket = io.connect('localhost:3000');  //  https://artfindersocket.herokuapp.com/
+            this.socket.on('refreshPosts', factory.refreshPosts);
         },
         
-        postsChanged: function(){
+        postsChanged: function(postId){
             if(!io){ return; }
         
-            socket.emit('postsChanged');
+            this.socket.emit('postsChanged', {postId: postId});
             
         },
         
-        refreshPosts: function(){
+        refreshPosts: function(info){
             if(!io){ return; }
 
-            $rootScope.$emit('refreshPosts');
+            $rootScope.$emit('refreshPosts', info);
         }
         
     };

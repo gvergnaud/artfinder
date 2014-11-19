@@ -7,7 +7,7 @@
  * # AppctrlCtrl
  * Controller of the artFinderApp
  */
-app.controller('appCtrl', function ($scope, $rootScope, Session, Auth, UI, AUTH_EVENTS, USER_ROLES, Geoloc) {
+app.controller('appCtrl', function ($scope, $rootScope, Session, Auth, UI, AUTH_EVENTS, USER_ROLES, Geoloc, Socket) {
 
     //LOADER 
     //
@@ -64,8 +64,16 @@ app.controller('appCtrl', function ($scope, $rootScope, Session, Auth, UI, AUTH_
     $scope.animation = '';
 
     setTimeout(function(){
-        $scope.animation = "animated";
+        $scope.setSlideAnimation();
     }, 1000);
+
+    $scope.setSlideAnimation = function(){
+        $scope.animation = "slide";
+    };
+
+    $scope.setBackAnimation = function(){
+        $scope.animation = "back";
+    };
 
     // ANIMATION MENU 
     angular.element(document.querySelector('header.menu')).on('mouseenter mouseleave', function(){
@@ -127,6 +135,15 @@ app.controller('appCtrl', function ($scope, $rootScope, Session, Auth, UI, AUTH_
     //Redirection 
     //
     $scope.redirectTo = function(page, param){
+        var hashtab = window.location.hash.split('/'),
+            currentPage = hashtab[1];
+
+
+        if(currentPage === 'singlepost' && (!page || page === 'search')){
+            $scope.setBackAnimation();
+        }else{
+            $scope.setSlideAnimation();
+        }
 
         $scope.smoothScrollTo('#container', function(){
 
@@ -151,5 +168,11 @@ app.controller('appCtrl', function ($scope, $rootScope, Session, Auth, UI, AUTH_
             }
 
         });
+    };
+
+    //Sockets send
+    $scope.socket = function(postId){
+        console.log('socket send');
+        Socket.postsChanged(postId);
     };
 });
