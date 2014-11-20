@@ -129,6 +129,35 @@ app.controller('SinglepostCtrl',['$scope', '$rootScope', '$routeParams', 'Post',
 		}
  	};
 
+ 	$scope.deleteComment = function(comment){
+
+		if(Auth.isAuthenticated()){ //si l'utilisateur est identifé
+			if(Session.userId === comment.user.id){
+				Post.deleteComment($scope.post.id, comment.id).then(
+					function(posts){
+						Post.find($routeParams.id).then(
+							function (post){ // les posts sont récupérés !
+								$scope.post =  post;
+							},
+							function (msg){ // erreur lors de la récupération des posts
+								UI.notification('error', msg);
+								$scope.post = false;
+							}
+						);
+						UI.notification('success', 'Commentaire supprimé');
+					},
+					function(msg){
+						UI.notification('error', msg);
+					}
+				);
+			}else{
+				UI.notification('error', 'Vous n\'êtes pas l\'auteur de ce commentaire.')
+			}
+ 		}else{
+			UI.notification('', 'Vous devez etre connecté !');
+		}
+ 	};
+
  	$scope.likePost = function(){
 
 		if(Auth.isAuthenticated()){ //si l'utilisateur est identifé

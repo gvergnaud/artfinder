@@ -460,10 +460,10 @@ p.notification.show{
 
 .post img{
 	position: absolute;
-	top:0;
-	left:0;
+	top:50%;
+	left:50%;
 	width:100%;
-	transform: translateY(-10%);
+	transform: translate(-50%, -50%);
 	height: auto;
 	z-index:0;
 }

@@ -32,6 +32,9 @@ app.factory('Post', function Post($http, $q, Session, Socket) {
         		$http.get('server/posts.json?' + new Date().getTime())
         			.success(function (data, status){
         				factory.posts = data;
+
+                        factory.saveInLocalStorage(data);
+
         				deferred.resolve(factory.posts);
         			})
         			.error(function (data, status){
@@ -209,7 +212,49 @@ app.factory('Post', function Post($http, $q, Session, Socket) {
                     //on ajoute notre newComment a la liste de commentaire de notre post
                     angular.forEach(posts, function (value, key){
                         if(value.id === postId){
+                            newComment.id = value.comments.length; //on ajoute un id a notre nouveau commentaire
                             value.comments.push(newComment);
+                        }
+                    });
+                    
+                    //on sauvegarde notre nouvel objet posts
+                    factory.posts = posts;
+                    factory.save(posts).then(
+                        function(data){
+                            Socket.postsChanged(postId);
+                            deferred.resolve(data);
+                        },
+                        function(msg){
+                            deferred.reject(msg);
+                            console.log(msg);
+                        }
+                    );
+
+                },
+                function (msg){
+                    deferred.reject(msg);
+                }
+            );
+
+            return deferred.promise;
+        },
+
+        deleteComment: function(postId, commentId){
+            var deferred = $q.defer();
+
+            //on récupere tous les posts au cas ou il y aurait eu une modification du fichier sur le server
+            factory.get(true).then(
+                function (posts){
+
+                    //on ajoute notre newComment a la liste de commentaire de notre post
+                    angular.forEach(posts, function (value, key){
+                        if(value.id === postId){
+                            angular.forEach(value.comments, function (comment, key){
+                                if(comment.id === commentId){
+                                    value.comments.splice(value.comments.indexOf(comment), 1);
+                                    return;
+                                }
+                            });
                         }
                     });
                     
@@ -351,6 +396,22 @@ app.factory('Post', function Post($http, $q, Session, Socket) {
             );
 
             return deferred.promise;
+        },
+
+        saveInLocalStorage: function(posts){
+            if(localStorage){
+                localStorage.setItem('ArtFinderPosts', posts);
+            }else{
+                return false;
+            }
+        },
+
+        getFromLocalStorage: function(){
+            if(localStorage){
+                return localStorage.getItem('ArtFinderPosts');
+            }else{
+                return false;
+            }
         }
     };
 

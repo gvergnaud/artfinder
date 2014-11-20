@@ -52,6 +52,7 @@
 					<h3>{{post.comments.length}} Commentaires</h3>
 					<div ng-repeat="comment in post.comments">
 						<div class="comment">
+							<div class="deleteComment" ng-click="deleteComment(comment)" ng-if="comment.user.id === currentUser.id">delete</div>
 							<img class="avatar" ng-src="{{comment.user.avatar}}" />
 							<div class="comment_info">
 								<h3 class="username">{{comment.user.username}}</h3><span class="activephoto"> Watching picture n°{{comment.activePhoto}}</span>

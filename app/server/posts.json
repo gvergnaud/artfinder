@@ -126,7 +126,8 @@
         "comments": [],
         "likes": [
             "gab",
-            "Gabriel"
+            "Gabriel",
+            "Gabriel Vergnaud"
         ],
         "id": 1
     },
@@ -200,21 +201,7 @@
             "longitude": 2.3431777954102
         },
         "address": "37 Rue Rodier, 75009 Paris, France",
-        "comments": [
-            {
-                "content": "haha",
-                "timestamp": 1416411865172,
-                "user": {
-                    "statut": "success",
-                    "id": "1",
-                    "username": "Gabriel",
-                    "role": "editor",
-                    "avatar": "images\/avatar-default.jpg"
-                },
-                "activePhoto": 1,
-                "date": "19\/11\/2014"
-            }
-        ],
+        "comments": [],
         "likes": [
             "gab"
         ],
@@ -244,34 +231,7 @@
             "longitude": 2.3874664306641
         },
         "address": "39 Rue de Montreuil, 75011 Paris, France",
-        "comments": [
-            {
-                "content": "haha",
-                "timestamp": 1416411559099,
-                "user": {
-                    "statut": "success",
-                    "id": "1",
-                    "username": "Gabriel",
-                    "role": "editor",
-                    "avatar": "images\/avatar-default.jpg"
-                },
-                "activePhoto": 1,
-                "date": "19\/11\/2014"
-            },
-            {
-                "content": "yes",
-                "timestamp": 1416412675192,
-                "user": {
-                    "statut": "success",
-                    "id": "1",
-                    "username": "Gabriel",
-                    "role": "editor",
-                    "avatar": "images\/avatar-default.jpg"
-                },
-                "activePhoto": 1,
-                "date": "19\/11\/2014"
-            }
-        ],
+        "comments": [],
         "likes": [
             "gab",
             "lol"
@@ -454,7 +414,9 @@
         "comments": [],
         "likes": [
             "gab",
-            "lol"
+            "lol",
+            "Gabriel",
+            "Gabriel Vergnaud"
         ],
         "id": 9
     },
@@ -625,8 +587,47 @@
         "address": "10 Rue de Brosse, 75004 Paris, France",
         "comments": [],
         "likes": [
-            "Gabriel"
+            "Gabriel",
+            "Gabriel Vergnaud"
         ],
         "id": 14
+    },
+    {
+        "photos": [
+            {
+                "stillExist": false,
+                "description": "C'est triste.",
+                "url": "http:\/\/localhost\/artfinder\/app\/images\/uploads\/1416520748banksy-dreams_00349040.jpg",
+                "artists": [
+                    {
+                        "left": 14.166666666667,
+                        "top": 3.7037037037037,
+                        "width": 73.25,
+                        "height": 76.148148148148,
+                        "name": "banksy"
+                    }
+                ],
+                "technique": "pochoir",
+                "user": {
+                    "statut": "success",
+                    "id": "13",
+                    "username": "Gabriel Vergnaud",
+                    "role": "editor",
+                    "avatar": "https:\/\/graph.facebook.com\/862339243816494\/picture"
+                },
+                "userId": 13,
+                "date": 1416520800013
+            }
+        ],
+        "coords": {
+            "latitude": 48.855482243934,
+            "longitude": 2.3339080810547
+        },
+        "address": "30 Rue Bonaparte, 75006 Paris, France",
+        "comments": [],
+        "likes": [
+            "Gabriel Vergnaud"
+        ],
+        "id": 15
     }
 ]

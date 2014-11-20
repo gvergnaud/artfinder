@@ -222,6 +222,11 @@ div.comment{
 	border-bottom: 1px solid #aaa;
 }
 
+div.deleteComment{
+	float: right;
+	cursor: pointer;
+}
+
 div.desc{
 	min-height: 50px;
 	background:#eeeeee;

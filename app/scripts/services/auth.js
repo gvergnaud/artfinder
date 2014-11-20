@@ -41,6 +41,34 @@ app.factory('Auth', function Auth($http, $q, Session) {
 
         },
 
+        loginWithFacebook: function(facebookLoginInfos){
+            var deferred = $q.defer();
+
+            $http({
+                url: 'login_with_facebook.php',
+                method: 'post',
+                data: facebookLoginInfos
+            })
+            .success(function (user, status){
+                if(user.statut === 'success'){
+
+                    console.log('auth reussit');
+                    Session.create(user.id, user.username, user.role, user.avatar);
+                    deferred.resolve(user);
+
+                }else if(user.statut === 'error'){
+
+                    console.log(user.desc);
+                    deferred.reject(user.desc);
+                }
+            })
+            .error(function (data, status){
+                deferred.reject('Impossible de se connecter.' + status);
+            });
+
+            return deferred.promise;
+        },
+
         signUp: function(signUpInfos){
             var deferred = $q.defer();
 

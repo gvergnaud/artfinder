@@ -7,7 +7,7 @@
  * # AddpostCtrl
  * Controller of the artFinderApp
  */
-app.controller('signCtrl', function ($scope, $rootScope, UI, AUTH_EVENTS, Auth, Session) {
+app.controller('signCtrl', function ($scope, $rootScope, UI, AUTH_EVENTS, Auth, Facebook, Session) {
 	$scope.loginInfos = {};
 	$scope.signUpInfos = {};
 
@@ -19,15 +19,21 @@ app.controller('signCtrl', function ($scope, $rootScope, UI, AUTH_EVENTS, Auth, 
 
 	//si le localStorage existe, on recupère le user
 	if(!!localStorage.getItem('ArtFinderUser')){
+
 		var user = JSON.parse(localStorage.getItem('ArtFinderUser'));
+
 		Session.create(user.id, user.username, user.role, user.avatar);
+
 		$rootScope.$broadcast(AUTH_EVENTS.loginSuccess);
+
 		$scope.setCurrentUser(user);
+
 		setTimeout(function(){
 			UI.notification('success', 'Heureux de vous revoir ' + Session.username);
 		},500);
 	}
 
+	// Login
 	$rootScope.login = function(){
 		
 		if(!Auth.isAuthenticated()){ //si l'utilisateur n'est pas identifé
@@ -105,10 +111,11 @@ app.controller('signCtrl', function ($scope, $rootScope, UI, AUTH_EVENTS, Auth, 
 		
 	};
 
-	$rootScope.logOut = function() {
+	$rootScope.logout = function() {
 
-		if ($scope.facebook.logged === true){
-			$scope.facebook.logOut();
+		if ($scope.loggedWithFB === true){
+			Facebook.logout();
+			$scope.loggedWithFB = false;
 		}
 
 		if(!!localStorage.getItem('ArtFinderUser')){
@@ -119,105 +126,77 @@ app.controller('signCtrl', function ($scope, $rootScope, UI, AUTH_EVENTS, Auth, 
 		UI.notification(false, 'À bientôt !');
 
 		console.log('logout');
-	}
+	};
 
 	//FACEBOOK
 	// This is called with the results from from FB.getLoginStatus().
-	$rootScope.facebook = {
+	$scope.loggedWithFB = false;
 
-		logged: false,
-		
-		init: function(){
-			window.fbAsyncInit = function() {
-				FB.init({
-					appId: '306208576247087',
-					cookie     : true,  // enable cookies to allow the server to access 
-					// the session
-					xfbml      : true,  // parse social plugins on this page
-					version    : 'v2.1' // use version 2.1
-				});
-
-				// Now that we've initialized the JavaScript SDK, we call 
-				// FB.getLoginStatus().  This function gets the state of the
-				// person visiting this page and can return one of three states to
-				// the callback you provide.  They can be:
-				//
-				// 1. Logged into your app ('connected')
-				// 2. Logged into Facebook, but not your app ('not_authorized')
-				// 3. Not logged into Facebook and can't tell if they are logged into
-				//    your app or not.
-				//
-				// These three cases are handled in the callback function.
-
-				FB.getLoginStatus(function(response) {
-					$rootScope.facebook.statusChangeCallback(response);
-				});
-
-			};
-
-			// Load the SDK asynchronously
-			(function(d, s, id) {
-				var js, fjs = d.getElementsByTagName(s)[0];
-				if (d.getElementById(id)) return;
-				js = d.createElement(s); js.id = id;
-				js.src = "//connect.facebook.net/en_US/sdk.js";
-				fjs.parentNode.insertBefore(js, fjs);
-			}(document, 'script', 'facebook-jssdk'));
+	$scope.$watch(
+    	function() {
+    		return Facebook.isReady();
 		},
-
-		statusChangeCallback: function(response) {
-			console.log('statusChangeCallback');
-			console.log(response);
-			// The response object is returned with a status field that lets the
-			// app know the current login status of the person.
-			// Full docs on the response object can be found in the documentation
-			// for FB.getLoginStatus().
-			if (response.status === 'connected') {
-			// Logged into your app and Facebook.
-			$rootScope.facebook.logged = true;
-			$rootScope.facebook.getUserInfos();
-
-			} else if (response.status === 'not_authorized') {
-				// The person is logged into Facebook, but not your app.
-				UI.notification('Please log into this app.');
-			} else {
-				// The person is not logged into Facebook, so we're not sure if
-				// they are logged into this app or not.
-				UI.notification('Please log into Facebook.');
-			}
-		},
-
-		// This function is called when someone finishes with the Login
-		// Button.  See the onlogin handler attached to it in the sample
-		// code below.
-		checkLoginState: function() {
-			console.log('checkLoginState');
-			FB.getLoginStatus(function(response) {
-				console.log(response);
-				$rootScope.facebook.statusChangeCallback(response);
-			});
-		},
-		
-		// Here we run a very simple test of the Graph API after login is
-		// successful.  See statusChangeCallback() for when this call is made.
-		
-		getUserInfos: function () {
-
-			console.log('Welcome!  Fetching your information.... ');
-
-			FB.api('/me', function(response) {
-				console.log(response);
-				console.log('oui');
-			});
-		},
-
-		logOut: function () {
-			FB.logout(function(response) {
-		        console.log(response);
-		    });
+		function(newVal) {
+			if (newVal)
+				$scope.facebookReady = true;
 		}
-			
-	};
+	);
 
-	$rootScope.facebook.init();
+	$scope.loginWithFacebook = function() {
+    // From now on you can use the Facebook service just as Facebook api says
+    	if(!$scope.loggedWithFB){
+			Facebook.login(function(response) {
+				// Do something with response.
+				$scope.loggedWithFB = true;
+				$scope.me();
+		    });
+    	}
+    };
+
+    $scope.getLoginStatus = function() {
+    	Facebook.getLoginStatus(function(response) {
+			if(response.status === 'connected') {
+				//$scope.loggedIn = true;
+        	} else {
+				//$scope.loggedIn = false;
+        	}
+    	});
+    };
+
+    $scope.me = function() {
+    	Facebook.api('/me', function(response) {
+        	//$scope.user = response;
+        	console.log(response);
+
+        	var facebookLoginInfos = {
+        		facebook_id: response.id,
+        		mail: response.email,
+        		username: response.name,
+        		avatar: 'https://graph.facebook.com/' + response.id + '/picture'
+        	};
+
+        	if(!Auth.isAuthenticated()){ //si l'utilisateur n'est pas identifé
+
+
+				Auth.loginWithFacebook(facebookLoginInfos).then(
+					function (user) {
+						$rootScope.$broadcast(AUTH_EVENTS.loginSuccess);
+						$scope.setCurrentUser(user);
+						$scope.toggleLoginOverlay();
+						UI.notification('success', 'Heureux de vous revoir ' + Session.username);
+
+					}, function (msg) {
+						
+						$rootScope.$broadcast(AUTH_EVENTS.loginFailed);
+						if(msg ==='no data'){
+							UI.notification('error', 'Aucune donnée reçue.');
+						}
+					}
+				);
+				
+			}else{
+				UI.notification('error', 'Vous êtes déjà identifié.');
+			}
+   		});
+    };
 });
