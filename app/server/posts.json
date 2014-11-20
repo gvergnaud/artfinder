@@ -35,7 +35,13 @@
                     }
                 ],
                 "technique": "collage",
-                "username": "gab",
+                "user": {
+                    "statut": "success",
+                    "id": "1",
+                    "username": "Gabriel",
+                    "role": "editor",
+                    "avatar": "images\/avatar-default.jpg"
+                },
                 "date": 1414921768310,
                 "description": "Un mur bien remplis.",
                 "userId": 13
@@ -46,7 +52,13 @@
                 "url": "images\/uploads\/1414923587konnysteding2.jpg",
                 "artists": [],
                 "technique": "collage",
-                "username": "gab",
+                "user": {
+                    "statut": "success",
+                    "id": "1",
+                    "username": "Gabriel",
+                    "role": "editor",
+                    "avatar": "images\/avatar-default.jpg"
+                },
                 "userId": 13,
                 "date": 1414923609300
             },
@@ -56,7 +68,13 @@
                 "url": "images\/uploads\/1415134381P2017_Vergnaud-Gabriel_colorisation.jpg",
                 "artists": [],
                 "technique": "peinture",
-                "username": "gab",
+                "user": {
+                    "statut": "success",
+                    "id": "1",
+                    "username": "Gabriel",
+                    "role": "editor",
+                    "avatar": "images\/avatar-default.jpg"
+                },
                 "userId": 13,
                 "date": 1415134477536
             }
@@ -66,15 +84,7 @@
             "longitude": 2.3673927783966
         },
         "address": "2 Rue de la Bastille, 75004 Paris, France",
-        "comments": [
-            {
-                "content": "Oui",
-                "timestamp": 1415052283202,
-                "username": "gab",
-                "activePhoto": 1,
-                "date": "03\/11\/2014"
-            }
-        ],
+        "comments": [],
         "likes": [
             "gab",
             "Gabriel"
@@ -97,7 +107,13 @@
                     }
                 ],
                 "technique": "pochoir",
-                "username": "gab",
+                "user": {
+                    "statut": "success",
+                    "id": "1",
+                    "username": "Gabriel",
+                    "role": "editor",
+                    "avatar": "images\/avatar-default.jpg"
+                },
                 "userId": 13,
                 "date": 1414922746876
             }
@@ -107,45 +123,10 @@
             "longitude": 2.3358821868896
         },
         "address": "29-31 Rue de Buci, 75006 Paris, France",
-        "comments": [
-            {
-                "content": "Trop Bath",
-                "timestamp": 1414923554687,
-                "username": "gab",
-                "activePhoto": 1,
-                "date": "02\/11\/2014"
-            },
-            {
-                "content": "Du tonnerre",
-                "timestamp": 1415052708523,
-                "username": "gab",
-                "activePhoto": 1,
-                "date": "03\/11\/2014"
-            },
-            {
-                "content": "fantastique.",
-                "timestamp": 1415052722107,
-                "username": "gab",
-                "activePhoto": 1,
-                "date": "03\/11\/2014"
-            },
-            {
-                "content": "Je suis trop facin\u00e9",
-                "timestamp": 1415052782095,
-                "username": "gab",
-                "activePhoto": 1,
-                "date": "03\/11\/2014"
-            },
-            {
-                "content": "haha",
-                "timestamp": 1416390146049,
-                "username": "Gabriel",
-                "activePhoto": 1,
-                "date": "19\/11\/2014"
-            }
-        ],
+        "comments": [],
         "likes": [
-            "gab"
+            "gab",
+            "Gabriel"
         ],
         "id": 1
     },
@@ -165,7 +146,13 @@
                     }
                 ],
                 "technique": "pochoir",
-                "username": "gab",
+                "user": {
+                    "statut": "success",
+                    "id": "1",
+                    "username": "Gabriel",
+                    "role": "editor",
+                    "avatar": "images\/avatar-default.jpg"
+                },
                 "userId": 13,
                 "date": 1414923681717
             }
@@ -197,7 +184,13 @@
                     }
                 ],
                 "technique": "sculpture",
-                "username": "gab",
+                "user": {
+                    "statut": "success",
+                    "id": "1",
+                    "username": "Gabriel",
+                    "role": "editor",
+                    "avatar": "images\/avatar-default.jpg"
+                },
                 "userId": 13,
                 "date": 1414923714032
             }
@@ -207,7 +200,21 @@
             "longitude": 2.3431777954102
         },
         "address": "37 Rue Rodier, 75009 Paris, France",
-        "comments": [],
+        "comments": [
+            {
+                "content": "haha",
+                "timestamp": 1416411865172,
+                "user": {
+                    "statut": "success",
+                    "id": "1",
+                    "username": "Gabriel",
+                    "role": "editor",
+                    "avatar": "images\/avatar-default.jpg"
+                },
+                "activePhoto": 1,
+                "date": "19\/11\/2014"
+            }
+        ],
         "likes": [
             "gab"
         ],
@@ -221,7 +228,13 @@
                 "url": "images\/uploads\/14149237471414419330Street-Art-Paris2.jpg",
                 "artists": [],
                 "technique": "pochoir",
-                "username": "gab",
+                "user": {
+                    "statut": "success",
+                    "id": "1",
+                    "username": "Gabriel",
+                    "role": "editor",
+                    "avatar": "images\/avatar-default.jpg"
+                },
                 "userId": 13,
                 "date": 1414923756997
             }
@@ -233,17 +246,35 @@
         "address": "39 Rue de Montreuil, 75011 Paris, France",
         "comments": [
             {
-                "content": "coule",
-                "timestamp": 1415633519571,
-                "username": "lol",
+                "content": "haha",
+                "timestamp": 1416411559099,
+                "user": {
+                    "statut": "success",
+                    "id": "1",
+                    "username": "Gabriel",
+                    "role": "editor",
+                    "avatar": "images\/avatar-default.jpg"
+                },
                 "activePhoto": 1,
-                "date": "10\/11\/2014"
+                "date": "19\/11\/2014"
+            },
+            {
+                "content": "yes",
+                "timestamp": 1416412675192,
+                "user": {
+                    "statut": "success",
+                    "id": "1",
+                    "username": "Gabriel",
+                    "role": "editor",
+                    "avatar": "images\/avatar-default.jpg"
+                },
+                "activePhoto": 1,
+                "date": "19\/11\/2014"
             }
         ],
         "likes": [
             "gab",
-            "lol",
-            "Gabriel"
+            "lol"
         ],
         "id": 4
     },
@@ -263,7 +294,13 @@
                     }
                 ],
                 "technique": "pochoir",
-                "username": "gab",
+                "user": {
+                    "statut": "success",
+                    "id": "1",
+                    "username": "Gabriel",
+                    "role": "editor",
+                    "avatar": "images\/avatar-default.jpg"
+                },
                 "userId": 13,
                 "date": 1414923793926
             }
@@ -273,15 +310,7 @@
             "longitude": 2.3509562015533
         },
         "address": "20 Rue du Clo\u00eetre Saint-Merri, 75004 Paris, France",
-        "comments": [
-            {
-                "content": "hehe",
-                "timestamp": 1415220305837,
-                "username": "gab",
-                "activePhoto": 1,
-                "date": "05\/11\/2014"
-            }
-        ],
+        "comments": [],
         "likes": [
             "gab",
             "Gabriel"
@@ -304,7 +333,13 @@
                         "name": "konny steding"
                     }
                 ],
-                "username": "gab",
+                "user": {
+                    "statut": "success",
+                    "id": "1",
+                    "username": "Gabriel",
+                    "role": "editor",
+                    "avatar": "images\/avatar-default.jpg"
+                },
                 "userId": 13,
                 "date": 1415009339463
             }
@@ -334,7 +369,13 @@
                     }
                 ],
                 "technique": "pochoir",
-                "username": "Gab",
+                "user": {
+                    "statut": "success",
+                    "id": "1",
+                    "username": "Gabriel",
+                    "role": "editor",
+                    "avatar": "images\/avatar-default.jpg"
+                },
                 "userId": 1,
                 "date": 1415176938570
             }
@@ -344,15 +385,7 @@
             "longitude": 2.4616670608521
         },
         "address": "39 Rue de Paris, 93130 Noisy-le-Sec, France",
-        "comments": [
-            {
-                "content": "cool",
-                "timestamp": 1415187134484,
-                "username": "gab",
-                "activePhoto": 1,
-                "date": "05\/11\/2014"
-            }
-        ],
+        "comments": [],
         "likes": [
             "Gabriel"
         ],
@@ -366,7 +399,13 @@
                 "technique": "pochoir",
                 "url": "images\/uploads\/3757893272_6118d6dd06_z.jpg",
                 "artists": [],
-                "username": "Gab",
+                "user": {
+                    "statut": "success",
+                    "id": "1",
+                    "username": "Gabriel",
+                    "role": "editor",
+                    "avatar": "images\/avatar-default.jpg"
+                },
                 "userId": 1,
                 "date": 1415177024702
             }
@@ -396,7 +435,13 @@
                     }
                 ],
                 "technique": "pochoir",
-                "username": "Gab",
+                "user": {
+                    "statut": "success",
+                    "id": "1",
+                    "username": "Gabriel",
+                    "role": "editor",
+                    "avatar": "images\/avatar-default.jpg"
+                },
                 "userId": 1,
                 "date": 1415177124296
             }
@@ -406,15 +451,7 @@
             "longitude": 2.3645925521851
         },
         "address": "123 Boulevard Vincent Auriol, 75013 Paris, France",
-        "comments": [
-            {
-                "content": "Chouette !",
-                "timestamp": 1415650678640,
-                "username": "Gabriel",
-                "activePhoto": 1,
-                "date": "10\/11\/2014"
-            }
-        ],
+        "comments": [],
         "likes": [
             "gab",
             "lol"
@@ -437,7 +474,13 @@
                     }
                 ],
                 "technique": "peinture",
-                "username": "Gab",
+                "user": {
+                    "statut": "success",
+                    "id": "1",
+                    "username": "Gabriel",
+                    "role": "editor",
+                    "avatar": "images\/avatar-default.jpg"
+                },
                 "userId": 1,
                 "date": 1415177239682
             }
@@ -448,7 +491,9 @@
         },
         "address": "3A Passage Julien Lacroix, 75020 Paris, France",
         "comments": [],
-        "likes": [],
+        "likes": [
+            "Gabriel"
+        ],
         "id": 10
     },
     {
@@ -467,7 +512,13 @@
                     }
                 ],
                 "technique": "sculpture",
-                "username": "Gab",
+                "user": {
+                    "statut": "success",
+                    "id": "1",
+                    "username": "Gabriel",
+                    "role": "editor",
+                    "avatar": "images\/avatar-default.jpg"
+                },
                 "userId": 1,
                 "date": 1415177346648
             }
@@ -489,7 +540,13 @@
                 "url": "images\/uploads\/nemo-funambule-1.jpg",
                 "artists": [],
                 "technique": "pochoir",
-                "username": "Gab",
+                "user": {
+                    "statut": "success",
+                    "id": "1",
+                    "username": "Gabriel",
+                    "role": "editor",
+                    "avatar": "images\/avatar-default.jpg"
+                },
                 "userId": 1,
                 "date": 1415177509111
             }
@@ -519,7 +576,13 @@
                         "name": "inti"
                     }
                 ],
-                "username": "Gab",
+                "user": {
+                    "statut": "success",
+                    "id": "1",
+                    "username": "Gabriel",
+                    "role": "editor",
+                    "avatar": "images\/avatar-default.jpg"
+                },
                 "userId": 1,
                 "date": 1415177600029
             }
@@ -531,8 +594,39 @@
         "address": "129 Avenue d'Italie, 75013 Paris, France",
         "comments": [],
         "likes": [
-            "gab"
+            "gab",
+            "Gabriel"
         ],
         "id": 13
+    },
+    {
+        "photos": [
+            {
+                "stillExist": true,
+                "description": "Le joker",
+                "url": "http:\/\/localhost\/artfinder\/app\/images\/uploads\/1416408200joker.jpg",
+                "artists": [],
+                "technique": "pochoir",
+                "user": {
+                    "statut": "success",
+                    "id": "1",
+                    "username": "Gabriel",
+                    "role": "editor",
+                    "avatar": "images\/avatar-default.jpg"
+                },
+                "userId": 1,
+                "date": 1416408330460
+            }
+        ],
+        "coords": {
+            "latitude": 48.855284587319,
+            "longitude": 2.3542070388794
+        },
+        "address": "10 Rue de Brosse, 75004 Paris, France",
+        "comments": [],
+        "likes": [
+            "Gabriel"
+        ],
+        "id": 14
     }
 ]

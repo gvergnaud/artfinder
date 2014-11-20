@@ -36,7 +36,7 @@ app.controller('HomeCtrl',['$scope', '$rootScope', 'Post', 'Geoloc', 'UI', '$fil
 	//Récuperation des posts
     getPosts();
     
-    $rootScope.$on('refreshPosts', getPosts);
+    //$rootScope.$on('refreshPosts', getPosts);
     
 	// Load les posts dans la view
 
@@ -96,7 +96,6 @@ app.controller('HomeCtrl',['$scope', '$rootScope', 'Post', 'Geoloc', 'UI', '$fil
 		setTimeout(function(){
 			$scope.geoloc.panTo(48.857487002645485, 2.3515677452087402);	
 		}, 500);
-
 	};
 
 
@@ -111,7 +110,7 @@ app.controller('HomeCtrl',['$scope', '$rootScope', 'Post', 'Geoloc', 'UI', '$fil
 		$scope.geoloc.smoothZoom($scope.geoloc.map, 12, $scope.geoloc.map.getZoom(), true);
 	},1000);	
 
-	//show post location
+	//montre la position du post sur la map
 	$scope.showPostLocation = function(e, post){
 		e.stopPropagation();
 		UI.home.setMapView();

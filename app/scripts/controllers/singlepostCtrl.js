@@ -110,7 +110,7 @@ app.controller('SinglepostCtrl',['$scope', '$rootScope', '$routeParams', 'Post',
 	 		if(typeof $scope.newComment.content !== 'undefined'){
 	 			
 	 			$scope.newComment.timestamp = new Date().getTime();
-	 			$scope.newComment.username = Session.username;
+	 			$scope.newComment.user = $scope.currentUser;
 		 		$scope.newComment.activePhoto = $scope.currentPhotoId + 1;	
 
 	 			var d = new Date($scope.newComment.timestamp);

@@ -217,7 +217,7 @@ div#commentaires>h3{
 div.comment{
 	width:500px;
 	min-height: 50px;
-	background:#eeeeee;
+	background:#f6f6f6;
 	padding: 10px;
 	border-bottom: 1px solid #aaa;
 }
@@ -244,12 +244,29 @@ h3.username{
 	margin-bottom: 5px;
 }
 
-p.content{
+.content{
+	display: block;
 	font-size: 16px;
 	margin-bottom: 10px;
 }
 
-p.date{
+textarea.content{
+	margin: 10px 0;
+	height: 20px;
+	width: 100%;
+	color: #262626;
+	display: block;
+	background: transparent;
+	resize: none;
+	border: none;
+}
+
+textarea.content:focus{
+	outline: none;
+	border-bottom: 1px solid #B59E5C;
+}
+
+.date{
 	font-size: 0.8em;
 	color: #aaa;
 }

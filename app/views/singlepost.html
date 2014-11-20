@@ -39,10 +39,10 @@
 
 	<section id="infos">
 		<div class="left">
-			<div class="desc">
-				<img class="avatar" src="images/avatar-default.jpg" />
+			<div class="desc" ng-if="post.photos[currentPhotoId].description">
+				<img class="avatar" ng-src="{{post.photos[currentPhotoId].user.avatar}}" />
 				<div class="comment_info">
-					<h3 class="username">{{post.photos[currentPhotoId].username}}</h3>
+					<h3 class="username">{{post.photos[currentPhotoId].user.username}}</h3>
 					<p class="content">{{post.photos[currentPhotoId].description}}</p>
 				</div>
 			</div>
@@ -52,9 +52,9 @@
 					<h3>{{post.comments.length}} Commentaires</h3>
 					<div ng-repeat="comment in post.comments">
 						<div class="comment">
-							<img class="avatar" src="images/avatar-default.jpg" />
+							<img class="avatar" ng-src="{{comment.user.avatar}}" />
 							<div class="comment_info">
-								<h3 class="username">{{comment.username}}</h3><span class="activephoto"> Watching picture n°{{comment.activePhoto}}</span>
+								<h3 class="username">{{comment.user.username}}</h3><span class="activephoto"> Watching picture n°{{comment.activePhoto}}</span>
 								<p class="content">{{comment.content}}</p>
 								<p class="date">{{comment.date}}</p>
 							</div>
@@ -62,10 +62,16 @@
 					</div>
 				</div>
 				<div ng-show="isAuthenticated()">
-					<h4>Commenter</h4>
-					<form role="form" class="comment" ng-submit="addComment()">
-						<textarea type="text" class="content" ng-model="newComment.content" placeholder="message"></textarea>
-						<input type="submit" value="Envoyer" />
+					<h3>Commenter</h3>
+					<form role="form" ng-submit="addComment()">
+						<div class="comment">
+							<img class="avatar" ng-src="{{currentUser.avatar}}" />
+							<div class="comment_info">
+								<h3 class="username">{{currentUser.username}}</h3>
+								<textarea type="text" class="content" ng-model="newComment.content" placeholder="message"></textarea>
+								<input type="submit" value="Envoyer" />
+							</div>
+						</div>
 					</form>
 				</div>
 			</section>

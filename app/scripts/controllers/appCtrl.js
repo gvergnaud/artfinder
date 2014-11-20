@@ -44,7 +44,6 @@ app.controller('appCtrl', function ($scope, $rootScope, Session, Auth, UI, AUTH_
     $scope.userDisconnect = function(){
         Session.destroy();
         $scope.currentUser = null;
-        UI.notification(false, 'Vous etes maintenant déconnecté.');
     };
 
     $scope.isLiked = function(post){
@@ -139,7 +138,7 @@ app.controller('appCtrl', function ($scope, $rootScope, Session, Auth, UI, AUTH_
             currentPage = hashtab[1];
 
 
-        if(currentPage === 'singlepost' && (!page || page === 'search')){
+        if( (currentPage === 'singlepost' || currentPage === 'addpost') && (!page || page === 'search') ){
             $scope.setBackAnimation();
         }else{
             $scope.setSlideAnimation();

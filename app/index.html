@@ -78,6 +78,8 @@
 						<input type="submit" value="Envoyer" />
 					</form>
 
+					<fb:login-button scope="public_profile,email" onlogin="facebook.checkLoginState()">Se connecter avec Facebook</fb:login-button>
+
 				</div>
 			</div>
 			<header class="menu">
@@ -87,8 +89,8 @@
 					<li ng-click="redirectTo()" class="icon-globe"><a class="menu_link hidden" href="">Explorer</a></li>
 					<li ng-click="redirectTo('addpost')" class="icon-camera"><a class="menu_link hidden" href="">Ajouter un mur</a></li>
 					<li ng-click="toggleLoginOverlay()" ng-hide="isAuthenticated()" class="icon-user"><a class="menu_link hidden" href="">Sign In / Up</a></li>
-					<li ng-click="userDisconnect()" ng-show="isAuthenticated()" class="icon-user"><a class="menu_link hidden" href="">LogOut</a></li>
-					<li class="icon-paper-plane"><a class="menu_link hidden" href="#/">About</a></li>
+					<li ng-click="logOut()" ng-show="isAuthenticated()" class="icon-user"><a class="menu_link hidden" href="">LogOut</a></li>
+					<li ng-click="facebook.logOut()" class="icon-paper-plane"><a class="menu_link hidden" href="#/">About</a></li>
 				</ul>
 			</header>
 
@@ -161,5 +163,6 @@
 
 		<script src="scripts/filters/reversefilter.js"></script>
 		<!-- endbuild -->
+
 	</body>
 </html>
