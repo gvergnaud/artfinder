@@ -14,7 +14,8 @@ var app = angular.module('artFinderApp', [
     'ngResource',
     'ngRoute',
     'ngSanitize',
-    'ngTouch'
+    'ngTouch',
+    'facebook'
     ], function($httpProvider) {
         // Use x-www-form-urlencoded Content-Type
         $httpProvider.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=utf-8';
@@ -82,14 +83,6 @@ var app = angular.module('artFinderApp', [
       .otherwise({
         redirectTo: '/'
       });
-<<<<<<< HEAD
-  });
-  // .config(function(FacebookProvider) {
-  //    // Set your appId through the setAppId method or
-  //    // use the shortcut in the initialize method directly.
-  //    FacebookProvider.init('306208576247087');
-  // });
-=======
 })
 .config(function(FacebookProvider) {
      // Set your appId through the setAppId method or
@@ -115,4 +108,3 @@ var app = angular.module('artFinderApp', [
     url: 'http://artfinder.gabrielvergnaud.com/',
     nodeServerUrl: 'https://artfindersocket.herokuapp.com/'
 });
->>>>>>> origin/work-in-progres

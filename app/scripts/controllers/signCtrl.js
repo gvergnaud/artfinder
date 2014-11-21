@@ -7,7 +7,7 @@
  * # AddpostCtrl
  * Controller of the artFinderApp
  */
-app.controller('signCtrl', function ($scope, $rootScope, UI, AUTH_EVENTS, Auth, Session) {
+app.controller('signCtrl', function ($scope, $rootScope, UI, AUTH_EVENTS, Auth, Session, Facebook) {
 	$scope.loginInfos = {};
 	$scope.signUpInfos = {};
 
@@ -130,64 +130,7 @@ app.controller('signCtrl', function ($scope, $rootScope, UI, AUTH_EVENTS, Auth, 
 
 	//FACEBOOK
 	// This is called with the results from from FB.getLoginStatus().
-<<<<<<< HEAD
-	// $scope.loggedWithFB = false;
 
-	// $scope.$watch(
- //    	function() {
- //    		return Facebook.isReady();
-	// 	},
-	// 	function(newVal) {
-	// 		if (newVal)
-	// 			$scope.facebookReady = true;
-	// 	}
-	// );
-
-	// $scope.loginWithFacebook = function() {
- //    // From now on you can use the Facebook service just as Facebook api says
- //    	if(!$scope.loggedWithFB){
-	// 		Facebook.login(function(response) {
-	// 			// Do something with response.
-	// 			$scope.loggedWithFB = true;
-	// 			$scope.me();
-	// 	    });
- //    	}
- //    };
-
- //    $scope.getLoginStatus = function() {
- //    	Facebook.getLoginStatus(function(response) {
-	// 		if(response.status === 'connected') {
-	// 			//$scope.loggedIn = true;
- //        	} else {
-	// 			//$scope.loggedIn = false;
- //        	}
- //    	});
- //    };
-
- //    $scope.me = function() {
- //    	Facebook.api('/me', function(response) {
- //        	//$scope.user = response;
- //        	console.log(response);
-
- //        	var facebookLoginInfos = {
- //        		facebook_id: response.id,
- //        		mail: response.email,
- //        		username: response.name,
- //        		avatar: 'https://graph.facebook.com/' + response.id + '/picture'
- //        	};
-
- //        	if(!Auth.isAuthenticated()){ //si l'utilisateur n'est pas identifé
-
-
-	// 			Auth.loginWithFacebook(facebookLoginInfos).then(
-	// 				function (user) {
-	// 					$rootScope.$broadcast(AUTH_EVENTS.loginSuccess);
-	// 					$scope.setCurrentUser(user);
-	// 					$scope.toggleLoginOverlay();
-	// 					UI.notification('success', 'Heureux de vous revoir ' + Session.username);
-
-	// 				}, function (msg) {
-=======
 	$scope.loggedWithFB = false;
 
 	$scope.$watch(
@@ -245,23 +188,13 @@ app.controller('signCtrl', function ($scope, $rootScope, UI, AUTH_EVENTS, Auth, 
 						UI.closeLoginOverlay();
 						UI.notification('success', 'Heureux de vous revoir ' + Session.username);
 
-					}, function (msg) {
->>>>>>> origin/work-in-progres
-						
-	// 					$rootScope.$broadcast(AUTH_EVENTS.loginFailed);
-	// 					if(msg ==='no data'){
-	// 						UI.notification('error', 'Aucune donnée reçue.');
-	// 					}
-	// 				}
-	// 			);
-				
-<<<<<<< HEAD
-	// 		}else{
-	// 			UI.notification('error', 'Vous êtes déjà identifié.');
-	// 		}
- //   		});
- //    };
-=======
+					}, function (msg) {				
+						$rootScope.$broadcast(AUTH_EVENTS.loginFailed);
+						if(msg ==='no data'){
+							UI.notification('error', 'Aucune donnée reçue.');
+						}
+					}
+				);
 			}else{
 				UI.notification('error', 'Vous êtes déjà identifié.');
 			}
@@ -269,5 +202,5 @@ app.controller('signCtrl', function ($scope, $rootScope, UI, AUTH_EVENTS, Auth, 
     };
 
     $scope.getLoginStatus();
->>>>>>> origin/work-in-progres
+
 });
