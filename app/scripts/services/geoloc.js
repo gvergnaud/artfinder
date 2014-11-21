@@ -100,7 +100,7 @@ app.factory('Geoloc', function (UI, $q) {
 					var point = that.pointFromLatLng(marker.getPosition(), marker.map);
                    
 					that.markerTooltip.html('<img class="tooltipImage" src="'+ post.photos[0].url + '" />').css({
-                        left: that.mapElement.offsetLeft + point.x - 75 + 'px',
+                        left: that.mapElement.offsetLeft + point.x + 'px',
                         top: that.mapElement.offsetTop + point.y  - 190 + 'px',
 						display: 'block'
 					});

@@ -7,7 +7,7 @@
  * # User
  * factory in the artFinderApp.
  */
-app.factory('Auth', function Auth($http, $q, Session) {
+app.factory('Auth', function Auth($http, $q, Session, SERVER) {
 
     var auth = {
 
@@ -16,7 +16,7 @@ app.factory('Auth', function Auth($http, $q, Session) {
             var deferred = $q.defer();
 
             $http({
-                url: 'login.php',
+                url: SERVER.url + '/login.php',
                 method: 'post',
                 data: loginInfos
             })
@@ -45,7 +45,7 @@ app.factory('Auth', function Auth($http, $q, Session) {
             var deferred = $q.defer();
 
             $http({
-                url: 'login_with_facebook.php',
+                url: SERVER.url + '/login_with_facebook.php',
                 method: 'post',
                 data: facebookLoginInfos
             })
@@ -73,7 +73,7 @@ app.factory('Auth', function Auth($http, $q, Session) {
             var deferred = $q.defer();
 
             $http({
-                url: 'signup.php',
+                url: SERVER.url + '/signup.php',
                 method: 'post',
                 data: signUpInfos
             })
@@ -141,21 +141,4 @@ app.factory('Auth', function Auth($http, $q, Session) {
         this.userLocation = null;
     };
     return this;
-})
-
-.constant('AUTH_EVENTS', {
-    loginSuccess: 'auth-login-success',
-    loginFailed: 'auth-login-failed',
-    logoutSuccess: 'auth-logout-success',
-    sessionTimeout: 'auth-session-timeout',
-    notAuthenticated: 'auth-not-authenticated',
-    notAuthorized: 'auth-not-authorized',
-    userLocationChanged: 'user-location-changed'
-})
-
-.constant('USER_ROLES', {
-    all: '*',
-    admin: 'admin',
-    editor: 'editor',
-    guest: 'guest'
 });

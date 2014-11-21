@@ -1,4 +1,8 @@
 <?php
+
+header('Access-Control-Allow-Origin: *');  
+header('Access-Control-Allow-Headers: Cache-Control, X-Requested-With, Access-Control-Allow-Headers');
+
 $ds          = DIRECTORY_SEPARATOR;  //1
  
 $storeFolder = 'images' . $ds . 'uploads';   //2

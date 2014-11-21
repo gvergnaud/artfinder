@@ -378,7 +378,6 @@ p.notification.show{
 }
 
 .marker_tooltip{
-    width: 150px;
     height: 150px;
     overflow: hidden;
     background: #050505;
@@ -387,6 +386,9 @@ p.notification.show{
     display: none;
     border-radius: 5px;
     border: 1px solid #B59E5C;
+    transform: translateX(-50%);
+	-moz-transform: translateX(-50%);
+	-webkit-transform: translateX(-50%);
 }
 
 .tooltipImage{

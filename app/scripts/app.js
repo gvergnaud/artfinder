@@ -61,8 +61,8 @@ var app = angular.module('artFinderApp', [
         $httpProvider.defaults.transformRequest = [function(data) {
           return angular.isObject(data) && String(data) !== '[object File]' ? param(data) : data;
         }];
-  })
-  .config(function ($routeProvider) {
+})
+.config(function ($routeProvider) {
     $routeProvider
       .when('/', {
         templateUrl: 'views/home.html',
@@ -83,9 +83,27 @@ var app = angular.module('artFinderApp', [
       .otherwise({
         redirectTo: '/'
       });
-  })
-  .config(function(FacebookProvider) {
+})
+.config(function(FacebookProvider) {
      // Set your appId through the setAppId method or
      // use the shortcut in the initialize method directly.
      FacebookProvider.init('306208576247087');
-  });
+})
+.constant('AUTH_EVENTS', {
+    loginSuccess: 'auth-login-success',
+    loginFailed: 'auth-login-failed',
+    logoutSuccess: 'auth-logout-success',
+    sessionTimeout: 'auth-session-timeout',
+    notAuthenticated: 'auth-not-authenticated',
+    notAuthorized: 'auth-not-authorized',
+    userLocationChanged: 'user-location-changed'
+})
+.constant('USER_ROLES', {
+    all: '*',
+    admin: 'admin',
+    editor: 'editor',
+    guest: 'guest'
+})
+.constant('SERVER', {
+    url: 'http://artfinder.gabrielvergnaud.com'
+});

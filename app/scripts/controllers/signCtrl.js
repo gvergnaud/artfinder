@@ -156,9 +156,10 @@ app.controller('signCtrl', function ($scope, $rootScope, UI, AUTH_EVENTS, Auth, 
     $scope.getLoginStatus = function() {
     	Facebook.getLoginStatus(function(response) {
 			if(response.status === 'connected') {
-				//$scope.loggedIn = true;
+				$scope.loggedWithFB = true;
+				$scope.me();
         	} else {
-				//$scope.loggedIn = false;
+				$scope.loggedWithFB = false;
         	}
     	});
     };
@@ -182,7 +183,7 @@ app.controller('signCtrl', function ($scope, $rootScope, UI, AUTH_EVENTS, Auth, 
 					function (user) {
 						$rootScope.$broadcast(AUTH_EVENTS.loginSuccess);
 						$scope.setCurrentUser(user);
-						$scope.toggleLoginOverlay();
+						UI.closeLoginOverlay();
 						UI.notification('success', 'Heureux de vous revoir ' + Session.username);
 
 					}, function (msg) {
@@ -199,4 +200,6 @@ app.controller('signCtrl', function ($scope, $rootScope, UI, AUTH_EVENTS, Auth, 
 			}
    		});
     };
+
+    $scope.getLoginStatus();
 });

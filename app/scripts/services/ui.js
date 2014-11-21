@@ -47,6 +47,10 @@ app.factory('UI', function UI() {
             loginContainer.toggleClass('show');
         },
 
+        closeLoginOverlay: function(){
+            loginContainer.removeClass('show');
+        },
+
         toggleMenu: function(){
             var viewcontainer = angular.element(document.querySelector('#viewcontainer')),
                 notifications = angular.element(document.querySelector('#notifications')),

@@ -239,6 +239,17 @@ section#closePostsContainer.ng-hide-add-active{
 
 form#addPhotoForm{
     display: none;
+    position: absolute;
+    top: 250%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+form#addPostForm{
+    position: absolute;
+    top: 250%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 
 
