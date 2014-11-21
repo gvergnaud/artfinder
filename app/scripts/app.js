@@ -105,5 +105,6 @@ var app = angular.module('artFinderApp', [
     guest: 'guest'
 })
 .constant('SERVER', {
-    url: 'http://artfinder.gabrielvergnaud.com'
+    url: 'http://artfinder.gabrielvergnaud.com/',
+    nodeServerUrl: 'https://artfindersocket.herokuapp.com/'
 });

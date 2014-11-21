@@ -37,7 +37,7 @@ app.factory('Post', function Post($http, $q, Session, Socket, SERVER) {
 
             }else{
                 console.log('appel ajax a posts.json');
-        		$http.get(SERVER.url + '/getposts.php?' + new Date().getTime())
+        		$http.get(SERVER.url + 'getposts.php?' + new Date().getTime())
         			.success(function (data, status){
         				factory.posts = data;
 
@@ -178,7 +178,7 @@ app.factory('Post', function Post($http, $q, Session, Socket, SERVER) {
             var deferred = $q.defer();
 
             $http({
-                    url: SERVER.url + '/save.php',
+                    url: SERVER.url + 'save.php',
                     method: 'post',
                     data: {posts: angular.toJson(posts)}
                 })
@@ -220,7 +220,11 @@ app.factory('Post', function Post($http, $q, Session, Socket, SERVER) {
                     //on ajoute notre newComment a la liste de commentaire de notre post
                     angular.forEach(posts, function (value, key){
                         if(value.id === postId){
-                            newComment.id = value.comments.length; //on ajoute un id a notre nouveau commentaire
+                            if(value.comments.length === 0){
+                                newComment.id = 0;
+                            }else{
+                                newComment.id = value.comments[value.comments.length-1].id + 1; //on ajoute un id a notre nouveau commentaire
+                            }
                             value.comments.push(newComment);
                         }
                     });

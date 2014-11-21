@@ -263,8 +263,8 @@ app.factory('UI', function UI() {
 
                 ui.singlepost.style();
                 window.addEventListener('resize', ui.singlepost.style, false);
-                window.addEventListener('resize', ui.singlepost.tagStyles, false);
                 window.addEventListener('resize', ui.singlepost.imgStyle, false);
+                window.addEventListener('resize', ui.singlepost.tagStyles, false);
             },
 
             style: function(){
@@ -291,8 +291,7 @@ app.factory('UI', function UI() {
                 if(ui.singlepost.img[0].offsetWidth > window.innerWidth-100){
                     ui.singlepost.img.css({
                         width: window.innerWidth - ui.menuWidth + 'px',
-                        height: '',
-                        marginTop: Math.abs((window.innerHeight - 100 - ui.singlepost.img[0].offsetHeight)/2) + 'px'
+                        height: ''
                     });
                 }
             },

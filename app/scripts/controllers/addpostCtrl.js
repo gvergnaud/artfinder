@@ -19,7 +19,7 @@ app.controller('AddpostCtrl', function ($scope, $rootScope, UI, Auth, Geoloc, Se
     
 //    DROPZONE 
 	
-	var postImageUrl = SERVER.url + '/upload.php';
+	var postImageUrl = SERVER.url + 'upload.php';
     
 	// Get the template HTML and remove it from the doumenthe template HTML and remove it from the doument
 	var previewNode = document.querySelector('#template');
@@ -71,12 +71,14 @@ app.controller('AddpostCtrl', function ($scope, $rootScope, UI, Auth, Geoloc, Se
 		if(response !== 'nofiles'){
             if(response !== 'not an image'){
                 
-                var imagePath = SERVER.url + '/images/uploads/' + response;
+                var imagePath = SERVER.url + 'images/uploads/' + response;
                 document.getElementById('photorender').setAttribute('src', imagePath);
 
                 $scope.newPost.photos[0].url = imagePath;
                 $scope.newPost.photos[0].artists = [];
                 
+                document.querySelector('#previews').remove();
+
                 $scope.smoothScrollTo('#locate');
                 
             }else{

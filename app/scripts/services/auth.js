@@ -16,7 +16,7 @@ app.factory('Auth', function Auth($http, $q, Session, SERVER) {
             var deferred = $q.defer();
 
             $http({
-                url: SERVER.url + '/login.php',
+                url: SERVER.url + 'login.php',
                 method: 'post',
                 data: loginInfos
             })
@@ -45,7 +45,7 @@ app.factory('Auth', function Auth($http, $q, Session, SERVER) {
             var deferred = $q.defer();
 
             $http({
-                url: SERVER.url + '/login_with_facebook.php',
+                url: SERVER.url + 'login_with_facebook.php',
                 method: 'post',
                 data: facebookLoginInfos
             })
@@ -73,7 +73,7 @@ app.factory('Auth', function Auth($http, $q, Session, SERVER) {
             var deferred = $q.defer();
 
             $http({
-                url: SERVER.url + '/signup.php',
+                url: SERVER.url + 'signup.php',
                 method: 'post',
                 data: signUpInfos
             })

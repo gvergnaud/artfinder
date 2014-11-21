@@ -23,7 +23,7 @@ app.directive('formprogress', function() {
                 });
                                 
                 if(progress <= 40){
-                    formStep.html('Ajoutez une image - 1/3');
+                    formStep.html('Ajoutez une photo - 1/3');
                     
                 }else if(progress <= 80){
                     formStep.html('Ou se trouve le mur ? - 2/3');
