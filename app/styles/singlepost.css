@@ -23,6 +23,7 @@ nav.arrows{
 	color: #fff;
 	cursor: pointer;
 	z-index: 200;
+	display: none;
 }
 
 nav#prev{

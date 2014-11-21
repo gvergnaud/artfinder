@@ -1,8 +1,11 @@
 <?php
+
+	header('Access-Control-Allow-Origin: *');  
+
 	try
 	{
-		//$bdd = new PDO('mysql:host=db405508102.db.1and1.com;dbname=db405508102', 'dbo405508102','Dbnight');
-		$bdd = new PDO('mysql:host=localhost;dbname=artfinder', 'root', 'root');
+		$bdd = new PDO('mysql:host=db405508102.db.1and1.com;dbname=db405508102', 'dbo405508102','Dbnight');
+		//$bdd = new PDO('mysql:host=localhost;dbname=artfinder', 'root', 'root');
 	}
 	catch (Exception $e)
 	{
@@ -19,7 +22,7 @@
 		$username = $_POST['username'];
 		$avatar = $_POST['avatar'];
 
-		$query = $bdd->query("SELECT * FROM users WHERE facebook_id = '$facebook_id'");
+		$query = $bdd->query("SELECT * FROM artfinder_users WHERE facebook_id = '$facebook_id'");
 
 		if($query->rowCount() == 1){   //si la requete renvoi une ligne, l'utilisateur est dans la base
 
@@ -37,7 +40,7 @@
 
 		}else{ 
 			$query->closeCursor();
-			$query = $bdd->prepare('INSERT INTO users(username, mail, facebook_id, avatar) VALUES(:username, :mail, :facebook_id, :avatar)');
+			$query = $bdd->prepare('INSERT INTO artfinder_users(username, mail, facebook_id, avatar) VALUES(:username, :mail, :facebook_id, :avatar)');
 			$query->execute(array(
 				'username' => $username,
 				'mail' => $mail,
@@ -48,7 +51,7 @@
 			//recuperer l'id du nouvel user dans $userId
 			$userId = $bdd->lastInsertId();
 
-			$query = $bdd->query("SELECT * FROM users WHERE id = '$userId'");
+			$query = $bdd->query("SELECT * FROM artfinder_users WHERE id = '$userId'");
 
 
 			$response = $query->fetch();

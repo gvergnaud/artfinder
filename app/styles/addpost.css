@@ -13,7 +13,7 @@ nav#addpostnav{
     background: #1B1B1B;
 }
 
-h3#formStep{
+#formStep{
     position: absolute;
     top: 5px;
     right: 5px;
@@ -110,6 +110,19 @@ div.progress{
 
 .progress-bar{
     background: #B59E5C;
+    height:20px;
+}
+
+#photorender{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate3d(-50%, -50%, 0);
+    -moz-transform: translate3d(-50%, -50%, 0);
+    -o-transform: translate3d(-50%, -50%, 0);
+    transform: translate3d(-50%, -50%, 0);
+    max-height: 80%;
+    max-width: 80%;
 }
 
 /*MAP*/
@@ -239,6 +252,17 @@ section#closePostsContainer.ng-hide-add-active{
 
 form#addPhotoForm{
     display: none;
+    position: absolute;
+    top: 250%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+form#addPostForm{
+    position: absolute;
+    top: 250%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 
 

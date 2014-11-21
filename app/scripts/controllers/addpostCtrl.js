@@ -7,7 +7,7 @@
  * # AddpostCtrl
  * Controller of the artFinderApp
  */
-app.controller('AddpostCtrl', function ($scope, $rootScope, UI, Auth, Geoloc, Session, Post) {
+app.controller('AddpostCtrl', function ($scope, $rootScope, UI, Auth, Geoloc, Session, Post, SERVER) {
 	
 	UI.addpost.init();
     $rootScope.loaded = true;
@@ -19,7 +19,7 @@ app.controller('AddpostCtrl', function ($scope, $rootScope, UI, Auth, Geoloc, Se
     
 //    DROPZONE 
 	
-	var postImageUrl = window.location.origin + window.location.pathname + 'upload.php';
+	var postImageUrl = SERVER.url + 'upload.php';
     
 	// Get the template HTML and remove it from the doumenthe template HTML and remove it from the doument
 	var previewNode = document.querySelector('#template');
@@ -37,6 +37,7 @@ app.controller('AddpostCtrl', function ($scope, $rootScope, UI, Auth, Geoloc, Se
 		autoQueue: false, // Make sure the files aren't queued until manually added
 		previewsContainer: '#previews', // Define the container to display the previews
 		clickable: '#drop' // Define the element that should be used as click trigger to select files.
+		//headers: {"Content-Type": "multipart/form-data"}
 	});
 
 
@@ -70,12 +71,14 @@ app.controller('AddpostCtrl', function ($scope, $rootScope, UI, Auth, Geoloc, Se
 		if(response !== 'nofiles'){
             if(response !== 'not an image'){
                 
-                var imagePath = window.location.origin + window.location.pathname + 'images/uploads/' + response;
+                var imagePath = SERVER.url + 'images/uploads/' + response;
                 document.getElementById('photorender').setAttribute('src', imagePath);
 
                 $scope.newPost.photos[0].url = imagePath;
                 $scope.newPost.photos[0].artists = [];
                 
+                document.querySelector('#previews').remove();
+
                 $scope.smoothScrollTo('#locate');
                 
             }else{
@@ -160,6 +163,7 @@ app.controller('AddpostCtrl', function ($scope, $rootScope, UI, Auth, Geoloc, Se
 
 		Post.get().then(
 			function (posts){
+				console.log(posts);
 				for(var i in posts){
 					var post = posts[i];
 					//si le nouveau post est près d'un ancien post

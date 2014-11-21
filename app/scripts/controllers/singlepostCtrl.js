@@ -63,6 +63,7 @@ app.controller('SinglepostCtrl',['$scope', '$rootScope', '$routeParams', 'Post',
 		});
 
 		UI.singlepost.togglePlayerArrows($scope);
+		UI.singlepost.tagStyles();
 	});
 
  	//Changer l'image avec next
@@ -73,6 +74,7 @@ app.controller('SinglepostCtrl',['$scope', '$rootScope', '$routeParams', 'Post',
  		});
 
  		UI.singlepost.togglePlayerArrows($scope);
+		UI.singlepost.tagStyles();
  	});
 
 

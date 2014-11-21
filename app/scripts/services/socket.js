@@ -7,14 +7,14 @@
  * # post
  * Service in the artFinderApp.
  */
-app.factory('Socket', function Socket($rootScope) {
+app.factory('Socket', function Socket($rootScope, SERVER) {
     
     var factory = {
 
         init: function(){
             if(!io){ return; }
 
-            this.socket = io.connect('https://artfindersocket.herokuapp.com/');  //  https://artfindersocket.herokuapp.com/
+            this.socket = io.connect(SERVER.nodeServerUrl);  //  https://artfindersocket.herokuapp.com/
             this.socket.on('refreshPosts', factory.refreshPosts);
         },
         

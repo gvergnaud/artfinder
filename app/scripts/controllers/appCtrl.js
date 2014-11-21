@@ -166,7 +166,8 @@ app.controller('appCtrl', function ($scope, $rootScope, Session, Auth, UI, AUTH_
 
             }
 
-        });
+            $scope.setSlideAnimation();
+        }); 
     };
 
     //Sockets send
