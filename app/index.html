@@ -61,22 +61,23 @@
 			<div id="login" ng-click="toggleLoginOverlay()" ng-controller="signCtrl">
 				<div id="signForms">
 
-					<form role="form" ng-submit="login()">
-						<h3>Login</h3>
-						<input type="email" ng-model="loginInfos.mail" placeholder="yourmail@any.any"/>
-						<input type="password" ng-model="loginInfos.pwd" placeholder="mot de passe"/>
-						<p>Se souvenir de moi <input type="checkbox" ng-model="loginInfos.remember"></p>
-						<input type="submit" value="Envoyer" />
-					</form>
+		        <form role="form" ng-submit="login()">
+		          <h3 id="gray">Login</h3>
+		          <input type="email" ng-model="loginInfos.mail" placeholder="yourmail@any.any"/>
+		          <input type="password" ng-model="loginInfos.pwd" placeholder="mot de passe"/>
+		          <p id="gray">Se souvenir de moi <input type="checkbox" ng-model="loginInfos.remember"></p>
+		          <input class="btnSubmit" type="submit" value="Envoyer" />
+		        </form>
 
-					<form role="form" ng-submit="signUp()">
-						<h3>Sign Up !</h3>
-						<input type="text" ng-model="signUpInfos.username" placeholder="nom d'utilisateur"/>
-						<input type="email" ng-model="signUpInfos.mail" placeholder="yourmail@any.any"/>
-						<input type="password" ng-model="signUpInfos.pwd" placeholder="mot de passe"/>
-						<input type="password" ng-model="signUpInfos.repeatpwd" placeholder="retappez votre mot de passe"/>
-						<input type="submit" value="Envoyer" />
-					</form>
+
+		        <form role="form" ng-submit="signUp()">
+		          <h3 id="gray">Sign Up !</h3>
+		          <input type="text" ng-model="signUpInfos.username" placeholder="nom d'utilisateur"/>
+		          <input type="email" ng-model="signUpInfos.mail" placeholder="yourmail@any.any"/>
+		          <input type="password" ng-model="signUpInfos.pwd" placeholder="mot de passe"/>
+		          <input type="password" ng-model="signUpInfos.repeatpwd" placeholder="retapez votre mot de passe"/><br/><br/>
+		          <input class="btnSubmit" type="submit" value="Envoyer" />
+		        </form>
 
 					<!-- Facebook login -->
 					<button type="button" class="facebookConnect" ng-show="!loggedWithFB" data-ng-disabled="!facebookReady" data-ng-click="loginWithFacebook()">Login with Facebook</button>
@@ -95,6 +96,7 @@
 					</span> -->
 				</div>
 			</div>
+<<<<<<< HEAD
 			<header class="menu">
 				<div ng-click="redirectTo()" id="logo"></div>
 				
@@ -108,6 +110,29 @@
 
 				<div style="text-align:center;" ng-show="isAuthenticated()"><img ng-src="{{currentUser.avatar}}" /></div>
 			</header>
+=======
+		    <header class="menu">
+		     	<div ng-click="redirectTo()" id="logo"></div>
+		    	<h1 id="username" ng-show="isAuthenticated()">{{currentUser.username}}</h1>
+		      	<ul>
+			        <li ng-click="redirectTo()" class="icon-globe">
+			        	<a class="menu_link hidden" href="">Explorer</a>
+			        </li>
+			        <li ng-click="redirectTo('addpost')" class="icon-camera">
+			        	<a class="menu_link hidden" href="">Ajouter un mur</a>
+			        </li>
+			        <li ng-click="toggleLoginOverlay()" ng-hide="isAuthenticated()" class="icon-user">
+			        	<a class="menu_link hidden" href="">Sign In / Up</a>
+			        </li>
+			        <li ng-click="userDisconnect()" ng-show="isAuthenticated()" class="icon-user">
+			        	<a class="menu_link hidden" href="">LogOut</a>
+			        </li>
+			        <li class="icon-paper-plane">
+			        	<a class="menu_link hidden" href="#/">About</a>
+			        </li>
+		    	</ul>
+		    </header>
+>>>>>>> 1d97b4f8b9bf9af2167b0a4b8e8757e6b04166b6
 
 			<div id="viewcontainer">
 				<aside id="notifications"></aside>

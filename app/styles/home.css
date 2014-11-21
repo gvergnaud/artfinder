@@ -24,8 +24,9 @@
 	left: 50px;	
 	top: 50px;
 	color: #fff;
-	z-index:1000
+	z-index:1000;
 }
+
 
 #switcher{
     min-height: 100px !important;
