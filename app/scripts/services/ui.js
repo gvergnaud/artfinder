@@ -257,8 +257,8 @@ app.factory('UI', function UI() {
             selection: false,
 
             init:function(){
-                ui.singlepost.player = angular.element(document.querySelectorAll('#player')),
-                ui.singlepost.img = angular.element(document.querySelectorAll('section#player img')),
+                ui.singlepost.player = angular.element(document.querySelectorAll('#player'));
+                ui.singlepost.img = angular.element(document.querySelectorAll('section#player img'));
                 ui.singlepost.arrows = [angular.element(document.querySelectorAll('nav#prev')), angular.element(document.querySelectorAll('nav#next'))];
 
                 ui.singlepost.style();

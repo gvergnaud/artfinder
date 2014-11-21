@@ -195,8 +195,9 @@ app.controller('signCtrl', function ($scope, $rootScope, UI, AUTH_EVENTS, Auth, 
     		return Facebook.isReady();
 		},
 		function(newVal) {
-			if (newVal)
+			if (newVal){
 				$scope.facebookReady = true;
+			}
 		}
 	);
 

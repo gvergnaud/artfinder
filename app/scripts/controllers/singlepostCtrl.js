@@ -153,7 +153,7 @@ app.controller('SinglepostCtrl',['$scope', '$rootScope', '$routeParams', 'Post',
 					}
 				);
 			}else{
-				UI.notification('error', 'Vous n\'êtes pas l\'auteur de ce commentaire.')
+				UI.notification('error', 'Vous n\'êtes pas l\'auteur de ce commentaire.');
 			}
  		}else{
 			UI.notification('', 'Vous devez etre connecté !');

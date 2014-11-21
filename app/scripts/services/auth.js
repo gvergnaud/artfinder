@@ -131,7 +131,7 @@ app.factory('Auth', function Auth($http, $q, Session, SERVER) {
     
     this.addUserLocation = function(latLng){
         this.userLocation = latLng;
-    }
+    };
 
     this.destroy = function () {
         this.userId = null;
