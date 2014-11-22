@@ -263,7 +263,6 @@ app.factory('UI', function UI() {
 
                 ui.singlepost.style();
                 window.addEventListener('resize', ui.singlepost.style, false);
-                window.addEventListener('resize', ui.singlepost.imgStyle, false);
                 window.addEventListener('resize', ui.singlepost.tagStyles, false);
             },
 
@@ -280,20 +279,8 @@ app.factory('UI', function UI() {
                 });
 
                 ui.singlepost.img.css({
-                    height: window.innerHeight - 100 + 'px',
-                    width: '',
-                    marginTop: ''
+                    height: window.innerHeight - 100 + 'px'
                 }); 
-            },
-
-            imgStyle: function(){
-
-                if(ui.singlepost.img[0].offsetWidth > window.innerWidth-100){
-                    ui.singlepost.img.css({
-                        width: window.innerWidth - ui.menuWidth + 'px',
-                        height: ''
-                    });
-                }
             },
 
             tagStyles: function(){
