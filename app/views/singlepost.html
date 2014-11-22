@@ -90,7 +90,7 @@
 	<section class="closePosts">
 		<h1>Murs à proximité</h1>
 		<div id="closePostsContainer">
-			<div class="post col" post-auto-sizing ng-repeat="post in closePosts">
+			<div class="post col" ng-repeat="post in closePosts">
 			    <img ng-src="{{post.photos[0].url}}" />
 			    <div class="over"  ng-click="redirectTo('singlepost', {{post.id}})">
 			      <p>{{post.likes.length}} Likes</p>

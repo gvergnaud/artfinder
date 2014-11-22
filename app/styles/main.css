@@ -477,9 +477,11 @@ p.notification.show{
 	position: absolute;
 	top:50%;
 	left:50%;
-	width:100%;
+	max-width: 175%;
+	max-height: 175%;
+	min-width: 100%;
+    min-height: 100%;
 	transform: translate(-50%, -50%);
-	height: auto;
 	z-index:0;
 }
 
