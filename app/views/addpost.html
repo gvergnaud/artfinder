@@ -47,7 +47,7 @@
 
     <section id="closePostsContainer" ng-show="closePosts.length">
         <h1>Des murs ont été partagés à cet endroit.</h1>
-        <div class="post col" ng-repeat="post in closePosts" ng-tooltip="Ajouter à ce mur">
+        <div class="post col" post-auto-sizing ng-repeat="post in closePosts" ng-tooltip="Ajouter à ce mur">
             <div  class="{{post.id}}">
                 <img ng-src="{{post.photos[0].url}}" />
                 <div class="over"  ng-click="selectClosePost({{post}})">

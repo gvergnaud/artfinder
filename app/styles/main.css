@@ -139,6 +139,7 @@ body{
 	margin:0;
 	font-family: 'Open Sans Regular';
 	overflow-x:hidden;
+	background: #050505;
 }
 
 .menu{
@@ -172,7 +173,7 @@ body{
 }
 
 .menu a.menu_link{
-    margin-left: 0;
+    margin-left: 5px;
     display: inline;
 	color: #fff;
 	font-family: 'Uni Sans Heavy';
@@ -201,6 +202,17 @@ body{
 	height: 80px;
 	width: 40px;
 	margin: 20px auto;
+}
+
+.menu #userAvatar{
+	position: absolute;
+	bottom: 10px;
+	left: 15px;
+	width: 500px;
+}
+
+.menu #userAvatar img{
+	display: inline;
 }
 
 #viewcontainer{
@@ -411,6 +423,7 @@ p.notification.show{
 	position: relative;
 	display: inline-block;
 	height:275px;
+	max-height:100%;
 	overflow: hidden;
 	background: #000;
 	transition: .5s ease;

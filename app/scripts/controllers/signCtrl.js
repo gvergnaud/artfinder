@@ -151,7 +151,7 @@ app.controller('signCtrl', function ($scope, $rootScope, UI, AUTH_EVENTS, Auth, 
 				// Do something with response.
 				$scope.loggedWithFB = true;
 				$scope.me();
-		    });
+		    }, {scope: 'email'});
     	}
     };
 

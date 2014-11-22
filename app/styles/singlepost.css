@@ -1,5 +1,7 @@
 /* SINGLE POST */
-
+.container{
+	background: #fff;
+}
 /* Player */
 section#player{
 	overflow: hidden;
@@ -19,6 +21,7 @@ nav.arrows{
 	position: absolute;
 	height:100px;
 	width:100px;
+	max-width: 25%;
 	text-align: center;
 	color: #fff;
 	cursor: pointer;
@@ -203,8 +206,28 @@ span.left{
 }
 
 #infos>div.left{
+	display: inline-block;
 	width:537px;
+	max-width: 100%;
 }
+
+#infos>div.right{
+	display: inline-block;
+	float: right;
+	width:263px;
+	max-width: 100%;
+	padding: 5px 0;
+}
+
+#infos>div.right h3{
+	font-size: 1em;
+}
+
+#infos>div.right p{
+	margin: 5px 0;
+	font-size: .8em;
+}
+
 /* COMMENTAIRES*/
 div#commentaires{
 	margin:10px auto;
@@ -217,6 +240,7 @@ div#commentaires>h3{
 
 div.comment{
 	width:500px;
+	max-width: 95%;
 	min-height: 50px;
 	background:#f6f6f6;
 	padding: 10px;
@@ -228,10 +252,15 @@ div.deleteComment{
 	cursor: pointer;
 }
 
+div.deleteComment:before{
+	color:#B59E5C;
+}
+
 div.desc{
 	min-height: 50px;
 	background:#eeeeee;
 	width:500px;
+	max-width: 100%;
 	padding: 10px;
 }
 
@@ -269,10 +298,9 @@ textarea.content{
 
 textarea.content:focus{
 	outline: none;
-	border-bottom: 1px solid #B59E5C;
 }
 
-.date{
+.discret{
 	font-size: 0.8em;
 	color: #aaa;
 }
@@ -301,7 +329,27 @@ section.closePosts h1{
 	color: #fff;
 }
 
+@media only screen and (max-width: 1200px) {
+	span#artists{
+		display: block;
+		margin-top: 15px;
+	}
+	span#where{
+		font-size:1em;
+	}
 
+}
+
+@media only screen and (max-width: 800px) {
+	#infos{
+		width: 100%;
+	}
+	#infos>div.right{
+		display: block;
+		width:100%;
+		padding: 5px 0;
+	}
+}
 
 @media only screen and (max-width: 680px) {
 	div#closePostsContainer{

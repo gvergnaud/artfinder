@@ -13,7 +13,9 @@ app.controller('SinglepostCtrl',['$scope', '$rootScope', '$routeParams', 'Post',
     function getPost(){
         Post.find($routeParams.id, true).then(
             function (post){ // les posts sont récupérés !
-                $scope.post =  post;		
+                $scope.post = post;	
+
+                $scope
 
                 Post.getClosePosts(post, 5).then(
                     function(closePosts){
@@ -48,6 +50,14 @@ app.controller('SinglepostCtrl',['$scope', '$rootScope', '$routeParams', 'Post',
 	UI.singlepost.init();
 
 	$scope.currentPhotoId = 0;
+
+	$scope.createFullDate = function(){
+		if($scope.post){
+	    	var date = new Date($scope.post.photos[$scope.currentPhotoId].date);
+	        return 'Ajouté le ' + date.getDate() + ' / ' + date.getMonth() + ' / ' +  date.getFullYear() + '.';	
+		}
+    };
+
  	$scope.img = angular.element(document.querySelectorAll('section#player img'));
  	$scope.arrows = [angular.element(document.querySelectorAll('nav#prev')), angular.element(document.querySelectorAll('nav#next'))];
 
