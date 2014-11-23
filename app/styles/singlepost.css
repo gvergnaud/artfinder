@@ -114,7 +114,7 @@ span#where{
 	cursor: pointer;
 }
 
-span#where:before{
+span#locationPin:before{
 	content: '';
 	background: url(../images/pin.svg) no-repeat;
 	font-weight: normal;
@@ -363,7 +363,7 @@ section.closePosts h1{
 	span#where{
 		display: none;
 	}
-	span#where:before{
-		display: inline-block;
+	span#locationPin{
+		margin-left:10px;
 	}
 }

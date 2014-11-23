@@ -99,14 +99,14 @@ app.factory('Post', function Post($http, $q, Session, Socket, SERVER) {
                         closePost.distance = distance;
                         closePost.post = value;
 
-                        closePosts.push(closePost);
+                        if(!(post.id === closePost.post.id)){
+                            closePosts.push(closePost);
+                        }
                     });
 
                     closePosts.sort(function(a, b) { //on trie le tableau par distance croissante
                         return a.distance - b.distance;
                     });
-
-                    closePosts.shift(); //on supprime le 1er element du tableau car c'est le post luimeme
 
                     closePosts.splice(nb); //on suprime les elements dont la distance est plus grande que les nb premiers
 

@@ -141,9 +141,11 @@ div#formMap{
 }
 
 span#addressInputContainer{
+    max-width: 90%;
     position: absolute;
     top: 200%;
     left: 50%;
+    text-align: center;
      -webkit-transform: translate3d(-50%, -100px, 0);
     -moz-transform: translate3d(-50%, -100px, 0);
     -o-transform: translate3d(-50%, -100px, 0);
@@ -185,13 +187,15 @@ span#addressPin:before{
     /* remove if not needed */
     margin-left: .2em;
     width:25px;
+    max-width: 10%;
     height:35px;
     vertical-align: bottom;
 }
 
 input#addressInput{
-    padding: 5px;
+    padding: 1%;
     width: 250px;
+    max-width: 70%;
     background: transparent;
     border: none;
     border-bottom: 2px solid #fff;

@@ -7,7 +7,7 @@
  * # AddpostCtrl
  * Controller of the artFinderApp
  */
-app.controller('AddpostCtrl', function ($scope, $rootScope, UI, Auth, Geoloc, Session, Post, SERVER) {
+app.controller('AddpostCtrl', function ($scope, $rootScope, UI, Auth, Geoloc, Session, Post, SERVER, APP_EVENTS) {
 	
 	UI.addpost.init();
     $rootScope.loaded = true;
@@ -115,6 +115,8 @@ app.controller('AddpostCtrl', function ($scope, $rootScope, UI, Auth, Geoloc, Se
 	$scope.newPost.photos[0].description = '';
 	$scope.newPost.coords = {};
 
+
+	// MAP
 	var geoloc = new Geoloc('#formMap');
 
 	geoloc.createMap();
@@ -135,8 +137,26 @@ app.controller('AddpostCtrl', function ($scope, $rootScope, UI, Auth, Geoloc, Se
 		$scope.newPost.coords.latitude = event.latLng.lat();
 		$scope.newPost.coords.longitude = event.latLng.lng();
 		$scope.proposePosts();
+	});
+
+	//affiche la position de l'utilisateur à chaque refresh
+	$rootScope.$on(APP_EVENTS.userLocationChanged, function(){
+
+		var userMarker = geoloc.addUserLocationMarker(Session.userLocation, 'Utiliser ma position actuelle');
+		//on ajoute l'evenement click sur le userMarker
+		google.maps.event.addListener(userMarker, 'click', (function(userMarker) {
+			return function() {
+				$scope.useUserLocation();
+			};
+		})(userMarker));
 
 	});
+
+	$scope.useUserLocation = function(){
+		$scope.newPost.coords.latitude = Session.userLocation.k;
+		$scope.newPost.coords.longitude = Session.userLocation.B;
+		$scope.smoothScrollTo('#newPostInfos');
+	};
 
 	//entrer l'adresse pour recupérer les coordonnées
 	$scope.addressChange = function(){

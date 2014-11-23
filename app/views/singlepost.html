@@ -17,7 +17,10 @@
 
 	<section id="short_infos">
 		<span class="left">
-			<span id="where" ng-click="toggleMap()" ng-tooltip="Voir sur la carte">{{post.address}}</span>
+			<span ng-click="toggleMap()" ng-tooltip="Voir sur la carte">
+				<span id="locationPin"></span>
+				<span id="where">{{post.address}}</span>
+			</span>
 			<span id="artists">
 				<span ng-repeat="artist in post.photos[currentPhotoId].artists">
 					<span class="artist" ng-click="redirectTo('search', '{{artist.name}}')" ng-tooltip="Oeuvres de l'artiste">{{artist.name}}</span>

@@ -18,7 +18,7 @@ app.controller('SinglepostCtrl',['$scope', '$rootScope', '$routeParams', 'Post',
 
                 $scope
 
-                Post.getClosePosts(post, 5).then(
+                Post.getClosePosts(post, 4).then(
                     function(closePosts){
                         $scope.closePosts = closePosts;
                     }
@@ -107,6 +107,10 @@ app.controller('SinglepostCtrl',['$scope', '$rootScope', '$routeParams', 'Post',
 	 		UI.singlepost.toggleMap(function(){
 				geoloc.showPostLocation($scope.post);
 	 		});
+
+	 		if(Session.userLocation){
+				geoloc.addUserLocationMarker(Session.userLocation);
+	 		}
 
 	 		$scope.mapOpened = true;
 
