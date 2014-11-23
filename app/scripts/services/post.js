@@ -29,8 +29,6 @@ app.factory('Post', function Post($http, $q, Session, Socket, SERVER) {
 
             }else if(!reload && localStorage.getItem('ArtFinderPosts')){
 
-                console.log('localStorage');
-
                 factory.posts = factory.getFromLocalStorage();
 
                 deferred.resolve(factory.posts);
@@ -46,7 +44,12 @@ app.factory('Post', function Post($http, $q, Session, Socket, SERVER) {
         				deferred.resolve(factory.posts);
         			})
         			.error(function (data, status){
-    					deferred.reject('Impossible de récupérer les posts. ' + status);
+                        if(localStorage.getItem('ArtFinderPosts')){
+                            factory.posts = factory.getFromLocalStorage();
+                            deferred.resolve(factory.posts);
+                        }else{
+    					   deferred.reject('Impossible de récupérer les posts. ' + status);
+                        }
         			});
             }
 
@@ -420,6 +423,7 @@ app.factory('Post', function Post($http, $q, Session, Socket, SERVER) {
 
         getFromLocalStorage: function(){
             if(localStorage){
+                console.log('localStorage');
                 return angular.fromJson(localStorage.getItem('ArtFinderPosts'));
             }else{
                 return false;

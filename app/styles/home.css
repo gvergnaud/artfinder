@@ -45,3 +45,26 @@
 #search:focus{
 	background: rgba(255,255,255,1);
 }
+
+
+@media only screen and (max-width: 1280px) {
+	
+}
+
+@media only screen and (max-width: 850px) {
+	
+}
+
+@media only screen and (max-width: 680px) {
+	#mosaic{
+		width: 100% !important;
+	}
+
+	#map{
+		width: 100% !important;
+	}
+
+	#filters{
+		display: none;
+	}
+}

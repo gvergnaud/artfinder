@@ -14,6 +14,7 @@ nav#addpostnav{
 }
 
 #formStep{
+    white-space: nowrap;
     position: absolute;
     top: 5px;
     right: 5px;
@@ -266,8 +267,23 @@ form#addPostForm{
     transform: translate(-50%, -50%);
 }
 
+@media only screen and (max-width: 1280px) {
 
+}
 
+@media only screen and (max-width: 850px) {
+
+}
+
+@media only screen and (max-width: 680px) {
+    #formProgress{   
+        width: 100% !important;
+    }
+
+    #drop{
+        right: 10px;
+    }
+}
 
 
 

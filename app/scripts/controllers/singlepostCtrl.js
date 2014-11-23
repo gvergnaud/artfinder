@@ -10,8 +10,9 @@
 app.controller('SinglepostCtrl',['$scope', '$rootScope', '$routeParams', 'Post', 'UI', 'Auth', 'Session', 'Geoloc', '$filter', function ($scope, $rootScope, $routeParams, Post, UI, Auth, Session, Geoloc, $filter) {
 	
 	//POSTS
-    function getPost(){
-        Post.find($routeParams.id, true).then(
+    function getPost(reload){
+    	if(!reload) {reload = false};
+        Post.find($routeParams.id, reload).then(
             function (post){ // les posts sont récupérés !
                 $scope.post = post;	
 
@@ -41,7 +42,7 @@ app.controller('SinglepostCtrl',['$scope', '$rootScope', '$routeParams', 'Post',
     $rootScope.$on('refreshPosts', function(e, info){
     	console.log(info);
     	if(info.postId == $scope.post.id){
-    		getPost();
+    		getPost(true);
     	}
     });
     
