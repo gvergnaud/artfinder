@@ -144,14 +144,25 @@ span#addressInputContainer{
     position: absolute;
     top: 200%;
     left: 50%;
-    -webkit-transform: translate3d(-50%, -250px, 0);
-    -moz-transform: translate3d(-50%, -250px, 0);
-    -o-transform: translate3d(-50%, -250px, 0);
-    transform: translate3d(-50%, -250px, 0);
+     -webkit-transform: translate3d(-50%, -100px, 0);
+    -moz-transform: translate3d(-50%, -100px, 0);
+    -o-transform: translate3d(-50%, -100px, 0);
+    transform: translate3d(-50%, -100px, 0);
+
+    -webkit-transition: .65s cubic-bezier(.2,.1,.1,1);
+    -moz-transition: .65s cubic-bezier(.2,.1,.1,1);
+    -o-transition: .65s cubic-bezier(.2,.1,.1,1);
+    transition: .65s cubic-bezier(.2,.1,.1,1);
 }
 
+span#addressInputContainer.up{
+    -webkit-transform: translate3d(-50%, -270px, 0);
+    -moz-transform: translate3d(-50%, -270px, 0);
+    -o-transform: translate3d(-50%, -270px, 0);
+    transform: translate3d(-50%, -270px, 0);
+}
 
-span#addressInputContainer:before{
+span#addressPin:before{
     content: '';
     background: url(../images/pin.png) no-repeat;
     font-weight: normal;
@@ -187,8 +198,6 @@ input#addressInput{
     color: #fff;
 }
 
-
-
 input#addressInput:focus{
     outline: none;
     border-bottom: 2px solid #B59E5C;
@@ -203,6 +212,8 @@ section#closePostsContainer{
     background: #1b1b1b;
     padding-bottom: 15px;
     overflow: hidden;
+    text-align: center;
+    overflow-y: auto;
     
     -webkit-transform: translate3d(0, -100%, 0);
     -moz-transform: translate3d(0, -100%, 0);

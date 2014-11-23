@@ -41,18 +41,17 @@
 <section class="formSection" id="locate">
     <div id="formMap"></div>
     <span id="addressInputContainer">
+        <span id="addressPin"></span> 
         <input id="addressInput" type="text" placeholder="Ou ce trouve ce mur ?" ng-model="newPost.address" ng-change="addressChange()"/>
         <button ng-if="newPost.coords.latitude" ng-click="smoothScrollTo('#newPostInfos')">Valider</button>
     </span>
 
     <section id="closePostsContainer" ng-show="closePosts.length">
         <h1>Des murs ont été partagés à cet endroit.</h1>
-        <div class="post col" ng-repeat="post in closePosts" ng-tooltip="Ajouter à ce mur">
-            <div  class="{{post.id}}">
-                <img ng-src="{{post.photos[0].url}}" />
-                <div class="over"  ng-click="selectClosePost({{post}})">
-                    <p>{{post.likes.length}} Likes</p>
-                </div>
+        <div ng-repeat="post in closePosts"  class="post col postN{{post.id}}" ng-tooltip="Ajouter à ce mur">
+            <img ng-src="{{post.photos[0].url}}" />
+            <div class="over"  ng-click="selectClosePost({{post}})">
+                <p>{{post.likes.length}} Likes</p>
             </div>
         </div>
     </section>
@@ -81,7 +80,7 @@
             <input type="checkbox" ng-model="newPost.photos[0].stillExist" />
         </div>
         <div>
-            <input type="submit" id="addPhotoBtn" value="Ajouter ma photo à ce post !" />
+            <input type="submit" id="addPhotoBtn" value="Ajouter ma photo à ce mur !" />
         </div>
     </form>
 

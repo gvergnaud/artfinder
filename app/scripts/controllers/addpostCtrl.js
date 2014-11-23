@@ -163,7 +163,6 @@ app.controller('AddpostCtrl', function ($scope, $rootScope, UI, Auth, Geoloc, Se
 
 		Post.get().then(
 			function (posts){
-				console.log(posts);
 				for(var i in posts){
 					var post = posts[i];
 					//si le nouveau post est près d'un ancien post
@@ -172,6 +171,7 @@ app.controller('AddpostCtrl', function ($scope, $rootScope, UI, Auth, Geoloc, Se
 						if($scope.closePosts.indexOf(post) === -1){
 							$scope.closePosts.push(post);
 							geoloc.addPostMarker(post);
+							UI.addpost.proposePosts();
 						}
 					//sinon, si le post etait dans le tableau, on l'enleve
 					}else if($scope.closePosts.indexOf(post) !== -1){
@@ -179,6 +179,9 @@ app.controller('AddpostCtrl', function ($scope, $rootScope, UI, Auth, Geoloc, Se
 						$scope.closePosts.splice($scope.closePosts.indexOf(post), 1);
 						
 					}
+				}
+				if($scope.closePosts.length === 0){
+					UI.addpost.removeProposedPosts();
 				}
 			},
 			function (msg){
@@ -191,7 +194,7 @@ app.controller('AddpostCtrl', function ($scope, $rootScope, UI, Auth, Geoloc, Se
 	$scope.selectClosePost = function(post){
         //dois effacer les autres champs ainsi que les autres closePosts proposés et faire apparaitre un bouton submit spécial qui déclenche la function Post.addPhoto.
 		UI.addpost.selectedPost(post);
-        
+		
         $scope.newPost.coords = post.coords;
         $scope.newPost.address = post.address;
         

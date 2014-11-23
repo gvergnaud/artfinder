@@ -509,8 +509,7 @@ p.notification.show{
 /*  GRID OF FIVE   ============================================================================= */
 
 .col {
-	display: block;
-	float: left;
+	display: inline-block;
 	width: 24.70%; 
 	margin: .15% .15% .15% .15%;
 }
@@ -654,16 +653,8 @@ button.enter .enterText.loaded{
 		position: fixed;
 		height:50px !important;
 		width:100% !important;
-		bottom: 0 !important;
+		bottom: -5px !important;
 		top: none !important;
-
-		z-index: 100;
-		background: #050505;
-		color: #fff;
-	    overflow: hidden;
-		transition: .5s ease;
-		-moz-transition: .5s ease;
-		-webkit-transition: .5s ease;
 	}
 	.menu.opened{
 		width: none;

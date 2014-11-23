@@ -7,7 +7,7 @@
  * # Geoloc
  * Factory in the artFinderApp.
  */
-app.factory('Geoloc', function (UI, $q) {
+app.factory('Geoloc', function (UI, $q, Session) {
 
 	return function (selector){
 

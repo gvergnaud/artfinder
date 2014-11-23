@@ -473,7 +473,41 @@ app.factory('UI', function UI() {
                 };
             },
 
+            proposePosts: function(){
+                var addressInputContainer = angular.element(document.querySelector('span#addressInputContainer'));
+                addressInputContainer.addClass('up');
+            },
+
+            removeProposedPosts: function(){
+                var addressInputContainer = angular.element(document.querySelector('span#addressInputContainer'));
+                addressInputContainer.removeClass('up');
+            },
+
             selectedPost: function(post){
+                //locate section
+                var addressPin = angular.element(document.querySelectorAll('#addressPin')),
+                    addressInput = angular.element(document.querySelectorAll('#addressInput')),
+                    posts = angular.element(document.querySelectorAll('div.post.col')),
+                    thePost = angular.element(document.querySelector('div.post.col.postN' + post.id));
+
+                posts.css({
+                    display: 'none'
+                });
+
+                thePost.css({
+                    display: '',
+                    border: '2px solid #B59E5C'
+                });
+
+                addressInput.css({
+                    display: 'none'
+                });
+
+                addressPin.css({
+                    display: 'none'
+                });
+
+                //infos section
                 var addPhotoForm = angular.element(document.querySelector('form#addPhotoForm'));
                 var addPostForm = angular.element(document.querySelector('form#addPostForm'));
 
@@ -487,6 +521,31 @@ app.factory('UI', function UI() {
             },
             
             removeSelectedPost: function(post){
+                //locate section
+                var addressPin = angular.element(document.querySelectorAll('#addressPin')),
+                    addressInput = angular.element(document.querySelectorAll('#addressInput')),
+                    posts = angular.element(document.querySelectorAll('div.post')),
+                    thePost = angular.element(document.querySelectorAll('div.post.col.postN' + post.id));
+
+                posts.css({
+                    display: ''
+                });
+
+                thePost.css({
+                    display: '',
+                    border: ''
+                });
+
+                addressInput.css({
+                    display: ''
+                });
+
+                addressPin.css({
+                    display: ''
+                });
+
+
+                //infos section
                 var addPhotoForm = angular.element(document.querySelector('form#addPhotoForm'));
                 var addPostForm = angular.element(document.querySelector('form#addPostForm'));
 
