@@ -7,7 +7,7 @@
  * # SinglepostCtrl
  * Controller of the artFinderApp
  */
-app.controller('SinglepostCtrl',['$scope', '$rootScope', '$routeParams', 'Post', 'UI', 'Auth', 'Session', 'Geoloc', '$filter', function ($scope, $rootScope, $routeParams, Post, UI, Auth, Session, Geoloc, $filter) {
+app.controller('SinglepostCtrl',['$scope', '$rootScope', '$routeParams', 'Post', 'UI', 'Auth', 'Session', 'Geoloc', '$filter', 'APP_EVENTS', function ($scope, $rootScope, $routeParams, Post, UI, Auth, Session, Geoloc, $filter, APP_EVENTS) {
 	
 	//POSTS
     function getPost(reload){
@@ -92,27 +92,37 @@ app.controller('SinglepostCtrl',['$scope', '$rootScope', '$routeParams', 'Post',
  	//Ouverture de la map
  	$scope.mapOpened = false;
 
+	var geoloc = new Geoloc('section.map');
+	geoloc.createMap();
+
  	$scope.toggleMap = function(){
 
  		if(!$scope.mapOpened){
-	 		var geoloc = new Geoloc('section.map');
+	 		
 	 		var mapCenter = geoloc.getLatLng($scope.post.coords.latitude, $scope.post.coords.longitude);
-
-			geoloc.createMap({zoom: 10, center: mapCenter});
+			
 			geoloc.addPostMarker($scope.post);
-			geoloc.setMapOptions({scrollwheel: false});
+			geoloc.setMapOptions({scrollwheel: false, zoom: 10, center: mapCenter});
 
 	 		UI.singlepost.toggleMap(function(){
 				geoloc.showPostLocation($scope.post);
 	 		});
 
 	 		$scope.mapOpened = true;
+
  		}else{
  			UI.singlepost.toggleMap();
  			$scope.mapOpened = false;
  		}
  		
  	};
+
+ 	//affiche la position de l'utilisateur à chaque refresh
+	$rootScope.$on(APP_EVENTS.userLocationChanged, function(){
+		if($scope.mapOpened){
+			geoloc.addUserLocationMarker(Session.userLocation);
+		}
+	});
 
  	$scope.newComment = {};
 

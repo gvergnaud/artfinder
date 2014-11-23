@@ -50,7 +50,6 @@ app.factory('Geoloc', function (UI, $q, Session) {
 				if(!!options.disableDefaultUI){ optionsGmaps.disableDefaultUI = options.disableDefaultUI; }
 			}
 
-
 			var styles = [{"featureType":"all","elementType":"all","stylers":[{"visibility":"simplified"},{"saturation":-100}]},{"featureType":"all","elementType":"labels.icon","stylers":[{"visibility":"off"}]},{"featureType":"landscape","elementType":"geometry","stylers":[{"color":"#706f70"},{"lightness":-22}]},{"featureType":"water","elementType":"geometry","stylers":[{"color":"#292929"}]},{"featureType":"water","elementType":"labels.text","stylers":[{"color":"#e8e8e8"}]},{"featureType":"poi","elementType":"all","stylers":[{"visibility":"off"}]},{"featureType":"administrative.locality","elementType":"labels.text","stylers":[{"visibility":"simplified"},{"color":"#1c1c1c"}]},{"featureType":"administrative.neighborhood","elementType":"labels.text","stylers":[{"visibility":"off"}]},{"featureType":"road.local","elementType":"geometry","stylers":[{"color":"#8a8a8a"},{"lightness":-26}]},{"featureType":"road.arterial","elementType":"geometry","stylers":[{"color":"#878587"},{"lightness":-17}]},{"featureType":"road.highway","elementType":"geometry","stylers":[{"color":"#949494"}]},{"featureType":"road","elementType":"labels.text","stylers":[{"visibility":"simplified"},{"color":"#000000"}]},{"featureType":"transit","elementType":"all","stylers":[{"visibility":"off"}]}];
 
 			that.map = new google.maps.Map(that.mapElement, optionsGmaps);
@@ -67,6 +66,10 @@ app.factory('Geoloc', function (UI, $q, Session) {
 			google.maps.event.addListener(that.map, 'bounds_changed', function() {
 				 google.maps.event.trigger(that.map, 'resize');
 			});
+
+			if(!!Session.userLocation){
+				that.addUserLocationMarker(Session.userLocation);
+			}
 		};
 		
 		
@@ -130,6 +133,21 @@ app.factory('Geoloc', function (UI, $q, Session) {
             });
             
             that.markers.push(marker);
+        };
+
+        that.addUserLocationMarker = function(latLng){
+
+        	if(that.userLocationMarker){
+        		that.userLocationMarker.setMap();
+        	}
+        	
+            var marker = new google.maps.Marker({
+                position: latLng,
+                map: that.map,
+                icon: 'images/ma_position.png'
+            });
+            
+            that.userLocationMarker = marker;
         };
 		
 	//REMOVE

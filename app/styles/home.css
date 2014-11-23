@@ -9,7 +9,9 @@
 #mosaic{
 	border-top: 5px solid #050505;
 	width:100%;
+    min-height: 150px !important;
 	position: fixed;
+	bottom: 0;
 	overflow-y: scroll;
 	background: #050505;
 	-moz-transition: .65s cubic-besiez(.2,.1,.1,1);

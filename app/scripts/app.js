@@ -89,7 +89,7 @@ var app = angular.module('artFinderApp', [
      // use the shortcut in the initialize method directly.
      FacebookProvider.init('306208576247087');
 })
-.constant('AUTH_EVENTS', {
+.constant('APP_EVENTS', {
     loginSuccess: 'auth-login-success',
     loginFailed: 'auth-login-failed',
     logoutSuccess: 'auth-logout-success',

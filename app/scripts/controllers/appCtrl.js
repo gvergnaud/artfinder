@@ -7,7 +7,7 @@
  * # AppctrlCtrl
  * Controller of the artFinderApp
  */
-app.controller('appCtrl', function ($scope, $rootScope, Session, Auth, UI, AUTH_EVENTS, USER_ROLES, Geoloc, Socket) {
+app.controller('appCtrl', function ($scope, $rootScope, Session, Auth, UI, APP_EVENTS, USER_ROLES, Geoloc, Socket) {
 
     //LOADER 
     //
@@ -21,15 +21,27 @@ app.controller('appCtrl', function ($scope, $rootScope, Session, Auth, UI, AUTH_
     // get user lOCATION
     var geoloc = new Geoloc();
 
-    geoloc.getUserLocation().then(
-        function(latLng){
-            Session.addUserLocation(latLng);
-            $rootScope.$broadcast(AUTH_EVENTS.userLocationChanged);
-        }, 
-        function(msg){
-            console.log(msg);
+    $scope.traceUserLocation = function(){
+        
+        function getUserLocation(){
+            geoloc.getUserLocation().then(
+                function(latLng){
+                    Session.addUserLocation(latLng);
+                    $rootScope.$broadcast(APP_EVENTS.userLocationChanged);
+                }, 
+                function(msg){
+                    console.log(msg);
+                }
+            );
         }
-    );
+
+        getUserLocation();
+        setInterval(function(){
+            getUserLocation();
+        }, 5000);
+    };
+
+    $scope.traceUserLocation();
 
     $scope.currentUser = null;
     $scope.userRoles = USER_ROLES;

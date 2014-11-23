@@ -8,7 +8,7 @@
  * Controller of the artFinderApp
  */
 
-app.controller('HomeCtrl',['$scope', '$rootScope', 'Post', 'Geoloc', 'UI', '$filter', '$routeParams', function ($scope, $rootScope, Post, Geoloc, UI, $filter, $routeParams) {
+app.controller('HomeCtrl',['$scope', '$rootScope', 'Post', 'Geoloc', 'UI', '$filter', '$routeParams', 'APP_EVENTS', 'Session', function ($scope, $rootScope, Post, Geoloc, UI, $filter, $routeParams, APP_EVENTS, Session) {
 
 
 	//POSTS
@@ -94,7 +94,11 @@ app.controller('HomeCtrl',['$scope', '$rootScope', 'Post', 'Geoloc', 'UI', '$fil
 	$scope.switchMozMap = function(){
 		UI.home.switchMozMap();
 		setTimeout(function(){
-			$scope.geoloc.panTo(48.857487002645485, 2.3515677452087402);	
+			if(Session.userLocation){
+				$scope.geoloc.panTo(Session.userLocation.k, Session.userLocation.B);	
+			}else{
+				$scope.geoloc.panTo(48.857487002645485, 2.3515677452087402);	
+			}
 		}, 500);
 	};
 
@@ -120,7 +124,11 @@ app.controller('HomeCtrl',['$scope', '$rootScope', 'Post', 'Geoloc', 'UI', '$fil
 		}, 800);
 	};
 
-	//$scope.geoloc.addMyLocationMarker();
+	//affiche la position de l'utilisateur à chaque refresh
+	$rootScope.$on(APP_EVENTS.userLocationChanged, function(){
+		$scope.geoloc.addUserLocationMarker(Session.userLocation);
+	});
+
 
 	//applique les filtres sur la map
 	$scope.filters = {};

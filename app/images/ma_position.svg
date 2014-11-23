@@ -3,6 +3,6 @@
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
 <svg version="1.1" id="Calque_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
 	 viewBox="0 0 117.5 113.6" enable-background="new 0 0 117.5 113.6" xml:space="preserve">
-<circle fill="#050606" stroke="#B49D5B" stroke-miterlimit="10" cx="59.3" cy="57" r="7.5"/>
-<circle fill="none" stroke="#000000" stroke-miterlimit="10" cx="59.3" cy="57" r="54.7"/>
+<circle fill="#B49D5B" stroke="#050606" stroke-width="2" stroke-miterlimit="10" cx="59.3" cy="57" r="11.5"/>
+<circle fill="none" stroke="#000000" stroke-width="12" stroke-miterlimit="10" cx="59.3" cy="57" r="49.2"/>
 </svg>
