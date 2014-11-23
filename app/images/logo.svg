@@ -1,24 +1,36 @@
-<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Calque_1" x="0px" y="0px" viewBox="0 0 250 100" enable-background="new 0 0 250 100" xml:space="preserve">
-  <text transform="matrix(1 0 0 1 16 62.8193)">
-    <tspan x="0" y="0" fill="#B59E5B" font-family="'Uni Sans Thin'" font-size="40">
-      A
-    </tspan>
-    <tspan x="24" y="0" fill="#B59E5B" font-family="'Uni Sans Thin'" font-size="40">
-      R
-    </tspan>
-    <tspan x="47.9" y="0" fill="#B59E5B" font-family="'Uni Sans Thin'" font-size="40">
-      T
-    </tspan>
-  </text>
-  <text transform="matrix(1 0 0 1 85.48 62.8193)" fill="#FFFFFF" font-family="'Uni Sans Heavy'" font-size="40">
-    FINDER
-  </text>
-  <defs>
-    <rect id="SVGID_1_" x="106" y="74.1" width="82.3" height="25.9"/>
-  </defs>
-  <clipPath id="SVGID_2_">
-    <use xlink:href="#SVGID_1_" overflow="visible"/>
-  </clipPath>
-  <path fill="#FFFFFF" d="M115.1 63.6c1-0.1 2.6-0.2 3.5-0.6 0.8-0.4 1.2-0.7 1.4-1l0.2-0.3 0.1-25.4c0 0 0-0.1-0.3-0.3 -0.5-0.4-0.9-0.3-0.9-0.3s-0.2-1.3-1.1-1.8c-0.9-0.6-1.7-0.5-1.7-0.5l-0.1-0.6 -0.2-0.1 -0.2-1.7c0 0-0.2 0-0.3 0 -0.1 0-0.2 0.1-0.9 0.1 -0.7 0-0.9-0.3-1.1-0.1 -0.1 0.2-0.2 1.7-0.2 1.7s-0.2-0.3-0.2 0.1c0 0.4 0 0.7 0 0.7s-1.6 0.1-2.1 0.8c-0.5 0.6-0.7 1.5-0.7 1.5s-0.6-0.1-1 0.3c-0.3 0.3-0.2 0.8-0.2 0.8l0.1 24.6c0 0 1 1.2 2.2 1.6 1.1 0.4 2.3 0.4 2.9 0.5C114.9 63.7 115.1 63.6 115.1 63.6"/>
-  <path fill="#010202" d="M118.8 36.9v24.3c0 0-0.3 0.5-0.6 0.7 -0.3 0.2-1 0.4-1 0.4V36.3l0.6 0.1 0.6 0.3L118.8 36.9z"/>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 18.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 502 81.3" enable-background="new 0 0 502 81.3" xml:space="preserve">
+<g id="Calque_2">
+</g>
+<g id="Calque_1">
+	<text transform="matrix(1 0 0 1 -100.8321 223.777)" font-family="'ArialMT'" font-size="29.376">     </text>
+	<text transform="matrix(1 0 0 1 175.2486 77.7906)" font-family="'ArialMT'" font-size="29.376">     </text>
+	<text transform="matrix(1 0 0 1 240.3642 77.7906)" font-family="'ArialMT'" font-size="29.376">     </text>
+	<text transform="matrix(1 0 0 1 287.3181 77.7906)" font-family="'ArialMT'" font-size="29.376">   </text>
+	<g enable-background="new    ">
+		<path fill="#FFFFFF" d="M190.3,37.9H217v16.4h-26.7v23.9h-17.7V8.8h48.3v16.6h-30.5V37.9z"/>
+		<path fill="#FFFFFF" d="M257.5,8.8h16.6l16.7,29.6l5.9,13.9l0.5-0.1c-0.1,0-1.9-11.9-2-11.9V8.8h17.4v69.3H295l-15.7-27.3
+			l-6.1-13.9l-0.5,0.1l2.3,13.4v27.7h-17.5V8.8z"/>
+		<path fill="#FFFFFF" d="M349.6,8.8c13.9,0,26.9,7,26.9,23.2v23.3c0,16-13,22.9-26.9,22.8h-25.9V8.8H349.6z M350.2,61.7
+			c6,0,8.7-3,8.7-7.5V32.5c0-4.5-2.8-7.3-8.7-7.3h-8.9v36.5H350.2z"/>
+		<path fill="#FFFFFF" d="M403.7,36h28.1v15.2h-28.1v10.4h30.5v16.5h-48.3V8.8h48.3v16.4h-30.5V36z"/>
+		<path fill="#FFFFFF" d="M464.4,56.1h-3.1v22h-17.7V8.8h27.7c14.3,0,25.4,6.6,25.8,22.8c0,12.8-5.2,20.1-13.6,22.7l18.9,23.8h-21.8
+			L464.4,56.1z M471.5,41c11.1,0,11.1-15.9,0-15.9h-10.3V41H471.5z"/>
+	</g>
+	<path fill="#FFFFFF" d="M251.8,12.4c-1.2-1-2.2-0.7-2.2-0.7s-0.5-3.2-2.7-4.4c-2.2-1.5-4.2-1.2-4.2-1.2l-0.2-1.5L242,4.3l-0.5-4.2
+		c0,0-0.5,0-0.7,0s-0.5,0.2-2.2,0.2c-1.7,0-2.2-0.7-2.7-0.2c-0.2,0.5-0.5,4.2-0.5,4.2s-0.5-0.7-0.5,0.2s0,1.7,0,1.7s-3.9,0.2-5.1,2
+		c-1.2,1.5-1.7,3.7-1.7,3.7s-1.5-0.2-2.4,0.7c-0.7,0.7-0.5,2-0.5,2l0.2,60.2c0,0,2.4,2.9,5.4,3.9c2.7,1,5.6,1,7.1,1.2
+		c1.5,0.2,2,0,2,0c2.4-0.2,6.4-0.5,8.6-1.5c2-1,2.9-1.7,3.4-2.4l0.9-1l-0.1-61.9C252.6,13.1,252.6,12.9,251.8,12.4z M248.9,74.1
+		c0,0-0.7,1.2-1.5,1.7c-0.7,0.5-2.4,1-2.4,1V13.1l1.5,0.2l1.5,0.7l1,0.5V74.1z"/>
+	<g>
+		<path fill="#B59E5B" d="M2.6,78.1H0L25.7,8.8h3.9l25.7,69.3h-2.6l-9.2-24.8H11.8L2.6,78.1z M27.4,11.2L12.7,50.9h29.8L27.8,11.2
+			H27.4z"/>
+		<path fill="#B59E5B" d="M107.5,78.1L84.2,47.2H68.4v30.9h-2.4V8.8h24.5c12,0,21.2,4.7,21.5,18.8c0,14.4-8.8,19.6-21.4,19.6H87
+			l23.4,30.9H107.5z M90.7,45c12.6,0,19.1-5.1,19.1-17.3c0-12.5-8-16.8-19.1-16.6H68.4v34H90.7z"/>
+		<path fill="#B59E5B" d="M166.2,11.2h-23.1v66.9h-2.4V11.2h-23.1V8.8h48.7V11.2z"/>
+	</g>
+</g>
 </svg>

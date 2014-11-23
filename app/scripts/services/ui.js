@@ -277,7 +277,7 @@ app.factory('UI', function UI() {
                         top: (window.innerHeight - 200)/2 + 'px',
                     });
                 });
-
+                
                 ui.singlepost.img.css({
                     height: window.innerHeight - 100 + 'px'
                 }); 

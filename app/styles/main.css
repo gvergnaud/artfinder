@@ -581,8 +581,8 @@ p.notification.show{
 	top:50%;
 	width:90%;
 	height:90%;
-	max-width:400px;
-	max-height:250px;
+	max-width:350px;
+	max-height:200px;
 	transition: .8s ease;
 	-moz-transition: .8s ease;
 	-webkit-transition: .8s ease;
@@ -617,10 +617,10 @@ button.enter{
 	-moz-transition: 2s ease;
 	-webkit-transition: 2s ease;
 
-	-webkit-transform: translate3d(-182px, 50px, 0);
-	-moz-transform: translate3d(-182px, 50px, 0);
-	-o-transform: translate3d(-182px, 50px, 0);
-	transform: translate3d(-182px, 50px, 0);
+	-webkit-transform: translate3d(-175px, 50px, 0);
+	-moz-transform: translate3d(-175px, 50px, 0);
+	-o-transform: translate3d(-175px, 50px, 0);
+	transform: translate3d(-175px, 50px, 0);
 }
 
 button.enter.width{
