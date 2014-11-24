@@ -56,6 +56,10 @@ section#player>img{
     transition: .65s cubic-bezier(.2,.1,.1,1);
 }
 
+section#player>img.up{
+	top: -1000px;
+}
+
 
 /* TAGZ */
 

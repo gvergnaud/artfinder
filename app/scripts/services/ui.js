@@ -406,8 +406,10 @@ app.factory('UI', function UI() {
             toggleMap: function(callback){
                 var map = angular.element(document.querySelector('section.map'));
                 var player = angular.element(document.querySelector('section#player'));
+                var img = angular.element(document.querySelector('section#player>img'));
                 map.toggleClass('show');
                 player.toggleClass('up');
+                img.toggleClass('up');
                 if(!!callback){
                     setTimeout(function(){
                         callback.call(this);
