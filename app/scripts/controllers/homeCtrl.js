@@ -130,8 +130,22 @@ app.controller('HomeCtrl',['$scope', '$rootScope', 'Post', 'Geoloc', 'UI', '$fil
 	});
 
 
-	//applique les filtres sur la map
+
+	//Filtres 
 	$scope.filters = {};
+
+	$scope.setTechnique = function(technique){
+		if($scope.filters.technique === technique){
+			$scope.filters.technique = '';
+			document.querySelector('span.technique.' + technique).classList.remove('active');
+		}else{
+			$scope.filters.technique = technique;
+			angular.element(document.querySelectorAll('span.technique')).removeClass('active');
+			document.querySelector('span.technique.' + technique).classList.add('active');
+		}
+	};
+
+	//applique les filtres sur la map
 
 	$scope.$watchCollection('filters', function (newValue, oldValue){
 		$scope.geoloc.clearMarkers();
