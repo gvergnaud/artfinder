@@ -45,9 +45,7 @@
 			<h3>{{createFullDate()}}</h3>
 			<p class="flaticon-checkboxmark" ng-if="post.photos[currentPhotoId].stillExist"> Yes ! L'oeuvre existe toujours</p>
 			<p class="flaticon-cross102" ng-if="!post.photos[currentPhotoId].stillExist"> Hélas, cette oeuvre n'existe existe plus</p>
-			<span ng-tooltip="{{post.photos[currentPhotoId].technique}}" class="technique {{post.photos[currentPhotoId].technique}}">
-		        {{post.photos[currentPhotoId].technique}}
-		    </span>
+			<span ng-tooltip="{{post.photos[currentPhotoId].technique}}" id="postTechnique" class="technique {{post.photos[currentPhotoId].technique}}"></span>
 		</div>
 		<div class="left">
 			<div class="desc">
@@ -55,7 +53,7 @@
 				<div class="comment_info">
 					<h3 class="username">{{post.photos[currentPhotoId].user.username}}</h3>
 					<p class="content" ng-if="post.photos[currentPhotoId].description">{{post.photos[currentPhotoId].description}}</p>
-					<p class="discret" ng-if="!post.photos[currentPhotoId].description">Pas très bavard ... </p>
+					<p class="discret" ng-if="!post.photos[currentPhotoId].description">Quelqu'un est timide ?</p>
 				</div>
 			</div>
 

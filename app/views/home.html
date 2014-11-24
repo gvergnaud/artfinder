@@ -2,26 +2,13 @@
 
 <div id="filters">
     <input type="text" id="search" placeholder="Recherche" ng-model="filters.search"/>
-    <div>
-    <h3>Technique utilisée : </h3>
-      <span ng-tooltip="Pochoir" class="technique pochoir" ng-click="setTechnique('pochoir')">
-        Pochoir
-      </span>
-      <span ng-tooltip="Sticker" class="technique sticker" ng-click="setTechnique('sticker')">
-        Sticker
-      </span>
-      <span ng-tooltip="Peinture" class="technique peinture" ng-click="setTechnique('peinture')">
-        Peinture
-      </span>
-      <span ng-tooltip="Grafitti" class="technique grafitti" ng-click="setTechnique('grafitti')">
-        Grafitti
-      </span>
-      <span ng-tooltip="Collage" class="technique collage" ng-click="setTechnique('collage')">
-        Collage
-      </span>
-      <span ng-tooltip="Autre" class="technique autre" ng-click="setTechnique('autre')">
-        Autre
-      </span>
+    <div id="techniques">
+      <span ng-tooltip="Pochoir" class="technique pochoir" ng-click="setTechnique('pochoir')"></span>
+      <span ng-tooltip="Sticker" class="technique sticker" ng-click="setTechnique('sticker')"></span>
+      <span ng-tooltip="Peinture" class="technique peinture" ng-click="setTechnique('peinture')"></span>
+      <span ng-tooltip="Grafitti" class="technique grafitti" ng-click="setTechnique('grafitti')"></span>
+      <span ng-tooltip="Mosaique" class="technique mosaique" ng-click="setTechnique('mosaique')"></span>
+      <span ng-tooltip="Autre" class="technique autre" ng-click="setTechnique('autre')"></span>
     </div>
 </div>
 

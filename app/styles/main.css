@@ -383,7 +383,7 @@ p.notification.show{
 	height: 1em;
 	white-space : nowrap;
 	border-radius: 2px;
-	z-index: 200;
+	z-index: 350;
 	transform: translateX(-50%);
 	-moz-transform: translateX(-50%);
 	-webkit-transform: translateX(-50%);
@@ -394,7 +394,7 @@ p.notification.show{
     overflow: hidden;
     background: #050505;
     position: absolute;
-    z-index: 200;
+    z-index: 350;
     display: none;
     border-radius: 5px;
     border: 1px solid #B59E5C;
@@ -505,6 +505,52 @@ p.notification.show{
 	opacity: 1;
 }
 
+/*TECHNIQUE ICONES*/
+div#techniques{
+	margin-top: 15px;
+	width: 100%;
+}
+
+span.technique{
+	width: 40px;
+	height: 40px;
+	display: inline-block;
+	cursor: pointer;
+}
+
+span.technique.active{
+	background-color: #1e1e1e !important;
+}
+
+span.technique.pochoir{
+	background: url(../images/pochoir.svg) no-repeat;
+	background-position: center;
+}
+
+span.technique.sticker{
+	background: url(../images/sticker.svg) no-repeat;
+	background-position: center;
+}
+
+span.technique.mosaique{
+	background: url(../images/mosaique.svg) no-repeat;
+	background-position: center;
+}
+
+span.technique.peinture{
+	background: url(../images/peinture.svg) no-repeat;
+	background-position: center;
+}
+
+span.technique.grafitti{
+	background: url(../images/grafitti.svg) no-repeat;
+	background-position: center;
+}
+
+span.technique.autre{
+	background: url(../images/autre.svg) no-repeat;
+	background-position: center;
+}
 
 /*  GRID OF FIVE   ============================================================================= */
 

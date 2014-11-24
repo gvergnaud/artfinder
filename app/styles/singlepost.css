@@ -221,6 +221,13 @@ span.left{
 	padding: 5px 0;
 }
 
+span#postTechnique{
+	width: 132px;
+	height: 132px;
+	margin: 15px 0;
+	display: block;
+}
+
 #infos>div.right h3{
 	font-size: 1em;
 }

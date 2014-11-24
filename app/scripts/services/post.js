@@ -180,7 +180,7 @@ app.factory('Post', function Post($http, $q, Session, Socket, SERVER) {
 
             var deferred = $q.defer();
 
-            factory.saveInLocalStorage(post);
+            factory.saveInLocalStorage(posts);
 
             $http({
                     url: SERVER.url + 'save.php',

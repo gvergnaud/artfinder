@@ -1,71 +1,175 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Generator: Adobe Illustrator 16.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<!-- Generator: Adobe Illustrator 18.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
 <svg version="1.1" id="Calque_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-	 width="22px" height="21.167px" viewBox="0 0 22 21.167" enable-background="new 0 0 22 21.167" xml:space="preserve">
-<image overflow="visible" width="32" height="49" xlink:href="data:image/png;base64,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
-AAAASUVORK5CYII=" transform="matrix(0.7318 0 0 0.7318 -0.7505 -7.3037)">
-</image>
+	 viewBox="-3.6 -3.4 24.5 24.9" enable-background="new -3.6 -3.4 24.5 24.9" xml:space="preserve">
+<g>
+	<g>
+		<g>
+			<defs>
+				<rect id="SVGID_1_" x="0" y="0" width="17.3" height="17.3"/>
+			</defs>
+			<clipPath id="SVGID_2_">
+				<use xlink:href="#SVGID_1_"  overflow="visible"/>
+			</clipPath>
+			<polygon clip-path="url(#SVGID_2_)" fill="none" stroke="#B59E5C" stroke-miterlimit="10" points="10.7,12.7 10.7,10.7 8.6,10.7 
+				6.6,10.7 6.6,12.7 8.6,12.7 			"/>
+		</g>
+		<g>
+			<defs>
+				<rect id="SVGID_3_" x="0" y="0" width="17.3" height="17.3"/>
+			</defs>
+			<clipPath id="SVGID_4_">
+				<use xlink:href="#SVGID_3_"  overflow="visible"/>
+			</clipPath>
+			<rect x="10.7" y="12.7" clip-path="url(#SVGID_4_)" fill="none" stroke="#B59E5C" stroke-miterlimit="10" width="2" height="2"/>
+		</g>
+		<g>
+			<defs>
+				<rect id="SVGID_5_" x="0" y="0" width="17.3" height="17.3"/>
+			</defs>
+			<clipPath id="SVGID_6_">
+				<use xlink:href="#SVGID_5_"  overflow="visible"/>
+			</clipPath>
+			<rect x="4.6" y="12.7" clip-path="url(#SVGID_6_)" fill="none" stroke="#B59E5C" stroke-miterlimit="10" width="2" height="2"/>
+		</g>
+		<g>
+			<defs>
+				<rect id="SVGID_7_" x="0" y="0" width="17.3" height="17.3"/>
+			</defs>
+			<clipPath id="SVGID_8_">
+				<use xlink:href="#SVGID_7_"  overflow="visible"/>
+			</clipPath>
+			<rect x="10.7" y="6.6" clip-path="url(#SVGID_8_)" fill="none" stroke="#B59E5C" stroke-miterlimit="10" width="2" height="2"/>
+		</g>
+		<g>
+			<defs>
+				<rect id="SVGID_9_" x="0" y="0" width="17.3" height="17.3"/>
+			</defs>
+			<clipPath id="SVGID_10_">
+				<use xlink:href="#SVGID_9_"  overflow="visible"/>
+			</clipPath>
+			<rect x="4.6" y="6.6" clip-path="url(#SVGID_10_)" fill="none" stroke="#B59E5C" stroke-miterlimit="10" width="2" height="2"/>
+		</g>
+		<g>
+			<defs>
+				<rect id="SVGID_11_" x="0" y="0" width="17.3" height="17.3"/>
+			</defs>
+			<clipPath id="SVGID_12_">
+				<use xlink:href="#SVGID_11_"  overflow="visible"/>
+			</clipPath>
+			<g clip-path="url(#SVGID_12_)">
+				<g>
+					<defs>
+						<rect id="SVGID_13_" x="0" y="0" width="17.3" height="17.3"/>
+					</defs>
+					<clipPath id="SVGID_14_">
+						<use xlink:href="#SVGID_13_"  overflow="visible"/>
+					</clipPath>
+					
+						<rect x="14.8" y="14.8" clip-path="url(#SVGID_14_)" fill="none" stroke="#B59E5C" stroke-miterlimit="10" width="2" height="2"/>
+				</g>
+				<g>
+					<defs>
+						<rect id="SVGID_15_" x="0" y="0" width="17.3" height="17.3"/>
+					</defs>
+					<clipPath id="SVGID_16_">
+						<use xlink:href="#SVGID_15_"  overflow="visible"/>
+					</clipPath>
+					
+						<rect x="12.7" y="12.7" clip-path="url(#SVGID_16_)" fill="none" stroke="#B59E5C" stroke-miterlimit="10" width="2" height="2"/>
+				</g>
+				<g>
+					<defs>
+						<rect id="SVGID_17_" x="0" y="0" width="17.3" height="17.3"/>
+					</defs>
+					<clipPath id="SVGID_18_">
+						<use xlink:href="#SVGID_17_"  overflow="visible"/>
+					</clipPath>
+					<g clip-path="url(#SVGID_18_)">
+						<g>
+							<defs>
+								<rect id="SVGID_19_" x="0" y="0" width="17.3" height="17.3"/>
+							</defs>
+							<clipPath id="SVGID_20_">
+								<use xlink:href="#SVGID_19_"  overflow="visible"/>
+							</clipPath>
+							
+								<rect x="10.7" y="14.8" clip-path="url(#SVGID_20_)" fill="none" stroke="#B59E5C" stroke-miterlimit="10" width="2" height="2"/>
+						</g>
+						<g>
+							<defs>
+								<rect id="SVGID_21_" x="0" y="0" width="17.3" height="17.3"/>
+							</defs>
+							<clipPath id="SVGID_22_">
+								<use xlink:href="#SVGID_21_"  overflow="visible"/>
+							</clipPath>
+							<polygon clip-path="url(#SVGID_22_)" fill="none" stroke="#B59E5C" stroke-miterlimit="10" points="8.6,12.7 6.6,12.7 
+								6.6,14.8 8.6,14.8 10.7,14.8 10.7,12.7 							"/>
+						</g>
+						<g>
+							<defs>
+								<rect id="SVGID_23_" x="0" y="0" width="17.3" height="17.3"/>
+							</defs>
+							<clipPath id="SVGID_24_">
+								<use xlink:href="#SVGID_23_"  overflow="visible"/>
+							</clipPath>
+							<g clip-path="url(#SVGID_24_)">
+								<g>
+									<defs>
+										<rect id="SVGID_25_" x="0" y="0" width="17.3" height="17.3"/>
+									</defs>
+									<defs>
+										<rect id="SVGID_26_" x="0" y="0" width="17.3" height="17.3"/>
+									</defs>
+									<clipPath id="SVGID_27_">
+										<use xlink:href="#SVGID_25_"  overflow="visible"/>
+									</clipPath>
+									<clipPath id="SVGID_28_" clip-path="url(#SVGID_27_)">
+										<use xlink:href="#SVGID_26_"  overflow="visible"/>
+									</clipPath>
+									<path clip-path="url(#SVGID_28_)" fill="none" stroke="#B59E5C" stroke-miterlimit="10" d="M14.8,6.6v-2h-2v-2h-2v-2h-2h-2
+										v2h-2v2h-2v2h-2v2v2h2h2v2h2v-2h2h2v2h2v-2h2h2v-2v-2H14.8z M4.6,6.6h2v2h-2V6.6z M10.7,6.6h2v2h-2
+										C10.7,8.7,10.7,6.6,10.7,6.6z"/>
+									
+										<rect x="0.5" y="14.8" clip-path="url(#SVGID_28_)" fill="none" stroke="#B59E5C" stroke-miterlimit="10" width="2" height="2"/>
+								</g>
+								<g>
+									<defs>
+										<rect id="SVGID_29_" x="0" y="0" width="17.3" height="17.3"/>
+									</defs>
+									<clipPath id="SVGID_30_">
+										<use xlink:href="#SVGID_29_"  overflow="visible"/>
+									</clipPath>
+									
+										<rect x="2.5" y="12.7" clip-path="url(#SVGID_30_)" fill="none" stroke="#B59E5C" stroke-miterlimit="10" width="2" height="2"/>
+								</g>
+								<g>
+									<defs>
+										<rect id="SVGID_31_" x="0" y="0" width="17.3" height="17.3"/>
+									</defs>
+									<clipPath id="SVGID_32_">
+										<use xlink:href="#SVGID_31_"  overflow="visible"/>
+									</clipPath>
+									<g clip-path="url(#SVGID_32_)">
+										<g>
+											<defs>
+												<rect id="SVGID_33_" x="0" y="0" width="17.3" height="17.3"/>
+											</defs>
+											<clipPath id="SVGID_34_">
+												<use xlink:href="#SVGID_33_"  overflow="visible"/>
+											</clipPath>
+											
+												<rect x="4.6" y="14.8" clip-path="url(#SVGID_34_)" fill="none" stroke="#B59E5C" stroke-miterlimit="10" width="2" height="2"/>
+										</g>
+									</g>
+								</g>
+							</g>
+						</g>
+					</g>
+				</g>
+			</g>
+		</g>
+	</g>
+</g>
 </svg>
