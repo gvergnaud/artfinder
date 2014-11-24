@@ -4,22 +4,22 @@
     <input type="text" id="search" placeholder="Recherche" ng-model="filters.search"/>
     <div>
     <h3>Technique utilisée : </h3>
-      <span class="technique pochoir" ng-click="setTechnique('pochoir')">
+      <span ng-tooltip="Pochoir" class="technique pochoir" ng-click="setTechnique('pochoir')">
         Pochoir
       </span>
-      <span class="technique sticker" ng-click="setTechnique('sticker')">
+      <span ng-tooltip="Sticker" class="technique sticker" ng-click="setTechnique('sticker')">
         Sticker
       </span>
-      <span class="technique peinture" ng-click="setTechnique('peinture')">
+      <span ng-tooltip="Peinture" class="technique peinture" ng-click="setTechnique('peinture')">
         Peinture
       </span>
-      <span class="technique grafitti" ng-click="setTechnique('grafitti')">
+      <span ng-tooltip="Grafitti" class="technique grafitti" ng-click="setTechnique('grafitti')">
         Grafitti
       </span>
-      <span class="technique collage" ng-click="setTechnique('collage')">
+      <span ng-tooltip="Collage" class="technique collage" ng-click="setTechnique('collage')">
         Collage
       </span>
-      <span class="technique autre" ng-click="setTechnique('autre')">
+      <span ng-tooltip="Autre" class="technique autre" ng-click="setTechnique('autre')">
         Autre
       </span>
     </div>
