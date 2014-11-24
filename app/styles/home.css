@@ -30,7 +30,7 @@
 }
 
 #switcher{
-    min-height: 100px !important;
+    min-height: 150px !important;
 }
 
 #search{
@@ -68,5 +68,9 @@
 
 	#filters{
 		display: none;
+	}
+
+	#switcher{
+	    width: 100% !important;
 	}
 }
