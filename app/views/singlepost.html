@@ -45,6 +45,9 @@
 			<h3>{{createFullDate()}}</h3>
 			<p class="flaticon-checkboxmark" ng-if="post.photos[currentPhotoId].stillExist"> Yes ! L'oeuvre existe toujours</p>
 			<p class="flaticon-cross102" ng-if="!post.photos[currentPhotoId].stillExist"> Hélas, cette oeuvre n'existe existe plus</p>
+			<span ng-tooltip="{{post.photos[currentPhotoId].technique}}" class="technique {{post.photos[currentPhotoId].technique}}">
+		        {{post.photos[currentPhotoId].technique}}
+		    </span>
 		</div>
 		<div class="left">
 			<div class="desc">

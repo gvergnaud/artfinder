@@ -12,8 +12,7 @@ app.directive('ngTooltip', function(Post) {
         restrict: 'A',
         link: function($scope, $element, $attrs) {
 
-            var msg = $attrs.ngTooltip,
-                tooltip = angular.element('<div />').addClass('tooltip');
+           var tooltip = angular.element('<div />').addClass('tooltip');
 
             function removeTooltip(){
                 angular.element(document.querySelector('.tooltip')).remove();
@@ -33,6 +32,8 @@ app.directive('ngTooltip', function(Post) {
                         top: e.clientY - 40 + 'px'
                     });
                 });
+
+                var msg = $attrs.ngTooltip;
 
                 tooltip.html(msg);
 

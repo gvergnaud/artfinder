@@ -25,9 +25,10 @@ app.controller('SinglepostCtrl',['$scope', '$rootScope', '$routeParams', 'Post',
                 );
 
                 UI.singlepost.togglePlayerArrows($scope);
-                setTimeout(function(){
-                    UI.singlepost.tagStyles();
-                }, 300);
+                
+                $scope.img.on('load', function(){
+		            UI.singlepost.tagStyles();
+				});
             },
             function (msg){ // erreur lors de la récupération des posts
                 UI.notification('error', msg);
@@ -74,7 +75,10 @@ app.controller('SinglepostCtrl',['$scope', '$rootScope', '$routeParams', 'Post',
 		});
 
 		UI.singlepost.togglePlayerArrows($scope);
-		UI.singlepost.tagStyles();
+		
+		$scope.img.on('load', function(){
+            UI.singlepost.tagStyles();
+		});
 	});
 
  	//Changer l'image avec next
@@ -85,7 +89,10 @@ app.controller('SinglepostCtrl',['$scope', '$rootScope', '$routeParams', 'Post',
  		});
 
  		UI.singlepost.togglePlayerArrows($scope);
-		UI.singlepost.tagStyles();
+		
+		$scope.img.on('load', function(){
+            UI.singlepost.tagStyles();
+		});
  	});
 
 
