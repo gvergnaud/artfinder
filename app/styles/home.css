@@ -9,7 +9,9 @@
 #mosaic{
 	border-top: 5px solid #050505;
 	width:100%;
+    min-height: 150px !important;
 	position: fixed;
+	bottom: 0;
 	overflow-y: scroll;
 	background: #050505;
 	-moz-transition: .65s cubic-besiez(.2,.1,.1,1);
@@ -20,11 +22,15 @@
 #filters{
 	position: absolute;
 	width:200px;
-	height:100px;
+	height:150px;
 	left: 50px;	
 	top: 50px;
 	color: #fff;
+<<<<<<< HEAD
 	z-index:1000;
+=======
+	z-index:150;
+>>>>>>> c5d7ca90b2b802bcf16f2a5b2bb633b36e6feb5e
 }
 
 
@@ -45,4 +51,27 @@
 }
 #search:focus{
 	background: rgba(255,255,255,1);
+}
+
+
+@media only screen and (max-width: 1280px) {
+	
+}
+
+@media only screen and (max-width: 850px) {
+	
+}
+
+@media only screen and (max-width: 680px) {
+	#mosaic{
+		width: 100% !important;
+	}
+
+	#map{
+		width: 100% !important;
+	}
+
+	#filters{
+		display: none;
+	}
 }

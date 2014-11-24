@@ -47,6 +47,10 @@ app.factory('UI', function UI() {
             loginContainer.toggleClass('show');
         },
 
+        closeLoginOverlay: function(){
+            loginContainer.removeClass('show');
+        },
+
         toggleMenu: function(){
             var viewcontainer = angular.element(document.querySelector('#viewcontainer')),
                 notifications = angular.element(document.querySelector('#notifications')),
@@ -253,14 +257,13 @@ app.factory('UI', function UI() {
             selection: false,
 
             init:function(){
-                ui.singlepost.player = angular.element(document.querySelectorAll('#player')),
-                ui.singlepost.img = angular.element(document.querySelectorAll('section#player img')),
+                ui.singlepost.player = angular.element(document.querySelectorAll('#player'));
+                ui.singlepost.img = angular.element(document.querySelectorAll('section#player img'));
                 ui.singlepost.arrows = [angular.element(document.querySelectorAll('nav#prev')), angular.element(document.querySelectorAll('nav#next'))];
 
                 ui.singlepost.style();
                 window.addEventListener('resize', ui.singlepost.style, false);
                 window.addEventListener('resize', ui.singlepost.tagStyles, false);
-                window.addEventListener('resize', ui.singlepost.imgStyle, false);
             },
 
             style: function(){
@@ -274,23 +277,10 @@ app.factory('UI', function UI() {
                         top: (window.innerHeight - 200)/2 + 'px',
                     });
                 });
-
+                
                 ui.singlepost.img.css({
-                    height: window.innerHeight - 100 + 'px',
-                    width: '',
-                    marginTop: ''
+                    height: window.innerHeight - 100 + 'px'
                 }); 
-            },
-
-            imgStyle: function(){
-
-                if(ui.singlepost.img[0].offsetWidth > window.innerWidth-100){
-                    ui.singlepost.img.css({
-                        width: window.innerWidth - ui.menuWidth + 'px',
-                        height: '',
-                        marginTop: Math.abs((window.innerHeight - 100 - ui.singlepost.img[0].offsetHeight)/2) + 'px'
-                    });
-                }
             },
 
             tagStyles: function(){
@@ -483,7 +473,41 @@ app.factory('UI', function UI() {
                 };
             },
 
+            proposePosts: function(){
+                var addressInputContainer = angular.element(document.querySelector('span#addressInputContainer'));
+                addressInputContainer.addClass('up');
+            },
+
+            removeProposedPosts: function(){
+                var addressInputContainer = angular.element(document.querySelector('span#addressInputContainer'));
+                addressInputContainer.removeClass('up');
+            },
+
             selectedPost: function(post){
+                //locate section
+                var addressPin = angular.element(document.querySelectorAll('#addressPin')),
+                    addressInput = angular.element(document.querySelectorAll('#addressInput')),
+                    posts = angular.element(document.querySelectorAll('div.post.col')),
+                    thePost = angular.element(document.querySelector('div.post.col.postN' + post.id));
+
+                posts.css({
+                    display: 'none'
+                });
+
+                thePost.css({
+                    display: '',
+                    border: '2px solid #B59E5C'
+                });
+
+                addressInput.css({
+                    display: 'none'
+                });
+
+                addressPin.css({
+                    display: 'none'
+                });
+
+                //infos section
                 var addPhotoForm = angular.element(document.querySelector('form#addPhotoForm'));
                 var addPostForm = angular.element(document.querySelector('form#addPostForm'));
 
@@ -497,6 +521,31 @@ app.factory('UI', function UI() {
             },
             
             removeSelectedPost: function(post){
+                //locate section
+                var addressPin = angular.element(document.querySelectorAll('#addressPin')),
+                    addressInput = angular.element(document.querySelectorAll('#addressInput')),
+                    posts = angular.element(document.querySelectorAll('div.post')),
+                    thePost = angular.element(document.querySelectorAll('div.post.col.postN' + post.id));
+
+                posts.css({
+                    display: ''
+                });
+
+                thePost.css({
+                    display: '',
+                    border: ''
+                });
+
+                addressInput.css({
+                    display: ''
+                });
+
+                addressPin.css({
+                    display: ''
+                });
+
+
+                //infos section
                 var addPhotoForm = angular.element(document.querySelector('form#addPhotoForm'));
                 var addPostForm = angular.element(document.querySelector('form#addPostForm'));
 

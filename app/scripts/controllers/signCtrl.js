@@ -7,7 +7,7 @@
  * # AddpostCtrl
  * Controller of the artFinderApp
  */
-app.controller('signCtrl', function ($scope, $rootScope, UI, AUTH_EVENTS, Auth, Facebook, Session) {
+app.controller('signCtrl', function ($scope, $rootScope, UI, APP_EVENTS, Auth, Session, Facebook) {
 	$scope.loginInfos = {};
 	$scope.signUpInfos = {};
 
@@ -24,7 +24,7 @@ app.controller('signCtrl', function ($scope, $rootScope, UI, AUTH_EVENTS, Auth, 
 
 		Session.create(user.id, user.username, user.role, user.avatar);
 
-		$rootScope.$broadcast(AUTH_EVENTS.loginSuccess);
+		$rootScope.$broadcast(APP_EVENTS.loginSuccess);
 
 		$scope.setCurrentUser(user);
 
@@ -42,7 +42,7 @@ app.controller('signCtrl', function ($scope, $rootScope, UI, AUTH_EVENTS, Auth, 
 
 				Auth.login($scope.loginInfos).then(
 					function (user) {
-						$rootScope.$broadcast(AUTH_EVENTS.loginSuccess);
+						$rootScope.$broadcast(APP_EVENTS.loginSuccess);
 						$scope.setCurrentUser(user);
 						$scope.toggleLoginOverlay();
 						UI.notification('success', 'Heureux de vous revoir ' + Session.username);
@@ -53,7 +53,7 @@ app.controller('signCtrl', function ($scope, $rootScope, UI, AUTH_EVENTS, Auth, 
 						}
 
 					}, function (msg) {
-						$rootScope.$broadcast(AUTH_EVENTS.loginFailed);
+						$rootScope.$broadcast(APP_EVENTS.loginFailed);
 						if(msg === 'user unknown'){
 							UI.notification('error', 'adresse email inconnue.');
 						}
@@ -83,13 +83,13 @@ app.controller('signCtrl', function ($scope, $rootScope, UI, AUTH_EVENTS, Auth, 
 					
 					Auth.signUp($scope.signUpInfos).then(
 						function (user) {
-							$rootScope.$broadcast(AUTH_EVENTS.loginSuccess);
+							$rootScope.$broadcast(APP_EVENTS.loginSuccess);
 							$scope.setCurrentUser(user);
 							$scope.toggleLoginOverlay();
 							UI.notification('success', 'Bienvenue sur ArtFinder ' + Session.username);
 
 						}, function (msg) {
-							$rootScope.$broadcast(AUTH_EVENTS.loginFailed);
+							$rootScope.$broadcast(APP_EVENTS.loginFailed);
 							if(msg === 'email taken'){
 								UI.notification('error', 'cette adresse email est déjà utilisée.');
 							}
@@ -130,6 +130,7 @@ app.controller('signCtrl', function ($scope, $rootScope, UI, AUTH_EVENTS, Auth, 
 
 	//FACEBOOK
 	// This is called with the results from from FB.getLoginStatus().
+
 	$scope.loggedWithFB = false;
 
 	$scope.$watch(
@@ -137,8 +138,9 @@ app.controller('signCtrl', function ($scope, $rootScope, UI, AUTH_EVENTS, Auth, 
     		return Facebook.isReady();
 		},
 		function(newVal) {
-			if (newVal)
+			if (newVal){
 				$scope.facebookReady = true;
+			}
 		}
 	);
 
@@ -149,16 +151,17 @@ app.controller('signCtrl', function ($scope, $rootScope, UI, AUTH_EVENTS, Auth, 
 				// Do something with response.
 				$scope.loggedWithFB = true;
 				$scope.me();
-		    });
+		    }, {scope: 'email'});
     	}
     };
 
     $scope.getLoginStatus = function() {
     	Facebook.getLoginStatus(function(response) {
 			if(response.status === 'connected') {
-				//$scope.loggedIn = true;
+				$scope.loggedWithFB = true;
+				$scope.me();
         	} else {
-				//$scope.loggedIn = false;
+				$scope.loggedWithFB = false;
         	}
     	});
     };
@@ -180,23 +183,24 @@ app.controller('signCtrl', function ($scope, $rootScope, UI, AUTH_EVENTS, Auth, 
 
 				Auth.loginWithFacebook(facebookLoginInfos).then(
 					function (user) {
-						$rootScope.$broadcast(AUTH_EVENTS.loginSuccess);
+						$rootScope.$broadcast(APP_EVENTS.loginSuccess);
 						$scope.setCurrentUser(user);
-						$scope.toggleLoginOverlay();
+						UI.closeLoginOverlay();
 						UI.notification('success', 'Heureux de vous revoir ' + Session.username);
 
-					}, function (msg) {
-						
-						$rootScope.$broadcast(AUTH_EVENTS.loginFailed);
+					}, function (msg) {				
+						$rootScope.$broadcast(APP_EVENTS.loginFailed);
 						if(msg ==='no data'){
 							UI.notification('error', 'Aucune donnée reçue.');
 						}
 					}
 				);
-				
 			}else{
 				UI.notification('error', 'Vous êtes déjà identifié.');
 			}
    		});
     };
+
+    $scope.getLoginStatus();
+
 });

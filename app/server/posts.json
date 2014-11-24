@@ -345,9 +345,25 @@
             "longitude": 2.4616670608521
         },
         "address": "39 Rue de Paris, 93130 Noisy-le-Sec, France",
-        "comments": [],
+        "comments": [
+            {
+                "content": "oui",
+                "timestamp": 1416524160698,
+                "user": {
+                    "statut": "success",
+                    "id": "13",
+                    "username": "Gabriel Vergnaud",
+                    "role": "editor",
+                    "avatar": "https:\/\/graph.facebook.com\/862339243816494\/picture"
+                },
+                "activePhoto": 1,
+                "date": "20\/11\/2014",
+                "id": 0
+            }
+        ],
         "likes": [
-            "Gabriel"
+            "Gabriel",
+            "Gabriel Vergnaud"
         ],
         "id": 7
     },

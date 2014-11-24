@@ -7,15 +7,18 @@
  * # SinglepostCtrl
  * Controller of the artFinderApp
  */
-app.controller('SinglepostCtrl',['$scope', '$rootScope', '$routeParams', 'Post', 'UI', 'Auth', 'Session', 'Geoloc', '$filter', function ($scope, $rootScope, $routeParams, Post, UI, Auth, Session, Geoloc, $filter) {
+app.controller('SinglepostCtrl',['$scope', '$rootScope', '$routeParams', 'Post', 'UI', 'Auth', 'Session', 'Geoloc', '$filter', 'APP_EVENTS', function ($scope, $rootScope, $routeParams, Post, UI, Auth, Session, Geoloc, $filter, APP_EVENTS) {
 	
 	//POSTS
-    function getPost(){
-        Post.find($routeParams.id, true).then(
+    function getPost(reload){
+    	if(!reload) {reload = false};
+        Post.find($routeParams.id, reload).then(
             function (post){ // les posts sont récupérés !
-                $scope.post =  post;		
+                $scope.post = post;	
 
-                Post.getClosePosts(post, 5).then(
+                $scope
+
+                Post.getClosePosts(post, 4).then(
                     function(closePosts){
                         $scope.closePosts = closePosts;
                     }
@@ -39,7 +42,7 @@ app.controller('SinglepostCtrl',['$scope', '$rootScope', '$routeParams', 'Post',
     $rootScope.$on('refreshPosts', function(e, info){
     	console.log(info);
     	if(info.postId == $scope.post.id){
-    		getPost();
+    		getPost(true);
     	}
     });
     
@@ -48,6 +51,14 @@ app.controller('SinglepostCtrl',['$scope', '$rootScope', '$routeParams', 'Post',
 	UI.singlepost.init();
 
 	$scope.currentPhotoId = 0;
+
+	$scope.createFullDate = function(){
+		if($scope.post){
+	    	var date = new Date($scope.post.photos[$scope.currentPhotoId].date);
+	        return 'Ajouté le ' + date.getDate() + ' / ' + date.getMonth() + ' / ' +  date.getFullYear() + '.';	
+		}
+    };
+
  	$scope.img = angular.element(document.querySelectorAll('section#player img'));
  	$scope.arrows = [angular.element(document.querySelectorAll('nav#prev')), angular.element(document.querySelectorAll('nav#next'))];
 
@@ -63,6 +74,7 @@ app.controller('SinglepostCtrl',['$scope', '$rootScope', '$routeParams', 'Post',
 		});
 
 		UI.singlepost.togglePlayerArrows($scope);
+		UI.singlepost.tagStyles();
 	});
 
  	//Changer l'image avec next
@@ -73,33 +85,48 @@ app.controller('SinglepostCtrl',['$scope', '$rootScope', '$routeParams', 'Post',
  		});
 
  		UI.singlepost.togglePlayerArrows($scope);
+		UI.singlepost.tagStyles();
  	});
 
 
  	//Ouverture de la map
  	$scope.mapOpened = false;
 
+	var geoloc = new Geoloc('section.map');
+	geoloc.createMap();
+
  	$scope.toggleMap = function(){
 
  		if(!$scope.mapOpened){
-	 		var geoloc = new Geoloc('section.map');
+	 		
 	 		var mapCenter = geoloc.getLatLng($scope.post.coords.latitude, $scope.post.coords.longitude);
-
-			geoloc.createMap({zoom: 10, center: mapCenter});
+			
 			geoloc.addPostMarker($scope.post);
-			geoloc.setMapOptions({scrollwheel: false});
+			geoloc.setMapOptions({scrollwheel: false, zoom: 10, center: mapCenter});
 
 	 		UI.singlepost.toggleMap(function(){
 				geoloc.showPostLocation($scope.post);
 	 		});
 
+	 		if(Session.userLocation){
+				geoloc.addUserLocationMarker(Session.userLocation);
+	 		}
+
 	 		$scope.mapOpened = true;
+
  		}else{
  			UI.singlepost.toggleMap();
  			$scope.mapOpened = false;
  		}
  		
  	};
+
+ 	//affiche la position de l'utilisateur à chaque refresh
+	$rootScope.$on(APP_EVENTS.userLocationChanged, function(){
+		if($scope.mapOpened){
+			geoloc.addUserLocationMarker(Session.userLocation);
+		}
+	});
 
  	$scope.newComment = {};
 
@@ -151,7 +178,7 @@ app.controller('SinglepostCtrl',['$scope', '$rootScope', '$routeParams', 'Post',
 					}
 				);
 			}else{
-				UI.notification('error', 'Vous n\'êtes pas l\'auteur de ce commentaire.')
+				UI.notification('error', 'Vous n\'êtes pas l\'auteur de ce commentaire.');
 			}
  		}else{
 			UI.notification('', 'Vous devez etre connecté !');

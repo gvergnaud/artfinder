@@ -2,15 +2,27 @@
 
 <div id="filters">
     <input type="text" id="search" placeholder="Recherche" ng-model="filters.search"/>
-    <label>Technique utilisée : </label><select ng-model="filters.technique">
-      <option value="">Toutes</option>
-      <option value="pochoir">Pochoir</option>
-      <option value="sculpture">Sculpture</option>
-      <option value="peinture">Peinture</option>
-      <option value="grafitti">Grafitti</option>
-      <option value="collage">Collage</option>
-      <option value="autre">Autre</option>
-    </select>
+    <div>
+    <h3>Technique utilisée : </h3>
+      <span ng-tooltip="Pochoir" class="technique pochoir" ng-click="setTechnique('pochoir')">
+        Pochoir
+      </span>
+      <span ng-tooltip="Sticker" class="technique sticker" ng-click="setTechnique('sticker')">
+        Sticker
+      </span>
+      <span ng-tooltip="Peinture" class="technique peinture" ng-click="setTechnique('peinture')">
+        Peinture
+      </span>
+      <span ng-tooltip="Grafitti" class="technique grafitti" ng-click="setTechnique('grafitti')">
+        Grafitti
+      </span>
+      <span ng-tooltip="Collage" class="technique collage" ng-click="setTechnique('collage')">
+        Collage
+      </span>
+      <span ng-tooltip="Autre" class="technique autre" ng-click="setTechnique('autre')">
+        Autre
+      </span>
+    </div>
 </div>
 
 <section class="section" id="mosaic" ng-mousewheel="loadPosts()">
