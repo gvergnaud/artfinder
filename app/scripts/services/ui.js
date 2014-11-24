@@ -279,7 +279,8 @@ app.factory('UI', function UI() {
                 });
                 
                 ui.singlepost.img.css({
-                    height: window.innerHeight - 100 + 'px'
+                    maxHeight: window.innerHeight - 100 + 'px',
+                    maxWidth: window.innerWidth - ui.menuWidth - 40 + 'px',
                 }); 
             },
 
