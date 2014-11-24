@@ -277,11 +277,19 @@ app.factory('UI', function UI() {
                         top: (window.innerHeight - 200)/2 + 'px',
                     });
                 });
+
+                if(window.innerWidth > 680){
+                    ui.singlepost.img.css({
+                        maxHeight: window.innerHeight - 100 + 'px',
+                        maxWidth: window.innerWidth - ui.menuWidth - 40 + 'px',
+                    }); 
+                }else{
+                    ui.singlepost.img.css({
+                        maxHeight: window.innerHeight - 100 + 'px',
+                        maxWidth: window.innerWidth - 40 + 'px',
+                    }); 
+                }
                 
-                ui.singlepost.img.css({
-                    maxHeight: window.innerHeight - 100 + 'px',
-                    maxWidth: window.innerWidth - ui.menuWidth - 40 + 'px',
-                }); 
             },
 
             tagStyles: function(){

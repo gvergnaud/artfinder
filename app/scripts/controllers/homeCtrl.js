@@ -109,10 +109,8 @@ app.controller('HomeCtrl',['$scope', '$rootScope', 'Post', 'Geoloc', 'UI', '$fil
 	$scope.geoloc = new Geoloc('section.map');
 
 	$scope.geoloc.createMap();
-
-	setTimeout(function(){
-		$scope.geoloc.smoothZoom($scope.geoloc.map, 12, $scope.geoloc.map.getZoom(), true);
-	},1000);	
+	$scope.geoloc.setMapOptions({zoom: 12});
+	
 
 	//montre la position du post sur la map
 	$scope.showPostLocation = function(e, post){
