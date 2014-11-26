@@ -174,32 +174,6 @@ span#where{
 	cursor: pointer;
 }
 
-span#locationPin:before{
-	content: '';
-	background: url(../images/pin.svg) no-repeat;
-	font-weight: normal;
-	speak: none;
-
-	display: inline-block;
-	text-decoration: inherit;
-	margin-right: .2em;
-	/* opacity: .8; */
-
-	/* For safety - reset parent styles, that can break glyph codes*/
-	font-variant: normal;
-	text-transform: none;
-	color:#B59E5C;
-
-	/* fix buttons height, for twitter bootstrap */
-	line-height: 1em;
-
-	/* Animation center compensation - margins should be symmetric */
-	/* remove if not needed */
-	margin-left: .2em;
-	width:21px;
-	height:30px;
-}
-
 span#artists{
 	font-size: 14px;
 	font-family: 'Uni Sans Heavy';
