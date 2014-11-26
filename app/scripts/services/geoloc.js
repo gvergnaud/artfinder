@@ -301,22 +301,23 @@ app.factory('Geoloc', function (UI, $q, Session) {
                     }, 
 
                     function (error){
-                        var info = "Erreur lors de la géolocalisation : ";
+                        var info;
+                        
                         switch(error.code) {
                             case error.TIMEOUT:
-                                info += "Timeout !";
+                                info = "timeout";
                                 break;
 
                             case error.PERMISSION_DENIED:
-                                info += "Vous n’avez pas donné la permission";
+                                info = "permission denied";
                                 break;
 
                             case error.POSITION_UNAVAILABLE:
-                                info += "La position n’a pu être déterminée";
+                                info = "position unavailable";
                                 break;
 
                             case error.UNKNOWN_ERROR:
-                                info += "Erreur inconnue";
+                                info = "unknown error";
                                 break;
                         }
 
@@ -386,10 +387,7 @@ app.factory('Geoloc', function (UI, $q, Session) {
 				that.smoothZoom(that.map, 17, that.map.getZoom(), true);
 			}, 750);
 
-
 		};
-
-
 
 	};
 

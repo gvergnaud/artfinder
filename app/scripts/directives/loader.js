@@ -29,7 +29,7 @@ app.directive('ngLoader', function(Post, $rootScope) {
 							setTimeout(function(){
 								button.querySelector('.enterText').classList.add('loaded');
 							}, 500);
-						}, 500);
+						}, 1500);
 					}, 800);
 				}, 500);
 			}

@@ -258,7 +258,7 @@ app.factory('UI', function UI() {
 
             init:function(){
                 ui.singlepost.player = angular.element(document.querySelectorAll('#player'));
-                ui.singlepost.img = angular.element(document.querySelectorAll('section#player img'));
+                ui.singlepost.img = angular.element(document.querySelectorAll('section#player img.mainImage'));
                 ui.singlepost.arrows = [angular.element(document.querySelectorAll('nav#prev')), angular.element(document.querySelectorAll('nav#next'))];
 
                 ui.singlepost.style();
@@ -294,7 +294,7 @@ app.factory('UI', function UI() {
 
             tagStyles: function(){
                 var tagWrapper = angular.element(document.querySelectorAll('.tagWrapper')),
-                    img = document.querySelectorAll('section#player img');
+                    img = document.querySelectorAll('section#player img.mainImage');
 
                 if(!!img){
                     tagWrapper.css({
@@ -404,12 +404,18 @@ app.factory('UI', function UI() {
             },
 
             toggleMap: function(callback){
-                var map = angular.element(document.querySelector('section.map'));
-                var player = angular.element(document.querySelector('section#player'));
-                var img = angular.element(document.querySelector('section#player>img'));
+                var map = angular.element(document.querySelector('section.map')),
+                    player = angular.element(document.querySelector('section#player')),
+                    img = angular.element(document.querySelector('section#player img.mainImage')),
+                    arrows = angular.element(document.querySelectorAll('.arrows')),
+                    miniatures = angular.element(document.querySelectorAll('.miniatures'));
+
                 map.toggleClass('show');
                 player.toggleClass('up');
                 img.toggleClass('up');
+                arrows.toggleClass('up');
+                miniatures.toggleClass('up');
+
                 if(!!callback){
                     setTimeout(function(){
                         callback.call(this);

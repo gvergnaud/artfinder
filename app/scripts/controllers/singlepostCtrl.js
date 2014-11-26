@@ -9,6 +9,9 @@
  */
 app.controller('SinglepostCtrl',['$scope', '$rootScope', '$routeParams', 'Post', 'UI', 'Auth', 'Session', 'Geoloc', '$filter', 'APP_EVENTS', function ($scope, $rootScope, $routeParams, Post, UI, Auth, Session, Geoloc, $filter, APP_EVENTS) {
 	
+
+	var mainPhoto = angular.element(document.querySelectorAll('section#player img'));
+
 	//POSTS
     function getPost(reload){
     	if(!reload) {reload = false};
@@ -24,9 +27,9 @@ app.controller('SinglepostCtrl',['$scope', '$rootScope', '$routeParams', 'Post',
                     }
                 );
 
-                UI.singlepost.togglePlayerArrows($scope);
+                // UI.singlepost.togglePlayerArrows($scope);
                 
-                $scope.img.on('load', function(){
+                mainPhoto.on('load', function(){
 		            UI.singlepost.tagStyles();
 				});
             },
@@ -60,40 +63,38 @@ app.controller('SinglepostCtrl',['$scope', '$rootScope', '$routeParams', 'Post',
 		}
     };
 
- 	$scope.img = angular.element(document.querySelectorAll('section#player img'));
- 	$scope.arrows = [angular.element(document.querySelectorAll('nav#prev')), angular.element(document.querySelectorAll('nav#next'))];
-
- 	// $scope.img.on('load', function(){
-		// UI.singlepost.imgStyle();
- 	// });
-
-	//Changer l'image avec prev
-	$scope.arrows[0].on('click', function(){
-		
+	
+	//NAVIGATION
+	$scope.nextPhoto = function(){
 		$scope.$apply(function(){	
 			$scope.currentPhotoId -= 1;
 		});
 
-		UI.singlepost.togglePlayerArrows($scope);
-		
-		$scope.img.on('load', function(){
-            UI.singlepost.tagStyles();
-		});
-	});
+		// UI.singlepost.togglePlayerArrows($scope);
+	};
 
- 	//Changer l'image avec next
- 	$scope.arrows[1].on('click', function(){
- 		
- 		$scope.$apply(function(){
+	$scope.prevPhoto = function(){
+		$scope.$apply(function(){
  			$scope.currentPhotoId += 1;
  		});
 
- 		UI.singlepost.togglePlayerArrows($scope);
-		
-		$scope.img.on('load', function(){
-            UI.singlepost.tagStyles();
-		});
- 	});
+ 		// UI.singlepost.togglePlayerArrows($scope);
+	};
+
+	$scope.setPhoto = function(photo){
+		$scope.currentPhotoId = $scope.post.photos.indexOf(photo);
+	}
+
+	$scope.nextPost = function(){
+		$scope.setSlideAnimation();
+		$scope.redirectTo('singlepost', parseInt($routeParams.id) - 1);
+	};
+
+	$scope.prevPost = function(){
+		$scope.setBackAnimation();
+		$scope.redirectTo('singlepost', parseInt($routeParams.id) + 1);
+	};
+
 
 
  	//Ouverture de la map

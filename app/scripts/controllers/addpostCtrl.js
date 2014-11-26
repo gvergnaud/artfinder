@@ -234,6 +234,7 @@ app.controller('AddpostCtrl', function ($scope, $rootScope, UI, Auth, Geoloc, Se
                     if(!!$scope.newPost.photos[0].technique){
 
                         //on ajoute le username de l'hoster a l'image
+                        $scope.newPost.photos[0].id = post.photos[post.photos.length - 1].id + 1;
                         $scope.newPost.photos[0].user = $scope.currentUser;
                         $scope.newPost.photos[0].userId = parseInt(Session.userId);
                         $scope.newPost.photos[0].date = new Date().getTime();
@@ -285,6 +286,7 @@ app.controller('AddpostCtrl', function ($scope, $rootScope, UI, Auth, Geoloc, Se
 
 								$scope.newPost.comments = [];
 								$scope.newPost.likes = [];
+								$scope.newPost.photos[0].id = 0;
 								$scope.newPost.photos[0].user = $scope.currentUser;
 								$scope.newPost.photos[0].userId = parseInt(Session.userId);
 								$scope.newPost.photos[0].date = new Date().getTime();

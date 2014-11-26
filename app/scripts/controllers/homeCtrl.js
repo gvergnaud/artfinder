@@ -76,6 +76,8 @@ app.controller('HomeCtrl',['$scope', '$rootScope', 'Post', 'Geoloc', 'UI', '$fil
 	//UI UI UI
 	UI.home.init();
 
+	$scope.setSlideAnimation();
+
 
 	$scope.$on('postsLoaded', function(){
 		if(UI.home.view === 'map'){

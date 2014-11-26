@@ -22,6 +22,7 @@ app.controller('appCtrl', function ($scope, $rootScope, Session, Auth, UI, APP_E
     var geoloc = new Geoloc();
 
     $scope.traceUserLocation = function(){
+
         
         function getUserLocation(){
             geoloc.getUserLocation().then(
@@ -29,16 +30,17 @@ app.controller('appCtrl', function ($scope, $rootScope, Session, Auth, UI, APP_E
                     Session.addUserLocation(latLng);
                     $rootScope.$broadcast(APP_EVENTS.userLocationChanged);
                 }, 
-                function(msg){
-                    console.log(msg);
+                function(info){
+                    if(info == 'permission denied'){
+                        console.log('permission denied');
+                        clearInterval(traceInterval);
+                    }
                 }
             );
         }
 
         getUserLocation();
-        setInterval(function(){
-            getUserLocation();
-        }, 5000);
+        var traceInterval = setInterval(getUserLocation, 5000);
     };
 
     $scope.traceUserLocation();
@@ -139,47 +141,49 @@ app.controller('appCtrl', function ($scope, $rootScope, Session, Auth, UI, APP_E
         if(!!callback){	
             setTimeout(function(){
                 callback.call(this);
-            }, speed);
+            }, speed + 15);
         }
     };
     
     //Redirection 
     //
     $scope.redirectTo = function(page, param){
+
+        $scope.smoothScrollTo('#container', function(){
+            $scope.route(page, param);
+            //$scope.setSlideAnimation();
+        }); 
+    };
+
+    $scope.route = function(page, param){
+
         var hashtab = window.location.hash.split('/'),
             currentPage = hashtab[1];
 
-
         if( (currentPage === 'singlepost' || currentPage === 'addpost') && (!page || page === 'search') ){
             $scope.setBackAnimation();
-        }else{
-            $scope.setSlideAnimation();
         }
 
-        $scope.smoothScrollTo('#container', function(){
 
-            if(!page){
+        if(!page){
 
-                if(window.location.hash === '#/'){return;}
+            if(window.location.hash === '#/'){return;}
 
-                window.location.hash = '';
+            window.location.hash = '';
 
-            }else if(typeof param !== 'undefined'){
+        }else if(typeof param !== 'undefined'){
 
-                if(window.location.hash === '#/' + page + '/'+ param){return;}
+            if(window.location.hash === '#/' + page + '/'+ param){return;}
 
-                window.location.hash = '#/' + page + '/'+ param;
+            window.location.hash = '#/' + page + '/'+ param;
 
-            }else{
+        }else{
 
-                if(window.location.hash === '#/' + page){return;}
+            if(window.location.hash === '#/' + page){return;}
 
-                window.location.hash = '#/' + page;
+            window.location.hash = '#/' + page;
 
-            }
-
-            $scope.setSlideAnimation();
-        }); 
+        }
     };
 
     //Sockets send

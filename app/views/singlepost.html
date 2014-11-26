@@ -1,8 +1,8 @@
 <div class="container">
 	<section id="player" class="player">
-		<nav class="arrows" id="prev"></nav>
-		<nav class="arrows" id="next"></nav>
-		<img ng-src="{{post.photos[currentPhotoId].url}}" />
+		<nav class="arrows" id="prev" player-arrow ng-click="prevPost()"></nav>
+		<nav class="arrows" id="next" player-arrow ng-click="nextPost()"></nav>
+		<img class="mainImage" ng-src="{{post.photos[currentPhotoId].url}}" />
 		<div class="tagWrapper">
 			<div ng-repeat="artist in post.photos[currentPhotoId].artists">
 				<div  class="tagBox" ng-mouseenter="showTag=true" ng-mouseleave="showTag=false" style="left:{{artist.left}}%;top:{{artist.top}}%;width:{{artist.width}}%;height:{{artist.height}}%;" data-artist="{{artist.name}}">
@@ -11,6 +11,9 @@
 			</div>
 		</div>
 		<div class="control"></div>
+		<div class="miniatures" ng-if="post.photos.length > 1">
+			<img class="miniature" ng-repeat="photo in post.photos" ng-src="{{photo.url}}" ng-click="setPhoto(photo)" />
+		</div>
 	</section>
 
 	<section class="map"></section>
