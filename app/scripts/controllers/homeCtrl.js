@@ -38,11 +38,10 @@ app.controller('HomeCtrl',['$scope', '$rootScope', 'Post', 'Geoloc', 'UI', '$fil
     
     //$rootScope.$on('refreshPosts', getPosts);
     
-	// Load les posts dans la view
-
-
+	
 	$scope.postsLimite = 8;
 
+	// Load les posts dans la view
 	$scope.loadPosts = function(force, noIncrem){
         
         if(noIncrem){
@@ -77,7 +76,6 @@ app.controller('HomeCtrl',['$scope', '$rootScope', 'Post', 'Geoloc', 'UI', '$fil
 	UI.home.init();
 
 	$scope.setSlideAnimation();
-
 
 	$scope.$on('postsLoaded', function(){
 		if(UI.home.view === 'map'){

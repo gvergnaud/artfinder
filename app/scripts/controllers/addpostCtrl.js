@@ -40,8 +40,6 @@ app.controller('AddpostCtrl', function ($scope, $rootScope, UI, Auth, Geoloc, Se
 		//headers: {"Content-Type": "multipart/form-data"}
 	});
 
-
-
 	myDropzone.on('addedfile', function(file) {
 	  	// Hookup the start button
         
@@ -53,20 +51,7 @@ app.controller('AddpostCtrl', function ($scope, $rootScope, UI, Auth, Geoloc, Se
             UI.notification('error', 'ce fichier n\'est pas une image');
         }
 	});
-	/*
-	myDropzone.on("totaluploadprogress", function(progress) {
-		document.querySelector("#total-progress .progress-bar").style.width = progress + "%";
-	});
 
-	myDropzone.on("sending", function(file){
-		console.log(file);
-	});
-
-	// Hide the total progress bar when nothing's uploading anymore
-	myDropzone.on("queuecomplete", function(progress) {
-		document.querySelector("#total-progress").style.opacity = "0";
-	});
-*/
 	myDropzone.on('success', function(file, response){
 		if(response !== 'nofiles'){
             if(response !== 'not an image'){
@@ -92,21 +77,9 @@ app.controller('AddpostCtrl', function ($scope, $rootScope, UI, Auth, Geoloc, Se
 
 	myDropzone.on('error', function(file){
 	});
-/*
-	// Setup the buttons for all transfers
-	// The "add files" button doesn't need to be setup because the config
-	// `clickable` has already been specified.
-	document.querySelector("#actions .start").onclick = function() {
-		myDropzone.enqueueFiles(myDropzone.getFilesWithStatus(Dropzone.ADDED));
-	};
-	document.querySelector("#actions .cancel").onclick = function() {
-		myDropzone.removeAllFiles(true);
-	}; 
-
-	*/
     
     
-//  FONCTIONNEL
+//  Initialisation des infos du nouveau post
 	$scope.newPost = {};
 	$scope.newPost.photos = [];
 	$scope.newPost.photos[0] = {};
@@ -177,6 +150,8 @@ app.controller('AddpostCtrl', function ($scope, $rootScope, UI, Auth, Geoloc, Se
         }
 	};
 
+
+	//propose des posts situés à proximité, au cas ou l'utilisateur voudrait poster un mur déjà présent sur artfinder
 	$scope.closePosts = [];
 
 	$scope.proposePosts = function(){
@@ -210,9 +185,8 @@ app.controller('AddpostCtrl', function ($scope, $rootScope, UI, Auth, Geoloc, Se
 		);
 	};
 
-    
+    //selection d'un post existant
 	$scope.selectClosePost = function(post){
-        //dois effacer les autres champs ainsi que les autres closePosts proposés et faire apparaitre un bouton submit spécial qui déclenche la function Post.addPhoto.
 		UI.addpost.selectedPost(post);
 		
         $scope.newPost.coords = post.coords;
@@ -271,6 +245,7 @@ app.controller('AddpostCtrl', function ($scope, $rootScope, UI, Auth, Geoloc, Se
 
 	};
 
+	//ajoute le nouveau post
 	$scope.addPost = function(){
 		
 		if(Auth.isAuthenticated()){

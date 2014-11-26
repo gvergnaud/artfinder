@@ -40,7 +40,7 @@ app.controller('appCtrl', function ($scope, $rootScope, Session, Auth, UI, APP_E
         }
 
         getUserLocation();
-        var traceInterval = setInterval(getUserLocation, 5000);
+        var traceInterval = setInterval(getUserLocation, 10000); //on récupère la position de l'utilisateur toutes les 10 sec
     };
 
     $scope.traceUserLocation();
@@ -186,7 +186,7 @@ app.controller('appCtrl', function ($scope, $rootScope, Session, Auth, UI, APP_E
         }
     };
 
-    //Sockets send
+    //Déclenche l'emission d'un socket (test)
     $scope.socket = function(postId){
         console.log('socket send');
         Socket.postsChanged(postId);

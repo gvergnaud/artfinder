@@ -128,9 +128,8 @@ app.controller('signCtrl', function ($scope, $rootScope, UI, APP_EVENTS, Auth, S
 		console.log('logout');
 	};
 
-	//FACEBOOK
-	// This is called with the results from from FB.getLoginStatus().
 
+	//FACEBOOK
 	$scope.loggedWithFB = false;
 
 	$scope.$watch(
@@ -168,7 +167,7 @@ app.controller('signCtrl', function ($scope, $rootScope, UI, APP_EVENTS, Auth, S
 
     $scope.me = function() {
     	Facebook.api('/me', function(response) {
-        	//$scope.user = response;
+    		
         	console.log(response);
 
         	var facebookLoginInfos = {

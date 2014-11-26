@@ -43,9 +43,10 @@ app.controller('SinglepostCtrl',['$scope', '$rootScope', '$routeParams', 'Post',
     //Récuperation du post
     getPost();
 
+    //rechargement des posts lors que l'evenement refresh post est déclenché par les sockets
     $rootScope.$on('refreshPosts', function(e, info){
     	console.log(info);
-    	if(info.postId == $scope.post.id){
+    	if(info.postId == $scope.post.id){ //si le changement concerne le post sur lequel on est
     		getPost(true);
     	}
     });
@@ -78,16 +79,12 @@ app.controller('SinglepostCtrl',['$scope', '$rootScope', '$routeParams', 'Post',
 		$scope.$apply(function(){	
 			$scope.currentPhotoId -= 1;
 		});
-
-		// UI.singlepost.togglePlayerArrows($scope);
 	};
 
 	$scope.prevPhoto = function(){
 		$scope.$apply(function(){
  			$scope.currentPhotoId += 1;
  		});
-
- 		// UI.singlepost.togglePlayerArrows($scope);
 	};
 
 	$scope.setPhoto = function(photo){
@@ -144,6 +141,9 @@ app.controller('SinglepostCtrl',['$scope', '$rootScope', '$routeParams', 'Post',
 			geoloc.addUserLocationMarker(Session.userLocation);
 		}
 	});
+
+
+	//COMMENTAIRES
 
  	$scope.newComment = {};
 
@@ -202,6 +202,7 @@ app.controller('SinglepostCtrl',['$scope', '$rootScope', '$routeParams', 'Post',
 		}
  	};
 
+ 	//LIKE
  	$scope.likePost = function(){
 
 		if(Auth.isAuthenticated()){ //si l'utilisateur est identifé
@@ -227,6 +228,7 @@ app.controller('SinglepostCtrl',['$scope', '$rootScope', '$routeParams', 'Post',
 		}
  	};
 
+ 	//IDENTIFICATION
 	$scope.identifying = false;
  	$scope.selecting = false;
 
