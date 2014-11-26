@@ -186,7 +186,7 @@ app.controller('signCtrl', function ($scope, $rootScope, UI, APP_EVENTS, Auth, S
 						$rootScope.$broadcast(APP_EVENTS.loginSuccess);
 						$scope.setCurrentUser(user);
 						UI.closeLoginOverlay();
-						UI.notification('success', 'Heureux de vous revoir ' + Session.username);
+						UI.notification('success', 'Bienvenue sur ArtFinder ' + Session.username);
 
 					}, function (msg) {				
 						$rootScope.$broadcast(APP_EVENTS.loginFailed);

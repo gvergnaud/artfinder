@@ -354,7 +354,7 @@ h3.username{
 	margin-bottom: 10px;
 }
 
-textarea.content{
+input.content{
 	margin: 10px 0;
 	height: 20px;
 	width: 100%;
@@ -365,7 +365,7 @@ textarea.content{
 	border: none;
 }
 
-textarea.content:focus{
+input.content:focus{
 	outline: none;
 }
 

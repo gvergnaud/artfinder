@@ -49,19 +49,28 @@ app.controller('SinglepostCtrl',['$scope', '$rootScope', '$routeParams', 'Post',
     		getPost(true);
     	}
     });
+
+    $scope.createFullDate = function(){
+		if($scope.post){
+	    	var date = new Date($scope.post.photos[$scope.currentPhotoId].date);
+	        return 'Ajouté le ' + date.getDate() + ' / ' + date.getMonth() + ' / ' +  date.getFullYear() + '.';	
+		}
+    };
+
+    $scope.getDistance = function(closePost){
+    	var metres = Math.round( geoloc.getDistance($scope.post, closePost) );
+    	if(metres > 1000){
+    		return (Math.round(metres/100))/10 + 'km';
+    	}else{
+    		return metres + 'm';
+    	}
+    };
     
     
 	//Initialisationde l'ui
 	UI.singlepost.init();
 
 	$scope.currentPhotoId = 0;
-
-	$scope.createFullDate = function(){
-		if($scope.post){
-	    	var date = new Date($scope.post.photos[$scope.currentPhotoId].date);
-	        return 'Ajouté le ' + date.getDate() + ' / ' + date.getMonth() + ' / ' +  date.getFullYear() + '.';	
-		}
-    };
 
 	
 	//NAVIGATION

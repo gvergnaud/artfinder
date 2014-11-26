@@ -151,7 +151,7 @@ app.controller('appCtrl', function ($scope, $rootScope, Session, Auth, UI, APP_E
 
         $scope.smoothScrollTo('#container', function(){
             $scope.route(page, param);
-            //$scope.setSlideAnimation();
+            $scope.setSlideAnimation();
         }); 
     };
 

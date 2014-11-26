@@ -82,7 +82,7 @@
 							<img class="avatar" ng-src="{{currentUser.avatar}}" />
 							<div class="comment_info">
 								<h3 class="username">{{currentUser.username}}</h3>
-								<textarea type="text" class="content" ng-change="checkKey()" ng-model="newComment.content" placeholder="message"></textarea>
+								<input type="text" class="content" ng-change="checkKey()" ng-model="newComment.content" placeholder="message" />
 								<input type="submit" value="Envoyer" />
 							</div>
 						</div>
@@ -100,6 +100,7 @@
 			<div class="post col" ng-repeat="post in closePosts">
 			    <img ng-src="{{post.photos[0].url}}" />
 			    <div class="over"  ng-click="redirectTo('singlepost', {{post.id}})">
+			    <p>À {{getDistance(post)}}</p>
 			      <p>{{post.likes.length}} Likes</p>
 			      <p>{{post.photos.length}} Photos</p>
 			    </div>
