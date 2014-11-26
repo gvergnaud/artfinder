@@ -18,7 +18,7 @@
       <div class="over"  ng-click="redirectTo('singlepost', {{post.id}})">
         <p>{{post.likes.length}} <span class="icon-heart"></span></p>
         <p>{{post.photos.length}} <span class="icon-camera"></span></p>
-        <a href="" ng-click="showPostLocation($event, {{post}})"> <span id="locationPin"></span></a>
+        <p> <span id="locationPin" ng-tooltip="Voir sur la carte" ng-click="showPostLocation($event, {{post}})"></span> </p>
       </div>
   </div>
 </section>

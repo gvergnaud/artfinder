@@ -163,18 +163,26 @@ app.factory('UI', function UI() {
             init: function(){
 
                 ui.home.setMapView();
+                
+                //remove event listeners
+                window.removeEventListener('resize', ui.addpost.style, false);
+                window.removeEventListener('resize', ui.singlepost.style, false);
+                window.removeEventListener('resize', ui.singlepost.tagStyles, false);
 
-                window.addEventListener('resize', function(){
-                    if(!ui.home.view){
+                //addeventListener
+                window.addEventListener('resize', ui.home.resizeMozMap, false);
+            },
+
+            resizeMozMap: function(){
+                if(!ui.home.view){
+                    ui.home.setMapView();
+                }else{
+                    if(ui.home.view === 'map'){
                         ui.home.setMapView();
                     }else{
-                        if(ui.home.view === 'map'){
-                            ui.home.setMapView();
-                        }else{
-                            ui.home.setMozView();
-                        }	
-                    }
-                }, false);
+                        ui.home.setMozView();
+                    }   
+                }
             },
 
             switchMozMap: function(){
@@ -262,6 +270,12 @@ app.factory('UI', function UI() {
                 ui.singlepost.arrows = [angular.element(document.querySelectorAll('nav#prev')), angular.element(document.querySelectorAll('nav#next'))];
 
                 ui.singlepost.style();
+
+                //remove event listeners
+                window.removeEventListener('resize', ui.home.resizeMozMap, false);
+                window.removeEventListener('resize', ui.addpost.style, false);
+
+                //addeventListener
                 window.addEventListener('resize', ui.singlepost.style, false);
                 window.addEventListener('resize', ui.singlepost.tagStyles, false);
             },
@@ -443,8 +457,15 @@ app.factory('UI', function UI() {
             init: function(){
 
                 ui.addpost.style();
-                window.addEventListener('resize', ui.addpost.style, false);
                 ui.addpost.dragDropStyle();
+
+                //remove event listeners
+                window.removeEventListener('resize', ui.home.resizeMozMap, false);
+                window.removeEventListener('resize', ui.singlepost.style, false);
+                window.removeEventListener('resize', ui.singlepost.tagStyles, false);
+
+                //addeventListener
+                window.addEventListener('resize', ui.addpost.style, false);
 
             },
 

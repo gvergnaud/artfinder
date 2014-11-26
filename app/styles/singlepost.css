@@ -375,7 +375,7 @@ section.closePosts h1{
 @media only screen and (max-width: 1200px) {
 	span#artists{
 		display: block;
-		margin-top: 15px;
+		margin-top: 20px;
 	}
 	span#where{
 		font-size:1em;
