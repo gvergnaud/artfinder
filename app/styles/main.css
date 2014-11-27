@@ -192,6 +192,7 @@ body{
 	color: #fff;
     overflow: hidden;
 	transition: .5s ease;
+	-o-transition: .5s ease;
 	-moz-transition: .5s ease;
 	-webkit-transition: .5s ease;
 }
@@ -219,6 +220,7 @@ body{
 	font-size: 15px;
 	text-decoration: none;
     transition: .4s ease;
+    -o-transition: .4s ease;
     -moz-transition: .4s ease;
     -webkit-transition: .4s ease;
 }
@@ -260,6 +262,7 @@ body{
 	height:100%;
 	opacity: 1;
 	transition: .5s ease;
+	-o-transition: .5s ease;
 	-moz-transition: .5s ease;
 	-webkit-transition: .5s ease;
 }
@@ -278,6 +281,7 @@ body{
 	display: block;
 
 	transition: .5s cubic-bezier(0.645,.045,.355,1);
+	-o-transition: .5s cubic-bezier(0.645,.045,.355,1);
 	-moz-transition: .5s cubic-bezier(0.645,.045,.355,1);
 	-webkit-transition: .5s cubic-bezier(0.645,.045,.355,1);
 }
@@ -314,6 +318,7 @@ body{
 
 .back.ng-enter{
 	transition: .5s cubic-bezier(0.645,.045,.355,1);
+	-o-transition: .5s cubic-bezier(0.645,.045,.355,1);
 	-moz-transition: .5s cubic-bezier(0.645,.045,.355,1);
 	-webkit-transition: .5s cubic-bezier(0.645,.045,.355,1);
 
@@ -332,6 +337,7 @@ body{
 
 .back.ng-leave{
 	transition: .5s cubic-bezier(0.645,.045,.355,1);
+	-o-transition: .5s cubic-bezier(0.645,.045,.355,1);
 	-moz-transition: .5s cubic-bezier(0.645,.045,.355,1);
 	-webkit-transition: .5s cubic-bezier(0.645,.045,.355,1);
 
@@ -405,6 +411,7 @@ div#signForms input[type="checkbox"] {
   	color: white;
   	border: solid 1px black;
   	transition: .5s cubic-bezier(0.645,.045,.355,1);
+	-o-transition: .5s cubic-bezier(0.645,.045,.355,1);
 	-moz-transition: .5s cubic-bezier(0.645,.045,.355,1);
 	-webkit-transition: .5s cubic-bezier(0.645,.045,.355,1);
   	margin-bottom: 5px; 
@@ -424,6 +431,7 @@ div#signForms input[type="checkbox"] {
 	color: white;
 	border: solid 1px black;
 	transition: .5s cubic-bezier(0.645,.045,.355,1);
+	-o-transition: .5s cubic-bezier(0.645,.045,.355,1);
 	-moz-transition: .5s cubic-bezier(0.645,.045,.355,1);
 	-webkit-transition: .5s cubic-bezier(0.645,.045,.355,1);
 	margin-bottom: 5px; 
@@ -448,6 +456,7 @@ aside#notifications{
 	overflow:hidden;
 	display:none;
 	transition: .3s ease;
+	-o-transition: .3s ease;
 	-moz-transition: .3s ease;
 	-webkit-transition: .3s ease;
 }
@@ -461,10 +470,15 @@ p.notification{
 	font-size: 1em;
 	background: #666;
 	user-select: none;
+	
+	transition: .65s cubic-bezier(.2,.1,.1,1);
+	-o-transition: .65s cubic-bezier(.2,.1,.1,1);
 	-moz-transition: .65s cubic-bezier(.2,.1,.1,1);
 	-webkit-transition: .65s cubic-bezier(.2,.1,.1,1);
-	transition: .65s cubic-bezier(.2,.1,.1,1);
+	
 	transform: translateY(-100%);
+	-o-transform: translateY(-100%);
+	-moz-transform: translateY(-100%);
 	-webkit-transform: translateY(-100%);
 }
 
@@ -478,6 +492,7 @@ p.notification.error{
 
 p.notification.show{ 
 	transform: translateY(0%);
+	-o-transform: translateY(0%);
 	-moz-transform: translateY(0%);
 	-webkit-transform: translateY(0%);
 }
@@ -495,6 +510,7 @@ p.notification.show{
 	border-radius: 2px;
 	z-index: 350;
 	transform: translateX(-50%);
+	-o-transform: translateX(-50%);
 	-moz-transform: translateX(-50%);
 	-webkit-transform: translateX(-50%);
 }
@@ -509,6 +525,7 @@ p.notification.show{
     border-radius: 5px;
     border: 1px solid #B59E5C;
     transform: translateX(-50%);
+	-o-transform: translateX(-50%);
 	-moz-transform: translateX(-50%);
 	-webkit-transform: translateX(-50%);
 }
@@ -537,6 +554,7 @@ p.notification.show{
 	overflow: hidden;
 	background: #000;
 	transition: .5s ease;
+	-o-transition: .5s ease;
 	-moz-transition: .5s ease;
 	-webkit-transition: .5s ease;
 }
@@ -573,17 +591,25 @@ p.notification.show{
 
 .post.ng-enter-stagger{
 	transition-delay: .1s;
+	-o-transition-delay: .1s;
 	-moz-transition-delay: .1s;
 	-webkit-transition-delay: .1s;
+
 	transition-duration: 0s;
+	-o-transition-duration: 0s;
+	-moz-transition-duration: 0s;
 	-webkit-transition-duration: 0s;
 }
 
 .post.ng-leave-stagger{
 	transition-delay: .1s;
+	-o-transition-delay: .1s;
 	-moz-transition-delay: .1s;
 	-webkit-transition-delay: .1s;
+
 	transition-duration: 0s;
+	-o-transition-duration: 0s;
+	-moz-transition-duration: 0s;
 	-webkit-transition-duration: 0s;
 }
 
@@ -595,6 +621,9 @@ p.notification.show{
 	max-height: 175%;
 	min-width: 100%;
     min-height: 100%;
+	-webkit-transform: translate(-50%, -50%);
+	-moz-transform: translate(-50%, -50%);
+	-o-transform: translate(-50%, -50%);
 	transform: translate(-50%, -50%);
 	z-index:0;
 }
@@ -609,6 +638,7 @@ p.notification.show{
 	background: rgba(0,0,0,.9);
 	-webkit-transition: .2s cubic-bezier(.2,.1,.1,1);
 	-moz-transition: .2s cubic-bezier(.2,.1,.1,1);
+	-o-transition: .2s cubic-bezier(.2,.1,.1,1);
 	transition: .2s cubic-bezier(.2,.1,.1,1);
 	z-index: 1;
 	color: #fff;

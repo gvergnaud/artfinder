@@ -31,6 +31,7 @@ nav#addpostnav{
     height: 30px;
     background: #B59E5C;
     transition: .1s ease;
+    -o-transition: .1s ease;
     -moz-transition: .1s ease;
     -webkit-transition: .1s ease;
 }
@@ -276,6 +277,9 @@ form#addPhotoForm{
     position: absolute;
     top: 250%;
     left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    -moz-transform: translate(-50%, -50%);
+    -o-transform: translate(-50%, -50%);
     transform: translate(-50%, -50%);
 }
 
@@ -283,6 +287,9 @@ form#addPostForm{
     position: absolute;
     top: 250%;
     left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    -moz-transform: translate(-50%, -50%);
+    -o-transform: translate(-50%, -50%);
     transform: translate(-50%, -50%);
 }
 
