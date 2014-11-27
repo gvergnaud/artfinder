@@ -7,7 +7,7 @@
  * # AddpostCtrl
  * Controller of the artFinderApp
  */
-app.controller('AddpostCtrl', function ($scope, $rootScope, UI, Auth, Geoloc, Session, Post, SERVER, APP_EVENTS) {
+app.controller('AddpostCtrl', function ($scope, $rootScope, UI, Auth, Geoloc, Session, Post, SERVER, APP_EVENTS, Socket) {
 	
 	UI.addpost.init();
     $rootScope.loaded = true;
@@ -150,6 +150,18 @@ app.controller('AddpostCtrl', function ($scope, $rootScope, UI, Auth, Geoloc, Se
         }
 	};
 
+	//recupère la technique choisie par l'utilisateur
+	$scope.setTechnique = function(technique){
+		if($scope.newPost.photos[0].technique === technique){
+			$scope.newPost.photos[0].technique = '';
+			angular.element(document.querySelectorAll('span.technique.' + technique)).addClass('active');
+		}else{
+			$scope.newPost.photos[0].technique = technique;
+			angular.element(document.querySelectorAll('span.technique')).removeClass('active');
+			angular.element(document.querySelectorAll('span.technique.' + technique)).addClass('active');
+		}
+	};
+
 
 	//propose des posts situés à proximité, au cas ou l'utilisateur voudrait poster un mur déjà présent sur artfinder
 	$scope.closePosts = [];
@@ -270,6 +282,8 @@ app.controller('AddpostCtrl', function ($scope, $rootScope, UI, Auth, Geoloc, Se
 								
 								Post.add($scope.newPost).then(
 									function (newPostId){
+										// success !!
+										Socket.newPost();
 										UI.notification('success', 'Votre mur à bien été ajouté !');
 										$scope.redirectTo('singlepost', newPostId);
 									},

@@ -372,6 +372,7 @@ body{
 
 div#signForms{
   width:200px;
+  height: 400px;
   position: absolute;
   top: 0;
   bottom: 0;

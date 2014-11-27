@@ -15,7 +15,8 @@ app.factory('Socket', function Socket($rootScope, SERVER) {
             if(!io){ return; }
 
             this.socket = io.connect(SERVER.nodeServerUrl);  //  https://artfindersocket.herokuapp.com/
-            this.socket.on('refreshPosts', factory.refreshPosts);
+            this.socket.on('refreshPost', factory.refreshPost);
+            this.socket.on('loadNewPost', factory.loadNewPost);
         },
         
         postsChanged: function(postId){
@@ -24,11 +25,23 @@ app.factory('Socket', function Socket($rootScope, SERVER) {
             this.socket.emit('postsChanged', {postId: postId});
             
         },
+
+        newPost: function(){
+            if(!io){ return; }
         
-        refreshPosts: function(info){
+            this.socket.emit('newPost');
+        },
+        
+        refreshPost: function(info){
             if(!io){ return; }
 
-            $rootScope.$emit('refreshPosts', info);
+            $rootScope.$emit('refreshPost', info);
+        },
+
+        loadNewPost: function(){
+            if(!io){ return; }
+
+            $rootScope.$emit('loadNewPost');
         }
         
     };

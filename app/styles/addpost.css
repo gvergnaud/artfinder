@@ -273,6 +273,7 @@ section#closePostsContainer.ng-hide-add-active{
 
 
 form#addPhotoForm{
+    text-align: center;
     display: none;
     position: absolute;
     top: 250%;
@@ -284,6 +285,7 @@ form#addPhotoForm{
 }
 
 form#addPostForm{
+    text-align: center;
     position: absolute;
     top: 250%;
     left: 50%;
@@ -291,6 +293,23 @@ form#addPostForm{
     -moz-transform: translate(-50%, -50%);
     -o-transform: translate(-50%, -50%);
     transform: translate(-50%, -50%);
+}
+
+textarea.description{
+    display: block;
+    width: 95%;
+    border: 1px solid black;
+    resize: none;
+    margin-top: 15px;
+}
+
+textarea.description:focus{
+    outline: none;
+    border: 1px solid #B59E5C;
+}
+
+form#addPostForm>div, form#addPhotoForm>div{
+    margin-bottom:20px;
 }
 
 @media only screen and (max-width: 1280px) {
@@ -308,6 +327,13 @@ form#addPostForm{
 
     #drop{
         right: 10px;
+        bottom: 60px;
+        background: #1b1b1b;
+        border: none;
+        color: #fff;
+        font-family: 'Uni Sans Heavy';
+        font-size: 1.2em;
+        border-radius: 5px;
     }
 }
 

@@ -28,6 +28,7 @@ app.controller('appCtrl', function ($scope, $rootScope, Session, Auth, UI, APP_E
             geoloc.getUserLocation().then(
                 function(latLng){
                     Session.addUserLocation(latLng);
+                    $scope.userLocation = latLng;
                     $rootScope.$broadcast(APP_EVENTS.userLocationChanged);
                 }, 
                 function(info){
@@ -46,6 +47,7 @@ app.controller('appCtrl', function ($scope, $rootScope, Session, Auth, UI, APP_E
     $scope.traceUserLocation();
 
     $scope.currentUser = null;
+    $scope.userLocation = false;
     $scope.userRoles = USER_ROLES;
     $scope.isAuthorized = Auth.isAuthorized;
     $scope.isAuthenticated = Auth.isAuthenticated;

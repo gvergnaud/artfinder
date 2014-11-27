@@ -25,7 +25,6 @@ app.factory('Post', function Post($http, $q, Session, Socket, SERVER) {
             if(!reload && factory.posts !== false){
 
                 deferred.resolve(factory.posts);
-                console.log('pas dappel ajax');
 
             }else if(!reload && localStorage.getItem('ArtFinderPosts')){
 

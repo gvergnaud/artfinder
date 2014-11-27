@@ -23,6 +23,7 @@
 			<span ng-click="toggleMap()" ng-tooltip="Voir sur la carte">
 				<span id="locationPin"></span>
 				<span id="where">{{post.address}}</span>
+				<span class="discret" ng-if="distanceFromUser"> (À {{distanceFromUser}})</span>
 			</span>
 			<span id="artists">
 				<span ng-repeat="artist in post.photos[currentPhotoId].artists">

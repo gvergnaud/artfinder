@@ -13,6 +13,7 @@ app.controller('HomeCtrl',['$scope', '$rootScope', 'Post', 'Geoloc', 'UI', '$fil
 
 	//POSTS
     function getPosts(){
+    	console.log('getPosts');
         Post.get(true).then(
             function (posts){ // les posts sont récupérés !
                 
@@ -36,7 +37,7 @@ app.controller('HomeCtrl',['$scope', '$rootScope', 'Post', 'Geoloc', 'UI', '$fil
 	//Récuperation des posts
     getPosts();
     
-    //$rootScope.$on('refreshPosts', getPosts);
+    $rootScope.$on('loadNewPost', getPosts);
     
 	
 	$scope.postsLimite = 8;

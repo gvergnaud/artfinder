@@ -27,7 +27,9 @@ app.controller('SinglepostCtrl',['$scope', '$rootScope', '$routeParams', 'Post',
                     }
                 );
 
-                // UI.singlepost.togglePlayerArrows($scope);
+                if($scope.userLocation){
+					$scope.getDistanceFromUser();
+				}
                 
                 mainPhoto.on('load', function(){
 		            UI.singlepost.tagStyles();
@@ -44,66 +46,15 @@ app.controller('SinglepostCtrl',['$scope', '$rootScope', '$routeParams', 'Post',
     getPost();
 
     //rechargement des posts lors que l'evenement refresh post est déclenché par les sockets
-    $rootScope.$on('refreshPosts', function(e, info){
+    $rootScope.$on('refreshPost', function(e, info){
     	console.log(info);
     	if(info.postId == $scope.post.id){ //si le changement concerne le post sur lequel on est
     		getPost(true);
     	}
     });
 
-    $scope.createFullDate = function(){
-		if($scope.post){
-	    	var date = new Date($scope.post.photos[$scope.currentPhotoId].date);
-	        return 'Ajouté le ' + date.getDate() + ' / ' + date.getMonth() + ' / ' +  date.getFullYear() + '.';	
-		}
-    };
 
-    $scope.getDistance = function(closePost){
-    	var metres = Math.round( geoloc.getDistance($scope.post, closePost) );
-    	if(metres > 1000){
-    		return (Math.round(metres/100))/10 + 'km';
-    	}else{
-    		return metres + 'm';
-    	}
-    };
-    
-    
-	//Initialisationde l'ui
-	UI.singlepost.init();
-
-	$scope.currentPhotoId = 0;
-
-	
-	//NAVIGATION
-	$scope.nextPhoto = function(){
-		$scope.$apply(function(){	
-			$scope.currentPhotoId -= 1;
-		});
-	};
-
-	$scope.prevPhoto = function(){
-		$scope.$apply(function(){
- 			$scope.currentPhotoId += 1;
- 		});
-	};
-
-	$scope.setPhoto = function(photo){
-		$scope.currentPhotoId = $scope.post.photos.indexOf(photo);
-	}
-
-	$scope.nextPost = function(){
-		$scope.setSlideAnimation();
-		$scope.redirectTo('singlepost', parseInt($routeParams.id) - 1);
-	};
-
-	$scope.prevPost = function(){
-		$scope.setBackAnimation();
-		$scope.redirectTo('singlepost', parseInt($routeParams.id) + 1);
-	};
-
-
-
- 	//Ouverture de la map
+ 	//MAP
  	$scope.mapOpened = false;
 
 	var geoloc = new Geoloc('section.map');
@@ -135,12 +86,87 @@ app.controller('SinglepostCtrl',['$scope', '$rootScope', '$routeParams', 'Post',
  		
  	};
 
+    //recupère la distance en mettre a partir des coordonnées GPS
+    $scope.getDistance = function(closePost){
+    	var metres = Math.round( geoloc.getDistance($scope.post, closePost) );
+    	if(metres > 1000){
+    		return (Math.round(metres/100))/10 + 'km';
+    	}else{
+    		return metres + 'm';
+    	}
+    };
+
+    //recupère la distance en mettre a partir des coordonnées GPS entre l'utilisateur est le post
+    $scope.getDistanceFromUser = function(){
+    	var userLocationObject = {
+			coords: {
+				latitude: Session.userLocation.k,
+				longitude: Session.userLocation.B
+			}
+		};
+
+	    var metres = Math.round( geoloc.getDistance(userLocationObject, $scope.post) );
+	    if(metres > 1000){
+	    	$scope.distanceFromUser = (Math.round(metres/100))/10 + 'km';
+	    }else{
+	    	$scope.distanceFromUser = metres + 'm';
+	    } 
+    };
+    
+	$scope.distanceFromUser = false;
+    
  	//affiche la position de l'utilisateur à chaque refresh
 	$rootScope.$on(APP_EVENTS.userLocationChanged, function(){
 		if($scope.mapOpened){
 			geoloc.addUserLocationMarker(Session.userLocation);
 		}
+
+		$scope.getDistanceFromUser();
 	});
+
+
+    
+	//UI
+	UI.singlepost.init();
+
+	$scope.currentPhotoId = 0;
+
+	//construit une date lisibile à partir d'un timestamp
+    $scope.createFullDate = function(){
+		if($scope.post){
+	    	var date = new Date($scope.post.photos[$scope.currentPhotoId].date);
+	        return 'Ajouté le ' + date.getDate() + ' / ' + date.getMonth() + ' / ' +  date.getFullYear() + '.';	
+		}
+    };
+	
+	//NAVIGATION
+	$scope.nextPhoto = function(){
+		$scope.$apply(function(){	
+			$scope.currentPhotoId -= 1;
+		});
+	};
+
+	$scope.prevPhoto = function(){
+		$scope.$apply(function(){
+ 			$scope.currentPhotoId += 1;
+ 		});
+	};
+
+	$scope.setPhoto = function(photo){
+		$scope.currentPhotoId = $scope.post.photos.indexOf(photo);
+	}
+
+	$scope.nextPost = function(){
+		$scope.setSlideAnimation();
+		$scope.redirectTo('singlepost', parseInt($routeParams.id) - 1);
+	};
+
+	$scope.prevPost = function(){
+		$scope.setBackAnimation();
+		$scope.redirectTo('singlepost', parseInt($routeParams.id) + 1);
+	};
+
+
 
 
 	//COMMENTAIRES

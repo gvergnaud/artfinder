@@ -499,7 +499,7 @@ app.factory('UI', function UI() {
 
                 el.ondragleave = function(){
                     this.className = '';
-                    this.innerHTML = 'Drag a file here';
+                    this.innerHTML = 'Drop ta photo ici !';
                     return false;
                 };
 
