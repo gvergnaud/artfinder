@@ -67,7 +67,8 @@ app.factory('UI', function UI() {
                 });
 
                 viewcontainer.css({
-                    left: '200px'
+                    left: '200px',
+                    opacity: '.5'
                 });				
 
 
@@ -89,7 +90,8 @@ app.factory('UI', function UI() {
                 });
 
                 viewcontainer.css({
-                    left: '80px'
+                    left: '80px',
+                    opacity: '1'
                 });
 
                 menuLinks.addClass('hidden');
