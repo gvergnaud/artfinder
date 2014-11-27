@@ -97,12 +97,12 @@
 	<section class="closePosts">
 		<h1>Murs à proximité</h1>
 		<div id="closePostsContainer">
-			<div class="post col" ng-repeat="post in closePosts">
+			<div class="post col" ng-repeat="post in closePosts" show-post-icons ng-click="redirectTo('singlepost', {{post.id}})">
 			    <img ng-src="{{post.photos[0].url}}" />
-			    <div class="over"  ng-click="redirectTo('singlepost', {{post.id}})">
-			    <p>À {{getDistance(post)}}</p>
-			      <p>{{post.likes.length}} <span class="icon-heart"></span></p>
-			      <p>{{post.photos.length}} <span class="icon-camera"></span></p>
+			    <div class="over">
+			    	<span class="postLeft">À {{getDistance(post)}}</span>
+			        <span class="postRight">{{post.likes.length}} <span class="icon-heart"></span> </span>
+			        <span class="postRight">{{post.photos.length}} <span class="icon-camera"></span> </span>
 			    </div>
 			</div>
 		</div>

@@ -264,6 +264,10 @@ section#closePostsContainer.ng-hide-add-active{
     transform: translate3d(0, 0, 0);
 }
 
+.post.proposed{
+    height: 150px;
+}
+
 /*POStInfo*/
 
 

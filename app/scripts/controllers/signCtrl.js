@@ -13,7 +13,7 @@ app.controller('signCtrl', function ($scope, $rootScope, UI, APP_EVENTS, Auth, S
 
 	var loginForm = angular.element(document.querySelector('#signForms'));
 
-	loginForm.on('click', function(e){
+	loginForm.on('click touch', function(e){
 		e.stopPropagation();
 	});
 

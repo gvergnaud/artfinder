@@ -48,10 +48,10 @@
 
     <section id="closePostsContainer" ng-show="closePosts.length">
         <h1>Des murs ont été partagés à cet endroit.</h1>
-        <div ng-repeat="post in closePosts"  class="post col postN{{post.id}}" ng-tooltip="Ajouter à ce mur">
+        <div ng-repeat="post in closePosts"  class="post col proposed postN{{post.id}}" ng-tooltip="Ajouter à ce mur" show-post-icons ng-click="selectClosePost({{post}})">
             <img ng-src="{{post.photos[0].url}}" />
-            <div class="over"  ng-click="selectClosePost({{post}})">
-                <p>{{post.likes.length}} Likes</p>
+            <div class="over">
+                <span class="postRight">{{post.likes.length}} <span class="icon-heart"></span> </span>
             </div>
         </div>
     </section>
