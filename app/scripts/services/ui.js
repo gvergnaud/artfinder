@@ -67,10 +67,14 @@ app.factory('UI', function UI() {
                 });
 
                 viewcontainer.css({
-                    left: '200px',
-                    opacity: '.5'
+                    left: '200px'
                 });				
 
+                if(window.innerWidth > 680){
+                    viewcontainer.css({
+                        opacity: '.5'
+                    });             
+                }
 
                 if(ui.menuOpen){
                     menuLinks.removeClass('hidden');

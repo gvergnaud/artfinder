@@ -354,4 +354,19 @@ app.controller('SinglepostCtrl',['$scope', '$rootScope', '$routeParams', 'Post',
 		}
  	};
 
+ 	$scope.deletePost = function(){
+ 		if($scope.post.photos[0].user.id === $scope.currentUser.id){
+ 			Post.deletePost($scope.post.id).then(
+ 				function(posts){
+					Socket.newPost();
+ 					$scope.redirectTo('');
+ 					UI.notification('success', 'Votre mur à été supprimé');
+				},
+				function(msg){
+					UI.notification('error', msg);
+ 				}
+ 			);
+ 		}
+ 	};
+
 }]);

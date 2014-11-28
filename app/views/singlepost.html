@@ -53,6 +53,7 @@
 		</div>
 		<div class="left">
 			<div class="desc">
+				<div class="deleteComment flaticon-cross102" ng-if="post.photos[0].user.id === currentUser.id" ng-click="deletePost(comment)" ng-tooltip="Supprimer le mur"></div>
 				<img class="avatar" ng-src="{{post.photos[currentPhotoId].user.avatar}}" />
 				<div class="comment_info">
 					<h3 class="username">{{post.photos[currentPhotoId].user.username}}</h3>

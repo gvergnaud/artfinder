@@ -80,6 +80,43 @@ app.factory('Post', function Post($http, $q, Session, Socket, SERVER) {
     		return deferred.promise;
     	},
 
+        deletePost: function(postId){
+            var deferred = $q.defer();
+
+            //on récupere tous les posts au cas ou il y aurait eu une modification du fichier sur le server
+            factory.get(true).then(
+                function (posts){
+
+                    //on ajoute notre newComment a la liste de commentaire de notre post
+                    angular.forEach(posts, function (post, key){
+                        if(post.id === postId){
+                            posts.splice(posts.indexOf(post), 1);
+                            return;
+                        }
+                    });
+                    
+                    //on sauvegarde notre nouvel objet posts
+                    factory.posts = posts;
+                    factory.save(posts).then(
+                        function(data){
+                            Socket.postsChanged(postId);
+                            deferred.resolve(data);
+                        },
+                        function(msg){
+                            deferred.reject(msg);
+                            console.log(msg);
+                        }
+                    );
+
+                },
+                function (msg){
+                    deferred.reject(msg);
+                }
+            );
+
+            return deferred.promise;
+        },
+
         getClosePosts: function(post, nb){ //recupère les nb posts situes les plus a proximité de post
 
             var deferred = $q.defer();
