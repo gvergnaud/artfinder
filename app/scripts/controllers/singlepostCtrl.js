@@ -158,12 +158,12 @@ app.controller('SinglepostCtrl',['$scope', '$rootScope', '$routeParams', 'Post',
 
 	$scope.nextPost = function(){
 		$scope.setSlideAnimation();
-		$scope.redirectTo('singlepost', parseInt($routeParams.id) - 1);
+		$scope.redirectTo('singlepost', Post.posts[Post.posts.indexOf($scope.post) - 1].id);
 	};
 
 	$scope.prevPost = function(){
 		$scope.setBackAnimation();
-		$scope.redirectTo('singlepost', parseInt($routeParams.id) + 1);
+		$scope.redirectTo('singlepost', Post.posts[Post.posts.indexOf($scope.post) + 1].id);
 	};
 
 
@@ -202,7 +202,7 @@ app.controller('SinglepostCtrl',['$scope', '$rootScope', '$routeParams', 'Post',
  	$scope.deleteComment = function(comment){
 
 		if(Auth.isAuthenticated()){ //si l'utilisateur est identifé
-			if(Session.userId === comment.user.id){
+			if(Session.userId === comment.user.id || $scope.currentUser.role === 'admin'){
 				Post.deleteComment($scope.post.id, comment.id).then(
 					function(posts){
 						Post.find($routeParams.id).then(
@@ -355,7 +355,7 @@ app.controller('SinglepostCtrl',['$scope', '$rootScope', '$routeParams', 'Post',
  	};
 
  	$scope.deletePost = function(){
- 		if($scope.post.photos[0].user.id === $scope.currentUser.id){
+ 		if($scope.post.photos[0].user.id === $scope.currentUser.id || $scope.currentUser.role === 'admin'){
  			Post.deletePost($scope.post.id).then(
  				function(posts){
 					Socket.newPost();
@@ -366,6 +366,8 @@ app.controller('SinglepostCtrl',['$scope', '$rootScope', '$routeParams', 'Post',
 					UI.notification('error', msg);
  				}
  			);
+ 		}else{
+ 			Ui.notification('error', 'Vous n\'avez pas le droit d\'effectuer cette action.')
  		}
  	};
 

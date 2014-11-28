@@ -12,25 +12,9 @@ app.directive('playerArrow', function (Post, $routeParams) {
         restrict: 'A',
         link: function($scope, $element, $attrs) {
             
-            function postExist(id){
-                for(var i in Post.posts){
-                    
-                    var post = Post.posts[i];
-                   
-                    if(post.id === id){
-                        return true;
-                    }
-                }
-
-                return false;
-            }
-
-            var nextPostId = parseInt($routeParams.id) - 1;
-            var prevPostId = parseInt($routeParams.id) + 1;
-
             if($attrs.id === 'next'){    
 
-                if(postExist(nextPostId)){
+                if(parseInt($routeParams.id) !== Post.posts[0].id){
                     $element.css({
                         display: 'block'
                     });
@@ -43,7 +27,7 @@ app.directive('playerArrow', function (Post, $routeParams) {
 
             else if($attrs.id === 'prev'){
 
-                if(postExist(prevPostId)){
+                if(parseInt($routeParams.id) !== Post.posts[Post.posts.length - 1].id){
                     $element.css({
                         display: 'block'
                     });
@@ -53,8 +37,6 @@ app.directive('playerArrow', function (Post, $routeParams) {
                     });
                 }
             }
-
-
         }
     };
 });

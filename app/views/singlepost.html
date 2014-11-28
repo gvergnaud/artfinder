@@ -53,7 +53,7 @@
 		</div>
 		<div class="left">
 			<div class="desc">
-				<div class="deleteComment flaticon-cross102" ng-if="post.photos[0].user.id === currentUser.id" ng-click="deletePost(comment)" ng-tooltip="Supprimer le mur"></div>
+				<div class="deleteComment flaticon-cross102" ng-if="post.photos[0].user.id === currentUser.id || currentUser.role === 'admin'" ng-click="deletePost(comment)" ng-tooltip="Supprimer le mur"></div>
 				<img class="avatar" ng-src="{{post.photos[currentPhotoId].user.avatar}}" />
 				<div class="comment_info">
 					<h3 class="username">{{post.photos[currentPhotoId].user.username}}</h3>
@@ -67,7 +67,7 @@
 					<h3>{{post.comments.length}} Commentaires</h3>
 					<div ng-repeat="comment in post.comments">
 						<div class="comment">
-							<div class="deleteComment flaticon-cross102" ng-click="deleteComment(comment)" ng-tooltip="Supprimer le commentaire" ng-if="comment.user.id === currentUser.id"></div>
+							<div class="deleteComment flaticon-cross102" ng-if="comment.user.id === currentUser.id || currentUser.role === 'admin'" ng-click="deleteComment(comment)" ng-tooltip="Supprimer le commentaire"></div>
 							<img class="avatar" ng-src="{{comment.user.avatar}}" />
 							<div class="comment_info">
 								<h3 class="username">{{comment.user.username}}</h3><span class="discret" ng-if="post.photos.length > 1"> À propos de la photo n°{{comment.activePhoto}}</span>
