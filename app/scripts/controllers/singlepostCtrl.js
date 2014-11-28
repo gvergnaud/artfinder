@@ -7,7 +7,7 @@
  * # SinglepostCtrl
  * Controller of the artFinderApp
  */
-app.controller('SinglepostCtrl',['$scope', '$rootScope', '$routeParams', 'Post', 'UI', 'Auth', 'Session', 'Geoloc', '$filter', 'APP_EVENTS', function ($scope, $rootScope, $routeParams, Post, UI, Auth, Session, Geoloc, $filter, APP_EVENTS) {
+app.controller('SinglepostCtrl',['$scope', '$rootScope', '$routeParams', 'Post', 'UI', 'Auth', 'Session', 'Geoloc', '$filter', 'APP_EVENTS', 'Socket', function ($scope, $rootScope, $routeParams, Post, UI, Auth, Session, Geoloc, $filter, APP_EVENTS, Socket) {
 	
 
 	var mainPhoto = angular.element(document.querySelectorAll('section#player img'));
