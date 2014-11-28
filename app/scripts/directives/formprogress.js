@@ -22,14 +22,23 @@ app.directive('formprogress', function() {
                     width: progress + '%'
                 });
                                 
-                if(progress <= 40){
+                if(progress <= 50){
                     formStep.html('Ajoutez une photo - 1/3');
-                    
+                    $scope.$apply(function(){
+                        $scope.stepSelector = '.drop';
+                    });
+
                 }else if(progress <= 80){
                     formStep.html('Ou se trouve le mur ? - 2/3');
+                    $scope.$apply(function(){
+                        $scope.stepSelector = '#locate';
+                    });
                     
                 }else if(progress <= 100){
                     formStep.html('Pouvez vous nous en dire plus ? - 3/3');
+                    $scope.$apply(function(){
+                        $scope.stepSelector = '#newPostInfos';
+                    });
                 }
             });
 

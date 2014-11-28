@@ -30,6 +30,7 @@ nav#addpostnav{
     width: 33%;
     height: 30px;
     background: #B59E5C;
+    cursor: pointer;
     transition: .1s ease;
     -o-transition: .1s ease;
     -moz-transition: .1s ease;
