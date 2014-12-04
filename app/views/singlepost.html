@@ -1,8 +1,8 @@
 <div class="container">
 	<section id="player" class="player">
-		<nav class="arrows" id="prev"></nav>
-		<nav class="arrows" id="next"></nav>
-		<img ng-src="{{post.photos[currentPhotoId].url}}" />
+		<nav class="arrows" id="prev" player-arrow ng-click="prevPost()"></nav>
+		<nav class="arrows" id="next" player-arrow ng-click="nextPost()"></nav>
+		<img class="mainImage" ng-src="{{post.photos[currentPhotoId].url}}" />
 		<div class="tagWrapper">
 			<div ng-repeat="artist in post.photos[currentPhotoId].artists">
 				<div  class="tagBox" ng-mouseenter="showTag=true" ng-mouseleave="showTag=false" style="left:{{artist.left}}%;top:{{artist.top}}%;width:{{artist.width}}%;height:{{artist.height}}%;" data-artist="{{artist.name}}">
@@ -11,13 +11,20 @@
 			</div>
 		</div>
 		<div class="control"></div>
+		<div class="miniatures" ng-if="post.photos.length > 1">
+			<img class="miniature" ng-repeat="photo in post.photos" ng-src="{{photo.url}}" ng-click="setPhoto(photo)" />
+		</div>
 	</section>
 
 	<section class="map"></section>
 
 	<section id="short_infos">
 		<span class="left">
-			<span id="where" ng-click="toggleMap()" ng-tooltip="Voir sur la carte">{{post.address}}</span>
+			<span ng-click="toggleMap()" ng-tooltip="Voir sur la carte">
+				<span id="locationPin"></span>
+				<span id="where">{{post.address}}</span>
+				<span class="discret" ng-if="distanceFromUser"> (À {{distanceFromUser}})</span>
+			</span>
 			<span id="artists">
 				<span ng-repeat="artist in post.photos[currentPhotoId].artists">
 					<span class="artist" ng-click="redirectTo('search', '{{artist.name}}')" ng-tooltip="Oeuvres de l'artiste">{{artist.name}}</span>
@@ -38,12 +45,20 @@
 	</section>
 
 	<section id="infos">
+		<div class="right">
+			<h3>{{createFullDate()}}</h3>
+			<p class="flaticon-checkboxmark" ng-if="post.photos[currentPhotoId].stillExist"> Yes ! L'oeuvre existe toujours</p>
+			<p class="flaticon-cross102" ng-if="!post.photos[currentPhotoId].stillExist"> Hélas, cette oeuvre n'existe existe plus</p>
+			<span ng-tooltip="{{post.photos[currentPhotoId].technique}}" id="postTechnique" class="technique {{post.photos[currentPhotoId].technique}}"></span>
+		</div>
 		<div class="left">
-			<div class="desc" ng-if="post.photos[currentPhotoId].description">
+			<div class="desc">
+				<div class="deleteComment flaticon-cross102" ng-if="post.photos[0].user.id === currentUser.id || currentUser.role === 'admin'" ng-click="deletePost(comment)" ng-tooltip="Supprimer le mur"></div>
 				<img class="avatar" ng-src="{{post.photos[currentPhotoId].user.avatar}}" />
 				<div class="comment_info">
 					<h3 class="username">{{post.photos[currentPhotoId].user.username}}</h3>
-					<p class="content">{{post.photos[currentPhotoId].description}}</p>
+					<p class="content" ng-if="post.photos[currentPhotoId].description">{{post.photos[currentPhotoId].description}}</p>
+					<p class="discret" ng-if="!post.photos[currentPhotoId].description">On dirait que quelqu'un est timide ...</p>
 				</div>
 			</div>
 
@@ -52,12 +67,12 @@
 					<h3>{{post.comments.length}} Commentaires</h3>
 					<div ng-repeat="comment in post.comments">
 						<div class="comment">
-							<div class="deleteComment" ng-click="deleteComment(comment)" ng-if="comment.user.id === currentUser.id">delete</div>
+							<div class="deleteComment flaticon-cross102" ng-if="comment.user.id === currentUser.id || currentUser.role === 'admin'" ng-click="deleteComment(comment)" ng-tooltip="Supprimer le commentaire"></div>
 							<img class="avatar" ng-src="{{comment.user.avatar}}" />
 							<div class="comment_info">
-								<h3 class="username">{{comment.user.username}}</h3><span class="activephoto"> Watching picture n°{{comment.activePhoto}}</span>
+								<h3 class="username">{{comment.user.username}}</h3><span class="discret" ng-if="post.photos.length > 1"> À propos de la photo n°{{comment.activePhoto}}</span>
 								<p class="content">{{comment.content}}</p>
-								<p class="date">{{comment.date}}</p>
+								<p class="discret">{{comment.date}}</p>
 							</div>
 						</div>
 					</div>
@@ -69,7 +84,7 @@
 							<img class="avatar" ng-src="{{currentUser.avatar}}" />
 							<div class="comment_info">
 								<h3 class="username">{{currentUser.username}}</h3>
-								<textarea type="text" class="content" ng-model="newComment.content" placeholder="message"></textarea>
+								<input type="text" class="content" ng-change="checkKey()" ng-model="newComment.content" placeholder="message" />
 								<input type="submit" value="Envoyer" />
 							</div>
 						</div>
@@ -77,17 +92,19 @@
 				</div>
 			</section>
 		</div>
+		<div style="clear:both;"></div>
 	</section>
 
 
 	<section class="closePosts">
 		<h1>Murs à proximité</h1>
 		<div id="closePostsContainer">
-			<div class="post col" ng-repeat="post in closePosts">
+			<div class="post col" ng-repeat="post in closePosts" show-post-icons ng-click="redirectTo('singlepost', {{post.id}})">
 			    <img ng-src="{{post.photos[0].url}}" />
-			    <div class="over"  ng-click="redirectTo('singlepost', {{post.id}})">
-			      <p>{{post.likes.length}} Likes</p>
-			      <p>{{post.photos.length}} Photos</p>
+			    <div class="over">
+			    	<span class="postLeft">À {{getDistance(post)}}</span>
+			        <span class="postRight">{{post.likes.length}} <span class="icon-heart"></span> </span>
+			        <span class="postRight">{{post.photos.length}} <span class="icon-camera"></span> </span>
 			    </div>
 			</div>
 		</div>

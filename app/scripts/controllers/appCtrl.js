@@ -7,7 +7,7 @@
  * # AppctrlCtrl
  * Controller of the artFinderApp
  */
-app.controller('appCtrl', function ($scope, $rootScope, Session, Auth, UI, AUTH_EVENTS, USER_ROLES, Geoloc, Socket) {
+app.controller('appCtrl', function ($scope, $rootScope, Session, Auth, UI, APP_EVENTS, USER_ROLES, Geoloc, Socket) {
 
     //LOADER 
     //
@@ -21,17 +21,33 @@ app.controller('appCtrl', function ($scope, $rootScope, Session, Auth, UI, AUTH_
     // get user lOCATION
     var geoloc = new Geoloc();
 
-    geoloc.getUserLocation().then(
-        function(latLng){
-            Session.addUserLocation(latLng);
-            $rootScope.$broadcast(AUTH_EVENTS.userLocationChanged);
-        }, 
-        function(msg){
-            console.log(msg);
+    $scope.traceUserLocation = function(){
+
+        
+        function getUserLocation(){
+            geoloc.getUserLocation().then(
+                function(latLng){
+                    Session.addUserLocation(latLng);
+                    $scope.userLocation = latLng;
+                    $rootScope.$broadcast(APP_EVENTS.userLocationChanged);
+                }, 
+                function(info){
+                    if(info == 'permission denied'){
+                        console.log('permission denied');
+                        clearInterval(traceInterval);
+                    }
+                }
+            );
         }
-    );
+
+        getUserLocation();
+        var traceInterval = setInterval(getUserLocation, 10000); //on récupère la position de l'utilisateur toutes les 10 sec
+    };
+
+    $scope.traceUserLocation();
 
     $scope.currentUser = null;
+    $scope.userLocation = false;
     $scope.userRoles = USER_ROLES;
     $scope.isAuthorized = Auth.isAuthorized;
     $scope.isAuthenticated = Auth.isAuthenticated;
@@ -127,49 +143,52 @@ app.controller('appCtrl', function ($scope, $rootScope, Session, Auth, UI, AUTH_
         if(!!callback){	
             setTimeout(function(){
                 callback.call(this);
-            }, speed);
+            }, speed + 15);
         }
     };
     
     //Redirection 
     //
     $scope.redirectTo = function(page, param){
+
+        $scope.smoothScrollTo('#container', function(){
+            $scope.route(page, param);
+            $scope.setSlideAnimation();
+        }); 
+    };
+
+    $scope.route = function(page, param){
+
         var hashtab = window.location.hash.split('/'),
             currentPage = hashtab[1];
 
-
         if( (currentPage === 'singlepost' || currentPage === 'addpost') && (!page || page === 'search') ){
             $scope.setBackAnimation();
-        }else{
-            $scope.setSlideAnimation();
         }
 
-        $scope.smoothScrollTo('#container', function(){
 
-            if(!page){
+        if(!page){
 
-                if(window.location.hash === '#/'){return;}
+            if(window.location.hash === '#/'){return;}
 
-                window.location.hash = '';
+            window.location.hash = '';
 
-            }else if(typeof param !== 'undefined'){
+        }else if(typeof param !== 'undefined'){
 
-                if(window.location.hash === '#/' + page + '/'+ param){return;}
+            if(window.location.hash === '#/' + page + '/'+ param){return;}
 
-                window.location.hash = '#/' + page + '/'+ param;
+            window.location.hash = '#/' + page + '/'+ param;
 
-            }else{
+        }else{
 
-                if(window.location.hash === '#/' + page){return;}
+            if(window.location.hash === '#/' + page){return;}
 
-                window.location.hash = '#/' + page;
+            window.location.hash = '#/' + page;
 
-            }
-
-        });
+        }
     };
 
-    //Sockets send
+    //Déclenche l'emission d'un socket (test)
     $scope.socket = function(postId){
         console.log('socket send');
         Socket.postsChanged(postId);

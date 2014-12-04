@@ -7,24 +7,31 @@
  * # SinglepostCtrl
  * Controller of the artFinderApp
  */
-app.controller('SinglepostCtrl',['$scope', '$rootScope', '$routeParams', 'Post', 'UI', 'Auth', 'Session', 'Geoloc', '$filter', function ($scope, $rootScope, $routeParams, Post, UI, Auth, Session, Geoloc, $filter) {
+app.controller('SinglepostCtrl', function ($scope, $rootScope, $filter, $routeParams, Post, UI, Auth, Session, Geoloc, APP_EVENTS, Socket) {
 	
-	//POSTS
-    function getPost(){
-        Post.find($routeParams.id, true).then(
-            function (post){ // les posts sont récupérés !
-                $scope.post =  post;		
 
-                Post.getClosePosts(post, 5).then(
+	var mainPhoto = angular.element(document.querySelectorAll('section#player img'));
+
+	//POSTS
+    function getPost(reload){
+    	if(!reload) {reload = false};
+        Post.find($routeParams.id, reload).then(
+            function (post){ // les posts sont récupérés !
+                $scope.post = post;	
+
+                Post.getClosePosts(post, 4).then(
                     function(closePosts){
                         $scope.closePosts = closePosts;
                     }
                 );
 
-                UI.singlepost.togglePlayerArrows($scope);
-                setTimeout(function(){
-                    UI.singlepost.tagStyles();
-                }, 300);
+                if($scope.userLocation){
+					$scope.getDistanceFromUser();
+				}
+                
+                mainPhoto.on('load', function(){
+		            UI.singlepost.tagStyles();
+				});
             },
             function (msg){ // erreur lors de la récupération des posts
                 UI.notification('error', msg);
@@ -36,70 +43,131 @@ app.controller('SinglepostCtrl',['$scope', '$rootScope', '$routeParams', 'Post',
     //Récuperation du post
     getPost();
 
-    $rootScope.$on('refreshPosts', function(e, info){
+    //rechargement des posts lors que l'evenement refresh post est déclenché par les sockets
+    $rootScope.$on('refreshPost', function(e, info){
     	console.log(info);
-    	if(info.postId == $scope.post.id){
-    		getPost();
+    	if(info.postId == $scope.post.id){ //si le changement concerne le post sur lequel on est
+    		getPost(true);
     	}
     });
-    
-    
-	//Initialisationde l'ui
-	UI.singlepost.init();
-
-	$scope.currentPhotoId = 0;
- 	$scope.img = angular.element(document.querySelectorAll('section#player img'));
- 	$scope.arrows = [angular.element(document.querySelectorAll('nav#prev')), angular.element(document.querySelectorAll('nav#next'))];
-
- 	// $scope.img.on('load', function(){
-		// UI.singlepost.imgStyle();
- 	// });
-
-	//Changer l'image avec prev
-	$scope.arrows[0].on('click', function(){
-		
-		$scope.$apply(function(){	
-			$scope.currentPhotoId -= 1;
-		});
-
-		UI.singlepost.togglePlayerArrows($scope);
-	});
-
- 	//Changer l'image avec next
- 	$scope.arrows[1].on('click', function(){
- 		
- 		$scope.$apply(function(){
- 			$scope.currentPhotoId += 1;
- 		});
-
- 		UI.singlepost.togglePlayerArrows($scope);
- 	});
 
 
- 	//Ouverture de la map
+ 	//MAP
  	$scope.mapOpened = false;
+
+	var geoloc = new Geoloc('section.map');
+	geoloc.createMap();
 
  	$scope.toggleMap = function(){
 
  		if(!$scope.mapOpened){
-	 		var geoloc = new Geoloc('section.map');
+	 		
 	 		var mapCenter = geoloc.getLatLng($scope.post.coords.latitude, $scope.post.coords.longitude);
-
-			geoloc.createMap({zoom: 10, center: mapCenter});
+			
 			geoloc.addPostMarker($scope.post);
-			geoloc.setMapOptions({scrollwheel: false});
+			geoloc.setMapOptions({scrollwheel: false, zoom: 10, center: mapCenter});
 
 	 		UI.singlepost.toggleMap(function(){
 				geoloc.showPostLocation($scope.post);
 	 		});
 
+	 		if(Session.userLocation){
+				geoloc.addUserLocationMarker(Session.userLocation);
+	 		}
+
 	 		$scope.mapOpened = true;
+
  		}else{
  			UI.singlepost.toggleMap();
  			$scope.mapOpened = false;
  		}
  		
  	};
+
+    //recupère la distance en mettre a partir des coordonnées GPS
+    $scope.getDistance = function(closePost){
+    	var metres = Math.round( geoloc.getDistance($scope.post, closePost) );
+    	if(metres > 1000){
+    		return (Math.round(metres/100))/10 + 'km';
+    	}else{
+    		return metres + 'm';
+    	}
+    };
+
+    //recupère la distance en mettre a partir des coordonnées GPS entre l'utilisateur est le post
+    $scope.getDistanceFromUser = function(){
+    	var userLocationObject = {
+			coords: {
+				latitude: Session.userLocation.k,
+				longitude: Session.userLocation.B
+			}
+		};
+
+	    var metres = Math.round( geoloc.getDistance(userLocationObject, $scope.post) );
+	    if(metres > 1000){
+	    	$scope.distanceFromUser = (Math.round(metres/100))/10 + 'km';
+	    }else{
+	    	$scope.distanceFromUser = metres + 'm';
+	    } 
+    };
+    
+	$scope.distanceFromUser = false;
+    
+ 	//affiche la position de l'utilisateur à chaque refresh
+	$rootScope.$on(APP_EVENTS.userLocationChanged, function(){
+		if($scope.mapOpened){
+			geoloc.addUserLocationMarker(Session.userLocation);
+		}
+
+		$scope.getDistanceFromUser();
+	});
+
+
+    
+	//UI
+	UI.singlepost.init();
+
+	$scope.currentPhotoId = 0;
+
+	//construit une date lisibile à partir d'un timestamp
+    $scope.createFullDate = function(){
+		if($scope.post){
+	    	var date = new Date($scope.post.photos[$scope.currentPhotoId].date);
+	        return 'Ajouté le ' + date.getDate() + ' / ' + date.getMonth() + ' / ' +  date.getFullYear() + '.';	
+		}
+    };
+	
+	//NAVIGATION
+	$scope.nextPhoto = function(){
+		$scope.$apply(function(){	
+			$scope.currentPhotoId -= 1;
+		});
+	};
+
+	$scope.prevPhoto = function(){
+		$scope.$apply(function(){
+ 			$scope.currentPhotoId += 1;
+ 		});
+	};
+
+	$scope.setPhoto = function(photo){
+		$scope.currentPhotoId = $scope.post.photos.indexOf(photo);
+	}
+
+	$scope.nextPost = function(){
+		$scope.setSlideAnimation();
+		$scope.redirectTo('singlepost', Post.posts[Post.posts.indexOf($scope.post) - 1].id);
+	};
+
+	$scope.prevPost = function(){
+		$scope.setBackAnimation();
+		$scope.redirectTo('singlepost', Post.posts[Post.posts.indexOf($scope.post) + 1].id);
+	};
+
+
+
+
+	//COMMENTAIRES
 
  	$scope.newComment = {};
 
@@ -132,7 +200,7 @@ app.controller('SinglepostCtrl',['$scope', '$rootScope', '$routeParams', 'Post',
  	$scope.deleteComment = function(comment){
 
 		if(Auth.isAuthenticated()){ //si l'utilisateur est identifé
-			if(Session.userId === comment.user.id){
+			if(Session.userId === comment.user.id || $scope.currentUser.role === 'admin'){
 				Post.deleteComment($scope.post.id, comment.id).then(
 					function(posts){
 						Post.find($routeParams.id).then(
@@ -151,13 +219,14 @@ app.controller('SinglepostCtrl',['$scope', '$rootScope', '$routeParams', 'Post',
 					}
 				);
 			}else{
-				UI.notification('error', 'Vous n\'êtes pas l\'auteur de ce commentaire.')
+				UI.notification('error', 'Vous n\'êtes pas l\'auteur de ce commentaire.');
 			}
  		}else{
 			UI.notification('', 'Vous devez etre connecté !');
 		}
  	};
 
+ 	//LIKE
  	$scope.likePost = function(){
 
 		if(Auth.isAuthenticated()){ //si l'utilisateur est identifé
@@ -180,9 +249,11 @@ app.controller('SinglepostCtrl',['$scope', '$rootScope', '$routeParams', 'Post',
 	 		);
 		}else{
 			UI.notification('', 'vous devez etre connecté !');
+			UI.toggleLoginOverlay();
 		}
  	};
 
+ 	//IDENTIFICATION
 	$scope.identifying = false;
  	$scope.selecting = false;
 
@@ -282,4 +353,21 @@ app.controller('SinglepostCtrl',['$scope', '$rootScope', '$routeParams', 'Post',
 		}
  	};
 
-}]);
+ 	$scope.deletePost = function(){
+ 		if($scope.post.photos[0].user.id === $scope.currentUser.id || $scope.currentUser.role === 'admin'){
+ 			Post.deletePost($scope.post.id).then(
+ 				function(posts){
+					Socket.newPost();
+ 					$scope.redirectTo('');
+ 					UI.notification('success', 'Votre mur à été supprimé');
+				},
+				function(msg){
+					UI.notification('error', msg);
+ 				}
+ 			);
+ 		}else{
+ 			Ui.notification('error', 'Vous n\'avez pas le droit d\'effectuer cette action.')
+ 		}
+ 	};
+
+});

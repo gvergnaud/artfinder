@@ -7,7 +7,7 @@
  * # AddpostCtrl
  * Controller of the artFinderApp
  */
-app.controller('AddpostCtrl', function ($scope, $rootScope, UI, Auth, Geoloc, Session, Post) {
+app.controller('AddpostCtrl', function ($scope, $rootScope, UI, Auth, Geoloc, Session, Post, SERVER, APP_EVENTS, Socket) {
 	
 	UI.addpost.init();
     $rootScope.loaded = true;
@@ -19,7 +19,7 @@ app.controller('AddpostCtrl', function ($scope, $rootScope, UI, Auth, Geoloc, Se
     
 //    DROPZONE 
 	
-	var postImageUrl = window.location.origin + window.location.pathname + 'upload.php';
+	var postImageUrl = SERVER.url + 'upload.php';
     
 	// Get the template HTML and remove it from the doumenthe template HTML and remove it from the doument
 	var previewNode = document.querySelector('#template');
@@ -37,9 +37,8 @@ app.controller('AddpostCtrl', function ($scope, $rootScope, UI, Auth, Geoloc, Se
 		autoQueue: false, // Make sure the files aren't queued until manually added
 		previewsContainer: '#previews', // Define the container to display the previews
 		clickable: '#drop' // Define the element that should be used as click trigger to select files.
+		//headers: {"Content-Type": "multipart/form-data"}
 	});
-
-
 
 	myDropzone.on('addedfile', function(file) {
 	  	// Hookup the start button
@@ -52,30 +51,19 @@ app.controller('AddpostCtrl', function ($scope, $rootScope, UI, Auth, Geoloc, Se
             UI.notification('error', 'ce fichier n\'est pas une image');
         }
 	});
-	/*
-	myDropzone.on("totaluploadprogress", function(progress) {
-		document.querySelector("#total-progress .progress-bar").style.width = progress + "%";
-	});
 
-	myDropzone.on("sending", function(file){
-		console.log(file);
-	});
-
-	// Hide the total progress bar when nothing's uploading anymore
-	myDropzone.on("queuecomplete", function(progress) {
-		document.querySelector("#total-progress").style.opacity = "0";
-	});
-*/
 	myDropzone.on('success', function(file, response){
 		if(response !== 'nofiles'){
             if(response !== 'not an image'){
                 
-                var imagePath = window.location.origin + window.location.pathname + 'images/uploads/' + response;
+                var imagePath = SERVER.url + 'images/uploads/' + response;
                 document.getElementById('photorender').setAttribute('src', imagePath);
 
                 $scope.newPost.photos[0].url = imagePath;
                 $scope.newPost.photos[0].artists = [];
                 
+                document.querySelector('#previews').remove();
+
                 $scope.smoothScrollTo('#locate');
                 
             }else{
@@ -89,21 +77,9 @@ app.controller('AddpostCtrl', function ($scope, $rootScope, UI, Auth, Geoloc, Se
 
 	myDropzone.on('error', function(file){
 	});
-/*
-	// Setup the buttons for all transfers
-	// The "add files" button doesn't need to be setup because the config
-	// `clickable` has already been specified.
-	document.querySelector("#actions .start").onclick = function() {
-		myDropzone.enqueueFiles(myDropzone.getFilesWithStatus(Dropzone.ADDED));
-	};
-	document.querySelector("#actions .cancel").onclick = function() {
-		myDropzone.removeAllFiles(true);
-	}; 
-
-	*/
     
     
-//  FONCTIONNEL
+//  Initialisation des infos du nouveau post
 	$scope.newPost = {};
 	$scope.newPost.photos = [];
 	$scope.newPost.photos[0] = {};
@@ -112,6 +88,8 @@ app.controller('AddpostCtrl', function ($scope, $rootScope, UI, Auth, Geoloc, Se
 	$scope.newPost.photos[0].description = '';
 	$scope.newPost.coords = {};
 
+
+	// MAP
 	var geoloc = new Geoloc('#formMap');
 
 	geoloc.createMap();
@@ -132,8 +110,26 @@ app.controller('AddpostCtrl', function ($scope, $rootScope, UI, Auth, Geoloc, Se
 		$scope.newPost.coords.latitude = event.latLng.lat();
 		$scope.newPost.coords.longitude = event.latLng.lng();
 		$scope.proposePosts();
+	});
+
+	//affiche la position de l'utilisateur à chaque refresh
+	$rootScope.$on(APP_EVENTS.userLocationChanged, function(){
+
+		var userMarker = geoloc.addUserLocationMarker(Session.userLocation, 'Utiliser ma position actuelle');
+		//on ajoute l'evenement click sur le userMarker
+		google.maps.event.addListener(userMarker, 'click', (function(userMarker) {
+			return function() {
+				$scope.useUserLocation();
+			};
+		})(userMarker));
 
 	});
+
+	$scope.useUserLocation = function(){
+		$scope.newPost.coords.latitude = Session.userLocation.k;
+		$scope.newPost.coords.longitude = Session.userLocation.B;
+		$scope.smoothScrollTo('#newPostInfos');
+	};
 
 	//entrer l'adresse pour recupérer les coordonnées
 	$scope.addressChange = function(){
@@ -154,6 +150,20 @@ app.controller('AddpostCtrl', function ($scope, $rootScope, UI, Auth, Geoloc, Se
         }
 	};
 
+	//recupère la technique choisie par l'utilisateur
+	$scope.setTechnique = function(technique){
+		if($scope.newPost.photos[0].technique === technique){
+			$scope.newPost.photos[0].technique = '';
+			angular.element(document.querySelectorAll('span.technique.' + technique)).addClass('active');
+		}else{
+			$scope.newPost.photos[0].technique = technique;
+			angular.element(document.querySelectorAll('span.technique')).removeClass('active');
+			angular.element(document.querySelectorAll('span.technique.' + technique)).addClass('active');
+		}
+	};
+
+
+	//propose des posts situés à proximité, au cas ou l'utilisateur voudrait poster un mur déjà présent sur artfinder
 	$scope.closePosts = [];
 
 	$scope.proposePosts = function(){
@@ -168,6 +178,7 @@ app.controller('AddpostCtrl', function ($scope, $rootScope, UI, Auth, Geoloc, Se
 						if($scope.closePosts.indexOf(post) === -1){
 							$scope.closePosts.push(post);
 							geoloc.addPostMarker(post);
+							UI.addpost.proposePosts();
 						}
 					//sinon, si le post etait dans le tableau, on l'enleve
 					}else if($scope.closePosts.indexOf(post) !== -1){
@@ -176,6 +187,9 @@ app.controller('AddpostCtrl', function ($scope, $rootScope, UI, Auth, Geoloc, Se
 						
 					}
 				}
+				if($scope.closePosts.length === 0){
+					UI.addpost.removeProposedPosts();
+				}
 			},
 			function (msg){
 				UI.notification('error', msg);
@@ -183,11 +197,10 @@ app.controller('AddpostCtrl', function ($scope, $rootScope, UI, Auth, Geoloc, Se
 		);
 	};
 
-    
+    //selection d'un post existant
 	$scope.selectClosePost = function(post){
-        //dois effacer les autres champs ainsi que les autres closePosts proposés et faire apparaitre un bouton submit spécial qui déclenche la function Post.addPhoto.
 		UI.addpost.selectedPost(post);
-        
+		
         $scope.newPost.coords = post.coords;
         $scope.newPost.address = post.address;
         
@@ -207,6 +220,7 @@ app.controller('AddpostCtrl', function ($scope, $rootScope, UI, Auth, Geoloc, Se
                     if(!!$scope.newPost.photos[0].technique){
 
                         //on ajoute le username de l'hoster a l'image
+                        $scope.newPost.photos[0].id = post.photos[post.photos.length - 1].id + 1;
                         $scope.newPost.photos[0].user = $scope.currentUser;
                         $scope.newPost.photos[0].userId = parseInt(Session.userId);
                         $scope.newPost.photos[0].date = new Date().getTime();
@@ -243,6 +257,7 @@ app.controller('AddpostCtrl', function ($scope, $rootScope, UI, Auth, Geoloc, Se
 
 	};
 
+	//ajoute le nouveau post
 	$scope.addPost = function(){
 		
 		if(Auth.isAuthenticated()){
@@ -258,6 +273,7 @@ app.controller('AddpostCtrl', function ($scope, $rootScope, UI, Auth, Geoloc, Se
 
 								$scope.newPost.comments = [];
 								$scope.newPost.likes = [];
+								$scope.newPost.photos[0].id = 0;
 								$scope.newPost.photos[0].user = $scope.currentUser;
 								$scope.newPost.photos[0].userId = parseInt(Session.userId);
 								$scope.newPost.photos[0].date = new Date().getTime();
@@ -266,6 +282,8 @@ app.controller('AddpostCtrl', function ($scope, $rootScope, UI, Auth, Geoloc, Se
 								
 								Post.add($scope.newPost).then(
 									function (newPostId){
+										// success !!
+										Socket.newPost();
 										UI.notification('success', 'Votre mur à bien été ajouté !');
 										$scope.redirectTo('singlepost', newPostId);
 									},

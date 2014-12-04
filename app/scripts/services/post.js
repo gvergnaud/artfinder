@@ -7,7 +7,7 @@
  * # post
  * Service in the artFinderApp.
  */
-app.factory('Post', function Post($http, $q, Session, Socket) {
+app.factory('Post', function Post($http, $q, Session, Socket, SERVER) {
     
     var factory = {
 
@@ -25,11 +25,16 @@ app.factory('Post', function Post($http, $q, Session, Socket) {
             if(!reload && factory.posts !== false){
 
                 deferred.resolve(factory.posts);
-                console.log('pas dappel ajax');
+
+            }else if(!reload && localStorage.getItem('ArtFinderPosts')){
+
+                factory.posts = factory.getFromLocalStorage();
+
+                deferred.resolve(factory.posts);
 
             }else{
                 console.log('appel ajax a posts.json');
-        		$http.get('server/posts.json?' + new Date().getTime())
+        		$http.get(SERVER.url + 'getposts.php?' + new Date().getTime())
         			.success(function (data, status){
         				factory.posts = data;
 
@@ -38,7 +43,12 @@ app.factory('Post', function Post($http, $q, Session, Socket) {
         				deferred.resolve(factory.posts);
         			})
         			.error(function (data, status){
-    					deferred.reject('Impossible de récupérer les posts. ' + status);
+                        if(localStorage.getItem('ArtFinderPosts')){
+                            factory.posts = factory.getFromLocalStorage();
+                            deferred.resolve(factory.posts);
+                        }else{
+    					   deferred.reject('Impossible de récupérer les posts. ' + status);
+                        }
         			});
             }
 
@@ -70,6 +80,43 @@ app.factory('Post', function Post($http, $q, Session, Socket) {
     		return deferred.promise;
     	},
 
+        deletePost: function(postId){
+            var deferred = $q.defer();
+
+            //on récupere tous les posts au cas ou il y aurait eu une modification du fichier sur le server
+            factory.get(true).then(
+                function (posts){
+
+                    //on ajoute notre newComment a la liste de commentaire de notre post
+                    angular.forEach(posts, function (post, key){
+                        if(post.id === postId){
+                            posts.splice(posts.indexOf(post), 1);
+                            return;
+                        }
+                    });
+                    
+                    //on sauvegarde notre nouvel objet posts
+                    factory.posts = posts;
+                    factory.save(posts).then(
+                        function(data){
+                            Socket.postsChanged(postId);
+                            deferred.resolve(data);
+                        },
+                        function(msg){
+                            deferred.reject(msg);
+                            console.log(msg);
+                        }
+                    );
+
+                },
+                function (msg){
+                    deferred.reject(msg);
+                }
+            );
+
+            return deferred.promise;
+        },
+
         getClosePosts: function(post, nb){ //recupère les nb posts situes les plus a proximité de post
 
             var deferred = $q.defer();
@@ -88,14 +135,14 @@ app.factory('Post', function Post($http, $q, Session, Socket) {
                         closePost.distance = distance;
                         closePost.post = value;
 
-                        closePosts.push(closePost);
+                        if(!(post.id === closePost.post.id)){
+                            closePosts.push(closePost);
+                        }
                     });
 
                     closePosts.sort(function(a, b) { //on trie le tableau par distance croissante
                         return a.distance - b.distance;
                     });
-
-                    closePosts.shift(); //on supprime le 1er element du tableau car c'est le post luimeme
 
                     closePosts.splice(nb); //on suprime les elements dont la distance est plus grande que les nb premiers
 
@@ -169,8 +216,10 @@ app.factory('Post', function Post($http, $q, Session, Socket) {
 
             var deferred = $q.defer();
 
+            factory.saveInLocalStorage(posts);
+
             $http({
-                    url: 'save.php',
+                    url: SERVER.url + 'save.php',
                     method: 'post',
                     data: {posts: angular.toJson(posts)}
                 })
@@ -212,7 +261,11 @@ app.factory('Post', function Post($http, $q, Session, Socket) {
                     //on ajoute notre newComment a la liste de commentaire de notre post
                     angular.forEach(posts, function (value, key){
                         if(value.id === postId){
-                            newComment.id = value.comments.length; //on ajoute un id a notre nouveau commentaire
+                            if(value.comments.length === 0){
+                                newComment.id = 0;
+                            }else{
+                                newComment.id = value.comments[value.comments.length-1].id + 1; //on ajoute un id a notre nouveau commentaire
+                            }
                             value.comments.push(newComment);
                         }
                     });
@@ -400,7 +453,7 @@ app.factory('Post', function Post($http, $q, Session, Socket) {
 
         saveInLocalStorage: function(posts){
             if(localStorage){
-                localStorage.setItem('ArtFinderPosts', posts);
+                localStorage.setItem('ArtFinderPosts', angular.toJson(posts));
             }else{
                 return false;
             }
@@ -408,7 +461,8 @@ app.factory('Post', function Post($http, $q, Session, Socket) {
 
         getFromLocalStorage: function(){
             if(localStorage){
-                return localStorage.getItem('ArtFinderPosts');
+                console.log('localStorage');
+                return angular.fromJson(localStorage.getItem('ArtFinderPosts'));
             }else{
                 return false;
             }

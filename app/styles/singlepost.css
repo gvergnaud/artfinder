@@ -1,5 +1,7 @@
 /* SINGLE POST */
-
+.container{
+	background: #fff;
+}
 /* Player */
 section#player{
 	overflow: hidden;
@@ -19,28 +21,91 @@ nav.arrows{
 	position: absolute;
 	height:100px;
 	width:100px;
+	max-width: 25%;
 	text-align: center;
 	color: #fff;
 	cursor: pointer;
 	z-index: 200;
+	display: none;
+
+	-webkit-transition: .65s cubic-bezier(.2,.1,.1,1);
+    -moz-transition: .65s cubic-bezier(.2,.1,.1,1);
+    -o-transition: .65s cubic-bezier(.2,.1,.1,1);
+    transition: .65s cubic-bezier(.2,.1,.1,1);
+}
+
+nav.arrows.up{
+	top: -100px !important;
+}
+
+nav.arrows:hover{
+	background-color: rgba(27,27,27,.6) !important;
 }
 
 nav#prev{
 	background: url(../images/prev.svg) no-repeat;
-	left: 20px;
+	background-position: center;
+	left: 0;
+	border-radius: 0 4px 4px 0;
 }
 
 nav#next{
 	background: url(../images/next.svg) no-repeat;
-	right: 20px;
+	background-position: center;
+	border-radius: 4px 0 0 4px;
+	right: 0;
 }
 
-section#player>img{
+section#player>img.mainImage{
 	display:block;
-	margin:0 auto;
+	position: absolute;
+	top: 15px;
+	right: 15px;
+	left: 15px;
+	bottom: 75px;
+	margin: auto;
+	max-width: 100%;
+	max-height: 100%;
+
+	-webkit-transition: .65s cubic-bezier(.2,.1,.1,1);
+    -moz-transition: .65s cubic-bezier(.2,.1,.1,1);
+    -o-transition: .65s cubic-bezier(.2,.1,.1,1);
+    transition: .65s cubic-bezier(.2,.1,.1,1);
 }
 
+section#player>img.mainImage.up{
+	top: -1000px;
+}
 
+div.miniatures{
+	position:absolute;
+	bottom:60px;
+	left:0;
+	height:60px;
+	width:100%;
+	background: #050505;
+	text-align: center;
+	z-index:100;
+	opacity: 0.5;
+
+	-webkit-transition: .65s cubic-bezier(.2,.1,.1,1);
+    -moz-transition: .65s cubic-bezier(.2,.1,.1,1);
+    -o-transition: .65s cubic-bezier(.2,.1,.1,1);
+    transition: .65s cubic-bezier(.2,.1,.1,1);
+}
+div.miniatures:hover{
+	opacity: 1;
+}
+
+div.miniatures.up{
+	bottom: 460px;
+}
+
+img.miniature{
+	height:50px;
+	margin: 5px 10px;
+	cursor: pointer;
+}
 /* TAGZ */
 
 .tagWrapper{
@@ -92,7 +157,8 @@ section.map{
     transition: .65s cubic-bezier(.2,.1,.1,1);
 }
 section.map.show{
-	height:400px;
+	height:400px !important;
+	width:100% !important;
 }
 
 /* POST INFOS */
@@ -108,32 +174,6 @@ span#where{
 	cursor: pointer;
 }
 
-span#where:before{
-	content: '';
-	background: url(../images/pin.svg) no-repeat;
-	font-weight: normal;
-	speak: none;
-
-	display: inline-block;
-	text-decoration: inherit;
-	margin-right: .2em;
-	/* opacity: .8; */
-
-	/* For safety - reset parent styles, that can break glyph codes*/
-	font-variant: normal;
-	text-transform: none;
-	color:#B59E5C;
-
-	/* fix buttons height, for twitter bootstrap */
-	line-height: 1em;
-
-	/* Animation center compensation - margins should be symmetric */
-	/* remove if not needed */
-	margin-left: .2em;
-	width:21px;
-	height:30px;
-}
-
 span#artists{
 	font-size: 14px;
 	font-family: 'Uni Sans Heavy';
@@ -142,6 +182,8 @@ span#artists{
 span.artist{
 	margin: 0 5px;
 	cursor: pointer;
+	font-size: 14px;
+	font-family: 'Uni Sans Heavy';
 }
 
 span.artist:before{
@@ -202,8 +244,35 @@ span.left{
 }
 
 #infos>div.left{
+	display: inline-block;
 	width:537px;
+	max-width: 96%;
 }
+
+#infos>div.right{
+	display: inline-block;
+	float: right;
+	width:263px;
+	max-width: 96%;
+	padding: 5px 0;
+}
+
+span#postTechnique{
+	width: 132px;
+	height: 132px;
+	margin: 15px 0;
+	display: block;
+}
+
+#infos>div.right h3{
+	font-size: 1em;
+}
+
+#infos>div.right p{
+	margin: 5px 0;
+	font-size: .8em;
+}
+
 /* COMMENTAIRES*/
 div#commentaires{
 	margin:10px auto;
@@ -216,6 +285,7 @@ div#commentaires>h3{
 
 div.comment{
 	width:500px;
+	max-width: 96%;
 	min-height: 50px;
 	background:#f6f6f6;
 	padding: 10px;
@@ -227,10 +297,15 @@ div.deleteComment{
 	cursor: pointer;
 }
 
+div.deleteComment:before{
+	color:#B59E5C;
+}
+
 div.desc{
 	min-height: 50px;
 	background:#eeeeee;
 	width:500px;
+	max-width: 96%;
 	padding: 10px;
 }
 
@@ -255,7 +330,7 @@ h3.username{
 	margin-bottom: 10px;
 }
 
-textarea.content{
+input.content{
 	margin: 10px 0;
 	height: 20px;
 	width: 100%;
@@ -266,12 +341,11 @@ textarea.content{
 	border: none;
 }
 
-textarea.content:focus{
+input.content:focus{
 	outline: none;
-	border-bottom: 1px solid #B59E5C;
 }
 
-.date{
+.discret{
 	font-size: 0.8em;
 	color: #aaa;
 }
@@ -300,10 +374,39 @@ section.closePosts h1{
 	color: #fff;
 }
 
+@media only screen and (max-width: 1200px) {
+	span#artists{
+		display: block;
+		margin-top: 20px;
+	}
+	span#where{
+		font-size:1em;
+	}
 
+}
+
+@media only screen and (max-width: 800px) {
+	#infos{
+		width: 96%;
+	}
+	#infos>div.right{
+		display: block;
+		width: 96%;
+		padding: 5px 0;
+	}
+}
 
 @media only screen and (max-width: 680px) {
 	div#closePostsContainer{
-		height:825px;
+		height:860px;
+	}
+	span#artists{
+		display: none;
+	}
+	span#where{
+		display: none;
+	}
+	span#locationPin{
+		margin-left:10px;
 	}
 }

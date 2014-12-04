@@ -47,6 +47,10 @@ app.factory('UI', function UI() {
             loginContainer.toggleClass('show');
         },
 
+        closeLoginOverlay: function(){
+            loginContainer.removeClass('show');
+        },
+
         toggleMenu: function(){
             var viewcontainer = angular.element(document.querySelector('#viewcontainer')),
                 notifications = angular.element(document.querySelector('#notifications')),
@@ -66,6 +70,11 @@ app.factory('UI', function UI() {
                     left: '200px'
                 });				
 
+                if(window.innerWidth > 680){
+                    viewcontainer.css({
+                        opacity: '.5'
+                    });             
+                }
 
                 if(ui.menuOpen){
                     menuLinks.removeClass('hidden');
@@ -85,7 +94,8 @@ app.factory('UI', function UI() {
                 });
 
                 viewcontainer.css({
-                    left: '80px'
+                    left: '80px',
+                    opacity: '1'
                 });
 
                 menuLinks.addClass('hidden');
@@ -159,18 +169,26 @@ app.factory('UI', function UI() {
             init: function(){
 
                 ui.home.setMapView();
+                
+                //remove event listeners
+                window.removeEventListener('resize', ui.addpost.style, false);
+                window.removeEventListener('resize', ui.singlepost.style, false);
+                window.removeEventListener('resize', ui.singlepost.tagStyles, false);
 
-                window.addEventListener('resize', function(){
-                    if(!ui.home.view){
+                //addeventListener
+                window.addEventListener('resize', ui.home.resizeMozMap, false);
+            },
+
+            resizeMozMap: function(){
+                if(!ui.home.view){
+                    ui.home.setMapView();
+                }else{
+                    if(ui.home.view === 'map'){
                         ui.home.setMapView();
                     }else{
-                        if(ui.home.view === 'map'){
-                            ui.home.setMapView();
-                        }else{
-                            ui.home.setMozView();
-                        }	
-                    }
-                }, false);
+                        ui.home.setMozView();
+                    }   
+                }
             },
 
             switchMozMap: function(){
@@ -253,14 +271,19 @@ app.factory('UI', function UI() {
             selection: false,
 
             init:function(){
-                ui.singlepost.player = angular.element(document.querySelectorAll('#player')),
-                ui.singlepost.img = angular.element(document.querySelectorAll('section#player img')),
+                ui.singlepost.player = angular.element(document.querySelectorAll('#player'));
+                ui.singlepost.img = angular.element(document.querySelectorAll('section#player img.mainImage'));
                 ui.singlepost.arrows = [angular.element(document.querySelectorAll('nav#prev')), angular.element(document.querySelectorAll('nav#next'))];
 
                 ui.singlepost.style();
+
+                //remove event listeners
+                window.removeEventListener('resize', ui.home.resizeMozMap, false);
+                window.removeEventListener('resize', ui.addpost.style, false);
+
+                //addeventListener
                 window.addEventListener('resize', ui.singlepost.style, false);
                 window.addEventListener('resize', ui.singlepost.tagStyles, false);
-                window.addEventListener('resize', ui.singlepost.imgStyle, false);
             },
 
             style: function(){
@@ -275,27 +298,23 @@ app.factory('UI', function UI() {
                     });
                 });
 
-                ui.singlepost.img.css({
-                    height: window.innerHeight - 100 + 'px',
-                    width: '',
-                    marginTop: ''
-                }); 
-            },
-
-            imgStyle: function(){
-
-                if(ui.singlepost.img[0].offsetWidth > window.innerWidth-100){
+                if(window.innerWidth > 680){
                     ui.singlepost.img.css({
-                        width: window.innerWidth - ui.menuWidth + 'px',
-                        height: '',
-                        marginTop: Math.abs((window.innerHeight - 100 - ui.singlepost.img[0].offsetHeight)/2) + 'px'
-                    });
+                        maxHeight: window.innerHeight - 100 + 'px',
+                        maxWidth: window.innerWidth - ui.menuWidth - 40 + 'px',
+                    }); 
+                }else{
+                    ui.singlepost.img.css({
+                        maxHeight: window.innerHeight - 100 + 'px',
+                        maxWidth: window.innerWidth - 40 + 'px',
+                    }); 
                 }
+                
             },
 
             tagStyles: function(){
                 var tagWrapper = angular.element(document.querySelectorAll('.tagWrapper')),
-                    img = document.querySelectorAll('section#player img');
+                    img = document.querySelectorAll('section#player img.mainImage');
 
                 if(!!img){
                     tagWrapper.css({
@@ -405,10 +424,18 @@ app.factory('UI', function UI() {
             },
 
             toggleMap: function(callback){
-                var map = angular.element(document.querySelector('section.map'));
-                var player = angular.element(document.querySelector('section#player'));
+                var map = angular.element(document.querySelector('section.map')),
+                    player = angular.element(document.querySelector('section#player')),
+                    img = angular.element(document.querySelector('section#player img.mainImage')),
+                    arrows = angular.element(document.querySelectorAll('.arrows')),
+                    miniatures = angular.element(document.querySelectorAll('.miniatures'));
+
                 map.toggleClass('show');
                 player.toggleClass('up');
+                img.toggleClass('up');
+                arrows.toggleClass('up');
+                miniatures.toggleClass('up');
+
                 if(!!callback){
                     setTimeout(function(){
                         callback.call(this);
@@ -436,8 +463,15 @@ app.factory('UI', function UI() {
             init: function(){
 
                 ui.addpost.style();
-                window.addEventListener('resize', ui.addpost.style, false);
                 ui.addpost.dragDropStyle();
+
+                //remove event listeners
+                window.removeEventListener('resize', ui.home.resizeMozMap, false);
+                window.removeEventListener('resize', ui.singlepost.style, false);
+                window.removeEventListener('resize', ui.singlepost.tagStyles, false);
+
+                //addeventListener
+                window.addEventListener('resize', ui.addpost.style, false);
 
             },
 
@@ -471,7 +505,7 @@ app.factory('UI', function UI() {
 
                 el.ondragleave = function(){
                     this.className = '';
-                    this.innerHTML = 'Drag a file here';
+                    this.innerHTML = 'Drop ta photo ici !';
                     return false;
                 };
 
@@ -483,7 +517,41 @@ app.factory('UI', function UI() {
                 };
             },
 
+            proposePosts: function(){
+                var addressInputContainer = angular.element(document.querySelector('span#addressInputContainer'));
+                addressInputContainer.addClass('up');
+            },
+
+            removeProposedPosts: function(){
+                var addressInputContainer = angular.element(document.querySelector('span#addressInputContainer'));
+                addressInputContainer.removeClass('up');
+            },
+
             selectedPost: function(post){
+                //locate section
+                var addressPin = angular.element(document.querySelectorAll('#addressPin')),
+                    addressInput = angular.element(document.querySelectorAll('#addressInput')),
+                    posts = angular.element(document.querySelectorAll('div.post.col')),
+                    thePost = angular.element(document.querySelector('div.post.col.postN' + post.id));
+
+                posts.css({
+                    display: 'none'
+                });
+
+                thePost.css({
+                    display: '',
+                    border: '2px solid #B59E5C'
+                });
+
+                addressInput.css({
+                    display: 'none'
+                });
+
+                addressPin.css({
+                    display: 'none'
+                });
+
+                //infos section
                 var addPhotoForm = angular.element(document.querySelector('form#addPhotoForm'));
                 var addPostForm = angular.element(document.querySelector('form#addPostForm'));
 
@@ -497,6 +565,31 @@ app.factory('UI', function UI() {
             },
             
             removeSelectedPost: function(post){
+                //locate section
+                var addressPin = angular.element(document.querySelectorAll('#addressPin')),
+                    addressInput = angular.element(document.querySelectorAll('#addressInput')),
+                    posts = angular.element(document.querySelectorAll('div.post')),
+                    thePost = angular.element(document.querySelectorAll('div.post.col.postN' + post.id));
+
+                posts.css({
+                    display: ''
+                });
+
+                thePost.css({
+                    display: '',
+                    border: ''
+                });
+
+                addressInput.css({
+                    display: ''
+                });
+
+                addressPin.css({
+                    display: ''
+                });
+
+
+                //infos section
                 var addPhotoForm = angular.element(document.querySelector('form#addPhotoForm'));
                 var addPostForm = angular.element(document.querySelector('form#addPostForm'));
 

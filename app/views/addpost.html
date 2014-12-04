@@ -1,14 +1,14 @@
 <!--NAVIGATION-->
 <nav id="addpostnav">
     <div id="formProgress">
-        <formprogress id="formProgressBar"><h3 id="formStep">1/3</h3></formprogress>
+        <formprogress id="formProgressBar" ng-click="smoothScrollTo(stepSelector)"><p id="formStep">Ajoutez une photo - 1/3</p></formprogress>
         
     </div>
 </nav>
 
 <!--SECTION DRAG DROP-->
 <section class="drop formSection">
-    <div id="drop">Drag & Drop or click</div>
+    <div id="drop">Envoyer une photo</div>
 
     <img id="photorender" ng-src="" />
     
@@ -41,18 +41,17 @@
 <section class="formSection" id="locate">
     <div id="formMap"></div>
     <span id="addressInputContainer">
+        <span id="addressPin"></span> 
         <input id="addressInput" type="text" placeholder="Ou ce trouve ce mur ?" ng-model="newPost.address" ng-change="addressChange()"/>
         <button ng-if="newPost.coords.latitude" ng-click="smoothScrollTo('#newPostInfos')">Valider</button>
     </span>
 
     <section id="closePostsContainer" ng-show="closePosts.length">
         <h1>Des murs ont été partagés à cet endroit.</h1>
-        <div class="post col" ng-repeat="post in closePosts" ng-tooltip="Ajouter à ce mur">
-            <div  class="{{post.id}}">
-                <img ng-src="{{post.photos[0].url}}" />
-                <div class="over"  ng-click="selectClosePost({{post}})">
-                    <p>{{post.likes.length}} Likes</p>
-                </div>
+        <div ng-repeat="post in closePosts"  class="post col proposed postN{{post.id}}" ng-tooltip="Ajouter à ce mur" show-post-icons ng-click="selectClosePost({{post}})">
+            <img ng-src="{{post.photos[0].url}}" />
+            <div class="over">
+                <span class="postRight">{{post.likes.length}} <span class="icon-heart"></span> </span>
             </div>
         </div>
     </section>
@@ -63,43 +62,43 @@
     <form id="addPhotoForm">
         <div>
             <label>Technique utilisée : </label>
-            <select ng-model="newPost.photos[0].technique">
-                <option value="pochoir">Pochoir</option>
-                <option value="sculpture">Sculpture</option>
-                <option value="peinture">Peinture</option>
-                <option value="grafitti">Grafitti</option>
-                <option value="collage">Collage</option>
-                <option value="autre">Autre</option>
-            </select>
+            <div id="techniques">
+                <span ng-tooltip="Pochoir" class="technique pochoir" ng-click="setTechnique('pochoir')"></span>
+                <span ng-tooltip="Sticker" class="technique sticker" ng-click="setTechnique('sticker')"></span>
+                <span ng-tooltip="Peinture" class="technique peinture" ng-click="setTechnique('peinture')"></span>
+                <span ng-tooltip="Grafitti" class="technique grafitti" ng-click="setTechnique('grafitti')"></span>
+                <span ng-tooltip="Mosaique" class="technique mosaique" ng-click="setTechnique('mosaique')"></span>
+                <span ng-tooltip="Autre" class="technique autre" ng-click="setTechnique('autre')"></span>
+            </div>
         </div>
         <div>
             <label>Description : </label>
-            <textarea ng-model="newPost.photos[0].description"></textarea>
+            <textarea class="description" ng-model="newPost.photos[0].description"></textarea>
         </div>
         <div>
             <label>L'oeuvre existe t'elle toujours ?</label>
             <input type="checkbox" ng-model="newPost.photos[0].stillExist" />
         </div>
         <div>
-            <input type="submit" id="addPhotoBtn" value="Ajouter ma photo à ce post !" />
+            <input type="submit" id="addPhotoBtn" value="Ajouter ma photo à ce mur !" />
         </div>
     </form>
 
     <form id="addPostForm" role="form" ng-submit="addPost()">
         <div>
             <label>Technique utilisée : </label>
-            <select ng-model="newPost.photos[0].technique">
-                <option value="pochoir">Pochoir</option>
-                <option value="sculpture">Sculpture</option>
-                <option value="peinture">Peinture</option>
-                <option value="grafitti">Grafitti</option>
-                <option value="collage">Collage</option>
-                <option value="autre">Autre</option>
-            </select>
+            <div id="techniques">
+                <span ng-tooltip="Pochoir" class="technique pochoir" ng-click="setTechnique('pochoir')"></span>
+                <span ng-tooltip="Sticker" class="technique sticker" ng-click="setTechnique('sticker')"></span>
+                <span ng-tooltip="Peinture" class="technique peinture" ng-click="setTechnique('peinture')"></span>
+                <span ng-tooltip="Grafitti" class="technique grafitti" ng-click="setTechnique('grafitti')"></span>
+                <span ng-tooltip="Mosaique" class="technique mosaique" ng-click="setTechnique('mosaique')"></span>
+                <span ng-tooltip="Autre" class="technique autre" ng-click="setTechnique('autre')"></span>
+            </div>
         </div>
         <div>
             <label>Description : </label>
-            <textarea ng-model="newPost.photos[0].description"></textarea>
+            <textarea class="description" ng-model="newPost.photos[0].description"></textarea>
         </div>
         <div>
             <label>L'oeuvre existe t'elle toujours ?</label>

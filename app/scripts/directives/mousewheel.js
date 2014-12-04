@@ -20,7 +20,7 @@ app.directive('ngMousewheel', function() {
                 }
             }
 			
-			$element.on('wheel', onMousewheel);
+			$element.on('scroll wheel', onMousewheel);
         }
     };
 });

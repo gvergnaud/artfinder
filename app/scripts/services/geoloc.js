@@ -7,7 +7,7 @@
  * # Geoloc
  * Factory in the artFinderApp.
  */
-app.factory('Geoloc', function (UI, $q) {
+app.factory('Geoloc', function (UI, $q, Session) {
 
 	return function (selector){
 
@@ -50,12 +50,15 @@ app.factory('Geoloc', function (UI, $q) {
 				if(!!options.disableDefaultUI){ optionsGmaps.disableDefaultUI = options.disableDefaultUI; }
 			}
 
-
 			var styles = [{"featureType":"all","elementType":"all","stylers":[{"visibility":"simplified"},{"saturation":-100}]},{"featureType":"all","elementType":"labels.icon","stylers":[{"visibility":"off"}]},{"featureType":"landscape","elementType":"geometry","stylers":[{"color":"#706f70"},{"lightness":-22}]},{"featureType":"water","elementType":"geometry","stylers":[{"color":"#292929"}]},{"featureType":"water","elementType":"labels.text","stylers":[{"color":"#e8e8e8"}]},{"featureType":"poi","elementType":"all","stylers":[{"visibility":"off"}]},{"featureType":"administrative.locality","elementType":"labels.text","stylers":[{"visibility":"simplified"},{"color":"#1c1c1c"}]},{"featureType":"administrative.neighborhood","elementType":"labels.text","stylers":[{"visibility":"off"}]},{"featureType":"road.local","elementType":"geometry","stylers":[{"color":"#8a8a8a"},{"lightness":-26}]},{"featureType":"road.arterial","elementType":"geometry","stylers":[{"color":"#878587"},{"lightness":-17}]},{"featureType":"road.highway","elementType":"geometry","stylers":[{"color":"#949494"}]},{"featureType":"road","elementType":"labels.text","stylers":[{"visibility":"simplified"},{"color":"#000000"}]},{"featureType":"transit","elementType":"all","stylers":[{"visibility":"off"}]}];
 
 			that.map = new google.maps.Map(that.mapElement, optionsGmaps);
 
 			that.map.setOptions({styles: styles});
+
+			if(Session.userLocation){
+				that.map.setOptions({center: Session.userLocation});
+			}
 
 			//resize la map quand le conteneur est resizé
 			google.maps.event.addListenerOnce(that.map, 'idle', function() {
@@ -67,8 +70,52 @@ app.factory('Geoloc', function (UI, $q) {
 			google.maps.event.addListener(that.map, 'bounds_changed', function() {
 				 google.maps.event.trigger(that.map, 'resize');
 			});
+
+			if(!!Session.userLocation){
+				that.addUserLocationMarker(Session.userLocation);
+			}
 		};
 		
+		that.addTooltip = function(marker, tooltipContent, topPosition, css){
+			
+			google.maps.event.addListener(marker, 'mouseover', (function(marker, tooltipContent) {
+				return function() {
+					
+					var point = that.pointFromLatLng(marker.getPosition(), marker.map);
+                   
+					that.markerTooltip.html(tooltipContent);
+
+					if(css){
+						that.markerTooltip.css(css);
+
+						that.markerTooltip.css({
+	                        left: that.mapElement.offsetLeft + point.x + 'px',
+	                        top: that.mapElement.offsetTop + point.y  + topPosition + 'px',
+							display: 'block'
+						});
+
+					}else{
+						that.markerTooltip.attr('style', '');
+
+						that.markerTooltip.css({
+	                        left: that.mapElement.offsetLeft + point.x + 'px',
+	                        top: that.mapElement.offsetTop + point.y  + topPosition + 'px',
+							display: 'block'
+						});
+					}
+				};
+			})(marker, tooltipContent));
+			
+			google.maps.event.addListener(marker, 'mouseout', (function(marker) {
+				return function() {
+					
+					that.markerTooltip.css({
+						display: 'none'
+					});
+
+				};
+			})(marker));
+		};
 		
 		that.addPostMarker = function(post){
 
@@ -94,33 +141,12 @@ app.factory('Geoloc', function (UI, $q) {
 				};
 			})(marker, post));
 			
-			google.maps.event.addListener(marker, 'mouseover', (function(marker, post) {
-				return function() {
-					
-					var point = that.pointFromLatLng(marker.getPosition(), marker.map);
-                   
-					that.markerTooltip.html('<img class="tooltipImage" src="'+ post.photos[0].url + '" />').css({
-                        left: that.mapElement.offsetLeft + point.x - 75 + 'px',
-                        top: that.mapElement.offsetTop + point.y  - 190 + 'px',
-						display: 'block'
-					});
-
-				};
-			})(marker, post));
-			
-			google.maps.event.addListener(marker, 'mouseout', (function(marker, post) {
-				return function() {
-					
-					that.markerTooltip.css({
-						display: 'none'
-					});
-
-				};
-			})(marker, post));
+			that.addTooltip(marker, '<img class="tooltipImage" src="'+ post.photos[0].url + '" />', -190);
 
 			that.markers.push(marker);
 
 		};
+
         
         that.addMarker = function(latLng){
             var marker = new google.maps.Marker({
@@ -130,6 +156,29 @@ app.factory('Geoloc', function (UI, $q) {
             });
             
             that.markers.push(marker);
+        };
+
+        that.addUserLocationMarker = function(latLng, msg){
+
+        	if(that.userLocationMarker){
+        		that.userLocationMarker.setMap();
+        	}
+
+        	if(!msg){
+        		msg = 'Vous êtes ici';
+        	}
+
+            var marker = new google.maps.Marker({
+                position: latLng,
+                map: that.map,
+                icon: 'images/ma_position.png'
+            });
+			
+			that.addTooltip(marker, msg, -75, {color: '#fff', height: '1em', borderRadius: '0', border: 'none', padding: '10px'});
+            
+            that.userLocationMarker = marker;
+
+            return marker;
         };
 		
 	//REMOVE
@@ -252,22 +301,23 @@ app.factory('Geoloc', function (UI, $q) {
                     }, 
 
                     function (error){
-                        var info = "Erreur lors de la géolocalisation : ";
+                        var info;
+                        
                         switch(error.code) {
                             case error.TIMEOUT:
-                                info += "Timeout !";
+                                info = "timeout";
                                 break;
 
                             case error.PERMISSION_DENIED:
-                                info += "Vous n’avez pas donné la permission";
+                                info = "permission denied";
                                 break;
 
                             case error.POSITION_UNAVAILABLE:
-                                info += "La position n’a pu être déterminée";
+                                info = "position unavailable";
                                 break;
 
                             case error.UNKNOWN_ERROR:
-                                info += "Erreur inconnue";
+                                info = "unknown error";
                                 break;
                         }
 
@@ -281,6 +331,25 @@ app.factory('Geoloc', function (UI, $q) {
             }
 
             return deferred.promise;
+        };
+
+        that.getDistance = function(post1, post2){
+        	
+        	function rad(x) {
+				return x * Math.PI / 180;
+			}
+
+			function getMeterDistance(p1, p2) {
+				var R = 6378137; // Earth’s mean radius in meter
+				var dLat = rad(p2.latitude - p1.latitude);
+				var dLong = rad(p2.longitude - p1.longitude);
+				var a = Math.sin(dLat / 2) * Math.sin(dLat / 2) + Math.cos(rad(p1.latitude)) * Math.cos(rad(p2.latitude)) * Math.sin(dLong / 2) * Math.sin(dLong / 2);
+				var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+				var d = R * c;
+				return d; // returns the distance in meter
+			}
+
+			return getMeterDistance(post1.coords, post2.coords);
         };
 
 	//MOVE
@@ -337,10 +406,7 @@ app.factory('Geoloc', function (UI, $q) {
 				that.smoothZoom(that.map, 17, that.map.getZoom(), true);
 			}, 750);
 
-
 		};
-
-
 
 	};
 

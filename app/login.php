@@ -1,8 +1,11 @@
 <?php
+
+	header('Access-Control-Allow-Origin: *');  
+
 	try
 	{
-		//$bdd = new PDO('mysql:host=db405508102.db.1and1.com;dbname=db405508102', 'dbo405508102','Dbnight');
-		$bdd = new PDO('mysql:host=localhost;dbname=artfinder', 'root', 'root');
+		$bdd = new PDO('mysql:host=db405508102.db.1and1.com;dbname=db405508102', 'dbo405508102','Dbnight');
+		//$bdd = new PDO('mysql:host=localhost;dbname=artfinder', 'root', 'root');
 	}
 	catch (Exception $e)
 	{
@@ -16,7 +19,7 @@
 
 		$mail = $_POST['mail'];
 
-		$query = $bdd->query("SELECT * FROM users WHERE mail = '$mail'");
+		$query = $bdd->query("SELECT * FROM artfinder_users WHERE mail = '$mail'");
 
 		if($query->rowCount() == 1){   //si la requete renvoi une ligne, l'utilisateur est dans la base
 

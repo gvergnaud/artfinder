@@ -2,17 +2,18 @@
 
 /**
  * @ngdoc function
- * @name artFinderApp.controller:MainCtrl
+ * @name artFinderApp.controller:HomeCtrl
  * @description
- * # MainCtrl
+ * # HomeCtrl
  * Controller of the artFinderApp
  */
 
-app.controller('HomeCtrl',['$scope', '$rootScope', 'Post', 'Geoloc', 'UI', '$filter', '$routeParams', function ($scope, $rootScope, Post, Geoloc, UI, $filter, $routeParams) {
+app.controller('HomeCtrl',  function ($scope, $rootScope, $filter, $routeParams, Post, Geoloc, UI, APP_EVENTS, Session) {
 
 
 	//POSTS
     function getPosts(){
+    	console.log('getPosts');
         Post.get(true).then(
             function (posts){ // les posts sont récupérés !
                 
@@ -36,13 +37,12 @@ app.controller('HomeCtrl',['$scope', '$rootScope', 'Post', 'Geoloc', 'UI', '$fil
 	//Récuperation des posts
     getPosts();
     
-    //$rootScope.$on('refreshPosts', getPosts);
+    $rootScope.$on('loadNewPost', getPosts);
     
-	// Load les posts dans la view
-
-
+	
 	$scope.postsLimite = 8;
 
+	// Load les posts dans la view
 	$scope.loadPosts = function(force, noIncrem){
         
         if(noIncrem){
@@ -66,7 +66,6 @@ app.controller('HomeCtrl',['$scope', '$rootScope', 'Post', 'Geoloc', 'UI', '$fil
 				$scope.geoloc.addPostMarker(post);
 			}
 
-
 			$scope.$emit('postsLoaded');
 		}
 
@@ -76,7 +75,9 @@ app.controller('HomeCtrl',['$scope', '$rootScope', 'Post', 'Geoloc', 'UI', '$fil
 	//UI UI UI
 	UI.home.init();
 
+	$scope.setSlideAnimation();
 
+	// évite que les posts n'ai pas la class reduced
 	$scope.$on('postsLoaded', function(){
 		if(UI.home.view === 'map'){
 			setTimeout(function(){
@@ -94,7 +95,11 @@ app.controller('HomeCtrl',['$scope', '$rootScope', 'Post', 'Geoloc', 'UI', '$fil
 	$scope.switchMozMap = function(){
 		UI.home.switchMozMap();
 		setTimeout(function(){
-			$scope.geoloc.panTo(48.857487002645485, 2.3515677452087402);	
+			if(Session.userLocation){
+				$scope.geoloc.panTo(Session.userLocation.k, Session.userLocation.B);	
+			}else{
+				$scope.geoloc.panTo(48.857487002645485, 2.3515677452087402);	
+			}
 		}, 500);
 	};
 
@@ -105,10 +110,8 @@ app.controller('HomeCtrl',['$scope', '$rootScope', 'Post', 'Geoloc', 'UI', '$fil
 	$scope.geoloc = new Geoloc('section.map');
 
 	$scope.geoloc.createMap();
-
-	setTimeout(function(){
-		$scope.geoloc.smoothZoom($scope.geoloc.map, 12, $scope.geoloc.map.getZoom(), true);
-	},1000);	
+	$scope.geoloc.setMapOptions({zoom: 12});
+	
 
 	//montre la position du post sur la map
 	$scope.showPostLocation = function(e, post){
@@ -120,10 +123,28 @@ app.controller('HomeCtrl',['$scope', '$rootScope', 'Post', 'Geoloc', 'UI', '$fil
 		}, 800);
 	};
 
-	//$scope.geoloc.addMyLocationMarker();
+	//affiche la position de l'utilisateur à chaque refresh
+	$rootScope.$on(APP_EVENTS.userLocationChanged, function(){
+		$scope.geoloc.addUserLocationMarker(Session.userLocation);
+	});
+
+
+
+	//Filtres 
+	$scope.filters = {};
+
+	$scope.setTechnique = function(technique){
+		if($scope.filters.technique === technique){
+			$scope.filters.technique = '';
+			document.querySelector('span.technique.' + technique).classList.remove('active');
+		}else{
+			$scope.filters.technique = technique;
+			angular.element(document.querySelectorAll('span.technique')).removeClass('active');
+			document.querySelector('span.technique.' + technique).classList.add('active');
+		}
+	};
 
 	//applique les filtres sur la map
-	$scope.filters = {};
 
 	$scope.$watchCollection('filters', function (newValue, oldValue){
 		$scope.geoloc.clearMarkers();
@@ -145,4 +166,4 @@ app.controller('HomeCtrl',['$scope', '$rootScope', 'Post', 'Geoloc', 'UI', '$fil
 		filteredPosts = $filter('filter')(filteredPosts, $scope.filters.technique);
 		return filteredPosts;
 	};
-}]);
+});
