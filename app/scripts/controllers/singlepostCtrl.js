@@ -7,7 +7,7 @@
  * # SinglepostCtrl
  * Controller of the artFinderApp
  */
-app.controller('SinglepostCtrl',['$scope', '$rootScope', '$routeParams', 'Post', 'UI', 'Auth', 'Session', 'Geoloc', '$filter', 'APP_EVENTS', 'Socket', function ($scope, $rootScope, $routeParams, Post, UI, Auth, Session, Geoloc, $filter, APP_EVENTS, Socket) {
+app.controller('SinglepostCtrl', function ($scope, $rootScope, $filter, $routeParams, Post, UI, Auth, Session, Geoloc, APP_EVENTS, Socket) {
 	
 
 	var mainPhoto = angular.element(document.querySelectorAll('section#player img'));
@@ -18,8 +18,6 @@ app.controller('SinglepostCtrl',['$scope', '$rootScope', '$routeParams', 'Post',
         Post.find($routeParams.id, reload).then(
             function (post){ // les posts sont récupérés !
                 $scope.post = post;	
-
-                $scope
 
                 Post.getClosePosts(post, 4).then(
                     function(closePosts){
@@ -251,6 +249,7 @@ app.controller('SinglepostCtrl',['$scope', '$rootScope', '$routeParams', 'Post',
 	 		);
 		}else{
 			UI.notification('', 'vous devez etre connecté !');
+			UI.toggleLoginOverlay();
 		}
  	};
 
@@ -371,4 +370,4 @@ app.controller('SinglepostCtrl',['$scope', '$rootScope', '$routeParams', 'Post',
  		}
  	};
 
-}]);
+});

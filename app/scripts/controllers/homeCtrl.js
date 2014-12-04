@@ -2,13 +2,13 @@
 
 /**
  * @ngdoc function
- * @name artFinderApp.controller:MainCtrl
+ * @name artFinderApp.controller:HomeCtrl
  * @description
- * # MainCtrl
+ * # HomeCtrl
  * Controller of the artFinderApp
  */
 
-app.controller('HomeCtrl',['$scope', '$rootScope', 'Post', 'Geoloc', 'UI', '$filter', '$routeParams', 'APP_EVENTS', 'Session', function ($scope, $rootScope, Post, Geoloc, UI, $filter, $routeParams, APP_EVENTS, Session) {
+app.controller('HomeCtrl',  function ($scope, $rootScope, $filter, $routeParams, Post, Geoloc, UI, APP_EVENTS, Session) {
 
 
 	//POSTS
@@ -66,7 +66,6 @@ app.controller('HomeCtrl',['$scope', '$rootScope', 'Post', 'Geoloc', 'UI', '$fil
 				$scope.geoloc.addPostMarker(post);
 			}
 
-
 			$scope.$emit('postsLoaded');
 		}
 
@@ -78,6 +77,7 @@ app.controller('HomeCtrl',['$scope', '$rootScope', 'Post', 'Geoloc', 'UI', '$fil
 
 	$scope.setSlideAnimation();
 
+	// évite que les posts n'ai pas la class reduced
 	$scope.$on('postsLoaded', function(){
 		if(UI.home.view === 'map'){
 			setTimeout(function(){
@@ -166,4 +166,4 @@ app.controller('HomeCtrl',['$scope', '$rootScope', 'Post', 'Geoloc', 'UI', '$fil
 		filteredPosts = $filter('filter')(filteredPosts, $scope.filters.technique);
 		return filteredPosts;
 	};
-}]);
+});
