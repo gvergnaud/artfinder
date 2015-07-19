@@ -1,0 +1,66 @@
+<!doctype html>
+<html class="no-js">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width">
+  </head>
+  <body ng-app="artFinderApp">
+    <!--[if lt IE 7]>
+      <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
+
+    <!-- Add your site or application content here -->
+    <div id="container">
+      <div id="login" ng-controller="loginCtrl">
+        <form id="loginForm" role="form" ng-submit="login()">
+          <h3>Login</h3>
+          <input type="text" ng-model="user.username" placeholder="pseudo"/>
+          <input type="email" ng-model="user.mail" placeholder="yourmail@any.any"/>
+          <input type="submit" value="Envoyer" />
+        </form>
+      </div>
+      <header class="header">
+        <h3>artFinder</h3>
+        <ul>
+          <li><a href="#/">Home</a></li>
+          <li><a href="#/addpost">Upload</a></li>
+          <li><a href="" id="showlogin">Login</a></li>
+        </ul>
+      </header>
+
+      <div id="viewcontainer">
+        <div class="view">
+          <div id="filtres">
+            <label>Cacher les markers</label><input type="checkbox" ng-hideAllMarkers />
+            <input type="text" id="search" placeholder="Artiste" ng-model="Search.artist" />
+            <label>Technique utilisée : </label><select ng-model="Technic.technic">
+              <option value="">Toutes</option>
+              <option value="pochoir">Pochoir</option>
+              <option value="sculpture">Sculpture</option>
+              <option value="grafitti">Grafitti</option>
+              <option value="collage">Collage</option>
+              <option value="autre">Autre</option>
+            </select>
+          </div>
+          <section id="map">
+          </section>
+          <section class="section" id="mosaic">
+            <div class="post">
+              <a href="#/singlepost/{{post.id}}">
+                <img ng-src="{{post.urls[0]}}" />
+                <div class="over">
+                  <a href="">Voir sur la Carte</a>
+                </div>
+              </a>
+            </div>
+          </section>
+        </div>
+      </div>
+
+      <footer class="footer">
+      </footer>
+    </div>
+</body>
+</html>
